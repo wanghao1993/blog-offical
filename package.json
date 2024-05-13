@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@studio-freight/react-lenis": "^0.0.47",
-    "antd": "^5.17.0",
+    "framer-motion": "^11.1.9",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18"

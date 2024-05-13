@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import LenisProvider from "@/components/Providers/LenisProvider";
-import { ConfigProvider } from "antd";
 import "./ui/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,11 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <ConfigProvider>
-        <LenisProvider>
-          <body className={inter.className}>{children}</body>
-        </LenisProvider>
-      </ConfigProvider>
+      <LenisProvider>
+        <body className={inter.className} style={}>
+          {children}
+        </body>
+      </LenisProvider>
     </html>
   );
 }

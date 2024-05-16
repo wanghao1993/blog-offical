@@ -20,6 +20,7 @@ export default function Nav() {
       {navList.map((nav) => (
         <Link
           href={nav.path}
+          key={nav.path}
           className={`horizontal-underline mr-3 hidden text-xl font-extrabold sm:block md:inline-block ${
             pathName === nav.path ? "horizontal-underline-active" : ""
           }`}

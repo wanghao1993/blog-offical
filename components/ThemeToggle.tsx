@@ -4,23 +4,25 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 export default function ThemeSwitch() {
   const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
-
   const [theme, setTheme] = useState("dark");
 
+  useEffect(() => {
+    setMounted(true);
+    const localTheme = window.localStorage.getItem("theme") || "dark";
+
+    handlerSetTheme(localTheme);
+    setTheme(localTheme);
+  }, []);
+
+  function handlerSetTheme(theme: string) {
+    setTheme(theme);
+    document.getElementsByTagName("html")[0].setAttribute("data-theme", theme);
+  }
+
+  // Switch Theme (Light/Dark)
   function switchTheme() {
-    if (theme === "dark") {
-      setTheme("light");
-      document
-        .getElementsByTagName("html")[0]
-        .setAttribute("data-theme", "light");
-    } else {
-      setTheme("dark");
-      document
-        .getElementsByTagName("html")[0]
-        .setAttribute("data-theme", "dark");
-    }
+    handlerSetTheme(theme === "light" ? "dark" : "light");
+    window.localStorage.setItem("theme", theme === "light" ? "dark" : "light");
   }
 
   return mounted ? (
@@ -37,11 +39,11 @@ export default function ThemeSwitch() {
       whileHover={{ scale: 1.2 }}
       onClick={() => switchTheme()}
     >
-      {theme === "dark" ? (
+      {theme === "light" ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="1em"
-          height="1em"
+          width="1.5em"
+          height="1.5em"
           viewBox="0 0 24 24"
         >
           <rect width="24" height="24" fill="none" />
@@ -53,8 +55,8 @@ export default function ThemeSwitch() {
       ) : (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="1em"
-          height="1em"
+          width="1.5em"
+          height="1.5em"
           viewBox="0 0 24 24"
         >
           <rect width="24" height="24" fill="none" />

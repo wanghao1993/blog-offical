@@ -18,7 +18,9 @@ export default function SizeNav() {
   return (
     <div>
       {pageList.map((item) => (
-        <Link href={item.url}>{item.title}</Link>
+        <Link href={item.url} key={item.url}>
+          {item.title}
+        </Link>
       ))}
     </div>
   );

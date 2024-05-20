@@ -16,7 +16,7 @@ export default function Nav() {
   const pathName = usePathname();
 
   return (
-    <div>
+    <div className="flex items-center">
       {navList.map((nav) => (
         <Link
           href={nav.path}
@@ -29,7 +29,6 @@ export default function Nav() {
           {nav.title}
         </Link>
       ))}
-      <ThemeSwitch />
     </div>
   );
 }

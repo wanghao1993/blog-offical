@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import Intro from "@/components/Intro";
 import Works from "@/components/Works";
 // import About from "@/components/About";
@@ -9,7 +8,6 @@ import { ScrollProvider } from "@/components/Providers/ScrollProvider";
 export default function Home() {
   return (
     <ScrollProvider>
-      <Header></Header>
       <Intro></Intro>
       <Works></Works>
     </ScrollProvider>

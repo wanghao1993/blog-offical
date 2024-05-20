@@ -5,25 +5,37 @@
 :root {
   --backgound-color: #000;
   --text-color: white;
+  --background-color-dark: #000;
+  --text-color-dark: white;
+  --background-color-light: white;
+  --text-color-light: #000;
   
 }
 [data-theme='light'] {
-  --backgound-color: white;
-  --text-color: #000;
-
+  background-color: var(--background-color-light);
+  color: var(--text-color-light);
 }
 
+[data-theme='dark'] {
+  background-color: var(--background-color-dark);
+  color: var(--text-color-dark);
+}
+
+
 @media (prefers-color-scheme: dark) {
-  :root {
-    --backgound-color: white;
-    --text-color: #000
+  :root:not([data-theme='dark']):not([data-theme='light']) {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
   }
 }
 
-body {
-  color: var(--text-color);
-  background: var(--backgound-color)
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']):not([data-theme='light']) {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+  }
 }
+
 
 @layer utilities {
   .text-balance {

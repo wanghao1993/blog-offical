@@ -3,11 +3,11 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { MdiThemeLightDark, BiMoon, BiSun } from "./Icon/icon";
+import { useTheme } from "next-themes";
 export default function ThemeSwitch() {
   const [mounted, setMounted] = useState(false);
 
-  type Theme = "dark" | "light" | "os";
-  const [theme, setTheme] = useState<Theme>("dark");
+  const { theme, setTheme } = useTheme();
 
   function clickOutSide(e: MouseEvent) {
     const themeEl = document.getElementById("theme-list");
@@ -23,10 +23,6 @@ export default function ThemeSwitch() {
   }
 
   useEffect(() => {
-    const localTheme: Theme =
-      (window.localStorage.getItem("theme") as Theme) || theme;
-
-    switchTheme(localTheme);
     setMounted(true);
 
     document.addEventListener("click", clickOutSide);
@@ -37,16 +33,14 @@ export default function ThemeSwitch() {
   }, []);
 
   // Switch Theme (Light/Dark/OS)
-  function switchTheme(theme: Theme) {
+  function switchTheme(theme: string) {
     setTheme(theme);
-    document.getElementsByTagName("html")[0].setAttribute("data-theme", theme);
-    window.localStorage.setItem("theme", theme);
     setStatus(false);
   }
 
   const [isActive, setStatus] = useState(false);
 
-  type OsIConMap = Record<Theme, { icon: JSX.Element; title: string }>;
+  type OsIConMap = Record<string, { icon: JSX.Element; title: string }>;
   const osIconMap: OsIConMap = {
     os: {
       icon: MdiThemeLightDark(),
@@ -63,20 +57,25 @@ export default function ThemeSwitch() {
     <div className="fixed right-4 top-4">
       <motion.div
         onClick={() => setStatus(isActive ? false : true)}
-        className="cursor-pointer flex justify-end"
+        className="cursor-pointer flex justify-end text-lg "
         whileHover={{ scale: 1.3 }}
         id="swiththeme-btn"
       >
-        {osIconMap[theme].icon}
+        {theme && osIconMap[theme].icon}
       </motion.div>
       {isActive && (
-        <motion.div animate={{ y: 0 }} initial={{ y: -100 }} id="theme-list">
+        <motion.div
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          id="theme-list"
+          className="text-sm  duration-100"
+        >
           <ul>
             {Object.entries(osIconMap).map(([key, value]) => (
-              <li key={key}>
+              <li key={key} className="py-1  hover:scale-110  duration-100 ">
                 <button
                   className="flex items-center"
-                  onClick={() => switchTheme(key as Theme)}
+                  onClick={() => switchTheme(key)}
                 >
                   {value.icon} <span>{value.title}</span>
                 </button>
@@ -87,6 +86,6 @@ export default function ThemeSwitch() {
       )}
     </div>
   ) : (
-    <>Loading</>
+    <></>
   );
 }

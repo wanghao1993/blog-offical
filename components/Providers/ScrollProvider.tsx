@@ -24,7 +24,6 @@ export const ScrollProvider = ({ children }: ScrollProviderProps) => {
     setMounted(true);
     setScrollY(scroll);
   });
-
   if (!mounted) return null;
 
   return (

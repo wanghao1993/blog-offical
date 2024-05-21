@@ -11,26 +11,26 @@
   --text-color-light: #000;
   
 }
-[data-theme='light'] {
+.light {
   background-color: var(--background-color-light);
   color: var(--text-color-light);
 }
 
-[data-theme='dark'] {
+.dark {
   background-color: var(--background-color-dark);
   color: var(--text-color-dark);
 }
 
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme='dark']):not([data-theme='light']) {
+  :root:not(.dark):not(.light) {
     background-color: var(--background-color-dark);
     color: var(--text-color-dark);
   }
 }
 
 @media (prefers-color-scheme: light) {
-  :root:not([data-theme='dark']):not([data-theme='light']) {
+  :root:not(.dark):not(.light) {
     background-color: var(--background-color-light);
     color: var(--text-color-light);
   }

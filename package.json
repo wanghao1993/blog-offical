@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@studio-freight/react-lenis": "^0.0.47",
+    "classnames": "^2.5.1",
     "framer-motion": "^11.1.9",
     "next": "14.2.3",
     "next-themes": "^0.3.0",
@@ -23,6 +24,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "postcss": "^8",
+    "sass": "^1.77.2",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

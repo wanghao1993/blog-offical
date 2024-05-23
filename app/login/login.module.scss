@@ -1,0 +1,25 @@
+
+.formItem {
+    @apply flex items-center relative mb-8;
+    line-height: 32px;
+    input {
+        @apply border-none outline-none rounded flex-1;
+        border-bottom: 1px solid #bbb;
+        background-color: transparent
+    }
+}
+
+.formLabel {
+    @apply absolute;
+    transition: all linear 0.2s;
+    width: 5rem;
+    top: 0;
+    color: #eee;
+    padding: 0px 4px;
+}
+
+.formActive {
+    top: -30px;
+    left: -4px;
+    scale: 0.8;
+}

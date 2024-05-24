@@ -2,10 +2,14 @@
 import { FocusEvent, FormEvent, useState } from "react";
 import loginStyle from "./login.module.scss";
 import classnames from "classnames";
+import { useTheme } from "next-themes";
+import { motion } from "framer-motion";
+import LoginBox from "./component/LoginBox";
 
 interface FormState {
   password: string;
   username: string;
+  rememberme: boolean;
 }
 
 export default function Login() {
@@ -13,40 +17,67 @@ export default function Login() {
   const [formState, setFormState] = useState<FormState>({
     username: "",
     password: "",
+    rememberme: true,
   });
+
+  // 聚焦
   const focusHandler = (el: FocusEvent<HTMLInputElement, Element>) => {
     const id = el.target.id as "username" | "password";
     setId(id);
   };
 
+  // 输入事件处理
   const inputHandler = (el: FormEvent<HTMLInputElement>) => {
-    console.log(el);
+    if (activeElId) {
+      if (activeElId === "username") {
+        setFormState({
+          username: el.target.value,
+          password: formState.password,
+          rememberme: formState.rememberme,
+        });
+      } else if (activeElId === "password") {
+        setFormState({
+          username: formState.username,
+          password: el.target.value,
+          rememberme: formState.rememberme,
+        });
+      }
+    }
+  };
+
+  // 选中checked
+  const checkedChange = (e: { target: { checked: boolean } }) => {
     setFormState({
-      username: id === "username" ? el.target.value : formState[id],
-      password: id === "password" ? el.target.value : formState[id],
+      username: formState.username,
+      password: formState.password,
+      rememberme: e.target.checked,
     });
-    console.log(formState);
+    localStorage.setItem("rememberme", e.target.checked.toString());
   };
   return (
     <>
-      <section className="login w-full h-[100vh] flex justify-center items-center">
-        <div className="w-1/2">
-          <form action="" className="form">
+      <section
+        className={`login  w-full h-[100vh] flex justify-center items-center`}
+      >
+        <div className="sm:w-1/2 md:w-1/3">
+          <form action="" className="form" autoComplete="off">
             <div className={loginStyle.formItem}>
               <label
                 htmlFor="username"
                 className={classnames({
                   [loginStyle.formLabel]: true,
-                  [loginStyle.formActive]: activeElId === "username",
+                  [loginStyle.formActive]:
+                    activeElId === "username" || !!formState.username,
                 })}
               >
                 用户名
               </label>
               <input
                 type="text"
-                autoComplete="username"
                 id="username"
+                name="username"
                 value={formState.username}
+                autoComplete="username"
                 onFocus={(event) => focusHandler(event)}
                 onInput={(event) => inputHandler(event)}
                 onBlur={() => setId("")}
@@ -58,20 +89,62 @@ export default function Login() {
                 htmlFor="password"
                 className={classnames({
                   [loginStyle.formLabel]: true,
-                  [loginStyle.formActive]: activeElId === "password",
+                  [loginStyle.formActive]:
+                    activeElId === "password" || !!formState.password,
                 })}
               >
                 密码
               </label>
               <input
                 type="password"
+                name="password"
                 value={formState.password}
-                autoComplete="current-password"
                 id="password"
+                autoComplete="current-password webauthn"
                 onBlur={() => setId("")}
                 onFocus={(event) => focusHandler(event)}
+                onInput={(event) => inputHandler(event)}
               />
             </div>
+
+            <div className={loginStyle.formItem}>
+              <div className="flex justify-between w-full">
+                <div className="rememberme">
+                  <input
+                    type="checkbox"
+                    name="rememberme"
+                    id="rememberme"
+                    checked={formState.rememberme}
+                    onChange={checkedChange}
+                  />
+                  <label
+                    htmlFor="rememberme"
+                    className={classnames({
+                      [loginStyle.formLabel]: true,
+                      "ml-1": true,
+                    })}
+                  >
+                    记住我
+                  </label>
+                </div>
+                <div className={loginStyle.forgotpassword}>
+                  <motion.a
+                    href="javascript:;"
+                    whileHover={{
+                      color: "rgb(208 182 64)",
+                    }}
+                  >
+                    忘记密码
+                  </motion.a>
+                </div>
+              </div>
+            </div>
+            <div className={loginStyle.formItem}>
+              <button className="w-full bg-cyan-800">登陆</button>
+            </div>
+            <div className="border-t border-cyan-600 mb-3"></div>
+
+            <LoginBox />
           </form>
         </div>
       </section>

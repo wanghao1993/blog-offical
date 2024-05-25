@@ -2,7 +2,6 @@
 import { FocusEvent, FormEvent, useState } from "react";
 import loginStyle from "./login.module.scss";
 import classnames from "classnames";
-import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import LoginBox from "./component/LoginBox";
 
@@ -59,7 +58,7 @@ export default function Login() {
       <section
         className={`login  w-full h-[100vh] flex justify-center items-center`}
       >
-        <div className="sm:w-1/2 md:w-1/3">
+        <div className="w-3/4 md:w-1/3 lg:w-72 ">
           <form action="" className="form" autoComplete="off">
             <div className={loginStyle.formItem}>
               <label
@@ -128,19 +127,19 @@ export default function Login() {
                   </label>
                 </div>
                 <div className={loginStyle.forgotpassword}>
-                  <motion.a
-                    href="javascript:;"
+                  <motion.span
+                    className="cursor-pointer"
                     whileHover={{
                       color: "rgb(208 182 64)",
                     }}
                   >
                     忘记密码
-                  </motion.a>
+                  </motion.span>
                 </div>
               </div>
             </div>
             <div className={loginStyle.formItem}>
-              <button className="w-full bg-cyan-800">登陆</button>
+              <button className="w-full bg-cyan-800">登录</button>
             </div>
             <div className="border-t border-cyan-600 mb-3"></div>
 

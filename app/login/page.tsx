@@ -1,9 +1,10 @@
 "use client";
-import { FocusEvent, FormEvent, useState } from "react";
+import { FocusEvent, FormEvent, useEffect, useState } from "react";
 import loginStyle from "./login.module.scss";
 import classnames from "classnames";
 import { motion } from "framer-motion";
 import LoginBox from "./component/LoginBox";
+import { post } from "lib/fetch";
 
 interface FormState {
   password: string;
@@ -18,6 +19,17 @@ export default function Login() {
     password: "",
     rememberme: true,
   });
+  //
+
+  useEffect(() => {
+    // async function fetchData() {
+    //   const response = await fetch("/api/username");
+    //   const result = await response.json();
+    //   console.log(result);
+    //   //   setData(result);
+    // }
+    // fetchData();
+  }, []);
 
   // 聚焦
   const focusHandler = (el: FocusEvent<HTMLInputElement, Element>) => {
@@ -52,6 +64,14 @@ export default function Login() {
       rememberme: e.target.checked,
     });
     localStorage.setItem("rememberme", e.target.checked.toString());
+  };
+
+  // 登录
+  const login = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    post("/user", {
+      ...formState,
+    });
   };
   return (
     <>
@@ -139,7 +159,9 @@ export default function Login() {
               </div>
             </div>
             <div className={loginStyle.formItem}>
-              <button className="w-full bg-cyan-800">登录</button>
+              <button className="w-full bg-cyan-800" onClick={(e) => login(e)}>
+                登录
+              </button>
             </div>
             <div className="border-t border-cyan-600 mb-3"></div>
 

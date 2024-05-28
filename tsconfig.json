@@ -21,6 +21,9 @@
       "@/components/*": [
         "components/*"
       ],
+      "@/lib/*": [
+        "lib/*"
+      ],
     },
     "plugins": [
       {

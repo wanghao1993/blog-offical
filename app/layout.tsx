@@ -25,7 +25,7 @@ export default function RootLayout({
             <Header />
             <LenisProvider>
               <ThemeSwitch />
-              <main>{children}</main>
+              <main className="h-full">{children}</main>
             </LenisProvider>
           </ThemeProvider>
         </NextAuthProvider>

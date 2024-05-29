@@ -10,14 +10,12 @@ export default function Header() {
   const path = usePathname();
   return (
     path !== "/login" && (
-      <SessionProvider session={session}>
-        <SectionContainer>
-          <header className="h-12 flex justify-between py-3">
-            <BlogName />
-            <Nav />
-          </header>
-        </SectionContainer>
-      </SessionProvider>
+      <SectionContainer>
+        <header className="h-12 flex justify-between py-3 items-center">
+          <BlogName />
+          <Nav />
+        </header>
+      </SectionContainer>
     )
   );
 }

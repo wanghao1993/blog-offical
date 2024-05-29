@@ -9,8 +9,9 @@
   --text-color-dark: white;
   --background-color-light: white;
   --text-color-light: #000;
-  
 }
+
+
 .light {
   background-color: var(--background-color-light);
   color: var(--text-color-light);

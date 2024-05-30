@@ -12,6 +12,7 @@ import medium from "@bytemd/plugin-medium-zoom";
 import gfm from "@bytemd/plugin-gfm";
 import { Input } from "antd";
 import { produce } from "immer";
+import ArticalOperations from "@/components/Article/SaveModal";
 export default function WriteBlog() {
   const [value, setValue] = useState("");
   const [articalInfo, setArticalInfo] = useState({
@@ -40,8 +41,10 @@ export default function WriteBlog() {
   };
   return (
     <main className="px-4">
-      <div className="toolbox mb-2">
+      <div className="toolbox mb-2 flex">
         <Input onChange={(e) => updateTitle(e)} placeholder="文章标题" />
+
+        <ArticalOperations />
       </div>
       <Editor
         uploadImages={async (files) => {

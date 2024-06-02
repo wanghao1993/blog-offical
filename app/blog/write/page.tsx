@@ -13,6 +13,7 @@ import gfm from "@bytemd/plugin-gfm";
 import { Input } from "antd";
 import { produce } from "immer";
 import ArticalOperations from "@/components/Article/SaveModal";
+import MainLayout from "@/components/Layouts/MainLayout";
 export default function WriteBlog() {
   const [value, setValue] = useState("");
   const [articalInfo, setArticalInfo] = useState({
@@ -40,7 +41,7 @@ export default function WriteBlog() {
     );
   };
   return (
-    <main className="px-4">
+    <MainLayout className="px-4">
       <div className="toolbox mb-2 flex">
         <Input onChange={(e) => updateTitle(e)} placeholder="文章标题" />
 
@@ -62,6 +63,6 @@ export default function WriteBlog() {
           setValue(v);
         }}
       />
-    </main>
+    </MainLayout>
   );
 }

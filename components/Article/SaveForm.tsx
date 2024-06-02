@@ -5,7 +5,7 @@ import { Button, Upload, Form, Input, Select } from "antd";
 type FieldType = {
   categories: string[];
   tags: string[];
-  CoverImg?: string;
+  coverImg?: string;
   abstract: string;
 };
 
@@ -40,7 +40,7 @@ export default function ArticleForm(props: { cancelFn: () => void }) {
         <Select
           mode="tags"
           style={{ width: "100%" }}
-          placeholder="Tags Mode"
+          placeholder="请选择分类"
           options={categories.map((item) => ({ label: item, value: item }))}
         />
       </Form.Item>
@@ -53,12 +53,12 @@ export default function ArticleForm(props: { cancelFn: () => void }) {
         <Select
           mode="tags"
           style={{ width: "100%" }}
-          placeholder="Tags Mode"
+          placeholder="请选择标签"
           options={tagList.map((item) => ({ label: item, value: item }))}
         />
       </Form.Item>
 
-      <Form.Item<FieldType> label="封面图片" name="CoverImg">
+      <Form.Item<FieldType> label="封面图片" name="coverImg">
         <Upload.Dragger name="files" action="/upload.do">
           <p className="ant-upload-text">点击或拖拽上传，建议尺寸为192*128px</p>
         </Upload.Dragger>

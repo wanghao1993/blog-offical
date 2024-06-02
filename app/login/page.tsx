@@ -5,6 +5,7 @@ import classnames from "classnames";
 import { motion } from "framer-motion";
 import LoginBox from "./component/LoginBox";
 import { post } from "lib/fetch";
+import { signIn } from "next-auth/react";
 
 interface FormState {
   password: string;
@@ -68,10 +69,7 @@ export default function Login() {
 
   // 登录
   const login = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    post("/user", {
-      ...formState,
-    });
+    signIn("credentials");
   };
   return (
     <>

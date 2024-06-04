@@ -1,5 +1,4 @@
 import Link from "next/link";
-import ThemeSwitch from "./ThemeToggle";
 import { usePathname } from "next/navigation";
 export default function Nav() {
   const navList = [

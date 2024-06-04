@@ -12,9 +12,9 @@ export default function BlogName() {
           className={`horizontal-underline hidden text-3xl font-extrabold sm:block ${
             pathName === "/" ? "horizontal-underline-active" : ""
           }`}
-          aria-label="Isaac."
+          aria-label="Crow."
         >
-          Isaac
+          Crow
         </Link>
       </div>
     </div>

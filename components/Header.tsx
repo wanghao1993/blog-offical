@@ -4,15 +4,19 @@ import SectionContainer from "./SectionContainer";
 import BlogName from "./Name";
 import Nav from "./Nav";
 import { usePathname } from "next/navigation";
+import ThemeSwitch from "@/components/ThemeToggle";
 
 export default function Header() {
   const path = usePathname();
   return (
     path !== "/login" && (
-      <SectionContainer>
-        <header className="h-12 flex justify-between py-3 items-center">
+      <SectionContainer className="sticky top-0 z-10">
+        <header className="flex justify-between py-5 items-center">
           <BlogName />
-          <Nav />
+          <div className="flex items-center">
+            <Nav />
+            <ThemeSwitch />
+          </div>
         </header>
       </SectionContainer>
     )

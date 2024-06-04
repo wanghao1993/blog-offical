@@ -9,6 +9,7 @@
   --text-color-dark: white;
   --background-color-light: white;
   --text-color-light: #000;
+  cursor: url('../../public/cursour.webp') auto
 }
 
 
@@ -16,18 +17,26 @@
   background-color: var(--background-color-light);
   color: var(--text-color-light);
 }
+.light header {
+  background-color: var(--background-color-light);
+}
 
 .light .login {
-  background-image: url('../../public/universe_light.webp');
+  background: url('../../public/universe_light.webp') no-repeat center fixed;
+  background-size: cover;
 }
 
 .dark {
   background-color: var(--background-color-dark);
   color: var(--text-color-dark);
 }
+.dark header {
+  background-color: var(--background-color-dark);
+}
 
 .dark .login {
-  background-image: url('../../public/universe.webp');
+  background: url('../../public/universe.webp') no-repeat center fixed;
+  background-size: cover;
 }
 
 @media (prefers-color-scheme: dark) {

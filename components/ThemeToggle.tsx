@@ -54,7 +54,7 @@ export default function ThemeSwitch() {
   };
 
   return mounted ? (
-    <div className="fixed right-4 top-4">
+    <div>
       <motion.div
         onClick={() => setStatus(isActive ? false : true)}
         className="cursor-pointer flex justify-end text-lg "
@@ -68,9 +68,9 @@ export default function ThemeSwitch() {
           animate={{ opacity: 1 }}
           initial={{ opacity: 0 }}
           id="theme-list"
-          className="text-sm  duration-100"
+          className="text-sm  duration-100 relative"
         >
-          <ul>
+          <ul className="absolute w-24 p-1">
             {Object.entries(osIconMap).map(([key, value]) => (
               <li key={key} className="py-1  hover:scale-110  duration-100 ">
                 <button

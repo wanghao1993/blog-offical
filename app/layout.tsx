@@ -4,7 +4,6 @@ import LenisProvider from "@/components/Providers/LenisProvider";
 import ThemeProvider from "@/components/Providers/ThemeProvider";
 import "./ui/globals.css";
 import Header from "@/components/Header";
-import ThemeSwitch from "@/components/ThemeToggle";
 const inter = Inter({ subsets: ["latin"] });
 import { NextAuthProvider } from "@/components/Providers/AuthProvider";
 export const metadata: Metadata = {
@@ -24,7 +23,6 @@ export default function RootLayout({
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <Header />
             <LenisProvider>
-              <ThemeSwitch />
               <main className="h-full">{children}</main>
             </LenisProvider>
           </ThemeProvider>

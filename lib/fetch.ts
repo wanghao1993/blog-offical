@@ -2,6 +2,11 @@
 const BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api";
 
+interface Response<T> {
+  code: number;
+  message: string;
+  data: T;
+}
 interface FetcherOptions extends RequestInit {
   body?: any;
 }
@@ -21,11 +26,13 @@ async function fetcher<T>(url: string, options: FetcherOptions): Promise<T> {
 
     throw error;
   }
-
-  return res.json();
+  return (await res.json()).data;
 }
 
-export async function get<T>(url: string): Promise<T> {
+export async function get<T>(url: string, data?: any): Promise<T> {
+  if (data) {
+    url += `?${new URLSearchParams(data).toString()}`;
+  }
   return fetcher<T>(url, {
     method: "GET",
   });

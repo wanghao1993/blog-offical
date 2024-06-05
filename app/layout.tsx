@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import LenisProvider from "@/components/Providers/LenisProvider";
 import ThemeProvider from "@/components/Providers/ThemeProvider";
-import "./ui/globals.css";
+import "./ui/globals.scss";
 import Header from "@/components/Header";
 const inter = Inter({ subsets: ["latin"] });
 import { NextAuthProvider } from "@/components/Providers/AuthProvider";
@@ -19,14 +19,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <NextAuthProvider>
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            <Header />
-            <LenisProvider>
-              <main className="h-full">{children}</main>
-            </LenisProvider>
-          </ThemeProvider>
-        </NextAuthProvider>
+        {/* <NextAuthProvider> */}
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <Header />
+          <LenisProvider>
+            <main className="h-full">{children}</main>
+          </LenisProvider>
+        </ThemeProvider>
+        {/* </NextAuthProvider> */}
       </body>
     </html>
   );

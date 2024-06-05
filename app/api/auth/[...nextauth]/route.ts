@@ -50,14 +50,7 @@ const authOptions: AuthOptions = {
       },
     }),
   ],
-  callbacks: {
-    session: async ({ session, token }) => {
-      return await new Promise((resolve) => {
-        console.log(token);
-        resolve(session);
-      });
-    },
-  },
+  callbacks: {},
   pages: {
     signIn: "/login",
   },

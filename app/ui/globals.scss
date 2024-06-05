@@ -9,34 +9,55 @@
   --text-color-dark: white;
   --background-color-light: white;
   --text-color-light: #000;
-  cursor: url('../../public/cursour.webp') auto
+  cursor: url('../../public/cursour.webp') auto;
+  --font-family: 'Poppins', sans-serif;
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(179, 177, 177);
+    border-radius: 0px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgb(136, 136, 136);
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(100, 100, 100);
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:active {
+    background: rgb(68, 68, 68);
+    border-radius: 10px;
+  }
+  
 }
-
 
 .light {
   background-color: var(--background-color-light);
   color: var(--text-color-light);
-}
-.light header {
-  background-color: var(--background-color-light);
-}
-
-.light .login {
-  background: url('../../public/universe_light.webp') no-repeat center fixed;
-  background-size: cover;
+  header {
+    background-color: var(--background-color-light);
+  }
+  .login {
+    background: url('../../public/universe_light.webp') no-repeat center fixed;
+    background-size: cover;
+  }
 }
 
 .dark {
   background-color: var(--background-color-dark);
   color: var(--text-color-dark);
-}
-.dark header {
-  background-color: var(--background-color-dark);
-}
-
-.dark .login {
-  background: url('../../public/universe.webp') no-repeat center fixed;
-  background-size: cover;
+  header {
+    background-color: var(--background-color-dark);
+  }
+  .login {
+    background: url('../../public/universe.webp') no-repeat center fixed;
+    background-size: cover;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -69,7 +90,7 @@
 
 .horizontal-underline {
   border-bottom-width: 0;
-  background-image: linear-gradient(transparent,transparent),linear-gradient(#de1d8d,#de1d8d);
+  background-image: linear-gradient(transparent,transparent),linear-gradient(#1d91de,#2a108a);
   background-size: 0 3px;
   background-position: 0 100%;
   background-repeat: no-repeat;

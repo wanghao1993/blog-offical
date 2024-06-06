@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@ant-design/nextjs-registry':
+        specifier: ^1.0.0
+        version: 1.0.0(@ant-design/cssinjs@1.20.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(antd@5.17.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@bytemd/plugin-breaks':
         specifier: ^1.21.0
         version: 1.21.0(bytemd@1.21.0)
@@ -125,6 +128,15 @@ packages:
     resolution: {integrity: sha512-bCPXTAg66f5bdccM4TT21SQBDO1Ek2gho9h3nO9DAKXJP4sq+5VBjrQMSxMVXSB3HyEz+cUbHQ5+6ogxCOpaew==}
     engines: {node: '>=8'}
     peerDependencies:
+      react: '>=16.0.0'
+      react-dom: '>=16.0.0'
+
+  '@ant-design/nextjs-registry@1.0.0':
+    resolution: {integrity: sha512-kU1K1UOhwrF6DPv73MhuL5a6U4e6/TiFapeLUt/c/kch9h5qFwEaJPb4RSJKNw0PRBfqCAPS011wVm4wYcrqbQ==}
+    peerDependencies:
+      '@ant-design/cssinjs': ^1.18.2
+      antd: ^5.0.0
+      next: ^14.0.0
       react: '>=16.0.0'
       react-dom: '>=16.0.0'
 
@@ -2776,6 +2788,14 @@ snapshots:
       '@babel/runtime': 7.24.5
       classnames: 2.5.1
       rc-util: 5.41.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
+  '@ant-design/nextjs-registry@1.0.0(@ant-design/cssinjs@1.20.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(antd@5.17.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@ant-design/cssinjs': 1.20.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      antd: 5.17.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 

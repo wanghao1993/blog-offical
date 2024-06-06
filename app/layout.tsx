@@ -5,7 +5,10 @@ import ThemeProvider from "@/components/Providers/ThemeProvider";
 import "./ui/globals.scss";
 import Header from "@/components/Header";
 const inter = Inter({ subsets: ["latin"] });
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { NextAuthProvider } from "@/components/Providers/AuthProvider";
+import { ConfigProvider } from "antd";
+
 export const metadata: Metadata = {
   title: "汪浩的博客",
   description: "我的博客，记录一些技术，心得，经历等等",
@@ -19,14 +22,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        {/* <NextAuthProvider> */}
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <Header />
-          <LenisProvider>
-            <main className="h-full">{children}</main>
-          </LenisProvider>
-        </ThemeProvider>
-        {/* </NextAuthProvider> */}
+        <AntdRegistry>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            <Header />
+            <LenisProvider>
+              <main className="h-full">{children}</main>
+            </LenisProvider>
+          </ThemeProvider>
+          {/* </NextAuthProvider> */}
+        </AntdRegistry>
       </body>
     </html>
   );

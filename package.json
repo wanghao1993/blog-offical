@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/nextjs-registry": "^1.0.0",
     "@bytemd/plugin-breaks": "^1.21.0",
     "@bytemd/plugin-frontmatter": "^1.21.0",
     "@bytemd/plugin-gemoji": "^1.21.0",

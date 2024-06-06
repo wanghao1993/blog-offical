@@ -62,6 +62,9 @@ export default function Bucket() {
           <Button type="link" onClick={() => getUrl(record.url)}>
             复制链接
           </Button>
+          <Button type="link" danger onClick={() => getUrl(record.url)}>
+            删除
+          </Button>
         </>
       ),
     },
@@ -138,9 +141,7 @@ export default function Bucket() {
           </Col>
         </Row>
         <Table
-          bordered
           size="small"
-          scroll={{ x: true, y: 600 }}
           className="mt-2"
           pagination={pagination}
           dataSource={dataSource}

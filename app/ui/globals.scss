@@ -9,8 +9,10 @@
   --text-color-dark: white;
   --background-color-light: white;
   --text-color-light: #000;
+  --table-bg-color: #000;
+  --table-text-color: white;
+  --table-border-color: #fafafa;
   cursor: url('../../public/cursour.webp') auto;
-  --font-family: 'Poppins', sans-serif;
   ::-webkit-scrollbar {
     width: 6px;
   }
@@ -36,9 +38,38 @@
   
 }
 
+.ant-table-wrapper .ant-table {
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(179, 177, 177);
+    border-radius: 0px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgb(136, 136, 136);
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(100, 100, 100);
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:active {
+    background: rgb(68, 68, 68);
+    border-radius: 10px;
+  }
+}
+
 .light {
   background-color: var(--background-color-light);
   color: var(--text-color-light);
+  --table-bg-color: #fff;
+  --table-text-color: #000;
+  --table-border-color: #fff;
+  
   header {
     background-color: var(--background-color-light);
   }
@@ -46,11 +77,15 @@
     background: url('../../public/universe_light.webp') no-repeat center fixed;
     background-size: cover;
   }
+  
 }
 
 .dark {
   background-color: var(--background-color-dark);
   color: var(--text-color-dark);
+  --table-bg-color: #000;
+  --table-text-color: white;
+  --table-border-color: #000;
   header {
     background-color: var(--background-color-dark);
   }
@@ -86,6 +121,18 @@
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.ant-table-thead th {
+  background-color: var(--table-bg-color) !important;
+  color: var(--table-text-color) !important;
+  border-color: var(--table-border-color) !important;
+}
+
+.ant-table-tbodyy td {
+  background-color: var(--table-bg-color) !important;
+  color: var(--table-text-color) !important;
+  border-color: var(--table-border-color) !important;
 }
 
 .horizontal-underline {

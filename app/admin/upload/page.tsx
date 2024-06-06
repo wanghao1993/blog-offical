@@ -1,6 +1,6 @@
 "use client";
 import SectionContainer from "@/components/SectionContainer";
-import { get } from "@/lib/fetch";
+import { del, get } from "@/lib/fetch";
 import { isImageUrl } from "@/lib/utils";
 import { CosTypes } from "@/types/cos";
 import {
@@ -13,12 +13,29 @@ import {
   Image,
   PaginationProps,
 } from "antd";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 export default function Bucket() {
   // 获取可访问的url
   function getUrl(url: string) {
     navigator.clipboard.writeText(url);
     message.success("复制成功");
+  }
+  // 删除
+  async function deleteObj(key: string) {
+    const item = bucketList.find((item) => item.Name === bucket);
+    if (item) {
+      try {
+        await del("cos/object", {
+          bucket: item.Name,
+          region: item.Location,
+          key,
+        });
+        setMarker("");
+        getObjectList();
+      } catch (e) {
+        console.log(e);
+      }
+    }
   }
 
   // 列名
@@ -41,7 +58,7 @@ export default function Bucket() {
       render: (url: string) => (
         <>
           {isImageUrl(url) ? (
-            <Image width={40} src={url} />
+            <Image width={40} src={url} alt={url} />
           ) : (
             <Button
               onClick={() => window.open(url, "_blank")}
@@ -62,7 +79,7 @@ export default function Bucket() {
           <Button type="link" onClick={() => getUrl(record.url)}>
             复制链接
           </Button>
-          <Button type="link" danger onClick={() => getUrl(record.url)}>
+          <Button type="link" danger onClick={() => deleteObj(record.Key)}>
             删除
           </Button>
         </>
@@ -105,23 +122,35 @@ export default function Bucket() {
   };
 
   // 获取桶内容
-  let marker = "";
+  const [loading, setLoading] = useState(true);
+  const [marker, setMarker] = useState<string>();
+
+  const getObjectList = useCallback(
+    function () {
+      setLoading(true);
+      const item = bucketList.find((item) => item.Name === bucket);
+      if (item) {
+        get<{
+          Contents: CosTypes.ObjectItem[];
+          NextMarker: string;
+        }>("cos/list", {
+          bucket: item?.Name,
+          region: item?.Location,
+          // marker,
+          pageSize: pagination.pageSize,
+        }).then((res) => {
+          setLoading(false);
+          setDataSource(res.Contents);
+          // 缺少分页
+          // setMarker(res.NextMarker);
+        });
+      }
+    },
+    [bucketList, bucket, pagination.pageSize]
+  );
   useEffect(() => {
-    const item = bucketList.find((item) => item.Name === bucket);
-    item &&
-      get<{
-        Contents: CosTypes.ObjectItem[];
-        NextMarker: string;
-      }>("cos/list", {
-        bucket: item?.Name,
-        region: item?.Location,
-        marker,
-        pageSize: pagination.pageSize,
-      }).then((res) => {
-        setDataSource(res.Contents);
-        marker = res.NextMarker;
-      });
-  }, [bucket, pagination]);
+    getObjectList();
+  }, [getObjectList]);
   const selectBucket = (v: string) => {
     setBucket(v);
   };
@@ -141,6 +170,7 @@ export default function Bucket() {
           </Col>
         </Row>
         <Table
+          loading={loading}
           size="small"
           className="mt-2"
           pagination={pagination}

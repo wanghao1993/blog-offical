@@ -14,32 +14,13 @@ export async function GET(request: Request) {
       Marker,
       MaxKeys,
     });
-    let count = 0;
 
-    await new Promise((resolve) => {
-      for (let i = 0; i < res.Contents.length; i++) {
-        let item = res.Contents[i];
-
-        cos.getObjectUrl(
-          {
-            Bucket,
-            Region,
-            Key: item.Key,
-            Sign: true,
-          },
-          (err, data) => {
-            count++;
-            if (count === res.Contents.length) {
-              resolve(true);
-            }
-            if (err) {
-              throw Error(err.message);
-            } else {
-              item["url"] = data.Url;
-            }
-          }
-        );
-      }
+    res.Contents.forEach((item: Record<string, string>) => {
+      item[
+        "url"
+      ] = `https://${Bucket}.cos.${Region}.myqcloud.com/${encodeURIComponent(
+        item.Key
+      )}`;
     });
 
     return responseHandler(res);
@@ -47,9 +28,3 @@ export async function GET(request: Request) {
     return responseHandler(null, 200, BusinessCode.badRequest);
   }
 }
-
-export async function POST(request: Request) {}
-
-export async function DELETE(request: Request) {}
-
-export async function PUT(request: Request) {}

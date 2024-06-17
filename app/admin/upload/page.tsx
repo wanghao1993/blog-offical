@@ -13,7 +13,7 @@ import {
   Image,
   PaginationProps,
 } from "antd";
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import BuckerSelect from "@/components/admin/upload/bucketSelect";
 import { ColumnProps } from "antd/es/table";
 export default function Bucket() {
@@ -98,18 +98,6 @@ export default function Bucket() {
   const [bucket, setBucket] = useState("");
   const [dataSource, setDataSource] = useState<CosTypes.ObjectItem[]>([]);
 
-  useEffect(() => {
-    function getBucketList() {
-      get<CosTypes.BucketItem[]>("cos/bucket").then((res) => {
-        if (res.length) {
-          setBucketList(res);
-          setBucket(res[0].Name);
-        }
-      });
-    }
-    getBucketList();
-  }, []);
-
   // 分页
   const [pagination, setPagination] = useState<PaginationProps>({
     showSizeChanger: true,
@@ -157,15 +145,22 @@ export default function Bucket() {
   useEffect(() => {
     getObjectList();
   }, [getObjectList]);
-  const selectBucket = (v: string) => {
+
+  // 选择桶的回调
+  const selectBucket = (v: string, list: CosTypes.BucketItem[]) => {
     setBucket(v);
+    setBucketList(list);
   };
+
+  const selectBucketHandler = (value: string, list: CosTypes.BucketItem[]) =>
+    selectBucket(value, list);
+
   return (
     <>
       <SectionContainer>
         <Row gutter={[20, 20]}>
           <Col span={24}>
-            <BuckerSelect selectBucket={(value) => selectBucket(value)} />
+            <BuckerSelect selectBucket={selectBucketHandler} />
           </Col>
         </Row>
         <Table

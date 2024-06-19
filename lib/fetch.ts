@@ -19,7 +19,7 @@ async function fetcher<T>(url: string, options: FetcherOptions): Promise<T> {
     headers: {
       ...options.headers,
     },
-    body: options.body ? JSON.stringify(options.body) : undefined,
+    body: options.body,
   });
 
   if (!res.ok) {

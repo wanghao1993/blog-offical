@@ -49,6 +49,13 @@ export default function Bucket() {
       ellipsis: true,
     },
     {
+      title: "大小",
+      dataIndex: "Size",
+      key: "Size",
+      width: 100,
+      render: (text: string) => `${(+text / 1024).toFixed(2)}kb`,
+    },
+    {
       title: "上次修改时间",
       key: "LastModified",
       width: 160,

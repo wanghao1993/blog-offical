@@ -8,10 +8,10 @@ export function isImageUrl(url: string) {
     const parsedUrl = new URL(url);
     if (parsedUrl.pathname) {
       // 获取 URL 的路径部分，并提取文件扩展名
-      const extension = parsedUrl.pathname.split(".").pop().toLowerCase();
+      const extension = parsedUrl.pathname.split(".").pop()?.toLowerCase();
 
       // 检查扩展名是否在定义的图片扩展名列表中
-      return imageExtensions.includes(extension);
+      return extension ? imageExtensions.includes(extension) : false;
     }
   } catch (e) {
     // 如果 URL 无效，则返回 false

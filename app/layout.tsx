@@ -7,7 +7,6 @@ import Header from "@/components/Header";
 const inter = Inter({ subsets: ["latin"] });
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { NextAuthProvider } from "@/components/Providers/AuthProvider";
-import { ConfigProvider } from "antd";
 
 export const metadata: Metadata = {
   title: "汪浩的博客",
@@ -22,15 +21,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <AntdRegistry>
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            <Header />
-            <LenisProvider>
-              <main className="h-full">{children}</main>
-            </LenisProvider>
-          </ThemeProvider>
-          {/* </NextAuthProvider> */}
-        </AntdRegistry>
+        <NextAuthProvider>
+          <AntdRegistry>
+            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+              <Header />
+              <LenisProvider>
+                <main className="h-full">{children}</main>
+              </LenisProvider>
+            </ThemeProvider>
+          </AntdRegistry>
+        </NextAuthProvider>
       </body>
     </html>
   );

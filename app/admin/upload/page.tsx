@@ -70,7 +70,7 @@ export default function Bucket() {
       render: (url: string) => (
         <>
           {isImageUrl(url) ? (
-            <Image width={40} src={url} alt={url} />
+            <Image width={40} src={url} alt={url} placeholder />
           ) : (
             <Button
               onClick={() => window.open(url, "_blank")}

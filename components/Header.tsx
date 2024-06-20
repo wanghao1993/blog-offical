@@ -5,7 +5,7 @@ import BlogName from "./Name";
 import Nav from "./Nav";
 import { usePathname } from "next/navigation";
 import ThemeSwitch from "@/components/ThemeToggle";
-
+import LoginInOut from "./LoginOutBtn";
 export default function Header() {
   const path = usePathname();
   return (
@@ -16,6 +16,7 @@ export default function Header() {
           <div className="flex items-center">
             <Nav />
             <ThemeSwitch />
+            <LoginInOut />
           </div>
         </header>
       </SectionContainer>

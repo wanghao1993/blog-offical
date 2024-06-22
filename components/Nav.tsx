@@ -15,7 +15,7 @@ export default function Nav() {
   const pathName = usePathname();
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center text-lg ">
       {navList.map((nav) => (
         <Link
           href={nav.path}

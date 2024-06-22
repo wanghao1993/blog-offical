@@ -10,7 +10,6 @@ import { signIn } from "next-auth/react";
 interface FormState {
   password: string;
   username: string;
-  rememberme: boolean;
 }
 
 export default function Login() {
@@ -18,7 +17,6 @@ export default function Login() {
   const [formState, setFormState] = useState<FormState>({
     username: "",
     password: "",
-    rememberme: true,
   });
   //
 
@@ -45,13 +43,11 @@ export default function Login() {
         setFormState({
           username: el.target.value,
           password: formState.password,
-          rememberme: formState.rememberme,
         });
       } else if (activeElId === "password") {
         setFormState({
           username: formState.username,
           password: el.target.value,
-          rememberme: formState.rememberme,
         });
       }
     }
@@ -62,9 +58,7 @@ export default function Login() {
     setFormState({
       username: formState.username,
       password: formState.password,
-      rememberme: e.target.checked,
     });
-    localStorage.setItem("rememberme", e.target.checked.toString());
   };
 
   // 登录
@@ -117,45 +111,18 @@ export default function Login() {
                 name="password"
                 value={formState.password}
                 id="password"
-                autoComplete="current-password webauthn"
+                autoComplete="current-password"
                 onBlur={() => setId("")}
                 onFocus={(event) => focusHandler(event)}
                 onInput={(event) => inputHandler(event)}
               />
             </div>
 
-            <div className={loginStyle.formItem}>
-              <div className="flex justify-between w-full">
-                <div className="rememberme">
-                  <input
-                    type="checkbox"
-                    name="rememberme"
-                    id="rememberme"
-                    checked={formState.rememberme}
-                    onChange={checkedChange}
-                  />
-                  <label
-                    htmlFor="rememberme"
-                    className={classnames({
-                      [loginStyle.formLabel]: true,
-                      "ml-1": true,
-                    })}
-                  >
-                    记住我
-                  </label>
-                </div>
-                <div className={loginStyle.forgotpassword}>
-                  <motion.span
-                    className="cursor-pointer"
-                    whileHover={{
-                      color: "rgb(208 182 64)",
-                    }}
-                  >
-                    忘记密码
-                  </motion.span>
-                </div>
-              </div>
+            <div className={(loginStyle.formItem, "text-right")}>
+              <span>注册账号</span>
+              <span>忘记密码</span>
             </div>
+
             <div className={loginStyle.formItem}>
               <button className="w-full bg-cyan-800" onClick={(e) => login(e)}>
                 登录

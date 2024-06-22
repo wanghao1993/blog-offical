@@ -54,7 +54,7 @@ export default function ThemeSwitch() {
   };
 
   return mounted ? (
-    <div>
+    <div className="ml-4">
       <motion.div
         onClick={() => setStatus(isActive ? false : true)}
         className="cursor-pointer flex justify-end text-lg "

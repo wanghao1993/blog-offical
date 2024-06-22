@@ -1,3 +1,5 @@
+import { HttpRequestHeader } from "antd/es/upload/interface";
+
 // lib/api.ts
 const BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api/";
@@ -15,10 +17,9 @@ async function fetcher<T>(url: string, options: FetcherOptions): Promise<T> {
   const res = await fetch(`${BASE_URL}${url}`, {
     ...options,
     headers: {
-      "Content-Type": "application/json",
       ...options.headers,
     },
-    body: options.body ? JSON.stringify(options.body) : undefined,
+    body: options.body,
   });
 
   if (!res.ok) {
@@ -38,10 +39,16 @@ export async function get<T>(url: string, data?: any): Promise<T> {
   });
 }
 
-export async function post<T>(url: string, data: any): Promise<T> {
+export async function post<T>(
+  url: string,
+  data: any,
+  headers?: HttpRequestHeader
+): Promise<T> {
+  console.log(data);
   return fetcher<T>(url, {
     method: "POST",
     body: data,
+    headers,
   });
 }
 

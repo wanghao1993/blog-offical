@@ -1,9 +1,11 @@
 import { Github, Google, WeChat, Alipay } from "@/components/Icon/icon";
-import { signIn, signOut } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 export default function LoginBox() {
   const sign = async () => {
-    await signIn("github");
+    await signIn("github", {
+      callbackUrl: location.origin,
+    });
   };
   return (
     <>

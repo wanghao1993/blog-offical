@@ -16,13 +16,11 @@ export enum BusinessCode {
   badRequest = 400,
 }
 
-export function responseHandler(
-  data: any,
+export function responseHandler<T>(
+  data: T,
   status = 200,
-  code = BusinessCode.normal
+  code = BusinessCode.normal,
+  message = "success"
 ) {
-  return NextResponse.json(
-    { message: StatusMsg[code] || "error", data, code },
-    { status }
-  );
+  return NextResponse.json({ message, data, code }, { status });
 }

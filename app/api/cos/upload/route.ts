@@ -49,8 +49,8 @@ export async function POST(request: Request) {
     });
 
     return responseHandler("上传成功", BusinessCode.normal);
-  } catch (err) {
-    return responseHandler(err, BusinessCode.normal);
+  } catch (err: any) {
+    return responseHandler(null, 200, BusinessCode.normal, err.message);
   }
 }
 

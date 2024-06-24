@@ -18,11 +18,6 @@ export default function WriteBlog() {
   const [value, setValue] = useState("");
   const [articalInfo, setArticalInfo] = useState({
     title: "",
-    content: "",
-    tags: [],
-    category: "",
-    description: "",
-    cover: "",
   });
   const plugins = [
     gfm(),
@@ -45,7 +40,7 @@ export default function WriteBlog() {
       <div className="toolbox mb-2 flex">
         <Input onChange={(e) => updateTitle(e)} placeholder="文章标题" />
 
-        <ArticalOperations />
+        <ArticalOperations content={value} title={articalInfo.title} />
       </div>
       <Editor
         uploadImages={async (files) => {

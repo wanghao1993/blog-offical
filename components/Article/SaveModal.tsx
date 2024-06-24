@@ -1,9 +1,10 @@
-import { Button } from "antd";
+import { Button, message } from "antd";
 import SaveForm from "./SaveForm";
 import { useState } from "react";
 import "./style.css";
 import { post } from "@/lib/fetch";
 import { FieldType } from "./SaveForm";
+import { useRouter } from "next/navigation";
 
 export default function ArticalOperations(data: {
   article_id?: string;
@@ -11,11 +12,24 @@ export default function ArticalOperations(data: {
   title?: string;
 }) {
   // 草稿箱
-  const saveDraft = () => {
-    console.log("存草稿箱");
+  const saveDraft = (formData: FieldType) => {
+    post("articles/create", {
+      abstract: formData.abstract,
+      tags: formData.tags,
+      categories: formData.categories,
+      coverImg: formData.coverImg,
+      content: data.content,
+      title: data.title,
+      isPublished: false,
+    }).then(() => {
+      message.success("发布成功");
+      setFormStatus(false);
+      router.push("/blog");
+    });
   };
 
   // 发布弹窗
+  const router = useRouter();
   const release = (formData: FieldType) => {
     post("articles/create", {
       abstract: formData.abstract,
@@ -24,7 +38,12 @@ export default function ArticalOperations(data: {
       coverImg: formData.coverImg,
       content: data.content,
       title: data.title,
-    }).then((res) => {});
+      isPublished: true,
+    }).then(() => {
+      message.success("发布成功");
+      setFormStatus(false);
+      router.push("/blog");
+    });
   };
 
   // 关闭弹窗

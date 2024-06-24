@@ -25,6 +25,7 @@
     "cos-nodejs-sdk-v5": "^2.14.0",
     "framer-motion": "^11.1.9",
     "immer": "^10.1.1",
+    "mongoose": "^8.4.3",
     "next": "14.2.3",
     "next-themes": "^0.3.0",
     "react": "^18",

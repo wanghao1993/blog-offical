@@ -2,6 +2,8 @@ import { Button } from "antd";
 import SaveForm from "./SaveForm";
 import { useState } from "react";
 import "./style.css";
+import { post } from "@/lib/fetch";
+import { FieldType } from "./SaveForm";
 
 export default function ArticalOperations(data: {
   article_id?: string;
@@ -14,8 +16,15 @@ export default function ArticalOperations(data: {
   };
 
   // 发布弹窗
-  const release = () => {
-    setFormStatus(true);
+  const release = (formData: FieldType) => {
+    post("articles/create", {
+      abstract: formData.abstract,
+      tags: formData.tags,
+      categories: formData.categories,
+      coverImg: formData.coverImg,
+      content: data.content,
+      title: data.title,
+    }).then((res) => {});
   };
 
   // 关闭弹窗
@@ -29,13 +38,17 @@ export default function ArticalOperations(data: {
       <Button className="mr-2" onClick={saveDraft}>
         草稿箱
       </Button>
-      <Button type="primary" onClick={release}>
+      <Button type="primary" onClick={() => setFormStatus(true)}>
         发布
       </Button>
 
       {showForm ? (
         <div className="arrow absolute z-10 top-12 right-2 px-4 py-6 rounded-md bg-white  w-[50vw] shadow-lg border">
-          <SaveForm cancelFn={cancel} />
+          <SaveForm
+            cancelFn={cancel}
+            onFinish={release}
+            saveAsDraft={saveDraft}
+          />
         </div>
       ) : null}
     </div>

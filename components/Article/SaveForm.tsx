@@ -2,15 +2,11 @@ import React from "react";
 import type { FormProps } from "antd";
 import { Button, Upload, Form, Input, Select } from "antd";
 
-type FieldType = {
+export type FieldType = {
   categories: string[];
   tags: string[];
   coverImg?: string;
   abstract: string;
-};
-
-const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-  console.log("Success:", values);
 };
 
 const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
@@ -20,7 +16,13 @@ const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
 const tagList = ["css", "后端"];
 const categories = ["前端", "后端"];
 
-export default function ArticleForm(props: { cancelFn: () => void }) {
+interface Props {
+  cancelFn: () => void;
+  onFinish: (data: FieldType) => void;
+  saveAsDraft: (data: FieldType) => void;
+}
+
+export default function ArticleForm(props: Props) {
   return (
     <Form
       className="w-full"
@@ -28,7 +30,7 @@ export default function ArticleForm(props: { cancelFn: () => void }) {
       labelCol={{ span: 4 }}
       wrapperCol={{ span: 20 }}
       style={{ maxWidth: 600 }}
-      onFinish={onFinish}
+      onFinish={(values) => props.onFinish(values)}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >

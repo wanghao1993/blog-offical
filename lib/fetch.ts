@@ -44,10 +44,11 @@ export async function post<T>(
   data: any,
   headers?: HttpRequestHeader
 ): Promise<T> {
-  console.log(data);
+  const isFile = Object.prototype.toString.call(data) === "[object FormData]";
+
   return fetcher<T>(url, {
     method: "POST",
-    body: data,
+    body: isFile ? data : JSON.stringify(data),
     headers,
   });
 }

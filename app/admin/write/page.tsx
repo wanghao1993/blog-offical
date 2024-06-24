@@ -41,7 +41,7 @@ export default function WriteBlog() {
     );
   };
   return (
-    <MainLayout className="px-4">
+    <MainLayout>
       <div className="toolbox mb-2 flex">
         <Input onChange={(e) => updateTitle(e)} placeholder="文章标题" />
 

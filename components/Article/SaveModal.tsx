@@ -1,7 +1,7 @@
 import { Button, message } from "antd";
 import SaveForm from "./SaveForm";
 import { useState } from "react";
-import "./style.css";
+import "./article.scss";
 import { post } from "@/lib/fetch";
 import { FieldType } from "./SaveForm";
 import { useRouter } from "next/navigation";
@@ -62,7 +62,7 @@ export default function ArticalOperations(data: {
       </Button>
 
       {showForm ? (
-        <div className="arrow absolute z-10 top-12 right-2 px-4 py-6 rounded-md bg-white  w-[50vw] shadow-lg border">
+        <div className="arrow">
           <SaveForm
             cancelFn={cancel}
             onFinish={release}

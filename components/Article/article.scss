@@ -1,0 +1,43 @@
+.arrow {
+    @apply  absolute z-10 top-12 right-2 px-4 py-6 rounded-md bg-white  w-[50vw] shadow-lg border;
+    &::before {
+        content: "";
+        position: absolute;
+        margin-left: -.5rem;
+        top: -.6rem;
+        right: 1.5rem;
+        width: 1rem;
+        height: 1rem;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-right: none;
+        border-bottom: none;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+  
+}
+
+html[style='color-scheme: dark;']  {
+    .articlelist {
+        @apply p-2  hover:shadow border-b duration-300 
+    }
+}
+
+html[style='color-scheme: light;']  {
+    .articlelist {
+        @apply p-2  hover:shadow border-b duration-300  hover:bg-gray-100
+    }
+}
+
+.articletitle {
+    @apply text-lg my-1
+}
+
+.articleabstract {
+    @apply text-zinc-500 text-sm line-clamp-1 my-1
+}
+
+.like-view {
+    @apply  text-xs text-zinc-500 my-1 cursor-pointer
+}

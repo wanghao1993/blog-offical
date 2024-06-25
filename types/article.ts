@@ -15,4 +15,9 @@ export namespace ArticleType {
     createdAt: string;
     updatedAt: string;
   }
+
+  export interface GetBlogList {
+    list: ArticleItem[];
+    totalCount: number;
+  }
 }

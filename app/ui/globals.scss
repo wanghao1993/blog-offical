@@ -2,17 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
-  --backgound-color: #000;
-  --text-color: white;
-  --background-color-dark: #000;
-  --text-color-dark: white;
-  --background-color-light: white;
-  --text-color-light: #000;
-  --table-bg-color: #000;
+  --backgound-color: #000; // 背景色
+  --text-color: white; // 文字颜色
+  --background-color-dark: #000; // 暗黑模式的文字颜色
+  --text-color-dark: white; // 暗黑模式的文字颜色
+  --background-color-light: white; // 亮色模式的文字颜色
+  --text-color-light: #000; //  亮色模式的文字颜色
+  --table-bg-color: #000; // 
   --table-text-color: white;
   --table-border-color: #fafafa;
-  cursor: url('../../public/cursour.webp') auto;
   ::-webkit-scrollbar {
     width: 6px;
   }

@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 const inter = Inter({ subsets: ["latin"] });
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { NextAuthProvider } from "@/components/Providers/AuthProvider";
+import ToTop from "@/components/toTop";
 
 export const metadata: Metadata = {
   title: "汪浩的博客",
@@ -27,6 +28,7 @@ export default function RootLayout({
               <Header />
               <LenisProvider>
                 <main className="h-full">{children}</main>
+                <ToTop />
               </LenisProvider>
             </ThemeProvider>
           </AntdRegistry>

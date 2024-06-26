@@ -68,16 +68,19 @@ importers:
       next-themes:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      radash:
+        specifier: ^12.1.0
+        version: 12.1.0
       react:
         specifier: ^18
         version: 18.3.1
       react-dom:
         specifier: ^18
         version: 18.3.1(react@18.3.1)
+      tailwindcss-animate:
+        specifier: ^1.0.7
+        version: 1.0.7(tailwindcss@3.4.3)
     devDependencies:
-      '@types/next-auth':
-        specifier: ^3.15.0
-        version: 3.15.0(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/node':
         specifier: ^20.12.7
         version: 20.12.7
@@ -468,10 +471,6 @@ packages:
 
   '@types/ms@0.7.34':
     resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
-
-  '@types/next-auth@3.15.0':
-    resolution: {integrity: sha512-ZVfejlu81YiIRX1m0iKAfvZ3nK7K9EyZWhNARNKsFop8kNAgEvMnlKpTpwN59xkK2OhyWLagPuiDAVBYSO9jSA==}
-    deprecated: This is a stub types definition. next-auth provides its own type definitions, so you do not need this installed.
 
   '@types/node@20.12.7':
     resolution: {integrity: sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==}
@@ -2110,6 +2109,10 @@ packages:
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
+  radash@12.1.0:
+    resolution: {integrity: sha512-b0Zcf09AhqKS83btmUeYBS8tFK7XL2e3RvLmZcm0sTdF1/UUlHSsjXdCcWNxe7yfmAlPve5ym0DmKGtTzP6kVQ==}
+    engines: {node: '>=14.18.0'}
+
   rc-cascader@3.26.0:
     resolution: {integrity: sha512-L1dml383TPSJD1I11YwxuVbmqaJY64psZqFp1ETlgl3LEOwDu76Cyl11fw5dmjJhMlUWwM5dECQfqJgfebhUjg==}
     peerDependencies:
@@ -2603,6 +2606,11 @@ packages:
   supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+
+  tailwindcss-animate@1.0.7:
+    resolution: {integrity: sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders'
 
   tailwindcss@3.4.3:
     resolution: {integrity: sha512-U7sxQk/n397Bmx4JHbJx/iSOOv5G+II3f1kpLpY2QeUv5DcPdcTsYLlusZfq1NthHS1c1cZoyFmmkex1rzke0A==}
@@ -3211,15 +3219,6 @@ snapshots:
       '@types/unist': 2.0.10
 
   '@types/ms@0.7.34': {}
-
-  '@types/next-auth@3.15.0(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      next-auth: 4.24.7(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-    transitivePeerDependencies:
-      - next
-      - nodemailer
-      - react
-      - react-dom
 
   '@types/node@20.12.7':
     dependencies:
@@ -5260,6 +5259,8 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
+  radash@12.1.0: {}
+
   rc-cascader@3.26.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.24.5
@@ -5924,6 +5925,10 @@ snapshots:
       has-flag: 4.0.0
 
   supports-preserve-symlinks-flag@1.0.0: {}
+
+  tailwindcss-animate@1.0.7(tailwindcss@3.4.3):
+    dependencies:
+      tailwindcss: 3.4.3
 
   tailwindcss@3.4.3:
     dependencies:

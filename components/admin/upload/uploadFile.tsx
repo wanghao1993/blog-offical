@@ -7,11 +7,16 @@ import {
   Upload,
   UploadFile,
   UploadProps,
+  message,
 } from "antd";
 import { CosTypes } from "@/types/cos";
 import { post } from "@/lib/fetch";
 
-const UploadFileModal = (props: { bucketList: CosTypes.BucketItem[] }) => {
+const UploadFileModal = (props: {
+  bucketList: CosTypes.BucketItem[];
+  bucket: string;
+  uploadSuccess: () => void;
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -22,6 +27,7 @@ const UploadFileModal = (props: { bucketList: CosTypes.BucketItem[] }) => {
     bucket: string;
     filesLists: UploadFile[];
   };
+
   const onFinish = (values: FieldType) => {
     const region = props.bucketList.find((item) => item.Name === values.bucket)
       ?.Location as string;
@@ -32,7 +38,18 @@ const UploadFileModal = (props: { bucketList: CosTypes.BucketItem[] }) => {
     fileList.forEach((item) => {
       formData.append("files", item.originFileObj as Blob);
     });
-    post("cos/upload", formData);
+    setUploading(true);
+    post("cos/upload", formData)
+      .then(() => {
+        message.success("上传成功");
+        setFileList([]);
+        form.resetFields();
+        setIsModalOpen(false);
+        props.uploadSuccess();
+      })
+      .finally(() => {
+        setUploading(false);
+      });
   };
 
   const onFinishFailed = () => {};
@@ -76,6 +93,7 @@ const UploadFileModal = (props: { bucketList: CosTypes.BucketItem[] }) => {
       >
         <Form
           preserve={false}
+          initialValues={{ bucket: props.bucket }}
           name="basic"
           form={form}
           labelCol={{ span: 4 }}
@@ -107,7 +125,7 @@ const UploadFileModal = (props: { bucketList: CosTypes.BucketItem[] }) => {
 
           <Form.Item<FieldType>>
             <Form.Item wrapperCol={{ offset: 4, span: 16 }}>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" loading={uploading}>
                 {uploading ? "上传中" : "开始上传"}
               </Button>
             </Form.Item>

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import UploadFileModal from "./uploadFile";
 export default function BuckerSelect(props: {
   selectBucket: (value: string, list: CosTypes.BucketItem[]) => void;
+  uploadSuccess: () => void;
 }) {
   const [bucketList, setBucketList] = useState<CosTypes.BucketItem[]>([]);
   const [bucket, setBucket] = useState("");
@@ -36,7 +37,11 @@ export default function BuckerSelect(props: {
         placeholder="请选择桶"
         onChange={(value) => selectBucket(value)}
       />
-      <UploadFileModal bucketList={bucketList} />
+      <UploadFileModal
+        uploadSuccess={props.uploadSuccess}
+        bucketList={bucketList}
+        bucket={bucket}
+      />
     </div>
   );
 }

@@ -7,12 +7,14 @@ import {
   Row,
   Col,
   Table,
-  Select,
   Button,
   message,
   Image,
   PaginationProps,
+  Divider,
 } from "antd";
+
+import { ReloadOutlined } from "@ant-design/icons";
 import { memo, useCallback, useEffect, useState } from "react";
 import BuckerSelect from "@/components/admin/upload/bucketSelect";
 import { ColumnProps } from "antd/es/table";
@@ -105,23 +107,6 @@ export default function Bucket() {
   const [bucket, setBucket] = useState("");
   const [dataSource, setDataSource] = useState<CosTypes.ObjectItem[]>([]);
 
-  // 分页
-  const [pagination, setPagination] = useState<PaginationProps>({
-    showSizeChanger: true,
-    pageSize: 10,
-    current: 1,
-    showLessItems: false,
-    showPrevNextJumpers: true,
-    showQuickJumper: true,
-    total: 0,
-    showTotal(total) {
-      return `共${total}项`;
-    },
-  });
-  const tableChange = (pagination: PaginationProps) => {
-    setPagination({ ...pagination });
-  };
-
   // 获取桶内容
   const [loading, setLoading] = useState(true);
   const [marker, setMarker] = useState<string>();
@@ -134,20 +119,22 @@ export default function Bucket() {
         get<{
           Contents: CosTypes.ObjectItem[];
           NextMarker: string;
+          IsTruncated: "true" | "false";
         }>("cos/list", {
           bucket: item?.Name,
           region: item?.Location,
-          // marker,
-          pageSize: pagination.pageSize,
+          marker,
+          pageSize: 1000,
         }).then((res) => {
           setLoading(false);
           setDataSource(res.Contents);
-          // 缺少分页
-          // setMarker(res.NextMarker);
+          if (res.IsTruncated === "true") {
+            setMarker(res.NextMarker);
+          }
         });
       }
     },
-    [bucketList, bucket, pagination.pageSize]
+    [bucketList, bucket]
   );
   useEffect(() => {
     getObjectList();
@@ -157,6 +144,7 @@ export default function Bucket() {
   const selectBucket = (v: string, list: CosTypes.BucketItem[]) => {
     setBucket(v);
     setBucketList(list);
+    setMarker("");
   };
 
   const selectBucketHandler = (value: string, list: CosTypes.BucketItem[]) =>
@@ -167,18 +155,35 @@ export default function Bucket() {
       <SectionContainer>
         <Row gutter={[20, 20]}>
           <Col span={24}>
-            <BuckerSelect selectBucket={selectBucketHandler} />
+            <BuckerSelect
+              selectBucket={selectBucketHandler}
+              uploadSuccess={getObjectList}
+            />
           </Col>
         </Row>
+        <Divider></Divider>
+
+        <Button
+          onClick={getObjectList}
+          size="small"
+          icon={<ReloadOutlined></ReloadOutlined>}
+          type="primary"
+        >
+          <span>刷新</span>
+        </Button>
         <Table
+          bordered
           loading={loading}
           size="small"
           className="mt-2"
-          pagination={pagination}
+          pagination={{
+            current: 1,
+            pageSize: 20,
+            total: dataSource.length,
+          }}
           dataSource={dataSource}
           rowKey={"Key"}
           columns={columns}
-          onChange={tableChange}
         ></Table>
       </SectionContainer>
     </>

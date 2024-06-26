@@ -1,35 +1,68 @@
 import { ArticleType } from "@/types/article";
-import { LikeFilled, EyeOutlined } from "@ant-design/icons";
-import { Tag } from "antd";
-import "./article.scss";
+import Link from "next/link";
+import { LikeFilled, EyeFilled } from "@ant-design/icons";
+import Image from "next/image";
 import { motion } from "framer-motion";
+import { Tag } from "antd";
+
+/**
+ * v0 by Vercel.
+ * @see https://v0.dev/t/P4Ve019xTmD
+ * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
+ */
+
 export default function ArticleItem(data: {
   articelInfo: ArticleType.ArticleItem;
 }) {
   return (
-    <motion.section className="articlelist" whileHover={{ scale: 1.05 }}>
-      <h3 className="articletitle">{data.articelInfo.title}</h3>
-      <p className="articleabstract">{data.articelInfo.abstract}</p>
-      <div className="flex justify-between">
-        <div className="like-view">
-          <span className="mr-2">
-            <LikeFilled />
-            <span className="pl-1">{data.articelInfo.likesCount}</span>
-          </span>
-          <span>
-            <EyeOutlined />
-            <span className="pl-1">{data.articelInfo.viewsCount}</span>
-          </span>
+    <motion.div className="transition-all duration-300 hover:shadow-md flex flex-col sm:flex-row border-b">
+      {data.articelInfo.coverUrl && (
+        <Link href="#" className="block" prefetch={false}>
+          <Image
+            src={data.articelInfo.coverUrl}
+            alt="Blog Post Image"
+            width={120}
+            height={90}
+            className="w-full h-40 sm:h-full object-cover"
+          />
+        </Link>
+      )}
+      <div className="p-4 flex-1">
+        <div className="flex items-center justify-between mb-2">
+          <div className="py-1 rounded-full text-xs font-medium">
+            {data.articelInfo.categories.map((item) => (
+              <Tag key={item}>{item}</Tag>
+            ))}
+          </div>
+          <div className="py-1 rounded-full text-xs font-medium">
+            {data.articelInfo.tags.map((item) => (
+              <Tag key={item}>{item}</Tag>
+            ))}
+          </div>
         </div>
-        <div className="tags">
-          {data.articelInfo.categories?.map((item) => {
-            return <Tag key={item}> {item} </Tag>;
-          })}
-          {data.articelInfo.tags?.map((item) => {
-            return <Tag key={item}> {item} </Tag>;
-          })}
+        <Link href="#" className="block" prefetch={false}>
+          <h3 className="text-lg font-semibold mb-2 line-clamp-2">
+            {data.articelInfo.title}
+          </h3>
+        </Link>
+        <p className="text-muted-foreground line-clamp-2 mb-4">
+          {data.articelInfo.abstract}
+        </p>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <LikeFilled className="w-5 h-5 fill-muted-foreground" />
+            <span className="text-muted-foreground">
+              {data.articelInfo.likesCount}
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <EyeFilled className="w-5 h-5 fill-muted-foreground" />
+            <span className="text-muted-foreground">
+              {data.articelInfo.viewsCount}
+            </span>
+          </div>
         </div>
       </div>
-    </motion.section>
+    </motion.div>
   );
 }

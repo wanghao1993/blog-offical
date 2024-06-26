@@ -20,6 +20,8 @@ export async function POST(request: Request) {
     fs.mkdirSync(uploadDir);
   }
   // 村粗到本地
+  let names = files.map((item) => item.name);
+
   for (let i = 0; i < files.length; i++) {
     const file = files[i] as File;
     const fileBuffer = await file.arrayBuffer();
@@ -28,7 +30,7 @@ export async function POST(request: Request) {
   // 上传
 
   try {
-    await cos.uploadFiles({
+    const res = await cos.uploadFiles({
       files: files.map((item) => ({
         Bucket: bucket,
         Region: region,
@@ -36,21 +38,29 @@ export async function POST(request: Request) {
         FilePath: path.join(uploadDir, item.name),
       })) as COS.UploadFileItemParams[],
     });
+
+    const successList = res.files.map(
+      (item, index) =>
+        `https://${bucket}.cos.${region}.myqcloud.com/${encodeURIComponent(
+          names[index]
+        )}`
+    );
+
     // 上传问后删除存储的文件
-    // fs.promises.readdir(uploadDir).then((files) => {
-    //   const deletePromises = files.map((file) => {
-    //     const filePath = path.join(uploadDir, file);
-    //     return fs.promises.unlink(filePath);
-    //   });
+    fs.promises.readdir(uploadDir).then((files) => {
+      const deletePromises = files.map((file) => {
+        const filePath = path.join(uploadDir, file);
+        return fs.promises.unlink(filePath);
+      });
 
-    //   Promise.all(deletePromises).then(() => {
-    //     console.log("All files deleted successfully");
-    //   });
-    // });
+      Promise.all(deletePromises).then(() => {
+        console.log("All files deleted successfully");
+      });
+    });
 
-    return responseHandler("上传成功", BusinessCode.normal);
+    return responseHandler(successList, BusinessCode.normal);
   } catch (err: any) {
-    return responseHandler(null, 200, BusinessCode.normal, err.message);
+    return responseHandler(err.message, 200, BusinessCode.normal);
   }
 }
 

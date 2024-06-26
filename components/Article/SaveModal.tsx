@@ -31,19 +31,20 @@ export default function ArticalOperations(data: {
   // 发布弹窗
   const router = useRouter();
   const release = (formData: FieldType) => {
-    post("articles/create", {
-      abstract: formData.abstract,
-      tags: formData.tags,
-      categories: formData.categories,
-      coverImg: formData.coverImg,
-      content: data.content,
-      title: data.title,
-      isPublished: true,
-    }).then(() => {
-      message.success("发布成功");
-      setFormStatus(false);
-      router.push("/blog");
-    });
+    console.log(formData);
+    // post("articles/create", {
+    //   abstract: formData.abstract,
+    //   tags: formData.tags,
+    //   categories: formData.categories,
+    //   coverImg: formData.coverImg,
+    //   content: data.content,
+    //   title: data.title,
+    //   isPublished: true,
+    // }).then(() => {
+    //   message.success("发布成功");
+    //   setFormStatus(false);
+    //   router.push("/blog");
+    // });
   };
 
   // 关闭弹窗

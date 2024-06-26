@@ -40,8 +40,9 @@ export default function ArticleForm(props: Props) {
             formData.append("bucket", "blog-offical-1302483222");
             formData.append("region", "ap-guangzhou");
             formData.append("files", blob);
-            post("cos/upload", formData);
-            setUrl(event.target.result as string);
+            post<string[]>("cos/upload", formData).then((res) => {
+              setUrl(res[0]);
+            });
           }
         };
         reader.readAsDataURL(blob);
@@ -87,8 +88,14 @@ export default function ArticleForm(props: Props) {
 
       <Form.Item<FieldType> label="封面图片" name="coverImg">
         <div className="relative">
-          <Input.TextArea placeholder="粘贴图片" onPaste={pasteImage} />
-          <Image src={imageUrl} alt="preview" width={50} height={50} />
+          <Input.TextArea
+            placeholder="粘贴图片"
+            onPaste={pasteImage}
+            value={imageUrl}
+          />
+          {imageUrl && (
+            <Image src={imageUrl} alt="preview" width={50} height={50} />
+          )}
           <Upload.Dragger name="files" action="/upload.do">
             <p className="ant-upload-text">
               点击或拖拽上传，建议尺寸为192*128px

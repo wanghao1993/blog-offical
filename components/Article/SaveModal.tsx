@@ -11,8 +11,32 @@ export default function ArticalOperations(data: {
   content?: string;
   title?: string;
 }) {
-  // 草稿箱
-  const saveDraft = (formData: FieldType) => {
+  // // 草稿箱
+  // const saveDraft = (formData: FieldType) => {
+  //   post("articles/create", {
+  //     abstract: formData.abstract,
+  //     tags: formData.tags,
+  //     categories: formData.categories,
+  //     coverImg: formData.coverImg,
+  //     content: data.content,
+  //     title: data.title,
+  //     isPublished: false,
+  //   }).then(() => {
+  //     message.success("保存成功");
+  //   });
+  // };
+
+  // 发布弹窗
+  const router = useRouter();
+  const release = (formData: FieldType) => {
+    if (!data.content) {
+      message.warning("请输入文章内容。");
+      return;
+    }
+    if (!data.title) {
+      message.warning("请输入文章标题。");
+      return;
+    }
     post("articles/create", {
       abstract: formData.abstract,
       tags: formData.tags,
@@ -20,31 +44,12 @@ export default function ArticalOperations(data: {
       coverImg: formData.coverImg,
       content: data.content,
       title: data.title,
-      isPublished: false,
+      isPublished: true,
     }).then(() => {
       message.success("发布成功");
       setFormStatus(false);
       router.push("/blog");
     });
-  };
-
-  // 发布弹窗
-  const router = useRouter();
-  const release = (formData: FieldType) => {
-    console.log(formData);
-    // post("articles/create", {
-    //   abstract: formData.abstract,
-    //   tags: formData.tags,
-    //   categories: formData.categories,
-    //   coverImg: formData.coverImg,
-    //   content: data.content,
-    //   title: data.title,
-    //   isPublished: true,
-    // }).then(() => {
-    //   message.success("发布成功");
-    //   setFormStatus(false);
-    //   router.push("/blog");
-    // });
   };
 
   // 关闭弹窗
@@ -55,9 +60,9 @@ export default function ArticalOperations(data: {
   const [showForm, setFormStatus] = useState(false);
   return (
     <div className="flex ml-2 relative">
-      <Button className="mr-2" onClick={saveDraft}>
+      {/* <Button className="mr-2" onClick={saveDraft}>
         草稿箱
-      </Button>
+      </Button> */}
       <Button type="primary" onClick={() => setFormStatus(true)}>
         发布
       </Button>
@@ -67,7 +72,7 @@ export default function ArticalOperations(data: {
           <SaveForm
             cancelFn={cancel}
             onFinish={release}
-            saveAsDraft={saveDraft}
+            // saveAsDraft={saveDraft}
           />
         </div>
       ) : null}

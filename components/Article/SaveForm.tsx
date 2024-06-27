@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import type { FormProps, UploadFile, UploadProps } from "antd";
 import { Button, Upload, Form, Input, Select, Image } from "antd";
-import { post } from "@/lib/fetch";
-import { RcFile } from "antd/es/upload";
+
 import { PlusOutlined } from "@ant-design/icons";
-import generateUUID from "@/lib/uuid";
 export type FieldType = {
   categories: string[];
   tags: string[];
@@ -16,57 +14,32 @@ const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
 
-const tagList = ["css", "后端"];
-const categories = ["前端", "后端"];
+const tagList = [
+  "JS",
+  "CSS",
+  "React",
+  "Vue",
+  "TypeScript",
+  "区块链",
+  "MySql",
+  "Docker",
+  "NextJs",
+  "NestJs",
+];
+const categories = ["前端", "后端", "Android", "IOS", "问题记录", "杂谈"];
 
 interface Props {
   cancelFn: () => void;
   onFinish: (data: FieldType) => void;
-  saveAsDraft: (data: FieldType) => void;
+  content: String;
+  // saveAsDraft: (data: FieldType) => void;
 }
 
 export default function ArticleForm(props: Props) {
-  // 转文件
-  // 黏贴图片上传
   const [form] = Form.useForm();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
-  const pasteImage = (event: any) => {
-    let items = event.clipboardData?.items || [];
-    for (let index in items) {
-      let item = items[index];
-      if (item.kind === "file") {
-        const fileName = `img_${+new Date()}.png`;
-        let blob = new File([item.getAsFile() as File], fileName, {
-          type: "image/png",
-        });
-        let reader = new FileReader();
-        reader.onload = function (event) {
-          if (event.target) {
-            const formData = new FormData();
-            formData.append("bucket", "blog-offical-1302483222");
-            formData.append("region", "ap-guangzhou");
-            formData.append("file", blob);
-            const uid = generateUUID();
-            post<string[]>("cos/upload", formData).then((res) => {
-              form.setFieldValue("coverImg", res[0]);
-              setFileList([
-                {
-                  name: fileName,
-                  thumbUrl: res[0],
-                  status: "done",
-                  uid,
-                },
-              ]);
-            });
-          }
-        };
-        reader.readAsDataURL(blob);
-      }
-    }
-  };
   // 选择上传
-
   const uploadChange: UploadProps["onChange"] = (info) => {
     setFileList(info.fileList);
     if (info.file.status === "done") {
@@ -119,7 +92,6 @@ export default function ArticleForm(props: Props) {
 
         <Form.Item<FieldType> label="封面图片" name="coverImg">
           <div className="relative">
-            <Input.TextArea placeholder="粘贴图片" onPaste={pasteImage} />
             <Upload
               accept="image/*"
               action="/api/cos/upload"

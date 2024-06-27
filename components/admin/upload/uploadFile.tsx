@@ -36,7 +36,7 @@ const UploadFileModal = (props: {
     formData.append("bucket", values.bucket);
     formData.append("region", region);
     fileList.forEach((item) => {
-      formData.append("files", item.originFileObj as Blob);
+      formData.append("file", item.originFileObj as Blob);
     });
     setUploading(true);
     post("cos/upload", formData)

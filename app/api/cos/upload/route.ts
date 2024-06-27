@@ -9,7 +9,7 @@ export async function GET(request: Request) {}
 export async function POST(request: Request) {
   const formData = await request.formData();
 
-  const files: File[] = formData.getAll("files") as unknown as File[];
+  const files: File[] = formData.getAll("file") as unknown as File[];
   const region = formData.get("region");
   const bucket = formData.get("bucket");
 

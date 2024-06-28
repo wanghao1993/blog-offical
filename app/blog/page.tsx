@@ -7,6 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import ArticleItem from "@/components/Article/ArticleItem";
 import { produce } from "immer";
 import useScroll from "@/lib/useScrollHooks";
+import Link from "next/link";
 export default function LoginPage() {
   const [list, setList] = useState<ArticleType.ArticleItem[]>([]);
   const loadingMoreRef = useRef<HTMLDivElement | null>(null);
@@ -20,7 +21,7 @@ export default function LoginPage() {
     setLoading(true);
     get<ArticleType.GetBlogList>("articles/list", {
       page: pageInfo.page,
-      pageSize: pageInfo.pageSize,
+      pageSize: 10,
     })
       .then((res) => {
         setList([...list, ...res.list]);
@@ -33,12 +34,13 @@ export default function LoginPage() {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [pageInfo.page]);
   const { isBottom } = useScroll();
   let timerId = -1;
   useEffect(() => {
     if (isBottom) {
       clearTimeout(timerId);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       timerId = window.setTimeout(() => {
         setPageInfo(
           produce((draft) => {
@@ -48,6 +50,9 @@ export default function LoginPage() {
         getBlogList();
       }, 300);
     }
+    return () => {
+      clearTimeout(timerId);
+    };
   }, [isBottom]);
 
   useEffect(() => {

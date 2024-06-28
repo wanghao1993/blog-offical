@@ -17,7 +17,7 @@ export default function ArticleItem(data: {
   return (
     <motion.div className="transition-all duration-300 hover:shadow-md flex flex-col sm:flex-row border-b">
       {data.articelInfo.coverUrl && (
-        <Link href="#" className="block" prefetch={false}>
+        <Link href="22" className="block" prefetch={false}>
           <Image
             src={data.articelInfo.coverUrl}
             alt="Blog Post Image"
@@ -40,17 +40,21 @@ export default function ArticleItem(data: {
             ))}
           </div>
         </div>
-        <Link href="#" className="block" prefetch={false}>
-          <h3 className="text-lg font-semibold mb-2 line-clamp-2">
+        <Link
+          href={`/blog/${data.articelInfo._id}`}
+          className="block"
+          prefetch={false}
+        >
+          <h3 className="text-lg font-semibold mb-2 line-clamp-1 ">
             {data.articelInfo.title}
           </h3>
         </Link>
-        <p className="text-muted-foreground line-clamp-2 mb-4">
+        <p className="text-muted-foreground line-clamp-2 mb-4 text-sm opacity-60 ">
           {data.articelInfo.abstract}
         </p>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between opacity-45">
           <div className="flex items-center gap-2">
-            <LikeFilled className="w-5 h-5 fill-muted-foreground" />
+            <LikeFilled className="w-5 h-5 fill-muted-foreground  " />
             <span className="text-muted-foreground">
               {data.articelInfo.likesCount}
             </span>

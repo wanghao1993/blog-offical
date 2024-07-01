@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { MdiThemeLightDark, BiMoon, BiSun } from "./Icon/icon";
 import { useTheme } from "next-themes";
+import { Button } from "antd";
+import { SunOutlined, MoonOutlined, LaptopOutlined } from "@ant-design/icons";
+import classNames from "classnames";
 export default function ThemeSwitch() {
   const [mounted, setMounted] = useState(false);
 
@@ -43,21 +46,27 @@ export default function ThemeSwitch() {
   type OsIConMap = Record<string, { icon: JSX.Element; title: string }>;
   const osIconMap: OsIConMap = {
     os: {
-      icon: MdiThemeLightDark(),
+      icon: <LaptopOutlined></LaptopOutlined>,
       title: "跟随系统",
     },
     dark: {
-      icon: BiMoon(),
+      icon: <MoonOutlined></MoonOutlined>,
       title: "夜间模式",
     },
-    light: { icon: BiSun(), title: "日间模式" },
+    light: { icon: <SunOutlined></SunOutlined>, title: "日间模式" },
   };
+
+  const className = classNames({
+    "p-2": true,
+    "duration-100": true,
+    "w-52": true,
+  });
 
   return mounted ? (
     <div className="ml-4">
       <motion.div
         onClick={() => setStatus(isActive ? false : true)}
-        className="cursor-pointer flex justify-end text-lg "
+        className="cursor-pointer flex justify-end text-lg  "
         whileHover={{ scale: 1.3 }}
         id="swiththeme-btn"
       >
@@ -70,18 +79,18 @@ export default function ThemeSwitch() {
           id="theme-list"
           className="text-sm  duration-100 relative"
         >
-          <ul className="absolute w-24 p-1">
+          <div className={`absolute p-2 bg-white top-4 text-black rounded-md`}>
             {Object.entries(osIconMap).map(([key, value]) => (
-              <li key={key} className="py-1  hover:scale-110  duration-100 ">
-                <button
-                  className="flex items-center"
-                  onClick={() => switchTheme(key)}
-                >
-                  {value.icon} <span>{value.title}</span>
-                </button>
-              </li>
+              <div
+                key={key}
+                className={className}
+                onClick={() => switchTheme(key)}
+              >
+                <span>{value.icon}</span>
+                <span className="ml-2"> {value.title}</span>
+              </div>
             ))}
-          </ul>
+          </div>
         </motion.div>
       )}
     </div>

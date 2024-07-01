@@ -6,9 +6,10 @@ import SectionContainer from "../SectionContainer";
 
 interface Props {
   children: ReactNode;
+  [key: string]: any;
 }
 
-export default function MainLayout({ children }: Props) {
+export default function MainLayout({ children, ...props }: Props) {
   const variants = {
     hidden: { opacity: 0, x: -200 },
     enter: { opacity: 1, x: 0 },
@@ -16,7 +17,7 @@ export default function MainLayout({ children }: Props) {
   };
 
   return (
-    <SectionContainer>
+    <SectionContainer {...props}>
       <motion.main
         data-scroll
         className="mb-auto"

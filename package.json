@@ -24,6 +24,7 @@
     "bytemd": "^1.21.0",
     "classnames": "^2.5.1",
     "cos-nodejs-sdk-v5": "^2.14.0",
+    "dayjs": "^1.11.11",
     "framer-motion": "^11.1.9",
     "highlight.js": "^11.9.0",
     "immer": "^10.1.1",

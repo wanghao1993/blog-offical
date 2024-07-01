@@ -1,5 +1,5 @@
 "use client";
-import "highlight.js/styles/arta.min.css";
+import "juejin-markdown-themes/dist/mk-cute.css";
 import "bytemd/dist/index.css";
 import "./page.css";
 import { Editor } from "@bytemd/react";

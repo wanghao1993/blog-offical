@@ -1,8 +1,5 @@
 import { Schema, model, models } from "mongoose";
-let counter = 1;
-let CountedId = { type: Number, default: () => counter++ };
 const ArticleSchema = new Schema({
-  id: CountedId,
   title: {
     required: true,
     type: String,
@@ -76,11 +73,5 @@ const ArticleSchema = new Schema({
 });
 
 const Article = models?.Article || model("Article", ArticleSchema);
-
-Article.find({ id: { $gt: 0 } })
-  .sort({ id: -1 })
-  .then(([first, ...others]) => {
-    if (first) counter = first.id + 1;
-  });
 
 export default Article;

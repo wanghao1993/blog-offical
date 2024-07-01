@@ -3,41 +3,68 @@
 @tailwind utilities;
 
 @layer base {
-  h1 {
-      @apply text-2xl;
+  a {
+    text-decoration: none;
+    color: inherit;
   }
-  h2 {
-      @apply text-xl;
+  
+  body {
+    margin: 0;
+    padding: 0
   }
-  h3 {
-      @apply text-lg;
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    color: #333030;
   }
-  h4 {
-      @apply text-base;
+  
+  ul,li {
+    list-style: none;
   }
-  h5 {
-      @apply text-sm;
-  }
-  h6 {
-      @apply text-xs;
-  }
+  
 }
 
 
 :root {
-  --backgound-color: #000; // 背景色
+  color-scheme: light dark;
+  --background-color: #000; // 背景色
   --text-color: white; // 文字颜色
-  --background-color-dark: #000; // 暗黑模式的文字颜色
-  --text-color-dark: white; // 暗黑模式的文字颜色
-  --background-color-light: white; // 亮色模式的文字颜色
-  --text-color-light: #000; //  亮色模式的文字颜色
-  --table-bg-color: #000; // 
-  --table-text-color: white;
-  --table-border-color: #fafafa;
+  --table-bg-color: #000;  // 表格颜色
+  --table-text-color: white; // 文字颜色
+  --table-border-color: #fafafa; // 边框颜色
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(179, 177, 177);
+    border-radius: 0px;
+  }
   
+  ::-webkit-scrollbar-thumb {
+    background: rgb(136, 136, 136);
+    border-radius: 10px;
+  }
   
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(100, 100, 100);
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:active {
+    background: rgb(68, 68, 68);
+    border-radius: 10px;
+  }
 }
 
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+header {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
 .ant-table-wrapper .ant-table {
   ::-webkit-scrollbar {
     width: 6px;
@@ -64,55 +91,33 @@
 }
 
 .light {
-  background-color: var(--background-color-light);
   color: var(--text-color-light);
+  --background-color: #fff;
+  --text-color: #333030;
   --table-bg-color: #fff;
   --table-text-color: #000;
   --table-border-color: #fff;
-  
-  header {
-    background-color: var(--background-color-light);
-  }
-  .login {
-    background: url('../../public/universe_light.webp') no-repeat center fixed;
-    background-size: cover;
-  }
-  
 }
-
 .dark {
-  background-color: var(--background-color-dark);
   color: var(--text-color-dark);
+  --background-color: #000;
+  --text-color: #fff;
   --table-bg-color: #000;
   --table-text-color: white;
   --table-border-color: #000;
-  header {
-    background-color: var(--background-color-dark);
-  }
-  .login {
-    background: url('../../public/universe.webp') no-repeat center fixed;
-    background-size: cover;
-  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not(.dark):not(.light) {
-    background-color: var(--background-color-dark);
-    color: var(--text-color-dark);
-  }
-  :root:not(.dark):not(.light) .login {
-    background-image: url('../../public/universe.webp');
+    --background-color: #000;
+    --text-color: #fff;
   }
 }
 
 @media (prefers-color-scheme: light) {
   :root:not(.dark):not(.light) {
-    background-color: var(--background-color-light);
-    color: var(--text-color-light);
-   
-  }
-  :root:not(.dark):not(.light) .login {
-    background-image: url('../../public/universe_light.webp');
+    --background-color: #fff;
+    --text-color: #000;
   }
 }
 

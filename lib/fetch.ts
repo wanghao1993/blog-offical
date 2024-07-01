@@ -50,6 +50,7 @@ export async function post<T>(
     method: "POST",
     body: isFile ? data : JSON.stringify(data),
     headers,
+    credentials: "same-origin",
   });
 }
 

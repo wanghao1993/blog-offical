@@ -31,7 +31,7 @@ const categories = ["前端", "后端", "Android", "IOS", "问题记录", "杂�
 interface Props {
   cancelFn: () => void;
   onFinish: (data: FieldType) => void;
-  content: String;
+  content?: String;
   // saveAsDraft: (data: FieldType) => void;
 }
 

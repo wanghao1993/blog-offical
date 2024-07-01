@@ -1,7 +1,6 @@
 import { Button, message } from "antd";
 import SaveForm from "./SaveForm";
 import { useState } from "react";
-import "./article.scss";
 import { post } from "@/lib/fetch";
 import { FieldType } from "./SaveForm";
 import { useRouter } from "next/navigation";
@@ -72,6 +71,7 @@ export default function ArticalOperations(data: {
           <SaveForm
             cancelFn={cancel}
             onFinish={release}
+            content={data.content}
             // saveAsDraft={saveDraft}
           />
         </div>

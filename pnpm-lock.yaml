@@ -53,6 +53,9 @@ importers:
       cos-nodejs-sdk-v5:
         specifier: ^2.14.0
         version: 2.14.0
+      dayjs:
+        specifier: ^1.11.11
+        version: 1.11.11
       framer-motion:
         specifier: ^11.1.9
         version: 11.1.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)

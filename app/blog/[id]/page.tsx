@@ -1,7 +1,78 @@
 "use client";
+import MainLayout from "@/components/Layouts/MainLayout";
+import { get } from "@/lib/fetch";
+import { ArticleType } from "@/types/article";
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Spin, Empty, Divider } from "antd";
+import { CalendarOutlined, EyeOutlined, LikeOutlined } from "@ant-design/icons";
+import formatterDate from "@/lib/data_utils";
+import { motion } from "framer-motion";
+import { Viewer } from "@bytemd/react";
+import "juejin-markdown-themes/dist/mk-cute.css";
 export default function ArticleDetail() {
-  const x = useParams();
-  console.log(x);
-  return <div>11</div>;
+  const { id } = useParams();
+  const [detail, setDetail] = useState<ArticleType.ArticleItem>();
+  const [loading, setLoading] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const getArticleDetail = () => {
+    if (id) {
+      setLoading(true);
+      get<ArticleType.ArticleItem>("/articles/detail", {
+        id,
+      })
+        .then((res) => {
+          setDetail(res);
+        })
+        .finally(() => {
+          setLoaded(true);
+          setLoading(false);
+        });
+    } else {
+    }
+  };
+
+  useEffect(() => {
+    getArticleDetail();
+    return () => {
+      setLoaded(false);
+      setLoading(false);
+    };
+  }, []);
+
+  return (
+    <MainLayout className="min-h-60">
+      <Spin spinning={loading}>
+        {detail ? (
+          <div className="article-detail">
+            <h1 className="font-semibold mb-4">{detail.title}</h1>
+            <div className="text-sm text-slate-400 flex items-center">
+              <div>
+                <CalendarOutlined />
+                <span className="pl-1">{formatterDate(detail.createdAt)}</span>
+              </div>
+              <Divider type="vertical" className="mx-4!"></Divider>
+              <div>
+                <EyeOutlined />
+                <span className="pl-1">{detail.viewsCount}</span>
+              </div>
+              <Divider type="vertical" className="mx-2!"></Divider>
+              <motion.div
+                className="cursor-pointer"
+                whileHover={{ scale: 1.2 }}
+              >
+                <LikeOutlined />
+                <span className="pl-1">{detail.likesCount}</span>
+              </motion.div>
+            </div>
+            <article className="mt-2">
+              <Viewer value={detail.content}></Viewer>
+            </article>
+          </div>
+        ) : (
+          loaded && <Empty></Empty>
+        )}
+      </Spin>
+    </MainLayout>
+  );
 }

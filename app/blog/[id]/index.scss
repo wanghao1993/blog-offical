@@ -1,0 +1,13 @@
+.article-detail {
+    pre {
+        @apply my-4
+    }
+    .language-css  {
+        .hljs-selector-pseudo {
+            color: #aaa
+        }
+        .hljs-attr {
+            color: #aaa
+        }
+    }
+}

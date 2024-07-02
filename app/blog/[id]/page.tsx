@@ -38,7 +38,7 @@ export default function ArticleDetail() {
       setLoaded(false);
       setLoading(false);
     };
-  });
+  }, []);
 
   return (
     <MainLayout className="min-h-60">

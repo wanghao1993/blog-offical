@@ -34,7 +34,6 @@ export default function Bucket() {
           region: item.Location,
           key,
         });
-        setMarker("");
         getObjectList();
       } catch (e) {
         console.log(e);
@@ -109,7 +108,6 @@ export default function Bucket() {
 
   // 获取桶内容
   const [loading, setLoading] = useState(true);
-  const [marker, setMarker] = useState<string>();
 
   const getObjectList = useCallback(
     function () {
@@ -123,19 +121,19 @@ export default function Bucket() {
         }>("cos/list", {
           bucket: item?.Name,
           region: item?.Location,
-          marker,
           pageSize: 1000,
         }).then((res) => {
           setLoading(false);
           setDataSource(res.Contents);
-          if (res.IsTruncated === "true") {
-            setMarker(res.NextMarker);
-          }
         });
       }
     },
     [bucketList, bucket]
   );
+  const [scrollXy] = useState({
+    x: 1000,
+    y: window.innerHeight - 350,
+  });
   useEffect(() => {
     getObjectList();
   }, [getObjectList]);
@@ -144,7 +142,6 @@ export default function Bucket() {
   const selectBucket = (v: string, list: CosTypes.BucketItem[]) => {
     setBucket(v);
     setBucketList(list);
-    setMarker("");
   };
 
   const selectBucketHandler = (value: string, list: CosTypes.BucketItem[]) =>
@@ -176,6 +173,7 @@ export default function Bucket() {
           loading={loading}
           size="small"
           className="mt-2"
+          scroll={scrollXy}
           pagination={{
             current: 1,
             pageSize: 20,

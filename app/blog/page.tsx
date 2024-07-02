@@ -7,10 +7,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import ArticleItem from "@/components/Article/ArticleItem";
 import { produce } from "immer";
 import useScroll from "@/lib/useScrollHooks";
-import Link from "next/link";
+import { Spin } from "antd";
 export default function LoginPage() {
   const [list, setList] = useState<ArticleType.ArticleItem[]>([]);
-  const loadingMoreRef = useRef<HTMLDivElement | null>(null);
   const [loading, setLoading] = useState(false);
   const [pageInfo, setPageInfo] = useState({
     page: 1,
@@ -24,7 +23,8 @@ export default function LoginPage() {
       pageSize: 10,
     })
       .then((res) => {
-        setList([...list, ...res.list]);
+        const arr = [...list, ...res.list];
+        setList(arr);
         setPageInfo(
           produce((draft) => {
             draft.total = res.totalCount;
@@ -60,10 +60,11 @@ export default function LoginPage() {
   }, [getBlogList]);
   return (
     <MainLayout>
-      {list.map((item) => (
-        <ArticleItem key={item._id} articelInfo={item} />
-      ))}
-      <div ref={loadingMoreRef}></div>
+      <Spin spinning={loading}>
+        {list.map((item) => (
+          <ArticleItem key={item._id} articleInfo={item} />
+        ))}
+      </Spin>
     </MainLayout>
   );
 }

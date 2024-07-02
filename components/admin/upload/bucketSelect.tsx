@@ -9,15 +9,7 @@ export default function BuckerSelect(props: {
 }) {
   const [bucketList, setBucketList] = useState<CosTypes.BucketItem[]>([]);
   const [bucket, setBucket] = useState("");
-  function getBucketList() {
-    get<CosTypes.BucketItem[]>("cos/bucket").then((res) => {
-      if (res.length) {
-        setBucketList(res);
-        setBucket(res[0].Name);
-        props.selectBucket(res[0].Name, res);
-      }
-    });
-  }
+
   // Function to handle bucket selection
   const selectBucket = (v: string) => {
     setBucket(v);
@@ -25,7 +17,13 @@ export default function BuckerSelect(props: {
   };
 
   useEffect(() => {
-    getBucketList();
+    get<CosTypes.BucketItem[]>("cos/bucket").then((res) => {
+      if (res.length) {
+        setBucketList(res);
+        setBucket(res[0].Name);
+        props.selectBucket(res[0].Name, res);
+      }
+    });
   }, []);
   return (
     <div className="flex justify-between w-full ">

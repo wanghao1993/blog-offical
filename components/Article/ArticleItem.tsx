@@ -12,14 +12,14 @@ import { Tag } from "antd";
  */
 
 export default function ArticleItem(data: {
-  articelInfo: ArticleType.ArticleItem;
+  articleInfo: ArticleType.ArticleItem;
 }) {
   return (
     <motion.div className="transition-all duration-300 hover:shadow-md flex flex-col sm:flex-row border-b">
-      {data.articelInfo.coverUrl && (
+      {data.articleInfo.coverUrl && (
         <Link href="22" className="block" prefetch={false}>
           <Image
-            src={data.articelInfo.coverUrl}
+            src={data.articleInfo.coverUrl}
             alt="Blog Post Image"
             width={120}
             height={90}
@@ -30,39 +30,39 @@ export default function ArticleItem(data: {
       <div className="p-4 flex-1">
         <div className="flex items-center justify-between mb-2">
           <div className="py-1 rounded-full text-xs font-medium">
-            {data.articelInfo.categories.map((item) => (
+            {data.articleInfo.categories.map((item) => (
               <Tag key={item}>{item}</Tag>
             ))}
           </div>
           <div className="py-1 rounded-full text-xs font-medium">
-            {data.articelInfo.tags.map((item) => (
+            {data.articleInfo.tags.map((item) => (
               <Tag key={item}>{item}</Tag>
             ))}
           </div>
         </div>
         <Link
-          href={`/blog/${data.articelInfo._id}`}
+          href={`/blog/${data.articleInfo._id}`}
           className="block"
           prefetch={false}
         >
           <h3 className="text-lg font-semibold mb-2 line-clamp-1 ">
-            {data.articelInfo.title}
+            {data.articleInfo.title}
           </h3>
         </Link>
         <p className="text-muted-foreground line-clamp-2 mb-4 text-sm opacity-60 ">
-          {data.articelInfo.abstract}
+          {data.articleInfo.abstract}
         </p>
         <div className="flex items-center justify-between opacity-45">
           <div className="flex items-center gap-2">
             <LikeFilled className="w-5 h-5 fill-muted-foreground  " />
             <span className="text-muted-foreground">
-              {data.articelInfo.likesCount}
+              {data.articleInfo.likesCount}
             </span>
           </div>
           <div className="flex items-center gap-2">
             <EyeFilled className="w-5 h-5 fill-muted-foreground" />
             <span className="text-muted-foreground">
-              {data.articelInfo.viewsCount}
+              {data.articleInfo.viewsCount}
             </span>
           </div>
         </div>

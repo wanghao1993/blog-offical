@@ -23,7 +23,7 @@ export default function ThemeProvider({
         token: themeToken,
       }}
     >
-      <NextThemesProvider {...props}>{children}</NextThemesProvider>;
+      <NextThemesProvider {...props}>{children}</NextThemesProvider>
     </ConfigProvider>
   );
 }

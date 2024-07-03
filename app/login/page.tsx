@@ -38,19 +38,19 @@ export default function Login() {
 
   // 输入事件处理
   const inputHandler = (el: FormEvent<HTMLInputElement>) => {
-    if (activeElId) {
-      if (activeElId === "username") {
-        setFormState({
-          username: el.target.value,
-          password: formState.password,
-        });
-      } else if (activeElId === "password") {
-        setFormState({
-          username: formState.username,
-          password: el.target.value,
-        });
-      }
-    }
+    // if (activeElId) {
+    //   if (activeElId === "username") {
+    //     setFormState({
+    //       username: el.target.,
+    //       password: formState.password,
+    //     });
+    //   } else if (activeElId === "password") {
+    //     setFormState({
+    //       username: formState.username,
+    //       password: el.target.value,
+    //     });
+    //   }
+    // }
   };
 
   // 选中checked

@@ -1,0 +1,29 @@
+
+.formItem {
+    @apply flex items-center relative mb-8;
+    line-height: 32px;
+    input {
+        @apply border-none outline-none rounded flex-1;
+        border-bottom: 1px solid #bbb;
+        background: transparent;
+        color: #9c9c9c
+    }
+}
+
+.formLabel {
+    @apply absolute w-full;
+    transition: all linear 0.2s;
+    width: 5rem;
+    top: 0;
+    color: #eee;
+    font-size: 0.75rem;
+}
+
+.formActive {
+    transform: translateY(-25px);
+    font-size: 0.65rem;
+}
+
+.forgotpassword {
+    font-size: 0.75rem;
+}

@@ -3,6 +3,15 @@ import { SignIn, SignOut } from "./Icon/icon";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { Avatar, Spin, Dropdown, MenuProps } from "antd";
+import dynamic from "next/dynamic";
+import { useState } from "react";
+const LoginModal = dynamic(
+  () => import("@/components/login/page").then((LoginModal) => LoginModal),
+  {
+    ssr: false,
+  }
+);
+
 // 登录和登出
 export default function LoginInOut() {
   const { data: session, status } = useSession();
@@ -20,12 +29,16 @@ export default function LoginInOut() {
       },
     },
   ];
+
+  const [visible, setVisible] = useState(false);
   return (
     <div className="mx-3">
+      <LoginModal open={visible} onClose={() => setVisible(false)} />
+
       {status === "unauthenticated" ? (
-        <Link href={"/login"} title="登录">
+        <div onClick={() => setVisible(true)}>
           <SignIn color={theme === "dark" ? "white" : "black"} />
-        </Link>
+        </div>
       ) : status === "authenticated" ? (
         <Dropdown
           trigger={["click"]}

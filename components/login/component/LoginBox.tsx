@@ -17,7 +17,7 @@ export default function LoginBox() {
       <div className="text-xl">
         <Button
           type="primary"
-          className="w-52 !bg-[#24292F]"
+          className="w-full !bg-[#24292F] mb-4"
           onClick={() => sign("github")}
           icon={<GithubOutlined></GithubOutlined>}
         >
@@ -26,7 +26,7 @@ export default function LoginBox() {
 
         <Button
           color="red"
-          className="w-52"
+          className="w-full"
           onClick={() => sign("google")}
           icon={<GoogleOutlined></GoogleOutlined>}
         >

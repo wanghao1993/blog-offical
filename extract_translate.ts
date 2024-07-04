@@ -1,21 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const tsdk = require("tencentcloud-sdk-nodejs");
-const translate = new tsdk.tmt.Client({
-  credential: {
-    secretId: process.env.TENCENTCLOUD_SECRET_ID,
-    secretKey: process.env.TENCENTCLOUD_SECRET_KEY,
-  },
-  region: "ap-shanghai",
-  // 可选配置实例
-  profile: {
-    signMethod: "TC3-HMAC-SHA256", // 签名方法
-    httpProfile: {
-      reqMethod: "POST", // 请求方法
-      reqTimeout: 30, // 请求超时时间，默认60s
-    },
-  },
-});
+const tsdk = require("google-translate-api-x");
 
 // 递归读取目录下的所有文件
 function readFiles(dirs) {
@@ -48,7 +33,7 @@ async function translateAndSave(englishMap, outputFilePath) {
   for (const key in englishMap) {
     if (!englishMap[key]) {
       try {
-        const result = await tsdk.tmt.extractChinese(key, { to: "en" });
+        const result = await tsdk(key, { to: "en" });
         console.log(result);
         translatedMap[key] = result.text;
       } catch (error) {

@@ -1,8 +1,23 @@
+// step1 pnpm install @prisma/client prisma
+// step2 npx prisma generate
+// step3 npx prisma migrate dev --name init
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource mysql {
   provider = "mysql"
-  url      = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  url      = env("MYSQL_URI_BLOG") // uses connection pooling
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  name       String
+  avatar     String
+  password   String
+  createdAt  DateTime @default(now())
+  updateTime DateTime @default(now())
+  profile    String
 }

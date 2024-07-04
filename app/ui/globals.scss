@@ -21,7 +21,9 @@
   ul,li {
     list-style: none;
   }
-  
+  code {
+    text-wrap: pretty
+  }
 }
 
 :deep(.ant-table-body) {
@@ -136,12 +138,18 @@ header {
     --background-color: #000;
     --text-color: #fff;
   }
+  .login-icon path {
+    fill: var(--text-color);
+  }
 }
 
 @media (prefers-color-scheme: light) {
   :root:not(.dark):not(.light) {
     --background-color: #fff;
     --text-color: #000;
+  }
+  .login-icon {
+    fill: var(--text-color);
   }
 }
 

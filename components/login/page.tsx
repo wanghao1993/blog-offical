@@ -4,9 +4,10 @@ import loginStyle from "./login.module.scss";
 import classnames from "classnames";
 import { motion } from "framer-motion";
 import LoginBox from "./component/LoginBox";
-import { Modal } from "antd";
+import { Modal, Divider, Button, Input } from "antd";
 import { post } from "lib/fetch";
 import { signIn } from "next-auth/react";
+import { SwapOutlined } from "@ant-design/icons";
 
 interface FormState {
   password: string;
@@ -24,16 +25,6 @@ export default function LoginModal(data: {
     password: "",
   });
   //
-
-  useEffect(() => {
-    // async function fetchData() {
-    //   const response = await fetch("/api/username");
-    //   const result = await response.json();
-    //   console.log(result);
-    //   //   setData(result);
-    // }
-    // fetchData();
-  }, []);
 
   // 聚焦
   const focusHandler = (el: FocusEvent<HTMLInputElement, Element>) => {
@@ -70,76 +61,53 @@ export default function LoginModal(data: {
   const login = (e: { preventDefault: () => void }) => {
     signIn("credentials");
   };
+  const [isLogin, setIsLogin] = useState(true);
   return (
     <>
       <Modal
         open={data.open}
         destroyOnClose
+        width={500}
+        footer={null}
         onClose={data.onClose}
         onCancel={data.onClose}
       >
         <section>
-          <form action="" className="form" autoComplete="off">
-            <div className={loginStyle.formItem}>
-              <label
-                htmlFor="username"
-                className={classnames({
-                  [loginStyle.formLabel]: true,
-                  [loginStyle.formActive]:
-                    activeElId === "username" || !!formState.username,
-                })}
+          <div className="flex flex-col items-center justify-center gap-6 pt-8">
+            <div className="flex items-center justify-between w-full">
+              <h2 className="text-2xl font-bold text-black">
+                {isLogin ? "登录" : "注册"}
+              </h2>
+              <Button
+                type={"text"}
+                onClick={() => setIsLogin(!isLogin)}
+                icon={<SwapOutlined />}
               >
-                用户名
-              </label>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                value={formState.username}
-                autoComplete="username"
-                onFocus={(event) => focusHandler(event)}
-                onInput={(event) => inputHandler(event)}
-                onBlur={() => setId("")}
-              />
+                <span className="sr-only">
+                  {isLogin ? "Switch to Register" : "Switch to Login"}
+                </span>
+              </Button>
             </div>
-
-            <div className={loginStyle.formItem}>
-              <label
-                htmlFor="password"
-                className={classnames({
-                  [loginStyle.formLabel]: true,
-                  [loginStyle.formActive]:
-                    activeElId === "password" || !!formState.password,
-                })}
-              >
-                密码
-              </label>
-              <input
-                type="password"
-                name="password"
-                value={formState.password}
-                id="password"
-                autoComplete="current-password"
-                onBlur={() => setId("")}
-                onFocus={(event) => focusHandler(event)}
-                onInput={(event) => inputHandler(event)}
-              />
+            <div className="w-full space-y-4">
+              <div className="space-y-2">
+                <label htmlFor="username">邮箱</label>
+                <Input id="username" placeholder="请输入邮箱" />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="password">密码</label>
+                <Input id="password" type="password" placeholder="请输入密码" />
+              </div>
             </div>
-
-            <div className={(loginStyle.formItem, "text-right")}>
-              <span>注册账号</span>
-              <span>忘记密码</span>
-            </div>
-
-            <div className={loginStyle.formItem}>
-              <button className="w-full bg-cyan-800" onClick={(e) => login(e)}>
-                登录
-              </button>
-            </div>
-            <div className="border-t border-cyan-600 mb-3"></div>
-
-            <LoginBox />
-          </form>
+            <Button
+              className="w-full"
+              type="primary"
+              onClick={(e) => e.preventDefault()}
+            >
+              <div className=" tracking-[] ">{isLogin ? "登 录" : "注 册"}</div>
+            </Button>
+          </div>
+          <Divider>或</Divider>
+          <LoginBox />
         </section>
       </Modal>
     </>

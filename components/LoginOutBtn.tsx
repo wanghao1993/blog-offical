@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 import { Avatar, Spin, Dropdown, MenuProps } from "antd";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const LoginModal = dynamic(
   () => import("@/components/login/page").then((LoginModal) => LoginModal),
   {
@@ -31,13 +31,14 @@ export default function LoginInOut() {
   ];
 
   const [visible, setVisible] = useState(false);
+
   return (
     <div className="mx-3">
       <LoginModal open={visible} onClose={() => setVisible(false)} />
 
       {status === "unauthenticated" ? (
-        <div onClick={() => setVisible(true)}>
-          <SignIn color={theme === "dark" ? "white" : "black"} />
+        <div onClick={() => setVisible(true)} className="login-icon">
+          <SignIn />
         </div>
       ) : status === "authenticated" ? (
         <Dropdown

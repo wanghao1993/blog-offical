@@ -3,11 +3,11 @@ import { usePathname } from "next/navigation";
 export default function Nav() {
   const navList = [
     {
-      title: "b",
+      title: "Blog",
       path: "/blog",
     },
     {
-      title: "a",
+      title: "About",
       path: "/about",
     },
   ];

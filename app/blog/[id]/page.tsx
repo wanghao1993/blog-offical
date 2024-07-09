@@ -4,7 +4,7 @@ import { get } from "@/lib/fetch";
 import { ArticleType } from "@/types/article";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Spin, Empty, Divider } from "antd";
+import { Spin, Empty, Divider, message } from "antd";
 import { CalendarOutlined, EyeOutlined, LikeOutlined } from "@ant-design/icons";
 import formatterDate from "@/lib/data_utils";
 import { motion } from "framer-motion";
@@ -15,7 +15,8 @@ export default function ArticleDetail() {
   const [detail, setDetail] = useState<ArticleType.ArticleItem>();
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const getArticleDetail = () => {
+
+  useEffect(() => {
     if (id) {
       setLoading(true);
       get<ArticleType.ArticleItem>("/articles/detail", {
@@ -29,19 +30,16 @@ export default function ArticleDetail() {
           setLoading(false);
         });
     } else {
+      message.warning("id不存在");
     }
-  };
-
-  useEffect(() => {
-    getArticleDetail();
     return () => {
       setLoaded(false);
       setLoading(false);
     };
-  }, []);
+  }, [id]);
 
   return (
-    <MainLayout className="min-h-60">
+    <MainLayout>
       <Spin spinning={loading}>
         {detail ? (
           <div className="article-detail">

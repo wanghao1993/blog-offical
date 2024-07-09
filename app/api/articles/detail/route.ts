@@ -12,6 +12,11 @@ export async function GET(request: Request) {
     const r = await res.save();
     return responseHandler(r);
   } catch (e: any) {
-    return responseHandler(e.message, BusinessCode.abnormal);
+    return responseHandler(
+      null,
+      BusinessCode.normal,
+      BusinessCode.abnormal,
+      "文章不存在，检查是否删除"
+    );
   }
 }

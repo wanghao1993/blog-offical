@@ -38,6 +38,7 @@ export default function LoginPage() {
   const { isBottom } = useScroll();
   let timerId = -1;
   useEffect(() => {
+    console.log(isBottom);
     if (isBottom) {
       clearTimeout(timerId);
       // eslint-disable-next-line react-hooks/exhaustive-deps

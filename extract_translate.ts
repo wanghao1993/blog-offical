@@ -3,8 +3,8 @@ const path = require("path");
 const tsdk = require("google-translate-api-x");
 
 // 递归读取目录下的所有文件
-function readFiles(dirs) {
-  let files = [];
+function readFiles(dirs: string[]) {
+  let files: string[] = [];
   dirs.forEach((dir) => {
     const items = fs.readdirSync(dir);
     for (const item of items) {
@@ -21,20 +21,22 @@ function readFiles(dirs) {
 }
 
 // 提取中文文本
-function extractChinese(text) {
+function extractChinese(text: string) {
   const regex = /[\u4e00-\u9fa5]+/g;
   const matches = text.match(regex);
   return matches ? matches : [];
 }
 
 // 翻译并保存到文件
-async function translateAndSave(englishMap, outputFilePath) {
-  let translatedMap = {};
+async function translateAndSave(
+  englishMap: Record<string, string>,
+  outputFilePath: string
+) {
+  let translatedMap: Record<string, string> = {};
   for (const key in englishMap) {
     if (!englishMap[key]) {
       try {
         const result = await tsdk(key, { to: "en" });
-        console.log(result);
         translatedMap[key] = result.text;
       } catch (error) {
         console.error("Translation error for:", key, error);
@@ -50,8 +52,8 @@ async function main() {
   const dirs = ["./app", "./components"]; // 指定多个目录路径
   const files = readFiles(dirs);
 
-  let chineseMap = {};
-  let englishMap = {};
+  let chineseMap: Record<string, string> = {};
+  let englishMap: Record<string, string> = {};
 
   for (const file of files) {
     const content = fs.readFileSync(file, "utf8");

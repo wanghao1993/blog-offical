@@ -1,3 +1,4 @@
+import { message } from "antd";
 import { HttpRequestHeader } from "antd/es/upload/interface";
 
 // lib/api.ts
@@ -22,12 +23,18 @@ async function fetcher<T>(url: string, options: FetcherOptions): Promise<T> {
     body: options.body,
   });
 
+  const json = await res.json();
   if (!res.ok) {
     const error = new Error("An error occurred while fetching the data.");
 
     throw error;
   }
-  return (await res.json()).data;
+  if (json.code === 200) {
+    return json.data;
+  } else {
+    message.error(json.message);
+    return Promise.reject(json.message);
+  }
 }
 
 export async function get<T>(url: string, data?: any): Promise<T> {

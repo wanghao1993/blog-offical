@@ -24,7 +24,7 @@ export default function BuckerSelect(props: {
         props.selectBucket(res[0].Name, res);
       }
     });
-  }, []);
+  }, [props]);
   return (
     <div className="flex justify-between w-full ">
       <Select

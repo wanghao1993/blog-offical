@@ -74,7 +74,11 @@ export default function Bucket() {
             <Image width={40} src={url} alt={url} placeholder />
           ) : (
             <Button
-              onClick={() => window.open(url, "_blank")}
+              onClick={() => {
+                if (typeof window !== undefined) {
+                  window.open(url, "_blank");
+                }
+              }}
               size="small"
               type="link"
             >
@@ -130,11 +134,15 @@ export default function Bucket() {
     },
     [bucketList, bucket]
   );
-  const [scrollXy] = useState({
+  const [scrollXy, setScrollXy] = useState({
     x: 1000,
-    y: window.innerHeight - 350,
+    y: 0,
   });
   useEffect(() => {
+    setScrollXy({
+      x: 1000,
+      y: window.innerHeight - 350,
+    });
     getObjectList();
   }, [getObjectList]);
 

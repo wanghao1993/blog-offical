@@ -11,7 +11,7 @@ export default function Header() {
   return (
     path !== "/login" && (
       <SectionContainer className="sticky top-0 z-10">
-        <header className="flex justify-between py-5 items-center">
+        <header className="flex justify-between py-4 items-center">
           <BlogName />
           <div className="flex items-center">
             <Nav />

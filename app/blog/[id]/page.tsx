@@ -19,7 +19,7 @@ export default function ArticleDetail() {
   useEffect(() => {
     if (id) {
       setLoading(true);
-      get<ArticleType.ArticleItem>("/articles/detail", {
+      get<ArticleType.ArticleItem>("articles/detail", {
         id,
       })
         .then((res) => {

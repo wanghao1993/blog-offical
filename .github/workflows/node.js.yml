@@ -27,5 +27,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'pnpm'
     - run: npm install pnpm
-    - run: pnpm run build
-    - run: npm run start -port=80
+    - run: pnpm install
+    - run: pnpm build
+    - run: npm start

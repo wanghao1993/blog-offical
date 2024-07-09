@@ -7,8 +7,8 @@ const authOptions = {
   debug: true,
   providers: [
     GitHubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+      clientId: process.env.GIT_CLIENT_ID as string,
+      clientSecret: process.env.GIT_CLIENT_SECRET as string,
       httpOptions: {
         timeout: 100000,
       },

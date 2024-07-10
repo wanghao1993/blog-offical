@@ -17,4 +17,4 @@ jobs:
           host: ${{secrets.DEPLOY_HOST}}
           username: ${{secrets.DEPLOY_USER}}
           password: ${{secrets.DEPLOY_PASS_WORD}}
-          script: cd /www/blog-offical && git pull && npm install && npm run build && pm2 delete all && pm2 start npm --name "blog-offical" -- start
+          script: cd /www/blog-offical && git pull && pnpm install && pnpm build && pm2 delete all && pm2 start pnpm --name "blog-offical" -- start

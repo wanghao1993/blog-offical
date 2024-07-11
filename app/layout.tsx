@@ -10,7 +10,7 @@ import { NextAuthProvider } from "@/components/Providers/AuthProvider";
 import ToTop from "@/components/toTop";
 import { content } from "@/lib/font";
 import Footer from "@/components/Footer";
-
+import { Suspense } from "react";
 export const metadata: Metadata = {
   title: "汪浩的博客",
   description: "我的博客，记录一些技术，心得，经历等等",

@@ -1,6 +1,13 @@
+"use client";
 import SectionContainer from "./SectionContainer";
 import Link from "next/link";
+import { renderCanvas } from "@/components/canvas";
+import { useEffect } from "react";
 export default function Into() {
+  useEffect(() => {
+    renderCanvas();
+  }, []);
+
   return (
     <SectionContainer>
       <div className=" flex h-[calc(100vh-81px)] items-center  ">
@@ -18,6 +25,10 @@ export default function Into() {
             </Link>
           </div>
         </div>
+        <canvas
+          className="bg-skin-base pointer-events-none absolute inset-0"
+          id="canvas"
+        ></canvas>
       </div>
     </SectionContainer>
   );

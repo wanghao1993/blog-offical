@@ -3,14 +3,12 @@ import LenisProvider from "@/components/Providers/LenisProvider";
 import ThemeProvider from "@/components/Providers/ThemeProvider";
 import "./ui/globals.scss";
 import Header from "@/components/Header";
-import Image from "next/image";
 
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { NextAuthProvider } from "@/components/Providers/AuthProvider";
 import ToTop from "@/components/toTop";
 import { content } from "@/lib/font";
 import Footer from "@/components/Footer";
-import { Suspense } from "react";
 export const metadata: Metadata = {
   title: "汪浩的博客",
   description: "我的博客，记录一些技术，心得，经历等等",

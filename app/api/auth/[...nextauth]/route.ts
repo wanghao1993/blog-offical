@@ -1,8 +1,8 @@
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-const authOptions = {
+const authOptions: AuthOptions = {
   secret: process.env.SECRET_KEY,
   debug: true,
   providers: [

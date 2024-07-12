@@ -2,8 +2,11 @@ import NextAuth, { AuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import prisma from "@/lib/prisma";
 const authOptions: AuthOptions = {
   secret: process.env.SECRET_KEY,
+  adapter: PrismaAdapter(prisma),
   debug: true,
   providers: [
     GitHubProvider({
@@ -59,7 +62,19 @@ const authOptions: AuthOptions = {
       },
     }),
   ],
-  callbacks: {},
+  session: {
+    strategy: "jwt",
+    maxAge: 2 * 24 * 60 * 60,
+  },
+  callbacks: {
+    session: async ({ session, token, user }) => {
+      if (session?.user) {
+        session.user.id = user.id;
+      }
+      return session;
+    },
+  },
+
   pages: {
     signIn: "/login",
   },

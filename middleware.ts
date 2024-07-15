@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
-  // console.log(request.cookie, "path");
+  console.log(request.cookies, "path");
   // if (path === '/'){
   //     return NextResponse.rewrite(
   //         new URL("/home", request.url)

@@ -67,7 +67,7 @@ export default function ArticalOperations(data: {
       </Button>
 
       {showForm ? (
-        <div className="arrow">
+        <div>
           <SaveForm
             cancelFn={cancel}
             onFinish={release}

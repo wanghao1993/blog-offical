@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import type { FormProps, UploadFile, UploadProps } from "antd";
 import { Button, Upload, Form, Input, Select, Image } from "antd";
+import { CaretUpOutlined } from "@ant-design/icons";
 
 import { PlusOutlined } from "@ant-design/icons";
 export type FieldType = {
@@ -52,13 +53,18 @@ export default function ArticleForm(props: Props) {
   const [visible, setVisible] = useState(false);
 
   return (
-    <div>
+    <div className="absolute bg-white w-[600px]  z-10 border rounded-lg shadow-md right-0 top-10 ">
+      <h1 className="!text-black border-b p-3 mb-3">发布文章</h1>
+      <CaretUpOutlined
+        style={{ color: "#fff" }}
+        className="absolute -top-3 right-5"
+      />
       <Form
         form={form}
         className="w-full"
         name="basic"
         labelCol={{ span: 4 }}
-        wrapperCol={{ span: 20 }}
+        wrapperCol={{ span: 18 }}
         style={{ maxWidth: 600 }}
         onFinish={(values) => props.onFinish(values)}
         onFinishFailed={onFinishFailed}

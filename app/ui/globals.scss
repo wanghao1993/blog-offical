@@ -2,38 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  body {
-    margin: 0;
-    padding: 0;
-    cursor: url('../../public/cursour.ico'), pointer; 
-  }
-
-
-  h1, h2, h3, h4, h5, h6 {
-    font-weight: bold;
-    color: var(--text-color);
-  }
-  
-  ul > li {
-    list-style: none;
-  }
-  ol {
-    margin-left: 20px;
-  }
-  ol > li {
-    list-style: decimal;
-  }
-  code {
-    text-wrap: pretty
-  }
-}
-
 a.link {
   color: var(--link-color);
 }
@@ -74,6 +42,36 @@ a.link {
   --link-color: #1890ff; 
   ::-webkit-scrollbar {
     width: 0px;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    cursor: url('../../public/cursour.ico'), pointer; 
+  }
+
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    color: var(--text-color);
+  }
+  
+  ul > li {
+    list-style: none;
+  }
+  ol {
+    margin-left: 20px;
+  }
+  ol > li {
+    list-style: decimal;
+  }
+  code {
+    text-wrap: pretty
   }
   // ::-webkit-scrollbar-track {
   //   background: rgb(179, 177, 177);

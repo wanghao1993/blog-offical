@@ -52,7 +52,7 @@ a.link {
   body {
     margin: 0;
     padding: 0;
-    cursor: url('../../public/cursour.ico'), pointer; 
+    // cursor: url('../../public/cursour.ico'), pointer; 
   }
 
 
@@ -61,15 +61,16 @@ a.link {
     color: var(--text-color);
   }
   
-  ul > li {
-    list-style: none;
-  }
+
+  ol,
+ul,
+menu {
+  list-style:decimal;
+}
   ol {
     margin-left: 20px;
   }
-  ol > li {
-    list-style: decimal;
-  }
+
   code {
     text-wrap: pretty
   }

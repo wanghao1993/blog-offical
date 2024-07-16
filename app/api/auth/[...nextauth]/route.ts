@@ -68,11 +68,12 @@ const authOptions: AuthOptions = {
     maxAge: 2 * 24 * 60 * 60,
   },
   callbacks: {
-    session: async ({ session, token, user }) => {
-      if (session?.user) {
-        session.user.id = user.id;
+    session: async (data) => {
+      console.log(data, "sessionsession");
+      if (data.session?.user) {
+        data.session.user.id = data.user.id;
       }
-      return session;
+      return data.session;
     },
   },
 

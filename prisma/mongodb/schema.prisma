@@ -1,0 +1,32 @@
+// step1 pnpm install @prisma/client prisma
+// step2 npx prisma generate --schema=prisma/mongodb/schema.prisma
+// step3 npx prisma migrate dev --name init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/mongodb"
+}
+
+datasource mongodb {
+  provider = "mongodb"
+  url      = env("MONGO_URI") // uses connection pooling
+}
+
+model Ariticles {
+  id            Int      @id @map("_id")
+  title         String
+  categories    String[]
+  tags          String[]
+  abstract      String?
+  cover_img     String?
+  content       String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  isPublished   Boolean  @default(false)
+  authorId      String?
+  viewsCount    Int?     @default(0)
+  likesCount    Int?     @default(0)
+  commentsCount Int?     @default(0)
+  readTime      Int?     @default(0)
+  sharesCount   Int?     @default(0)
+}

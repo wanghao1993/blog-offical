@@ -196,10 +196,14 @@ header {
   background-position: 0 100%;
   background-repeat: no-repeat;
   transition: background-size .5s ease-in-out;
-  padding-bottom: 5px
+  padding-bottom: 5px;
+  &:hover {
+    background-size: 100% 3px;
+    background-position: 0 100%;
+  }
 }
 
-.horizontal-underline-active,.horizontal-underline:hover {
+.horizontal-underline-active {
   background-size: 100% 3px;
-  background-position: 0 100%
+  background-position: 0 100%;
 }

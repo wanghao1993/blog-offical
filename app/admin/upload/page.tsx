@@ -18,7 +18,17 @@ import { ReloadOutlined } from "@ant-design/icons";
 import { memo, useCallback, useEffect, useState } from "react";
 import BuckerSelect from "@/components/admin/upload/bucketSelect";
 import { ColumnProps } from "antd/es/table";
+import { useSession } from "next-auth/react";
+import PageNoAuth from "@/components/401";
 export default function Bucket() {
+  const { data } = useSession();
+  if (data?.user.email !== "whao53333@gmail.com") {
+    return (
+      <>
+        <PageNoAuth />
+      </>
+    );
+  }
   // 获取可访问的url
   function getUrl(url: string) {
     navigator.clipboard.writeText(url);

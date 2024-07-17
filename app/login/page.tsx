@@ -18,17 +18,6 @@ export default function Login() {
     username: "",
     password: "",
   });
-  //
-
-  useEffect(() => {
-    // async function fetchData() {
-    //   const response = await fetch("/api/username");
-    //   const result = await response.json();
-    //   console.log(result);
-    //   //   setData(result);
-    // }
-    // fetchData();
-  }, []);
 
   // 聚焦
   const focusHandler = (el: FocusEvent<HTMLInputElement, Element>) => {

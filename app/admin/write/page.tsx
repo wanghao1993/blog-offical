@@ -14,11 +14,21 @@ import { Input } from "antd";
 import { produce } from "immer";
 import ArticalOperations from "@/components/Article/SaveModal";
 import MainLayout from "@/components/Layouts/MainLayout";
+import PageNoAuth from "@/components/401";
+import { useSession } from "next-auth/react";
 export default function WriteBlog() {
   const [value, setValue] = useState("");
   const [articalInfo, setArticalInfo] = useState({
     title: "",
   });
+  const { data } = useSession();
+  if (data?.user.email !== "whao53333@gmail.com") {
+    return (
+      <>
+        <PageNoAuth />
+      </>
+    );
+  }
   const plugins = [
     gfm(),
     medium(),

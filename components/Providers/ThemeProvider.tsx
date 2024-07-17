@@ -14,9 +14,6 @@ export default function ThemeProvider({
     colorPrimary: "#b765c5",
     colorLink: "#b765c5",
   });
-  useEffect(() => {
-    console.log(theme);
-  }, [theme]);
   return (
     <ConfigProvider
       theme={{

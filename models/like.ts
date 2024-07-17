@@ -1,5 +1,9 @@
 import { Schema, model, models } from "mongoose";
 const LikeSchema = new Schema({
+  id: {
+    required: true,
+    type: String,
+  },
   userId: {
     required: true,
     type: String,

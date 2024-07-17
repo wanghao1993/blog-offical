@@ -2,13 +2,10 @@ import NextAuth, { AuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import type { Adapter } from "next-auth/adapters";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import MongoPrisma from "@/lib/mongo_prisma";
-import { PrismaClient } from "@prisma/client/extension";
-const authOptions: AuthOptions = {
+import User from "models/user";
+export const authOptions: AuthOptions = {
   secret: process.env.SECRET_KEY,
-  adapter: PrismaAdapter(MongoPrisma as PrismaClient) as Adapter,
+  // adapter: PrismaAdapter(MongoPrisma as PrismaClient) as Adapter,
   debug: true,
   providers: [
     GitHubProvider({
@@ -17,6 +14,34 @@ const authOptions: AuthOptions = {
       httpOptions: {
         timeout: 100000,
       },
+      // async profile(profile) {
+      //   const existingUser = await User.findOne({ email: profile.email });
+
+      //   if (existingUser) {
+      //     // Update existing user
+      //     await User.findByIdAndUpdate(existingUser._id, {
+      //       name: profile.name || profile.login,
+      //       avatar: profile.avatar_url,
+      //       updated_at: Date.now(),
+      //     });
+
+      //     return existingUser;
+      //   }
+
+      //   // Create new user
+      //   const newUser = new User({
+      //     name: profile.name || profile.login,
+      //     email: profile.email,
+      //     avatar: profile.avatar_url,
+      //     password: profile.id, // Use GitHub ID as password
+      //     created_at: Date.now(),
+      //     updated_at: Date.now(),
+      //   });
+
+      //   await newUser.save();
+
+      //   return newUser;
+      // },
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_ID as string,
@@ -70,10 +95,7 @@ const authOptions: AuthOptions = {
   },
   callbacks: {
     session: async (data) => {
-      console.log(data, "sessionsession");
-      if (data.session?.user) {
-        data.session.user.id = data.user.id;
-      }
+      console.log(data, "daaa");
       return data.session;
     },
   },

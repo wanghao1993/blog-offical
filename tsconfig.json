@@ -27,6 +27,9 @@
       "@/types/*": [
         "types/*"
       ],
+      "@/prisma/*": [
+        "prisma/*"
+      ],
     },
     "plugins": [
       {

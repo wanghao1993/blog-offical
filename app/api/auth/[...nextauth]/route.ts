@@ -4,10 +4,11 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import type { Adapter } from "next-auth/adapters";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import prisma from "@/lib/prisma";
+import MongoPrisma from "@/lib/mongo_prisma";
+import { PrismaClient } from "@prisma/client/extension";
 const authOptions: AuthOptions = {
   secret: process.env.SECRET_KEY,
-  adapter: PrismaAdapter(prisma) as Adapter,
+  adapter: PrismaAdapter(MongoPrisma as PrismaClient) as Adapter,
   debug: true,
   providers: [
     GitHubProvider({

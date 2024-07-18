@@ -3,32 +3,22 @@ import SectionContainer from "@/components/SectionContainer";
 import { del, get } from "@/lib/fetch";
 import { isImageUrl } from "@/lib/utils";
 import { CosTypes } from "@/types/cos";
-import {
-  Row,
-  Col,
-  Table,
-  Button,
-  message,
-  Image,
-  PaginationProps,
-  Divider,
-} from "antd";
+import { Row, Col, Table, Button, message, Image, Divider } from "antd";
 
 import { ReloadOutlined } from "@ant-design/icons";
 import { memo, useCallback, useEffect, useState } from "react";
 import BuckerSelect from "@/components/admin/upload/bucketSelect";
 import { ColumnProps } from "antd/es/table";
-import { useSession } from "next-auth/react";
+import { SessionProvider, useSession } from "next-auth/react";
 import PageNoAuth from "@/components/401";
 export default function Bucket() {
   const { data } = useSession();
-  if (data?.user.email !== "whao53333@gmail.com") {
-    return (
-      <>
-        <PageNoAuth />
-      </>
-    );
-  }
+  const [canEdit, setCanEdit] = useState(false);
+
+  useEffect(() => {
+    const canEdit = data?.user?.email === "whao53333@gmail.com";
+    setCanEdit(canEdit);
+  }, [data]);
   // 获取可访问的url
   function getUrl(url: string) {
     navigator.clipboard.writeText(url);
@@ -165,43 +155,47 @@ export default function Bucket() {
   const selectBucketHandler = (value: string, list: CosTypes.BucketItem[]) =>
     selectBucket(value, list);
 
-  return (
+  return !canEdit ? (
+    <PageNoAuth></PageNoAuth>
+  ) : (
     <>
-      <SectionContainer>
-        <Row gutter={[20, 20]}>
-          <Col span={24}>
-            <BuckerSelect
-              selectBucket={selectBucketHandler}
-              uploadSuccess={getObjectList}
-            />
-          </Col>
-        </Row>
-        <Divider></Divider>
+      <SessionProvider>
+        <SectionContainer>
+          <Row gutter={[20, 20]}>
+            <Col span={24}>
+              <BuckerSelect
+                selectBucket={selectBucketHandler}
+                uploadSuccess={getObjectList}
+              />
+            </Col>
+          </Row>
+          <Divider></Divider>
 
-        <Button
-          onClick={getObjectList}
-          size="small"
-          icon={<ReloadOutlined></ReloadOutlined>}
-          type="primary"
-        >
-          <span>刷新</span>
-        </Button>
-        <Table
-          bordered
-          loading={loading}
-          size="small"
-          className="mt-2"
-          scroll={scrollXy}
-          pagination={{
-            current: 1,
-            pageSize: 20,
-            total: dataSource.length,
-          }}
-          dataSource={dataSource}
-          rowKey={"Key"}
-          columns={columns}
-        ></Table>
-      </SectionContainer>
+          <Button
+            onClick={getObjectList}
+            size="small"
+            icon={<ReloadOutlined></ReloadOutlined>}
+            type="primary"
+          >
+            <span>刷新</span>
+          </Button>
+          <Table
+            bordered
+            loading={loading}
+            size="small"
+            className="mt-2"
+            scroll={scrollXy}
+            pagination={{
+              current: 1,
+              pageSize: 20,
+              total: dataSource.length,
+            }}
+            dataSource={dataSource}
+            rowKey={"Key"}
+            columns={columns}
+          ></Table>
+        </SectionContainer>
+      </SessionProvider>
     </>
   );
 }

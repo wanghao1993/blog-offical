@@ -16,19 +16,20 @@ import ArticalOperations from "@/components/Article/SaveModal";
 import MainLayout from "@/components/Layouts/MainLayout";
 import PageNoAuth from "@/components/401";
 import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 export default function WriteBlog() {
   const [value, setValue] = useState("");
   const [articalInfo, setArticalInfo] = useState({
     title: "",
   });
+  const [canEdit, setCanEdit] = useState(false);
   const { data } = useSession();
-  if (data?.user.email !== "whao53333@gmail.com") {
-    return (
-      <>
-        <PageNoAuth />
-      </>
-    );
-  }
+
+  useEffect(() => {
+    const canEdit = data?.user?.email === "whao53333@gmail.com";
+    setCanEdit(canEdit);
+  }, [data]);
+
   const plugins = [
     gfm(),
     medium(),
@@ -45,7 +46,9 @@ export default function WriteBlog() {
       })
     );
   };
-  return (
+  return !canEdit ? (
+    <PageNoAuth />
+  ) : (
     <MainLayout>
       <div className="toolbox mb-2 flex">
         <Input onChange={(e) => updateTitle(e)} placeholder="文章标题" />

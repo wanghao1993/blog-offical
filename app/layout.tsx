@@ -22,9 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={content.className}>
-        <NextAuthProvider>
-          <AntdRegistry>
-            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <AntdRegistry>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            <NextAuthProvider>
               <Header />
               <LenisProvider>
                 <main className=" h-full min-h-[calc(100vh-110px)] ">
@@ -33,9 +33,9 @@ export default function RootLayout({
                 <ToTop />
               </LenisProvider>
               <Footer />
-            </ThemeProvider>
-          </AntdRegistry>
-        </NextAuthProvider>
+            </NextAuthProvider>
+          </ThemeProvider>
+        </AntdRegistry>
       </body>
     </html>
   );

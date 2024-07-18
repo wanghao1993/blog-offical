@@ -23,6 +23,7 @@
     "bytemd": "^1.21.0",
     "classnames": "^2.5.1",
     "cos-nodejs-sdk-v5": "^2.14.0",
+    "crypto-js": "^4.2.0",
     "dayjs": "^1.11.11",
     "framer-motion": "^11.1.9",
     "google-translate-api-x": "^10.6.8",
@@ -40,6 +41,7 @@
     "tencentcloud-sdk-nodejs": "^4.0.888"
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
     "@types/node": "^20.12.7",
     "@types/react": "^18",
     "@types/react-dom": "^18",

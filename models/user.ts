@@ -5,12 +5,12 @@ const userSchema = new Schema({
     type: String,
     required: true,
     trim: true,
-    maxlength: 50,
+    max_length: 50,
   },
-  avatar: {
+  image: {
     type: String,
-    required: false,
-    trim: true,
+    required: true,
+    default: "https://blog-1302483222.cos.ap-shanghai.myqcloud.com/images.jpg",
   },
   email: {
     type: String,
@@ -35,5 +35,4 @@ const userSchema = new Schema({
 });
 
 const User = models?.User || model("User", userSchema);
-
 export default User;

@@ -3,6 +3,8 @@ import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import User from "models/user";
+import connectMongo from "@/lib/mongoose";
+import { encrypt } from "@/lib/crypto";
 export const authOptions: AuthOptions = {
   secret: process.env.SECRET_KEY,
   // adapter: PrismaAdapter(MongoPrisma as PrismaClient) as Adapter,
@@ -14,34 +16,39 @@ export const authOptions: AuthOptions = {
       httpOptions: {
         timeout: 100000,
       },
-      // async profile(profile) {
-      //   const existingUser = await User.findOne({ email: profile.email });
+      async profile(profile) {
+        try {
+          await connectMongo();
 
-      //   if (existingUser) {
-      //     // Update existing user
-      //     await User.findByIdAndUpdate(existingUser._id, {
-      //       name: profile.name || profile.login,
-      //       avatar: profile.avatar_url,
-      //       updated_at: Date.now(),
-      //     });
+          const existingUser = await User.findOne({ email: profile.email });
 
-      //     return existingUser;
-      //   }
+          if (existingUser) {
+            // Update existing user
+            const res = await User.findByIdAndUpdate(existingUser._id, {
+              name: profile.name || profile.login,
+              image: profile.avatar_url,
+              updated_at: Date.now(),
+            });
+            return existingUser;
+          }
 
-      //   // Create new user
-      //   const newUser = new User({
-      //     name: profile.name || profile.login,
-      //     email: profile.email,
-      //     avatar: profile.avatar_url,
-      //     password: profile.id, // Use GitHub ID as password
-      //     created_at: Date.now(),
-      //     updated_at: Date.now(),
-      //   });
+          // Create new user
+          const newUser = new User({
+            name: profile.name || profile.login,
+            email: profile.email,
+            image: profile.avatar_url,
+            password: encrypt(profile.id.toString()), // Use GitHub ID as password
+            created_at: Date.now(),
+            updated_at: Date.now(),
+          });
 
-      //   await newUser.save();
+          await newUser.save();
 
-      //   return newUser;
-      // },
+          return newUser;
+        } catch (e) {
+          console.log(e.message);
+        }
+      },
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_ID as string,
@@ -95,13 +102,12 @@ export const authOptions: AuthOptions = {
   },
   callbacks: {
     session: async (data) => {
-      console.log(data, "daaa");
       return data.session;
     },
   },
 
   pages: {
-    signIn: "/login",
+    signIn: "/",
   },
 };
 

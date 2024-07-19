@@ -47,7 +47,7 @@ export const authOptions: AuthOptions = {
             await newUser.save();
   
             return newUser;
-          } catch (e) {
+          } catch (e: any ) {
             console.log(e.message);
           }
         },

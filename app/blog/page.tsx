@@ -8,6 +8,8 @@ import ArticleItem from "@/components/Article/ArticleItem";
 import { produce } from "immer";
 import useScroll from "@/lib/useScrollHooks";
 import { Spin } from "antd";
+import Link from "next/link";
+
 export default function LoginPage() {
   const [list, setList] = useState<ArticleType.ArticleItem[]>([]);
   const [loading, setLoading] = useState(false);
@@ -38,7 +40,6 @@ export default function LoginPage() {
   const { isBottom } = useScroll();
   let timerId = -1;
   useEffect(() => {
-    console.log(isBottom);
     if (isBottom) {
       clearTimeout(timerId);
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -59,12 +60,22 @@ export default function LoginPage() {
   useEffect(() => {
     getBlogList();
   }, [getBlogList]);
+
   return (
     <MainLayout>
       <Spin spinning={loading}>
-        {list.map((item) => (
-          <ArticleItem key={item._id} articleInfo={item} />
-        ))}
+        <div className="min-h-48">
+          {list.map((item) => (
+            <Link
+              key={item._id}
+              href={`/blog/${item._id}`}
+              className=" cursor-pointer"
+              prefetch={false}
+            >
+              <ArticleItem articleInfo={item} />
+            </Link>
+          ))}
+        </div>
       </Spin>
     </MainLayout>
   );

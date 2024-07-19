@@ -2,7 +2,7 @@ export namespace ArticleType {
   export interface ArticleItem {
     title: string;
     categories: string[];
-    coverUrl: string;
+    coverImg: string;
     tags: string[];
     abstract: string;
     content: string;

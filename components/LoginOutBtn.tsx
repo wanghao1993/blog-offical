@@ -1,7 +1,6 @@
-import { useSession, signOut, SessionProvider } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { SignIn, SignOut } from "./Icon/icon";
 import { UserOutlined } from "@ant-design/icons";
-import Link from "next/link";
 import { Avatar, Spin, Dropdown, MenuProps } from "antd";
 import dynamic from "next/dynamic";
 import { useState } from "react";

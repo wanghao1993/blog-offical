@@ -7,6 +7,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "avatars.githubusercontent.com",
       },
+      {
+        protocol: "https",
+        hostname: "**.myqcloud.com",
+      },
     ],
   },
   // async headers() {

@@ -1,11 +1,12 @@
-import NextAuth, { AuthOptions } from "next-auth";
+import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import User from "models/user";
 import connectMongo from "@/lib/mongoose";
 import { encrypt } from "@/lib/crypto";
-export const authOptions: AuthOptions = {
+import { AuthOptions } from "next-auth";
+ const authOptions: AuthOptions = {
   secret: process.env.SECRET_KEY,
   // adapter: PrismaAdapter(MongoPrisma as PrismaClient) as Adapter,
   debug: true,
@@ -101,7 +102,7 @@ export const authOptions: AuthOptions = {
     maxAge: 2 * 24 * 60 * 60,
   },
   callbacks: {
-    session: async (data) => {
+    session: async (data: { session: any; }) => {
       return data.session;
     },
   },

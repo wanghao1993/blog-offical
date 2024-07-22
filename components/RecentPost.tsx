@@ -1,38 +1,33 @@
+"use sever";
 import { get } from "@/lib/fetch";
 import { ArticleType } from "@/types/article";
-import { useState } from "react";
-import { useEffect } from "react";
 import Link from "next/link";
-export function RecentPosts() {
-  const [list, setList] = useState<ArticleType.ArticleItem[]>([]);
+import SectionContainer from "./SectionContainer";
 
-  useEffect(() => {
-    get<ArticleType.GetBlogList>("articles/list", {
-      page: 0,
-      pageSize: 3,
-    }).then((res) => {
-      setList(res.list);
-    });
-  }, []);
+export const getData = async () => {
+  const res = await get<ArticleType.GetBlogList>("articles/list", {
+    page: 0,
+    pageSize: 3,
+  });
+  return res.list || [];
+};
+export default async function RecentPosts() {
+  const list = await getData();
   return (
-    <div>
-      <h1>最近发布</h1>
-      <section>
+    <SectionContainer>
+      <h2 className="my-6">最近发布</h2>
+      <section className="grid gap-y-6">
         {list.map((item) => (
           <div key={item._id}>
-            <Link
-              href={`/blog/${item._id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h2>{item.title}</h2>
-              <p className="text-muted-foreground line-clamp-2 mb-4 text-sm opacity-80 ">
-                {item.abstract}
-              </p>
+            <Link href={`/blog/${item._id}`} rel="noopener noreferrer">
+              <h2 className=" my-3 !text-primary">{item.title}</h2>
             </Link>
+            <p className="text-muted-foreground line-clamp-2 text-sm opacity-80 ">
+              {item.abstract}
+            </p>
           </div>
         ))}
       </section>
-    </div>
+    </SectionContainer>
   );
 }

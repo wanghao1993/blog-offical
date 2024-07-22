@@ -42,8 +42,8 @@ export default function Into() {
         ></canvas>
         <motion.div
           animate={{
-            transform: scrollY > 50 ? `translateY(100px)` : `translateY(0px)`,
-            opacity: scrollY > 50 ? 0 : 1,
+            transform: scrollY > 80 ? `translateY(100px)` : `translateY(0px)`,
+            opacity: scrollY > 80 ? 0 : 1,
           }}
           className="absolute bottom-1 left-1/2 -translate-x-1/2 cursor-pointer"
         >

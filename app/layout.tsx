@@ -12,6 +12,9 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "汪浩的博客",
   description: "我的博客，记录一些技术，心得，经历等等",
+  viewport: "width=device-width, initial-scale=1",
+  keywords:
+    "博客，汪浩，Isaac Wang, Javascript, Vue, Css, Nextjs, Nodejs, Docker, web3，区块链",
 };
 
 export default function RootLayout({

@@ -6,6 +6,12 @@ export default {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  theme: {},
+  theme: {
+    extend: {
+      colors: {
+        'primary': '#1890ff'
+      }
+    }
+  },
   plugins: [require("tailwindcss-animate")],
 };

@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import type { FormProps, UploadFile, UploadProps } from "antd";
-import { Button, Upload, Form, Input, Select, Image } from "antd";
+import { Button, Upload, Form, Input, Select, Image, message } from "antd";
 import { CaretUpOutlined } from "@ant-design/icons";
 
 import { PlusOutlined } from "@ant-design/icons";
+import { useEffect } from "react";
+import { ArticleType } from "@/types/article";
+import { get } from "@/lib/fetch";
 export type FieldType = {
   categories: string[];
   tags: string[];
@@ -32,7 +35,8 @@ const categories = ["前端", "后端", "Android", "IOS", "问题记录", "杂�
 interface Props {
   cancelFn: () => void;
   onFinish: (data: FieldType) => void;
-  content?: String;
+  content?: string;
+  articleDetail?: ArticleType.ArticleItem;
   // saveAsDraft: (data: FieldType) => void;
 }
 
@@ -51,7 +55,27 @@ export default function ArticleForm(props: Props) {
   };
   // 预览
   const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    form.setFieldValue("abstract", props.content?.slice(0, 100));
+  }, [props.content]);
 
+  useEffect(() => {
+    const { categories, tags, coverImg, abstract } = props.articleDetail || {};
+    form.setFieldsValue({
+      categories: categories || [],
+      tags: tags || [],
+      abstract: abstract,
+    });
+    if (coverImg) {
+      setFileList([
+        {
+          url: coverImg,
+          uid: "2",
+          name: "image",
+        },
+      ]);
+    }
+  }, [props.articleDetail]);
   return (
     <div className="absolute bg-white w-[600px]  z-10 border rounded-lg shadow-md right-0 top-10 ">
       <h1 className="!text-black border-b p-3 mb-3">发布文章</h1>
@@ -123,7 +147,7 @@ export default function ArticleForm(props: Props) {
           name="abstract"
           rules={[{ required: true, message: "请选择标签" }]}
         >
-          <Input.TextArea placeholder="请输入摘要" />
+          <Input.TextArea placeholder="请输入摘要" maxLength={100} />
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 4, span: 16 }}>

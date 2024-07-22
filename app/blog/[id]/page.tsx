@@ -10,6 +10,7 @@ import formatterDate from "@/lib/data_utils";
 import { motion } from "framer-motion";
 import { Viewer } from "@bytemd/react";
 import "juejin-markdown-themes/dist/mk-cute.css";
+import Link from "next/link";
 export default function ArticleDetail() {
   const { id } = useParams();
   const [detail, setDetail] = useState<ArticleType.ArticleItem>();
@@ -44,24 +45,33 @@ export default function ArticleDetail() {
         {detail ? (
           <div className="article-detail">
             <h1 className="font-semibold mb-4">{detail.title}</h1>
-            <div className="text-sm text-slate-400 flex items-center">
-              <div>
-                <CalendarOutlined />
-                <span className="pl-1">{formatterDate(detail.createdAt)}</span>
+            <div className="text-sm text-slate-400 flex items-center justify-between  ">
+              <div className="flex items-center ">
+                <div>
+                  <CalendarOutlined />
+                  <span className="pl-1">
+                    {formatterDate(detail.createdAt)}
+                  </span>
+                </div>
+                <Divider type="vertical" className="mx-4!"></Divider>
+                <div>
+                  <EyeOutlined />
+                  <span className="pl-1">{detail.viewsCount}</span>
+                </div>
+                <Divider type="vertical" className="mx-2!"></Divider>
+                <motion.div
+                  className="cursor-pointer"
+                  whileHover={{ scale: 1.2 }}
+                >
+                  <LikeOutlined />
+                  <span className="pl-1">{detail.likesCount}</span>
+                </motion.div>
               </div>
-              <Divider type="vertical" className="mx-4!"></Divider>
-              <div>
-                <EyeOutlined />
-                <span className="pl-1">{detail.viewsCount}</span>
+              <div className="text-primary">
+                <span>{new Date(detail.updatedAt).toLocaleString()}</span>
+                <Divider type="vertical" className="mx-2!"></Divider>
+                <Link href={`/admin/write?id=${detail._id}`}>编辑</Link>
               </div>
-              <Divider type="vertical" className="mx-2!"></Divider>
-              <motion.div
-                className="cursor-pointer"
-                whileHover={{ scale: 1.2 }}
-              >
-                <LikeOutlined />
-                <span className="pl-1">{detail.likesCount}</span>
-              </motion.div>
             </div>
             <article className="mt-2">
               <Viewer value={detail.content}></Viewer>

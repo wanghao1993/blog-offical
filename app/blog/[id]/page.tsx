@@ -4,10 +4,26 @@ import { ArticleType } from "@/types/article";
 import { Empty, Divider } from "antd";
 import { CalendarOutlined, EyeOutlined, LikeOutlined } from "@ant-design/icons";
 import formatterDate from "@/lib/data_utils";
-import { motion } from "framer-motion";
-import { Viewer } from "@bytemd/react";
 import "juejin-markdown-themes/dist/mk-cute.css";
 import Link from "next/link";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import rehypeHighlight from "rehype-highlight";
+import js from "highlight.js/lib/languages/javascript";
+import ts from "highlight.js/lib/languages/typescript";
+import bash from "highlight.js/lib/languages/bash";
+import "highlight.js/styles/monokai.min.css";
+
+const options = {
+  mdxOptions: {
+    remarkPlugins: [],
+    rehypePlugins: [
+      [
+        rehypeHighlight,
+        { languages: { javascript: js, typescript: ts, bash: bash } },
+      ],
+    ],
+  },
+};
 async function getBlogDetail(id: string) {
   const res = await get<ArticleType.ArticleItem>("articles/detail", {
     id,
@@ -24,9 +40,9 @@ export default async function ArticleDetail({
   return (
     <MainLayout>
       {detail ? (
-        <div className="article-detail">
+        <div className="article-detail " style={{ lineHeight: 2 }}>
           <h1 className="font-semibold mb-4">{detail.title}</h1>
-          <div className="text-sm text-slate-400 flex items-center justify-between  ">
+          <div className="text-sm text-slate-400 flex items-center justify-between ">
             <div className="flex items-center ">
               <div>
                 <CalendarOutlined />
@@ -38,13 +54,10 @@ export default async function ArticleDetail({
                 <span className="pl-1">{detail.viewsCount}</span>
               </div>
               <Divider type="vertical" className="mx-2!"></Divider>
-              <motion.div
-                className="cursor-pointer"
-                whileHover={{ scale: 1.2 }}
-              >
+              <div className="cursor-pointer hover:scale-110">
                 <LikeOutlined />
                 <span className="pl-1">{detail.likesCount}</span>
-              </motion.div>
+              </div>
             </div>
             <div className="text-primary">
               <span>{new Date(detail.updatedAt).toLocaleString()}</span>
@@ -53,7 +66,7 @@ export default async function ArticleDetail({
             </div>
           </div>
           <article className="mt-2">
-            <Viewer value={detail.content}></Viewer>
+            <MDXRemote source={detail.content} options={options}></MDXRemote>
           </article>
         </div>
       ) : (

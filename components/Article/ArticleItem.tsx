@@ -1,22 +1,13 @@
 import { ArticleType } from "@/types/article";
-import Link from "next/link";
 import { LikeFilled, EyeFilled } from "@ant-design/icons";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { Tag, Divider } from "antd";
-import { useRef } from "react";
 
 export default function ArticleItem(data: {
   articleInfo: ArticleType.ArticleItem;
 }) {
   return (
-    <motion.div
-      whileHover={{
-        scale: 1.01,
-        transition: { duration: 0.4 },
-      }}
-      className="transition-all  flex items-center flex-col sm:flex-row border-b"
-    >
+    <div className="transition-all  flex items-center flex-col sm:flex-row border-b">
       <div className="p-4 flex-1">
         <div className="flex items-center justify-between mb-2">
           <div className="py-1 rounded-full text-xs font-medium">
@@ -63,6 +54,6 @@ export default function ArticleItem(data: {
           className=" sm:h-full object-cover"
         />
       )}
-    </motion.div>
+    </div>
   );
 }

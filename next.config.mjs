@@ -11,6 +11,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "**.myqcloud.com",
       },
+      {
+        protocol: "https",
+        hostname: "**.byteimg.com",
+      },
     ],
   },
   transpilePackages: ["next-mdx-remote"],

@@ -1,10 +1,6 @@
 import { signIn } from "next-auth/react";
 import { Button } from "antd";
 import { GithubOutlined, GoogleOutlined } from "@ant-design/icons";
-import { Metadata } from "next";
-export const metadata: Metadata = {
-  title: "登录页",
-};
 
 export default function LoginBox() {
   const sign = async (type: "github" | "google") => {

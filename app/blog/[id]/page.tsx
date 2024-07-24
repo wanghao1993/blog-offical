@@ -8,22 +8,42 @@ import "juejin-markdown-themes/dist/mk-cute.css";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypeHighlight from "rehype-highlight";
-import js from "highlight.js/lib/languages/javascript";
-import ts from "highlight.js/lib/languages/typescript";
-import bash from "highlight.js/lib/languages/bash";
 import "highlight.js/styles/monokai.min.css";
+import { SerializeOptions } from "node_modules/next-mdx-remote/dist/types";
+import { Metadata } from "next";
 
-const options = {
+const options: SerializeOptions = {
   mdxOptions: {
     remarkPlugins: [],
-    rehypePlugins: [
-      [
-        rehypeHighlight,
-        { languages: { javascript: js, typescript: ts, bash: bash } },
-      ],
-    ],
+    rehypePlugins: [rehypeHighlight],
   },
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const detail = await getBlogDetail(params.id);
+
+  if (!detail) {
+    return {};
+  }
+
+  return {
+    title: detail.title,
+    description: detail.content,
+    keywords: detail.tags.join(","),
+    category: detail.categories.join(", "),
+    abstract: detail.abstract,
+    creator: "汪浩（isaac wang）",
+    authors: [
+      { url: "https://github.com/wanghao1993", name: "汪浩（isaac wang）" },
+    ],
+    publisher: "汪浩（isaac wang）",
+  };
+}
+
 async function getBlogDetail(id: string) {
   const res = await get<ArticleType.ArticleItem>("articles/detail", {
     id,

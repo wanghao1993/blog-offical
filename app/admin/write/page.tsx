@@ -2,7 +2,7 @@
 import "juejin-markdown-themes/dist/mk-cute.css";
 import "bytemd/dist/index.css";
 import "./page.css";
-import { Editor } from "@bytemd/react";
+// import { Editor } from "@bytemd/react";
 import { ChangeEvent, useState } from "react";
 import breaks from "@bytemd/plugin-breaks";
 import frontmatter from "@bytemd/plugin-frontmatter";
@@ -21,6 +21,7 @@ import { useSearchParams } from "next/navigation";
 import { get } from "@/lib/fetch";
 import { ArticleType } from "@/types/article";
 import { Spin } from "antd";
+import Editor from "@/components/Editor/editor";
 
 export default function WriteBlog() {
   const searchParams = useSearchParams();

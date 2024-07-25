@@ -30,9 +30,7 @@ export default function RootLayout({
             <NextAuthProvider>
               <Header />
               <LenisProvider>
-                <main className=" h-full min-h-[calc(100vh-110px)] ">
-                  {children}
-                </main>
+                <main className="min-h-[calc(100vh-110px)] ">{children}</main>
                 <ToTop />
               </LenisProvider>
               <Footer />

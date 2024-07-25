@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowDownOutlined } from "@ant-design/icons";
 import { useContext } from "react";
 import { ScrollContext } from "./Providers/ScrollProvider";
-export default function CanvasCom() {
+export default function DownArrow() {
   const { scrollY } = useContext(ScrollContext);
   return (
     <motion.div

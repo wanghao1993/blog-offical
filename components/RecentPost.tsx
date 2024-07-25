@@ -6,7 +6,7 @@ import SectionContainer from "./SectionContainer";
 
 export const getData = async () => {
   const res = await get<ArticleType.GetBlogList>("articles/list", {
-    page: 0,
+    page: 1,
     pageSize: 3,
   });
   return res.list || [];
@@ -28,6 +28,15 @@ export default async function RecentPosts() {
           </div>
         ))}
       </section>
+
+      <p className="text-right py-3">
+        <Link
+          href={"/blog"}
+          className="horizontal-underline horizontal-underline-active p-1 text-xs rounded"
+        >
+          查看更多 →
+        </Link>
+      </p>
     </SectionContainer>
   );
 }

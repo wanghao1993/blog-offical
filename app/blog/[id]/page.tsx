@@ -5,14 +5,13 @@ import { Empty, Divider } from "antd";
 import { CalendarOutlined, EyeOutlined, LikeOutlined } from "@ant-design/icons";
 import formatterDate from "@/lib/data_utils";
 import "juejin-markdown-themes/dist/mk-cute.css";
-import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypeHighlight from "rehype-highlight";
 import "./index.scss";
 import "highlight.js/styles/monokai.min.css";
-import Pre from "@/components/Pre";
 import { SerializeOptions } from "node_modules/next-mdx-remote/dist/types";
 import { Metadata } from "next";
+import { EditIcon } from "@/components/blog/Edit";
 
 const options: SerializeOptions = {
   mdxOptions: {
@@ -64,7 +63,7 @@ export default async function ArticleDetail({
       {detail ? (
         <div className="article-detail ">
           <h1 className="font-semibold mb-4">{detail.title}</h1>
-          <p className="text-sm text-slate-400 flex items-center justify-between ">
+          <div className="text-sm text-slate-400 flex items-center justify-between ">
             <div className="flex items-center ">
               <div>
                 <CalendarOutlined />
@@ -83,10 +82,9 @@ export default async function ArticleDetail({
             </div>
             <div className="text-primary">
               <span>{new Date(detail.updatedAt).toLocaleString()}</span>
-              <Divider type="vertical" className="mx-2!"></Divider>
-              <Link href={`/admin/write?id=${detail._id}`}>编辑</Link>
+              <EditIcon detail={detail} />
             </div>
-          </p>
+          </div>
           <article className="mt-2">
             <MDXRemote source={detail.content} options={options}></MDXRemote>
           </article>

@@ -2,7 +2,9 @@
     pre {
         @apply my-4
     }
-
+    img {
+        margin-bottom: 20px;
+    }
     .language-css {
         .hljs-selector-pseudo {
             color: #aaa

@@ -6,7 +6,7 @@ import { CosTypes } from "@/types/cos";
 import { Row, Col, Table, Button, message, Image, Divider } from "antd";
 
 import { ReloadOutlined } from "@ant-design/icons";
-import { memo, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import BuckerSelect from "@/components/admin/upload/bucketSelect";
 import { ColumnProps } from "antd/es/table";
 import { SessionProvider, useSession } from "next-auth/react";

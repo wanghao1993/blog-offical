@@ -6,12 +6,12 @@ import { usePathname } from "next/navigation";
 import ThemeSwitch from "@/components/ThemeToggle";
 import LoginInOut from "./LoginOutBtn";
 import { SessionProvider } from "next-auth/react";
-import { useTheme } from "next-themes";
+import SectionContainer from "./SectionContainer";
 export default function Header() {
   const path = usePathname();
   return (
     path !== "/login" && (
-      <div className="sticky top-0 z-10 px-20">
+      <SectionContainer className="sticky top-0 z-10 px-20">
         <SessionProvider>
           <header className="flex justify-between py-2 items-center">
             <BlogName />
@@ -22,7 +22,7 @@ export default function Header() {
             </div>
           </header>
         </SessionProvider>
-      </div>
+      </SectionContainer>
     )
   );
 }

@@ -13,6 +13,7 @@ import { SerializeOptions } from "node_modules/next-mdx-remote/dist/types";
 import { Metadata } from "next";
 import { EditIcon } from "@/components/blog/Edit";
 import ToTop from "@/components/toTop";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 const options: SerializeOptions = {
   mdxOptions: {
@@ -61,9 +62,10 @@ export default async function ArticleDetail({
   const detail: ArticleType.ArticleItem = await getBlogDetail(params.id);
   return (
     <MainLayout>
+      <GoogleTagManager gtmId="G-4Z3CSGWXGR" />
       {detail ? (
         <div className="article-detail ">
-          <h1 className="font-semibold mb-4">{detail.title}</h1>
+          <h1 className="font-semibold ">{detail.title}</h1>
           <div className="text-sm text-slate-400 flex items-center justify-between ">
             <div className="flex items-center ">
               <div>
@@ -86,7 +88,7 @@ export default async function ArticleDetail({
               <EditIcon detail={detail} />
             </div>
           </div>
-          <article className="mt-2">
+          <article className="mt-4">
             <MDXRemote source={detail.content} options={options}></MDXRemote>
           </article>
 

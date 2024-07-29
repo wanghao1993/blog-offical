@@ -9,17 +9,13 @@ export default function ThemeProvider({
   children,
   ...props
 }: ThemeProviderProps) {
-  const { theme } = useTheme();
-  const [themeToken, setThemeToken] = useState({
-    colorPrimary: "#b765c5",
-    colorLink: "#b765c5",
-  });
+  // const { theme } = useTheme();
+  // const [themeToken, setThemeToken] = useState({
+  //   colorPrimary: "#b765c5",
+  //   colorLink: "#b765c5",
+  // });
   return (
-    <ConfigProvider
-      theme={{
-        token: themeToken,
-      }}
-    >
+    <ConfigProvider>
       <NextThemesProvider {...props}>{children}</NextThemesProvider>
     </ConfigProvider>
   );

@@ -20,6 +20,10 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "**.xitu.io",
+      },
+      {
+        protocol: "https",
         hostname: "**.byteimg.com",
       },
     ],

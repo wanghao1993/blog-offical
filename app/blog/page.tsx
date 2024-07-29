@@ -9,6 +9,7 @@ import { produce } from "immer";
 import useScroll from "@/lib/useScrollHooks";
 import { Spin } from "antd";
 import Link from "next/link";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 export default function LoginPage() {
   const [list, setList] = useState<ArticleType.ArticleItem[]>([]);
@@ -63,6 +64,7 @@ export default function LoginPage() {
 
   return (
     <MainLayout>
+      <GoogleTagManager gtmId="G-4Z3CSGWXGR" />
       <Spin spinning={loading}>
         <div className="min-h-48">
           {list.map((item) => (

@@ -12,6 +12,7 @@ import "highlight.js/styles/monokai.min.css";
 import { SerializeOptions } from "node_modules/next-mdx-remote/dist/types";
 import { Metadata } from "next";
 import { EditIcon } from "@/components/blog/Edit";
+import ToTop from "@/components/toTop";
 
 const options: SerializeOptions = {
   mdxOptions: {
@@ -88,6 +89,8 @@ export default async function ArticleDetail({
           <article className="mt-2">
             <MDXRemote source={detail.content} options={options}></MDXRemote>
           </article>
+
+          <ToTop />
         </div>
       ) : (
         <Empty></Empty>

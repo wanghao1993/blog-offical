@@ -175,9 +175,14 @@ header {
   &:hover {
     background-size: 100% 3px;
     background-position: 0 100%;
+  }
+}
+
+.horizontal-underline-hover:hover {
+    background-size: 100% 3px;
+    background-position: 0 100%;
     background-color: #1d91de;
     color: #fff;
-  }
 }
 
 .horizontal-underline-active {

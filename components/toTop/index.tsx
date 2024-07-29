@@ -21,7 +21,7 @@ export default function ToTop() {
   return (
     <div
       ref={ref}
-      className={` w-2 fixed right-2 bottom-6 top-6 z-100 rounded-md shadow-md`}
+      className={` w-2 fixed right-2 bottom-6 top-20 z-100 rounded-md shadow-md`}
       onClick={() => lenis?.scrollTo(0)}
     >
       <motion.div
@@ -34,11 +34,7 @@ export default function ToTop() {
           delay: 0,
         }}
         className={`absolute w-2 bg-primary-400 rounded-md `}
-      >
-        <span>
-          <img src="./" alt="" srcset="" />
-        </span>
-      </motion.div>
+      ></motion.div>
     </div>
   );
 }

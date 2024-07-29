@@ -15,12 +15,14 @@ export default async function RecentPosts() {
   const list = await getData();
   return (
     <SectionContainer>
-      <h2 className="my-6">最近发布</h2>
+      <h2 className="my-6 text-2xl text-bold ">最近发布</h2>
       <section className="grid gap-y-6">
         {list.map((item) => (
           <div key={item._id}>
             <Link href={`/blog/${item._id}`} rel="noopener noreferrer">
-              <h2 className=" my-3 !text-primary">{item.title}</h2>
+              <h2 className=" horizontal-underline-active text-bold text-xl my-3 !text-primary">
+                {item.title}
+              </h2>
             </Link>
             <p className="text-muted-foreground line-clamp-2 text-sm opacity-80 ">
               {item.abstract}
@@ -32,7 +34,7 @@ export default async function RecentPosts() {
       <p className="text-right py-3">
         <Link
           href={"/blog"}
-          className="horizontal-underline horizontal-underline-active p-1 text-xs rounded"
+          className="horizontal-underline horizontal-underline-active p-1 text-xs rounded horizontal-underline-hover "
         >
           查看更多 →
         </Link>

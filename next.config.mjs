@@ -1,4 +1,11 @@
 /** @type {import('next').NextConfig} */
+import withPWA from "next-pwa";
+const pwa = withPWA({
+  dest: "public",
+  disable: process.env.NODE_ENV === "development",
+  register: true,
+  skipWaiting: true,
+});
 const nextConfig = {
   reactStrictMode: false,
   images: {
@@ -17,6 +24,7 @@ const nextConfig = {
       },
     ],
   },
+
   transpilePackages: ["next-mdx-remote"],
   // async headers() {
   //   return [
@@ -41,4 +49,4 @@ const nextConfig = {
   // },
 };
 
-export default nextConfig;
+export default pwa(nextConfig);

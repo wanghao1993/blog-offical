@@ -20,7 +20,7 @@ export default function Nav() {
         <Link
           href={nav.path}
           key={nav.path}
-          className={`horizontal-underline mr-3 hidden text-xl font-extrabold sm:block md:inline-block ${
+          className={`horizontal-underline mr-3  text-xl font-extrabold sm:block md:inline-block ${
             pathName === nav.path ? "horizontal-underline-active" : ""
           }`}
           aria-label={nav.title}

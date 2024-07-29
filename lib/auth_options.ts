@@ -1,10 +1,9 @@
-import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import User from "models/user";
 import connectMongo from "@/lib/mongoose";
-import { encrypt } from "@/lib/crypto";
+import { decrypt, encrypt } from "@/lib/crypto";
 import { AuthOptions } from "next-auth";
 
 export const authOptions: AuthOptions = {
@@ -67,7 +66,7 @@ export const authOptions: AuthOptions = {
         // e.g. domain, username, password, 2FA token, etc.
         // You can pass any HTML attribute to the <input> tag through the object.
         credentials: {
-          username: {
+          email: {
             label: "用户名",
             type: "text",
             placeholder: "请输入用户名",
@@ -77,23 +76,24 @@ export const authOptions: AuthOptions = {
             type: "password",
             placeholder: "请输入密码",
           },
-          remember: {
-            label: "记住我",
-            type: "checkbox",
-          },
         },
         async authorize(credentials, req) {
           // Add logic here to look up the user from the credentials supplied
-          const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
-          console.log(credentials, req);
-          if (user) {
-            // Any object returned will be saved in `user` property of the JWT
-            return user;
-          } else {
-            // If you return null then an error will be displayed advising the user to check their details.
-            return null;
+          if (!credentials?.email || !credentials?.password) {
+            return null
+          }
+          await connectMongo();
   
-            // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+          const user = await User.findOne({ email: credentials.email });
+
+          if (!user) {
+            throw Error('用户不存在，请检查邮箱是否正确')
+          } else {
+            if (credentials.password ===  decrypt(user?.password as string)) {
+              return user
+            } else {
+              throw Error('密码不正确，请重新输入')
+            }
           }
         },
       }),

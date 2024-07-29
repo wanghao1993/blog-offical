@@ -7,6 +7,8 @@ export async function GET(request: Request) {
   const { page, pageSize } = searchParams as unknown as {
     page: number;
     pageSize: number;
+    category: string[];
+    tags: string[]
   };
   try {
     const totalCount = await Article.countDocuments();

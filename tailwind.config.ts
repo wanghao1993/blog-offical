@@ -37,17 +37,7 @@ export default {
         'gradient-3-end': '#2D00F7',
       },
       colors: {
-        primary: {
-          100: '#FDD1D9',
-          200: '#FBA4BC',
-          300: '#F575A5',
-          400: '#EB519B',
-          500: '#DE1D8D',
-          600: '#BE1588',
-          700: '#9F0E7F',
-          800: '#800972',
-          900: '#6A0568',
-        },
+        primary: '#1d91de',
         success: {
           100: '#E4FCDB',
           200: '#C3FAB9',

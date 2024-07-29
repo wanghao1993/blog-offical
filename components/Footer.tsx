@@ -1,5 +1,5 @@
 import Image from "next/image";
-import IconPolice from "public/police.png";
+import IconPolice from "./../public/police.png";
 
 export default function Footer() {
   return (

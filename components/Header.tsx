@@ -9,16 +9,9 @@ import { SessionProvider } from "next-auth/react";
 import { useTheme } from "next-themes";
 export default function Header() {
   const path = usePathname();
-  const { theme } = useTheme();
   return (
     path !== "/login" && (
-      <div
-        className="sticky top-0 z-10 px-20"
-        style={{
-          boxShadow:
-            theme === "light" ? "0px 2px 5px rgb(247 243 243)" : "none",
-        }}
-      >
+      <div className="sticky top-0 z-10 px-20">
         <SessionProvider>
           <header className="flex justify-between py-2 items-center">
             <BlogName />

@@ -19,7 +19,6 @@
     "@bytemd/plugin-medium-zoom": "^1.21.0",
     "@bytemd/react": "^1.21.0",
     "@next/third-parties": "^14.2.5",
-    "@sentry/wizard": "^3.25.2",
     "@studio-freight/react-lenis": "^0.0.47",
     "@tailwindcss/typography": "^0.5.13",
     "antd": "^5.17.4",

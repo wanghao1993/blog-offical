@@ -8,7 +8,8 @@ import { NextAuthProvider } from "@/components/Providers/AuthProvider";
 import { content } from "@/lib/font";
 import Footer from "@/components/Footer";
 import { GoogleTagManager } from "@next/third-parties/google";
-import Head from "next/head";
+import { ScrollProvider } from "@/components/Providers/ScrollProvider";
+
 import Script from "next/script";
 import type { Metadata, Viewport } from "next";
 
@@ -71,13 +72,15 @@ export default function RootLayout({
       <body className={content.className}>
         <AntdRegistry>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            <NextAuthProvider>
-              <Header />
-              <LenisProvider>
-                <main className="min-h-[calc(100vh-110px)] ">{children}</main>
-              </LenisProvider>
-              <Footer />
-            </NextAuthProvider>
+            <LenisProvider>
+              <ScrollProvider>
+                <NextAuthProvider>
+                  <Header />
+                  <main className="min-h-[calc(100vh-110px)] ">{children}</main>
+                  <Footer />
+                </NextAuthProvider>
+              </ScrollProvider>
+            </LenisProvider>
           </ThemeProvider>
         </AntdRegistry>
       </body>

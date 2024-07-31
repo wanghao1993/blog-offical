@@ -3,3 +3,11 @@
     font-size: 14px;
     color: var(--secondary-text-color);
 }
+
+.prose  li {
+    list-style: decimal;
+}
+
+.prose ol {
+    margin-left: 20px;
+}

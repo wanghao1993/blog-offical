@@ -57,8 +57,8 @@ export default function LoginInOut() {
           dropdownRender={(node) => <span>{node}</span>}
         >
           <Avatar
-            size={32}
-            shape={"square"}
+            size={28}
+            shape={"circle"}
             src={session?.user?.image}
             alt="avatar"
             className=" cursor-pointer "

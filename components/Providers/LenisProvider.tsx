@@ -1,5 +1,5 @@
 "use client";
-import { Lenis as ReactLenis } from "@studio-freight/react-lenis";
+import { ReactLenis } from "lenis/react";
 import { ReactNode } from "react";
 
 interface Props {

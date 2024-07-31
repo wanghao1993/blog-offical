@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useLenis } from "@studio-freight/react-lenis";
+import { useLenis } from "lenis/react";
 import { motion } from "framer-motion";
 export default function ToTop() {
   const [progress, setProgress] = useState(0);
@@ -33,7 +33,7 @@ export default function ToTop() {
           duration: 0,
           delay: 0,
         }}
-        className={`absolute w-2 bg-primary-400 rounded-md `}
+        className={`absolute w-2 bg-primary rounded-md `}
       ></motion.div>
     </div>
   );

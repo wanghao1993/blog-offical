@@ -14,6 +14,7 @@ import { Metadata } from "next";
 import { EditIcon } from "@/components/blog/Edit";
 import ToTop from "@/components/toTop";
 import { GoogleTagManager } from "@next/third-parties/google";
+import Image from "next/image";
 
 const options: SerializeOptions = {
   mdxOptions: {
@@ -89,6 +90,16 @@ export default async function ArticleDetail({
             </div>
           </div>
           <article className="mt-4">
+            {detail.coverImg && (
+              <Image
+                src={detail.coverImg}
+                width={2000}
+                height={1000}
+                style={{ width: "100%", height: "auto" }}
+                priority={true}
+                alt="cover_img"
+              />
+            )}
             <MDXRemote source={detail.content} options={options}></MDXRemote>
           </article>
 

@@ -37,12 +37,13 @@ async function fetcher<T>(url: string, options: FetcherOptions): Promise<T> {
   }
 }
 
-export async function get<T>(url: string, data?: any): Promise<T> {
+export async function get<T>(url: string, data?: any, revalidate = 60): Promise<T> {
   if (data) {
     url += `?${new URLSearchParams(data).toString()}`;
   }
   return fetcher<T>(url, {
     method: "GET",
+    next: { revalidate}
   });
 }
 

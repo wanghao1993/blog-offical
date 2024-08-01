@@ -45,47 +45,47 @@ export const authOptions: AuthOptions = {
         }
       },
     }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_ID as string,
-      clientSecret: process.env.GOOGLE_SECRET_KEY as string,
-      httpOptions: {
-        timeout: 100000,
-      },
-    }),
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        email: {
-          label: "用户名",
-          type: "text",
-          placeholder: "请输入用户名",
-        },
-        password: {
-          label: "密码",
-          type: "password",
-          placeholder: "请输入密码",
-        },
-      },
-      async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
-        if (!credentials?.email || !credentials?.password) {
-          return null;
-        }
-        await connectMongo();
+    // GoogleProvider({
+    //   clientId: process.env.GOOGLE_ID as string,
+    //   clientSecret: process.env.GOOGLE_SECRET_KEY as string,
+    //   httpOptions: {
+    //     timeout: 100000,
+    //   },
+    // }),
+    // CredentialsProvider({
+    //   name: "Credentials",
+    //   credentials: {
+    //     email: {
+    //       label: "用户名",
+    //       type: "text",
+    //       placeholder: "请输入用户名",
+    //     },
+    //     password: {
+    //       label: "密码",
+    //       type: "password",
+    //       placeholder: "请输入密码",
+    //     },
+    //   },
+    //   async authorize(credentials, req) {
+    //     // Add logic here to look up the user from the credentials supplied
+    //     if (!credentials?.email || !credentials?.password) {
+    //       return null;
+    //     }
+    //     await connectMongo();
 
-        const user = await User.findOne({ email: credentials.email });
+    //     const user = await User.findOne({ email: credentials.email });
 
-        if (!user) {
-          throw Error("用户不存在，请检查邮箱是否正确");
-        } else {
-          if (credentials.password === decrypt(user?.password as string)) {
-            return user;
-          } else {
-            throw Error("密码不正确，请重新输入");
-          }
-        }
-      },
-    }),
+    //     if (!user) {
+    //       throw Error("用户不存在，请检查邮箱是否正确");
+    //     } else {
+    //       if (credentials.password === decrypt(user?.password as string)) {
+    //         return user;
+    //       } else {
+    //         throw Error("密码不正确，请重新输入");
+    //       }
+    //     }
+    //   },
+    // }),
   ],
   session: {
     strategy: "jwt",

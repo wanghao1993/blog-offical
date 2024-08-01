@@ -122,11 +122,15 @@ export default function Bucket() {
           Contents: CosTypes.ObjectItem[];
           NextMarker: string;
           IsTruncated: "true" | "false";
-        }>("cos/list", {
-          bucket: item?.Name,
-          region: item?.Location,
-          pageSize: 1000,
-        }).then((res) => {
+        }>(
+          "cos/list",
+          {
+            bucket: item?.Name,
+            region: item?.Location,
+            pageSize: 1000,
+          },
+          10
+        ).then((res) => {
           setLoading(false);
           setDataSource(res.Contents);
         });
@@ -186,7 +190,6 @@ export default function Bucket() {
             className="mt-2"
             scroll={scrollXy}
             pagination={{
-              current: 1,
               pageSize: 20,
               total: dataSource.length,
             }}

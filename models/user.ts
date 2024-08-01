@@ -1,6 +1,7 @@
+import { USER_DTO } from "@/types/user";
 import { Schema, model, models } from "mongoose";
 
-const userSchema = new Schema({
+const userSchema = new Schema<USER_DTO>({
   name: {
     type: String,
     required: true,
@@ -34,5 +35,5 @@ const userSchema = new Schema({
   },
 });
 
-const User = models?.User || model("User", userSchema);
+const User = models?.User || model<USER_DTO>("User", userSchema);
 export default User;

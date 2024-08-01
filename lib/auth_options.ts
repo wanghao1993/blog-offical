@@ -5,6 +5,7 @@ import User from "models/user";
 import connectMongo from "@/lib/mongoose";
 import { decrypt, encrypt } from "@/lib/crypto";
 import { AuthOptions } from "next-auth";
+import { USER_DTO } from "@/types/user";
 
 export const authOptions: AuthOptions = {
     secret: process.env.SECRET_KEY,
@@ -28,21 +29,17 @@ export const authOptions: AuthOptions = {
               const res = await User.findByIdAndUpdate(existingUser._id, {
                 name: profile.name || profile.login,
                 image: profile.avatar_url,
-                updated_at: Date.now(),
               });
               return existingUser;
             }
   
             // Create new user
-            const newUser = new User({
-              name: profile.name || profile.login,
-              email: profile.email,
-              image: profile.avatar_url,
-              password: encrypt(profile.id.toString()), // Use GitHub ID as password
-              created_at: Date.now(),
-              updated_at: Date.now(),
-            });
-  
+            const newUser = new User();
+            newUser.name = profile.name || profile.login
+            newUser.email =  profile.email
+            newUser.image = profile.avatar_url
+            newUser.password = encrypt(profile.id.toString()), // Use GitHub ID as default password
+            
             await newUser.save();
   
             return newUser;

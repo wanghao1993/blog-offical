@@ -1,5 +1,3 @@
-"use client";
-
 import { signIn } from "next-auth/react";
 import { Button } from "antd";
 import { GithubOutlined, GoogleOutlined } from "@ant-design/icons";
@@ -7,7 +5,7 @@ import { GithubOutlined, GoogleOutlined } from "@ant-design/icons";
 export default function LoginBox() {
   const sign = async (type: "github" | "google") => {
     await signIn(type, {
-      callbackUrl: process.env.AUTH_CALLBACK_URL,
+      callbackUrl: location.origin,
       redirect: true,
     });
   };

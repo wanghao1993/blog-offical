@@ -6,7 +6,6 @@ export default function LoginBox() {
   const sign = async (type: "github" | "google") => {
     await signIn(type, {
       callbackUrl: location.origin + "/",
-      redirect: true,
     });
   };
   return (

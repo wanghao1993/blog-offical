@@ -1,60 +1,48 @@
 ---
 highlight: atom-one-dark
 ---
-
 ## Nextjs 是什么
 
 [NextJs](https://nextjs.org/docs/getting-started/installation) 是一个基于 React 的开源框架，用于构建生产级别的 React 应用程序。它为开发人员提供了一套丰富的工具和约定，使得创建高性能、可扩展的 Web 应用程序变得更加容易。
 
 ## Next.js 的主要特性：
 
-*   **服务器端渲染 (SSR)：**
+* **服务器端渲染 (SSR)：**
 
-    *   提高首屏加载速度，改善用户体验。
-    *   有利于 SEO，搜索引擎可以更好地抓取页面内容。
+  * 提高首屏加载速度，改善用户体验。
+  * 有利于 SEO，搜索引擎可以更好地抓取页面内容。
+* **静态站点生成 (SSG)：**
 
-*   **静态站点生成 (SSG)：**
+  * 将整个应用程序或部分页面预渲染成静态 HTML 文件。
+  * 适用于数据变化不频繁的网站，提供极快的加载速度。
+* **API 路由：**
 
-    *   将整个应用程序或部分页面预渲染成静态 HTML 文件。
-    *   适用于数据变化不频繁的网站，提供极快的加载速度。
+  * 内置 API 路由功能，可以轻松创建 RESTful API 或 GraphQL API。
+* **文件系统路由：**
 
-*   **API 路由：**
+  * 根据文件系统结构自动生成路由，简化路由配置。
+* **图像优化：**
 
-    *   内置 API 路由功能，可以轻松创建 RESTful API 或 GraphQL API。
+  * 内置图像优化功能，自动优化图片大小和格式，提升页面加载速度。
+* **TypeScript 支持：**
 
-*   **文件系统路由：**
+  * 原生支持 TypeScript，提供静态类型检查，提高代码质量。
+* **自定义服务器：**
 
-    *   根据文件系统结构自动生成路由，简化路由配置。
+  * 可以自定义服务器，满足各种复杂场景的需求。
+* **插件系统：**
 
-*   **图像优化：**
-
-    *   内置图像优化功能，自动优化图片大小和格式，提升页面加载速度。
-
-*   **TypeScript 支持：**
-
-    *   原生支持 TypeScript，提供静态类型检查，提高代码质量。
-
-*   **自定义服务器：**
-
-    *   可以自定义服务器，满足各种复杂场景的需求。
-
-*   **插件系统：**
-
-    *   丰富的插件生态系统，可以扩展 Next.js 的功能。
+  * 丰富的插件生态系统，可以扩展 Next.js 的功能。
 
 ## 安装
 
-使用官网推荐的方式安装，执行`npx create-next-app@latest`，输入项目名称，选择相关options选项就可以完成项目的初始化。如下
+使用官网推荐的方式安装，执行 `npx create-next-app@latest`，输入项目名称，选择相关options选项就可以完成项目的初始化。如下
 ![img](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/mx_screencap_20240730_093007.png)
-可以看到，我们可以选择是否使用`ts`, `eslint`, `tailwindcss`等等。
+可以看到，我们可以选择是否使用 `ts`, `eslint`, `tailwindcss`等等。
 
 ## 锁定引擎
 
-在`package.json`中添加`
- "engines": {
-    "node": ">=18.0.0",
-    "pnpm": ">=9.0.0"
-  },` 这样可以限制启动的`node`版本和`pnpm`版本，防止出现兼容性问题。
+在 `package.json`中添加 `  "engines": {     "node": ">=18.0.0",     "pnpm": ">=9.0.0"   },` 这样可以限制启动的 `node`版本和 `pnpm`版本，防止出现兼容性问题。
 
 ## 启动
 
@@ -66,13 +54,13 @@ highlight: atom-one-dark
 
 ### 创建路由
 
-nextjs中的路由采用的是`约定式路由`，根据文件的配置自动生成，我们可以看一下默认生成的文件结构。![目录结构](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/mx_screencap_20240730_104511.png)
+nextjs中的路由采用的是 `约定式路由`，根据文件的配置自动生成，我们可以看一下默认生成的文件结构。![目录结构](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/mx_screencap_20240730_104511.png)
 
 `.next`目录是运行的文件，`app`是路由的目录，`public`可以用于存放一些静态资源。
 
-所有的路由文件都放在`app`中，`page`就是内容页，`layout`就是布局页面的模板，`error`是错误页面，`loading`是加载页面，`not-found`是404页面。比如我们需要创建一个`dashborad`页面，只需要在`app`下新增一个`dashboard/page.tsx`即可。
+所有的路由文件都放在 `app`中，`page`就是内容页，`layout`就是布局页面的模板，`error`是错误页面，`loading`是加载页面，`not-found`是404页面。比如我们需要创建一个 `dashborad`页面，只需要在 `app`下新增一个 `dashboard/page.tsx`即可。
 
-带params的路由格式是`[id].tsx`，如下。
+带params的路由格式是 `[id].tsx`，如下。
 
 ![路由结构](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/layout.png)
 
@@ -114,74 +102,76 @@ export default function RootLayout({
 
 这里有四种方式来实现路由的跳转。
 
-*   使用`next/link`内置组件
-    ```js
-    import Link from 'next/link'
+* 使用 `next/link`内置组件
 
-    <Link href='/dashborad'></Link>
-    ```
-*   使用`useRouter`钩子函数，适用于`client`
-    ```js
-    import { useRouter } from 'next/navigation'
-    export default function Page() {
-        const router = useRouter()
-        return (
-            <button type="button" onClick={() => router.push('/dashboard')}>
-                Dashboard
-            </button>
-        )
-    }
-    ```
-*   对于`server component`
+  ```js
+  import Link from 'next/link'
 
-    ```js
-        import { redirect } from 'next/navigation'
+  <Link href='/dashborad'></Link>
+  ```
+* 使用 `useRouter`钩子函数，适用于 `client`
 
-        async function fetchTeam(id: string) {
-        const res = await fetch('https://...')
-        if (!res.ok) return undefined
-            return res.json()
-        }
-        
-        export default async function Profile({ params }: { params: { id: string } }) {
-            const team = await fetchTeam(params.id)
-            if (!team) {
-                redirect('/login')
-            }
-        // ...
-        }
-    ```
-*   使用原生`history`
+  ```js
+  import { useRouter } from 'next/navigation'
+  export default function Page() {
+      const router = useRouter()
+      return (
+          <button type="button" onClick={() => router.push('/dashboard')}>
+              Dashboard
+          </button>
+      )
+  }
+  ```
+* 对于 `server component`
 
-    ```js
-        'use client'
+  ```js
+      import { redirect } from 'next/navigation'
 
-        import { useSearchParams } from 'next/navigation'
-        
-        export default function SortProducts() {
-        const searchParams = useSearchParams()
-        
-        function updateSorting(sortOrder: string) {
-            const params = new URLSearchParams(searchParams.toString())
-            params.set('sort', sortOrder)
-            window.history.pushState(null, '', `?${params.toString()}`)
-        }
-        
-        return (
-            <>
-                <button onClick={() => updateSorting('asc')}>Sort Ascending</button>
-                <button onClick={() => updateSorting('desc')}>Sort Descending</button>
-                </>
-            )
-        }
-    ```
+      async function fetchTeam(id: string) {
+      const res = await fetch('https://...')
+      if (!res.ok) return undefined
+          return res.json()
+      }
+
+      export default async function Profile({ params }: { params: { id: string } }) {
+          const team = await fetchTeam(params.id)
+          if (!team) {
+              redirect('/login')
+          }
+      // ...
+      }
+  ```
+* 使用原生 `history`
+
+  ```js
+      'use client'
+
+      import { useSearchParams } from 'next/navigation'
+
+      export default function SortProducts() {
+      const searchParams = useSearchParams()
+
+      function updateSorting(sortOrder: string) {
+          const params = new URLSearchParams(searchParams.toString())
+          params.set('sort', sortOrder)
+          window.history.pushState(null, '', `?${params.toString()}`)
+      }
+
+      return (
+          <>
+              <button onClick={() => updateSorting('asc')}>Sort Ascending</button>
+              <button onClick={() => updateSorting('desc')}>Sort Descending</button>
+              </>
+          )
+      }
+  ```
 
 ### 路由参数传递和获取
 
-对于服务端组件来说，主函数的参数中自动注入，`params`和`searchParams`，例如我们访问这个链接的时候
+对于服务端组件来说，主函数的参数中自动注入，`params`和 `searchParams`，例如我们访问这个链接的时候
 `http://localhost:3001/dashboard/1?a=1`
 
-此时在主函数的`datas`, 他的内容就是`{ params: { id: '1' }, searchParams: { a: '1' } }`
+此时在主函数的 `datas`, 他的内容就是 `{ params: { id: '1' }, searchParams: { a: '1' } }`
 
 ```js
 // { params: { id: '1' }, searchParams: { a: '1' } }
@@ -197,7 +187,7 @@ export default async function DashboardPage(datas: any) {
 }
 ```
 
-对于客户端组件来说，也可以用上面的方式来获取，初次除此以外还可以通过`useParams`和`useSearchParams`来获取。
+对于客户端组件来说，也可以用上面的方式来获取，初次除此以外还可以通过 `useParams`和 `useSearchParams`来获取。
 
 ```js
 import { useParams, useSearchParams } from "next/navigation";
@@ -216,7 +206,7 @@ export default function DashboardPage() {
 
 ### API路由
 
-由于nextjs是运行在服务端的，所以他也能实现后端的服务，实现的方式是在`app`下创建一个`api`目录。在`api`目录下插入一个`dashboard/metrics`目录，然后创建一个`route.ts`，这样子就实现了一个api路由了。请求路径是`/dashboard/metrics`，方法为`get`的请求。
+由于nextjs是运行在服务端的，所以他也能实现后端的服务，实现的方式是在 `app`下创建一个 `api`目录。在 `api`目录下插入一个 `dashboard/metrics`目录，然后创建一个 `route.ts`，这样子就实现了一个api路由了。请求路径是 `/dashboard/metrics`，方法为 `get`的请求。
 
 ```js
 import { responseHandler } from "@/lib/fetch";
@@ -236,7 +226,7 @@ export async function GET(request: Request) {
 **error.js**：当页面UI加载错误的时候会显示此页面；
 
 **not-found.js**: 当页面不存在的时候显示此页面；
-例如当我们访问这个链接`http://localhost:3001/xx`，此时就会渲染此页面。
+例如当我们访问这个链接 `http://localhost:3001/xx`，此时就会渲染此页面。
 
 **loading.js**: 当组件加载的时候就会触发这个动画，使用[Suspense](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming)实现
 
@@ -257,41 +247,41 @@ export async function GET(request: Request) {
    export const config = { matcher: ['/protected/:path*'] };
 ```
 
-除`middleware`外，其他都支持全局和局部。
+除 `middleware`外，其他都支持全局和局部。
 
 ## 数据请求
 
-*   在服务端组件中，使用`fetch`请求，而且自带缓存，`Post`请求不缓存，通过在`fetch`中的配置，默认是
-    `{ cache: 'force-cache' }`。
+* 在服务端组件中，使用 `fetch`请求，而且自带缓存，`Post`请求不缓存，通过在 `fetch`中的配置，默认是
+  `{ cache: 'force-cache' }`。
 
-    如果需要重新验证数据的一致性，可以设置`{ next: { revalidate: 3600 } }`，这样每小时会重新验证一次，或者在`page/layout.ts`设置`export const revalidate = 3600`
+  如果需要重新验证数据的一致性，可以设置 `{ next: { revalidate: 3600 } }`，这样每小时会重新验证一次，或者在 `page/layout.ts`设置 `export const revalidate = 3600`
 
 ```js
         export const revalidate = 3600
 
         async function getData() {
             const res = await fetch('http://localhost:3000/api/dashboard/metric')
-       
+     
             if (!res.ok) {
                 throw new Error('Failed to fetch data')
             }
-            
+          
             return res.json()
         }
-        
+      
         export default async function Page() {
         const data = await getData()
-        
+      
         return <main>
                 指标是: {{ JSON.stringify(data.data) }}
             </main>
         }
 ```
 
-也可以不缓存，通过设置`{ cache: 'no-store' }`，也可以按需重新验证，参考此文档[on-demand-revalidation](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#on-demand-revalidation)，也可以在文件头部
+也可以不缓存，通过设置 `{ cache: 'no-store' }`，也可以按需重新验证，参考此文档[on-demand-revalidation](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#on-demand-revalidation)，也可以在文件头部
 `export const dynamic = 'force-dynamic';`这样每次都会新的。
 
-*   Server Actions and Mutations
+* Server Actions and Mutations
 
 ## 渲染
 
@@ -301,12 +291,15 @@ export async function GET(request: Request) {
 
 服务端组件渲染有三种方式。
 
-1.  Static Rendering(静态渲染)
-    > 这是默认的渲染方式，在build的时候就会完成数据的请求和页面组装，比如一个项目的首页
-2.  Dynamic Rendering(动态渲染)
-    > 在用户请求的时候渲染完成，比如一个订单的详情页，根据不同的ID来渲染不同的数据
-3.  Streaming(流式渲染)
-    > 简单来说就是将一整个 HTML 脚本文件通过切成一小段一小段的方式返回给客户端，客户端收到每一段内容时进行分批渲染。这样的方式相较于传统的服务端一次性渲染完成整个 HTML 内容进行返回，在视觉上大大减少了 TTFB 以及 FP 的时间，在用户体验上更好。主要原理是基于`Suspense/Lazy` 进行异步渲染组件，这样我们可以把一些不变的静态数据和动态数据拆分成多个组件，父组件中用`Suspense`包裹，然静态数据先渲染，从而提高`TTFB（time to first byte）`和FP`（first paint）`指标。
+1. Static Rendering(静态渲染)
+   > 这是默认的渲染方式，在build的时候就会完成数据的请求和页面组装，比如一个项目的首页
+   >
+2. Dynamic Rendering(动态渲染)
+   > 在用户请求的时候渲染完成，比如一个订单的详情页，根据不同的ID来渲染不同的数据
+   >
+3. Streaming(流式渲染)
+   > 简单来说就是将一整个 HTML 脚本文件通过切成一小段一小段的方式返回给客户端，客户端收到每一段内容时进行分批渲染。这样的方式相较于传统的服务端一次性渲染完成整个 HTML 内容进行返回，在视觉上大大减少了 TTFB 以及 FP 的时间，在用户体验上更好。主要原理是基于 `Suspense/Lazy` 进行异步渲染组件，这样我们可以把一些不变的静态数据和动态数据拆分成多个组件，父组件中用 `Suspense`包裹，然静态数据先渲染，从而提高 `TTFB（time to first byte）`和FP `（first paint）`指标。
+   >
 
 ```js
 // Metric1.tsx
@@ -414,7 +407,7 @@ export default async function DashboardPage(datas: any) {
 
 ### 客户端组件（Client Components）
 
-使用客户端组件的方式也很简单，首行写`use client`即开启
+使用客户端组件的方式也很简单，首行写 `use client`即开启
 
 ```js
 'use client'
@@ -439,8 +432,8 @@ export default function Counter() {
 
 #### 优势
 
-*   可以使用相关的API和交互`useEffect`，`state`，`event listener`等
-*   可以使用浏览器API
+* 可以使用相关的API和交互 `useEffect`，`state`，`event listener`等
+* 可以使用浏览器API
 
 ## 样式
 
@@ -452,7 +445,7 @@ export default function Counter() {
 
 nextjs中使用next/font来加载谷歌字体，而不是在css到声明字体，因为它帮我们优化了字体的加载，很方便使用各种各样的字体。官方推荐使用[可变字体](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_fonts/Variable_fonts_guide)，这里是[字体库](https://fonts.google.com/variablefonts)
 
-如下，我们可以看到引入了两种字体，字体中可以设置`子集`，样式等options.
+如下，我们可以看到引入了两种字体，字体中可以设置 `子集`，样式等options.
 
 ```js
 import Link from "next/link";
@@ -498,11 +491,11 @@ const myFont = localFont({ src: './my-font.woff2', display: 'swap',})
 
 `display`就是“font-display”专用于 @font-face 指令的描述符，它可以取如下几个值：
 
-*   auto 。这个是 font-display 的默认值，字体的加载过程由浏览器自行决定，不过基本上和取值为 block 时的处理方式一致。
-*   block 。在字体加载前，会使用备用字体渲染，但是显示为空白，使得它一直处于阻塞期，当字体加载完成之后，进入交换期，用下载下来的字体进行文本渲染。不过有些浏览器并不会无限的处于阻塞期，会有超时限制，一般在 3 秒后，如果阻塞期仍然没有加载完字体，那么直接就进入交换期，显示后备字体（而非空白），等字体下载完成之后直接替换。
-*   swap 。基本上没有阻塞期，直接进入交换期，使用后备字体渲染文本，等用到的字体加载完成之后替换掉后备字体。
-*   fallback 。阻塞期很短（大约100毫秒），也就是说会有大约 100 毫秒的显示空白的后备字体，然后交换期也有时限（大约 3 秒），在这段时间内如果字体加载成功了就会替换成该字体，如果没有加载成功那么后续会一直使用后备字体渲染文本。
-*   optional 。与 fallback 的阻塞期一致，但是没有交换期，如果在阻塞期的 100 毫秒内字体加载完成，那么会使用该字体，否则直接使用后备字体。这个就是说指定的网络字体是可有可无的，如果加载很快那么可以显示，加载稍微慢一点就不会显示了，适合网络情况不好的时候，例如移动网络。
+* auto 。这个是 font-display 的默认值，字体的加载过程由浏览器自行决定，不过基本上和取值为 block 时的处理方式一致。
+* block 。在字体加载前，会使用备用字体渲染，但是显示为空白，使得它一直处于阻塞期，当字体加载完成之后，进入交换期，用下载下来的字体进行文本渲染。不过有些浏览器并不会无限的处于阻塞期，会有超时限制，一般在 3 秒后，如果阻塞期仍然没有加载完字体，那么直接就进入交换期，显示后备字体（而非空白），等字体下载完成之后直接替换。
+* swap 。基本上没有阻塞期，直接进入交换期，使用后备字体渲染文本，等用到的字体加载完成之后替换掉后备字体。
+* fallback 。阻塞期很短（大约100毫秒），也就是说会有大约 100 毫秒的显示空白的后备字体，然后交换期也有时限（大约 3 秒），在这段时间内如果字体加载成功了就会替换成该字体，如果没有加载成功那么后续会一直使用后备字体渲染文本。
+* optional 。与 fallback 的阻塞期一致，但是没有交换期，如果在阻塞期的 100 毫秒内字体加载完成，那么会使用该字体，否则直接使用后备字体。这个就是说指定的网络字体是可有可无的，如果加载很快那么可以显示，加载稍微慢一点就不会显示了，适合网络情况不好的时候，例如移动网络。
 
 ### 图片
 
@@ -533,7 +526,7 @@ Image组件，Image是在img得基础上的封装，主要增强了以下功能�
 
 #### 安全
 
-可以设置指定域名的远程图片，在`next.config.mjs`
+可以设置指定域名的远程图片，在 `next.config.mjs`
 
 ```js
  images: {
@@ -562,10 +555,10 @@ Image组件，Image是在img得基础上的封装，主要增强了以下功能�
 
 通用的主题的实现有以下几种方式。
 
-1.  使用CSS变量来实现
-2.  使用CSS-in-JS实现主题切换
-3.  引入不同的CSS文件来实现主题的切换
-4.  使用CSS预处理器来实现主题
+1. 使用CSS变量来实现
+2. 使用CSS-in-JS实现主题切换
+3. 引入不同的CSS文件来实现主题的切换
+4. 使用CSS预处理器来实现主题
 
 具体实现可以参考这篇文章[如何实现前端页面主题切换：多种方法详解](https://super-super.cn/blog/66aa059a9822e0e619b587c7)
 
@@ -579,7 +572,7 @@ pnpm add next-themes
 
 ### 增加主题变量
 
-然后修改`global.css`
+然后修改 `global.css`
 
 ```css
 @tailwind base;
@@ -632,7 +625,7 @@ body {
 
 ### 实现ThemeProvider
 
-然后在`provider`目录创建`ThemeProvider`.
+然后在 `provider`目录创建 `ThemeProvider`.
 
 ```js
 "use client";
@@ -649,7 +642,7 @@ export default function ThemeProvider({
 
 ```
 
-最后在`app/layout.txs`中使用，设置`attribute`用class，默认主题用暗黑模式，支持跟随系统，mac支持，windows不支持。
+最后在 `app/layout.txs`中使用，设置 `attribute`用class，默认主题用暗黑模式，支持跟随系统，mac支持，windows不支持。
 
 ```js
  <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
@@ -661,7 +654,7 @@ export default function ThemeProvider({
 
 ### 主题切换组件
 
-然后就可以创建一个切换主题的组件，通过`setTheme`来实现主题的设置。
+然后就可以创建一个切换主题的组件，通过 `setTheme`来实现主题的设置。
 
 ```js
 "use client";
@@ -693,7 +686,7 @@ export default ThemeChanger;
 
 ## 滚动优化
 
-此处我们我使用了`lenis`来实现滚动的优化，代替默认的滚动。
+此处我们我使用了 `lenis`来实现滚动的优化，代替默认的滚动。
 
 ### 安装
 
@@ -703,7 +696,7 @@ pnpm add lenis
 
 ### 新建Provider
 
-创建`provider/leniProvider.tsx`
+创建 `provider/leniProvider.tsx`
 
 ```ts
 "use client";
@@ -720,7 +713,7 @@ export default function LenisProvider({ children }: Props) {
 
 ```
 
-创建`provider/scrollProvider.tsx`
+创建 `provider/scrollProvider.tsx`
 
 ```js
 "use client";
@@ -762,7 +755,7 @@ export const ScrollProvider = ({ children }: ScrollProviderProps) => {
 
 ### 使用
 
-在`app/layout.tsx`中使用。
+在 `app/layout.tsx`中使用。
 
 ```js
 import type { Metadata } from "next";
@@ -811,9 +804,9 @@ export default function RootLayout({
 
 ```
 
-此时我们可以通过`Scrollprivider`来访问`scrollY`，以及progress等等
+此时我们可以通过 `Scrollprivider`来访问 `scrollY`，以及progress等等
 
-在`dashboard/page.tsx`中我们使用context来inject进来scrollY。
+在 `dashboard/page.tsx`中我们使用context来inject进来scrollY。
 
 ```js
 "use client";
@@ -844,22 +837,22 @@ export default function DashboardPage({
 
 ## 数据库/Docker安装
 
-我所使用的是腾讯云的服务器，系统为`OpenCloudOS Docker版本`，所以不需要安装，只需要安装`mongodb`即可。
+我所使用的是腾讯云的服务器，系统为 `OpenCloudOS Docker版本`，所以不需要安装，只需要安装 `mongodb`即可。
 
 ### Docker命令
 
 这里说明一下docker的常用命令。
 
-*   `systemctl start docker` 启动
-*   `systemctl stop docker` 启动
-*   `systemctl enable docker` 开机启动
-*   `docker search mongodb` 查询镜像
-*   `docker pull mongodb` 拉取镜像
-*   `docker run -d --name=xxx xxx mongodb:latest` 基于某镜像创建一个容器
-*   `docker ps` 查看运行中的容器
-*   `docker stop container_id/name` 停止运行中的容器
-*   `docker start container_id/name` 启动运行中的容器
-    这些是常用的命令。
+* `systemctl start docker` 启动
+* `systemctl stop docker` 启动
+* `systemctl enable docker` 开机启动
+* `docker search mongodb` 查询镜像
+* `docker pull mongodb` 拉取镜像
+* `docker run -d --name=xxx xxx mongodb:latest` 基于某镜像创建一个容器
+* `docker ps` 查看运行中的容器
+* `docker stop container_id/name` 停止运行中的容器
+* `docker start container_id/name` 启动运行中的容器
+  这些是常用的命令。
 
 ### MongoDb
 
@@ -919,7 +912,7 @@ docker run --name mongo --restart=always -p 3009:27017 -v /data/mdb:/data/db -v 
 
 `3009:27017`端口映射服务器的3009端口映射到容器的的27017端口
 
-![start\_success](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/WX20240731-232403%402x.png)
+![start<span data-type=](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/WX20240731-232403%402x.png)\_success" />
 
 这时候我们看到了已经启动成功了。
 
@@ -931,7 +924,7 @@ docker run --name mongo --restart=always -p 3009:27017 -v /data/mdb:/data/db -v 
 docker exec -it mongo mongosh
 ```
 
-![login\_success](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/login_success.png)
+![login<span data-type=](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/login_success.png)\_success" />
 
 显示这样基本上就表示登录成功。
 
@@ -945,7 +938,7 @@ show dbs;
 
 ![](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/show.png)
 
-然后进入admin`use admin`.
+然后进入admin `use admin`.
 
 创建管理员账户。
 
@@ -960,7 +953,7 @@ admin> db.auth('admin', 'admin')
 
 ### 创建DB
 
-这里我们创建一个`blog`的db.
+这里我们创建一个 `blog`的db.
 
     use blog // 没有会自动创建
 
@@ -982,7 +975,7 @@ admin> db.auth('admin', 'admin')
 pnpm add mongoose --save
 ```
 
-创建一个工具函数`lib/mongoose.ts`
+创建一个工具函数 `lib/mongoose.ts`
 
 ```js
 import mongoose from "mongoose";
@@ -998,9 +991,9 @@ export default connectMongo;
 
 #### 数据模型
 
-我们先增加一个`USER`，相关规则可以查看此处[schematypes](https://mongoosejs.com/docs/schematypes.html)
+我们先增加一个 `USER`，相关规则可以查看此处[schematypes](https://mongoosejs.com/docs/schematypes.html)
 
-首先定义一个user的`DTO`和`VO`在`types/user.ts`
+首先定义一个user的 `DTO`和 `VO`在 `types/user.ts`
 
 ```ts
 export interface USER_DTO {
@@ -1093,13 +1086,13 @@ pnpm add next-auth
 
 ### 初始化配置
 
-新建配置，在`lib`目录中创建`auth_option.ts`，这边我打算使用自定义登录以及github和google登录，微信登录看了一下需要注册企业，个人的话也要交钱，所以就暂时没有接入，短信登录需要接入短信服务，也要收费。
+新建配置，在 `lib`目录中创建 `auth_option.ts`，这边我打算使用自定义登录以及github和google登录，微信登录看了一下需要注册企业，个人的话也要交钱，所以就暂时没有接入，短信登录需要接入短信服务，也要收费。
 
 #### 申请Github登录
 
 进入 GitHub 之后，打开 [Settings](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fsettings "https://github.com/settings") 中的 [Developer Settings](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fsettings%2Fapps "https://github.com/settings/apps")，点击左侧的 [OAuth Apps](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fsettings%2Fdevelopers "https://github.com/settings/developers") 后，再点击右边的按钮 **New OAuth App**，创建一个新的配置。
 
-![New OAuth App](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/WX20240731-224830%402x.png)，然后一步步往下走新建成功后，即可以拿到`CLIENT_ID`和`Secret`，可以把这些内容维护到`env`文件中
+![New OAuth App](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/WX20240731-224830%402x.png)，然后一步步往下走新建成功后，即可以拿到 `CLIENT_ID`和 `Secret`，可以把这些内容维护到 `env`文件中
 
 然后完成以下配置。
 
@@ -1128,10 +1121,10 @@ export const authOptions: AuthOptions = {
           try {
             // 连接数据库
             await connectMongo();
-            
+          
             // 查询是否存在
             const existingUser = await User.findOne({ email: profile.email });
-            
+          
 
             // 如果存在就更新以下名字和图像
             if (existingUser) {
@@ -1224,7 +1217,7 @@ export const authOptions: AuthOptions = {
 
 ### 创建路由
 
-在`api`下创建，`[...nextauth]/route.ts`
+在 `api`下创建，`[...nextauth]/route.ts`
 
 ```js
 import { authOptions } from "@/lib/auth_options";
@@ -1238,7 +1231,7 @@ export { handler as GET, handler as POST };
 
 ### 编写登录组件
 
-通过调用`signIn`的方法传入不同的参数即可实现对应的登录。
+通过调用 `signIn`的方法传入不同的参数即可实现对应的登录。
 
 ```js
 "use client";
@@ -1402,27 +1395,27 @@ export default function LoginBox() {
 在页面上点击登录，弹出登录窗口。
 ![LOGIN](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/github_login.png)
 
-登录成功后可以看到，返回了信息以及在`cookie`中写入了token.
+登录成功后可以看到，返回了信息以及在 `cookie`中写入了token.
 
 ![session](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/session.png)
 
-![token](<https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/token.png>)
+![token](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/token.png)
 
-这样我们就完成了登录，注册还没做可以用一个`nodemailer`来实现发送验证码，数据存储在`redis`，缓存有效期1分钟，注册的时候验证以下验证码即可，密码加密存入数据库即可。
+这样我们就完成了登录，注册还没做可以用一个 `nodemailer`来实现发送验证码，数据存储在 `redis`，缓存有效期1分钟，注册的时候验证以下验证码即可，密码加密存入数据库即可。
 
 到此我们的准备工作基本上都做完了，现在就是业务开发了，这边直接不说了，没什么说的。
 
---------------------------
+---
 
 ## 打包
 
-直接使用`pnpm build`即可打包，记住，打包的时候dev模式需要停止。
+直接使用 `pnpm build`即可打包，记住，打包的时候dev模式需要停止。
 
 ## CI
 
-这里使用`GITHUB_ACTION`完成，在`.github`下新增一个`nodejs.yml`，添加如下内容。
+这里使用 `GITHUB_ACTION`完成，在 `.github`下新增一个 `nodejs.yml`，添加如下内容。
 
-具体操作就是使用`ssh`登录到服务端。
+具体操作就是使用 `ssh`登录到服务端。
 
 然后执行拉取代码和打包的操作
 
@@ -1455,13 +1448,13 @@ jobs:
 
 ## CD
 
-构建完成了，我们需要部署，部署的话我们采用`nginx`来作为web服务器，使用`pm2`来管理进程，确保稳定性。
+构建完成了，我们需要部署，部署的话我们采用 `nginx`来作为web服务器，使用 `pm2`来管理进程，确保稳定性。
 
 ### Nginx
 
-一般linux系统安装，是通过`yum install nginx`来完成，安装目录在`/etc/nginx`
+一般linux系统安装，是通过 `yum install nginx`来完成，安装目录在 `/etc/nginx`
 
-这是Nginx的配置，开启了转发，http2，以及跨域问题，以及`https`
+这是Nginx的配置，开启了转发，http2，以及跨域问题，以及 `https` https的配置需要申请证书，一般都有免费的，只是时间比较短，需要经常更换。
 
 ```nginx
 
@@ -1497,7 +1490,7 @@ http {
     # See http://nginx.org/en/docs/ngx_core_module.html#include
     # for more information.
     include /etc/nginx/conf.d/*.conf;
-    
+  
     server {
         listen       80 default_server;
         listen       [::]:80 default_server;
@@ -1521,7 +1514,7 @@ http {
             add_header 'Access-Control-Allow-Origin' '*';
             add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, DELETE, PUT';
             add_header 'Access-Control-Allow-Headers' 'Origin, Authorization, Accept, Content-Type, X-Requested-With';
-        
+      
             proxy_pass http://localhost:3000;  # 将请求转发到本地主机的 3000 端口
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
@@ -1570,7 +1563,7 @@ http {
             add_header 'Access-Control-Allow-Origin' '*';
             add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, DELETE, PUT';
             add_header 'Access-Control-Allow-Headers' 'Origin, Authorization, Accept, Content-Type, X-Requested-With';
-        
+      
             proxy_pass http://localhost:3000;  # 将请求转发到本地主机的 3000 端口
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
@@ -1592,3 +1585,250 @@ http {
 ```
 
 ### 常用命令
+
+启动服务
+
+```
+nginx
+```
+
+停止服务
+
+```
+nginx -s stop
+```
+
+重新加载，因为一般重新配置之后，不希望重启服务，这时可以使用重新加载。
+
+```
+nginx -s realod
+```
+
+## 域名解析
+
+主要说一下域名解析的过程以及记录值的区别。
+
+
+## SEO相关
+
+### Metadata
+
+在NextJs中，提供了设置metadata的方式，设置在`page.tsx`或者`layout.tsx`.
+
+分为静态和动态两种。
+
+#### 静态metadata
+
+静态的metadata直接export一个metada对象即可。
+```js
+import type { Metadata, Viewport } from "next";
+
+const APP_NAME = "Blog";
+const APP_DEFAULT_TITLE = "汪浩的博客";
+const APP_TITLE_TEMPLATE = "博客";
+const APP_DESCRIPTION = "汪浩（Isaac Wang）的博客，一些关于技术和生活的的记录";
+
+export const metadata: Metadata = {
+  keywords:
+    "博客，汪浩，Isaac Wang, Javascript, Vue, Css, Nextjs, React, TypeScript, NextJs, NestJs, Nodejs, Docker, web3，区块链",
+  applicationName: APP_NAME,
+  title: {
+    default: APP_DEFAULT_TITLE,
+    template: APP_TITLE_TEMPLATE,
+  },
+  description: APP_DESCRIPTION,
+  manifest: "./manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: APP_DEFAULT_TITLE,
+    // startUpImage: [],
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    siteName: APP_NAME,
+    title: {
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE,
+    },
+    description: APP_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary",
+    title: {
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE,
+    },
+    description: APP_DESCRIPTION,
+  },
+};
+```
+
+然后就会在页面上得到解析，会被加载到head中。
+
+![metadata](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/metadata_static.png)
+
+#### 动态Metadata
+
+比如我们一些详情页，希望我们的标题是详情的title，content是详情的内容。这时候我们就可以用，例如博客的详情页面，这时候我们可以先获取到数据，然后使用`generateMetadata`函数来生成动态的metadata，如下：
+
+```js
+
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const detail = await getBlogDetail(params.id);
+
+  if (!detail) {
+    return {};
+  }
+
+  return {
+    title: detail.title,
+    description: detail.content,
+    keywords: detail.tags.join(","),
+    category: detail.categories.join(", "),
+    abstract: detail.abstract,
+    creator: "汪浩（isaac wang）",
+    authors: [
+      { url: "https://github.com/wanghao1993", name: "汪浩（isaac wang）" },
+    ],
+    publisher: "汪浩（isaac wang）",
+  };
+}
+
+```
+
+此时我们就可以在这里看到，刚刚动态配置的metadata。
+
+![动态的metadata](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/metadata_static.png)
+
+
+### Sitemap
+
+sitemap叫站点地图，可帮助搜索引擎更有效地发现您的网页并为其建立索引，也分为动态和静态两种。
+
+静态的，可以建立一个文件叫`app/sitemap.xml`，如下。
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+  <loc>https://www.super-super.cn/</loc>
+  <lastmod>2024-07-22T07:08:29+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.super-super.cn/blog</loc>
+  <lastmod>2024-07-22T07:08:29+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.super-super.cn/about</loc>
+  <lastmod>2024-07-22T07:08:29+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+</urlset>
+```
+
+动态的可以建立一个文件叫`app/sitemap.ts`，如下
+
+```js
+import { MetadataRoute } from 'next'
+ 
+export default function sitemap(): MetadataRoute.Sitemap {
+  return [
+    {
+      url: 'https://acme.com',
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 1,
+    },
+    {
+      url: 'https://acme.com/about',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://acme.com/blog',
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.5,
+    },
+  ]
+}
+```
+
+### 实施开放图谱和 Twitter 卡：
+
+[OpenGraph](https://segmentfault.com/a/1190000040863000)，又叫OG协议，可以简单的看一下介绍。
+
+**Twitter 卡片**标签看上去与开放图谱标签相似，基于与开放图谱协议相同的约定。当使用开放图谱协议描述页面上的数据时，很容易生成 Twitter 卡片，而无需复制标签和数据。当 Twitter 卡片处理器在页面上寻找标签时，它会首先检查 Twitter 特定的属性；如果不存在，则会返回受支持的开放图谱属性。它允许在页面上独立定义这两种属性，并最大程度减少描述内容和体验所需的标记复制量。
+
+如何定义呢，也是在metadata中定义，openGraph和twitter。
+
+```js
+ openGraph: {
+    type: "website",
+    siteName: APP_NAME,
+    title: {
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE,
+    },
+    description: APP_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary",
+    title: {
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE,
+    },
+    description: APP_DESCRIPTION,
+  },
+};
+
+```
+
+此时我们可以看到在metadata中多了几个。
+
+![og-tw](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/og-tw.png)
+
+### 语义化标签
+
+语义化的标签在SEO中也起到了很关键的作用，平时开发的时候也是需要注意的，这些都会被搜索引擎发现，比如`p`,`article`,`img.alt`等等标签都是会被作为seo的考虑的因素。
+
+### robots.txt
+
+当我们的网站发布时，搜索引擎将会尝试去抓取我们的内容，这个时候`robots.txt`可以规定能够被抓取的范围。
+
+```txt
+User-Agent: * // 意思是任何搜索引擎都可以
+Allow: / // 允许抓取任何内容
+Disallow: /admin // /admin下的内容不允许
+
+Sitemap: https://super-super.cn/sitemap.xml // sitemap的地址
+```
+
+
+这是google的seo文档，介绍的很详细[Google_SEO](https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=zh-cn)
+
+## 未完成
+
+- PWA
+  - 通过next-pwa，manifast完成PWA
+- 埋点
+  - 接入百度统计和谷歌统计
+- 响应式
+  

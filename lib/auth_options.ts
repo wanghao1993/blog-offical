@@ -24,8 +24,7 @@ export const authOptions: AuthOptions = {
           const existingUser = await User.findOne({ email: profile.email });
 
           if (existingUser) {
-            // Update existing user
-            const res = await User.findByIdAndUpdate(existingUser._id, {
+            await User.findByIdAndUpdate(existingUser._id, {
               name: profile.name || profile.login,
               image: profile.avatar_url,
             });

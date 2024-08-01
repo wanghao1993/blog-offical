@@ -1,3 +1,5 @@
+"use client";
+
 import { signIn } from "next-auth/react";
 import { Button } from "antd";
 import { GithubOutlined, GoogleOutlined } from "@ant-design/icons";

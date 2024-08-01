@@ -2,8 +2,7 @@ import { message } from "antd";
 import { HttpRequestHeader } from "antd/es/upload/interface";
 
 // lib/api.ts
-const BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api/";
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 interface Response<T> {
   code: number;
@@ -37,13 +36,17 @@ async function fetcher<T>(url: string, options: FetcherOptions): Promise<T> {
   }
 }
 
-export async function get<T>(url: string, data?: any, revalidate = 60): Promise<T> {
+export async function get<T>(
+  url: string,
+  data?: any,
+  revalidate = 60
+): Promise<T> {
   if (data) {
     url += `?${new URLSearchParams(data).toString()}`;
   }
   return fetcher<T>(url, {
     method: "GET",
-    next: { revalidate}
+    next: { revalidate },
   });
 }
 

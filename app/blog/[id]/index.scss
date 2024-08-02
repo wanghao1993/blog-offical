@@ -3,7 +3,23 @@
         @apply my-4
     }
     img {
-        margin-bottom: 20px;
+        margin: 20px;
+    }
+    a {
+        border-bottom-width: 0;
+        background-image: linear-gradient(transparent,transparent),linear-gradient(#1d91de,#2a108a);
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+        transition: background-size .5s ease-in-out;
+        padding-bottom: 5px;
+        background-size: 100% 3px;
+        color: #1d91de
+    }
+    code {
+        background-color: #eb7037;
+        color: #fff;
+        padding: 2px 4px;
+        border-radius: 2px;
     }
     .language-css {
         .hljs-selector-pseudo {
@@ -60,6 +76,27 @@
         @apply my-3
     }
 
+    h5 {
+        color: var(--text-color);
+        font-weight: 700;
+        font-size: 1em;
+        line-height: 1.3;
+        letter-spacing: -.025em;
+        @apply my-3
+    }
+
+    h6 {
+        color: var(--text-color);
+        font-weight: 700;
+        font-size: 1em;
+        line-height: 1.1;
+        letter-spacing: -.025em;
+        @apply my-3
+    }
+
+    ul, ol {
+        margin-left: 8ch;
+    }
     ul li {
         list-style:circle
     }
@@ -76,6 +113,7 @@
 
     code[class*='language-'],
     pre[class*='language-'] {
+        background-color: #28282c;
         color: #f8f8f2;
         text-shadow: 0 1px rgba(0, 0, 0, 0.3);
         font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;

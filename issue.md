@@ -1,38 +1,42 @@
----
-highlight: atom-one-dark
----
 ## Nextjs 是什么
 
 [NextJs](https://nextjs.org/docs/getting-started/installation) 是一个基于 React 的开源框架，用于构建生产级别的 React 应用程序。它为开发人员提供了一套丰富的工具和约定，使得创建高性能、可扩展的 Web 应用程序变得更加容易。
 
 ## Next.js 的主要特性：
 
-* **服务器端渲染 (SSR)：**
+ **服务器端渲染 (SSR)：**
 
-  * 提高首屏加载速度，改善用户体验。
-  * 有利于 SEO，搜索引擎可以更好地抓取页面内容。
-* **静态站点生成 (SSG)：**
+    - 提高首屏加载速度，改善用户体验。
+    - 有利于 SEO，搜索引擎可以更好地抓取页面内容。
 
-  * 将整个应用程序或部分页面预渲染成静态 HTML 文件。
-  * 适用于数据变化不频繁的网站，提供极快的加载速度。
-* **API 路由：**
+ **静态站点生成 (SSG)：**
 
-  * 内置 API 路由功能，可以轻松创建 RESTful API 或 GraphQL API。
-* **文件系统路由：**
+    - 将整个应用程序或部分页面预渲染成静态 HTML 文件。
+    - 适用于数据变化不频繁的网站，提供极快的加载速度。
 
-  * 根据文件系统结构自动生成路由，简化路由配置。
-* **图像优化：**
+ **API 路由：**
 
-  * 内置图像优化功能，自动优化图片大小和格式，提升页面加载速度。
-* **TypeScript 支持：**
+    - 内置 API 路由功能，可以轻松创建 RESTful API 或 GraphQL API。
 
-  * 原生支持 TypeScript，提供静态类型检查，提高代码质量。
-* **自定义服务器：**
+ **文件系统路由：**
 
-  * 可以自定义服务器，满足各种复杂场景的需求。
-* **插件系统：**
+    - 根据文件系统结构自动生成路由，简化路由配置。
+  
+ **图像优化：**
 
-  * 丰富的插件生态系统，可以扩展 Next.js 的功能。
+    - 内置图像优化功能，自动优化图片大小和格式，提升页面加载速度。
+
+ **TypeScript 支持：**
+
+    - 原生支持 TypeScript，提供静态类型检查，提高代码质量。
+
+ **自定义服务器：**
+
+    - 可以自定义服务器，满足各种复杂场景的需求。
+
+ **插件系统：**
+
+    - 丰富的插件生态系统，可以扩展 Next.js 的功能。
 
 ## 安装
 
@@ -42,7 +46,7 @@ highlight: atom-one-dark
 
 ## 锁定引擎
 
-在 `package.json`中添加 `  "engines": {     "node": ">=18.0.0",     "pnpm": ">=9.0.0"   },` 这样可以限制启动的 `node`版本和 `pnpm`版本，防止出现兼容性问题。
+在 `package.json`中添加 `"engines": {     "node": ">=18.0.0",     "pnpm": ">=9.0.0"   }` 这样可以限制启动的 `node`版本和 `pnpm`版本，防止出现兼容性问题。
 
 ## 启动
 
@@ -94,7 +98,7 @@ export default function RootLayout({
 }
 ```
 
-**\[folder]/layout**： 单个菜单下的布局，类似vue/react中的二级路由
+**[folder]/layout**： 单个菜单下的布局，类似vue/react中的二级路由
 
 **page**：页面内容
 
@@ -102,14 +106,14 @@ export default function RootLayout({
 
 这里有四种方式来实现路由的跳转。
 
-* 使用 `next/link`内置组件
+- 使用 `next/link`内置组件
 
   ```js
   import Link from 'next/link'
 
   <Link href='/dashborad'></Link>
   ```
-* 使用 `useRouter`钩子函数，适用于 `client`
+-  使用 `useRouter`钩子函数，适用于 `client`
 
   ```js
   import { useRouter } from 'next/navigation'
@@ -122,7 +126,7 @@ export default function RootLayout({
       )
   }
   ```
-* 对于 `server component`
+- 对于 `server component`
 
   ```js
       import { redirect } from 'next/navigation'
@@ -141,7 +145,7 @@ export default function RootLayout({
       // ...
       }
   ```
-* 使用原生 `history`
+- 使用原生 `history`
 
   ```js
       'use client'
@@ -251,7 +255,7 @@ export async function GET(request: Request) {
 
 ## 数据请求
 
-* 在服务端组件中，使用 `fetch`请求，而且自带缓存，`Post`请求不缓存，通过在 `fetch`中的配置，默认是
+- 在服务端组件中，使用 `fetch`请求，而且自带缓存，`Post`请求不缓存，通过在 `fetch`中的配置，默认是
   `{ cache: 'force-cache' }`。
 
   如果需要重新验证数据的一致性，可以设置 `{ next: { revalidate: 3600 } }`，这样每小时会重新验证一次，或者在 `page/layout.ts`设置 `export const revalidate = 3600`
@@ -281,7 +285,7 @@ export async function GET(request: Request) {
 也可以不缓存，通过设置 `{ cache: 'no-store' }`，也可以按需重新验证，参考此文档[on-demand-revalidation](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#on-demand-revalidation)，也可以在文件头部
 `export const dynamic = 'force-dynamic';`这样每次都会新的。
 
-* Server Actions and Mutations
+- Server Actions and Mutations
 
 ## 渲染
 
@@ -432,8 +436,8 @@ export default function Counter() {
 
 #### 优势
 
-* 可以使用相关的API和交互 `useEffect`，`state`，`event listener`等
-* 可以使用浏览器API
+- 可以使用相关的API和交互 `useEffect`，`state`，`event listener`等
+- 可以使用浏览器API
 
 ## 样式
 
@@ -491,11 +495,11 @@ const myFont = localFont({ src: './my-font.woff2', display: 'swap',})
 
 `display`就是“font-display”专用于 @font-face 指令的描述符，它可以取如下几个值：
 
-* auto 。这个是 font-display 的默认值，字体的加载过程由浏览器自行决定，不过基本上和取值为 block 时的处理方式一致。
-* block 。在字体加载前，会使用备用字体渲染，但是显示为空白，使得它一直处于阻塞期，当字体加载完成之后，进入交换期，用下载下来的字体进行文本渲染。不过有些浏览器并不会无限的处于阻塞期，会有超时限制，一般在 3 秒后，如果阻塞期仍然没有加载完字体，那么直接就进入交换期，显示后备字体（而非空白），等字体下载完成之后直接替换。
-* swap 。基本上没有阻塞期，直接进入交换期，使用后备字体渲染文本，等用到的字体加载完成之后替换掉后备字体。
-* fallback 。阻塞期很短（大约100毫秒），也就是说会有大约 100 毫秒的显示空白的后备字体，然后交换期也有时限（大约 3 秒），在这段时间内如果字体加载成功了就会替换成该字体，如果没有加载成功那么后续会一直使用后备字体渲染文本。
-* optional 。与 fallback 的阻塞期一致，但是没有交换期，如果在阻塞期的 100 毫秒内字体加载完成，那么会使用该字体，否则直接使用后备字体。这个就是说指定的网络字体是可有可无的，如果加载很快那么可以显示，加载稍微慢一点就不会显示了，适合网络情况不好的时候，例如移动网络。
+- auto 。这个是 font-display 的默认值，字体的加载过程由浏览器自行决定，不过基本上和取值为 block 时的处理方式一致。
+- block 。在字体加载前，会使用备用字体渲染，但是显示为空白，使得它一直处于阻塞期，当字体加载完成之后，进入交换期，用下载下来的字体进行文本渲染。不过有些浏览器并不会无限的处于阻塞期，会有超时限制，一般在 3 秒后，如果阻塞期仍然没有加载完字体，那么直接就进入交换期，显示后备字体（而非空白），等字体下载完成之后直接替换。
+- swap 。基本上没有阻塞期，直接进入交换期，使用后备字体渲染文本，等用到的字体加载完成之后替换掉后备字体。
+- fallback 。阻塞期很短（大约100毫秒），也就是说会有大约 100 毫秒的显示空白的后备字体，然后交换期也有时限（大约 3 秒），在这段时间内如果字体加载成功了就会替换成该字体，如果没有加载成功那么后续会一直使用后备字体渲染文本。
+- optional 。与 fallback 的阻塞期一致，但是没有交换期，如果在阻塞期的 100 毫秒内字体加载完成，那么会使用该字体，否则直接使用后备字体。这个就是说指定的网络字体是可有可无的，如果加载很快那么可以显示，加载稍微慢一点就不会显示了，适合网络情况不好的时候，例如移动网络。
 
 ### 图片
 
@@ -843,15 +847,15 @@ export default function DashboardPage({
 
 这里说明一下docker的常用命令。
 
-* `systemctl start docker` 启动
-* `systemctl stop docker` 启动
-* `systemctl enable docker` 开机启动
-* `docker search mongodb` 查询镜像
-* `docker pull mongodb` 拉取镜像
-* `docker run -d --name=xxx xxx mongodb:latest` 基于某镜像创建一个容器
-* `docker ps` 查看运行中的容器
-* `docker stop container_id/name` 停止运行中的容器
-* `docker start container_id/name` 启动运行中的容器
+- `systemctl start docker` 启动
+- `systemctl stop docker` 启动
+- `systemctl enable docker` 开机启动
+- `docker search mongodb` 查询镜像
+- `docker pull mongodb` 拉取镜像
+- `docker run -d --name=xxx xxx mongodb:latest` 基于某镜像创建一个容器
+- `docker ps` 查看运行中的容器
+- `docker stop container_id/name` 停止运行中的容器
+- `docker start container_id/name` 启动运行中的容器
   这些是常用的命令。
 
 ### MongoDb
@@ -902,17 +906,17 @@ auth:true
 
 现在我们就可以启动moogodb了。
 
-```docker
+```bash
 docker run --name mongo --restart=always -p 3009:27017 -v /data/mdb:/data/db -v /data/backup/mongodb:/data/backup -v /data/mdblog:/data/log -v /data/mongo_conf:/data/conf -d mongo
 ```
 
-`-v`映射目录
+// -v映射目录
 
-`--name`名称
+// --name名称
 
-`3009:27017`端口映射服务器的3009端口映射到容器的的27017端口
+// 3009:27017端口映射服务器的3009端口映射到容器的的27017端口
 
-![start<span data-type=](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/WX20240731-232403%402x.png)\_success" />
+![SUCCESS](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/WX20240731-232403%402x.png)
 
 这时候我们看到了已经启动成功了。
 
@@ -924,19 +928,19 @@ docker run --name mongo --restart=always -p 3009:27017 -v /data/mdb:/data/db -v 
 docker exec -it mongo mongosh
 ```
 
-![login<span data-type=](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/login_success.png)\_success" />
+![LOGIN](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/login_success.png)
 
 显示这样基本上就表示登录成功。
 
 查看数据库。
 
-```mongodb
+```bash
 show dbs;
 ```
 
 这是可以看到现有的db
 
-![](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/show.png)
+![show_db](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/show.png)
 
 然后进入admin `use admin`.
 
@@ -955,11 +959,13 @@ admin> db.auth('admin', 'admin')
 
 这里我们创建一个 `blog`的db.
 
+```bash
     use blog // 没有会自动创建
 
     db.createCollection('articles') // 创建一个集合
 
     db.articles.insertOne({title: 'xxx'}) // 插入数据
+```
 
 ![查看数据](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/mongo_DB.png)
 
@@ -1062,6 +1068,8 @@ export default User;
 
 可以熟悉以下常用的语法。
 
+```bash
+
 **增**：Modal.save()
 
 **删**：Modal.deleteOne({name: 'xxx'})
@@ -1069,8 +1077,9 @@ export default User;
 **改**：Modal.findByIdAndUpdate(id, { name: 'jason bourne' }, options)
 
 **查**：：Modal.deleteOne({ name: 'xxx })
+```
 
-每种操作都有很多种方法，可以按需使用，具体文档查找。[model操作](https://mongoosejs.com/docs/api/model.html)
+每种操作都有很多种方法，可以按需使用，具体文档查找, [model操作](https://mongoosejs.com/docs/api/model.html)
 
 到这里我们就基本完成了数据库的部分，可以进入到下一阶段登录。
 
@@ -1078,7 +1087,7 @@ export default User;
 
 登录使用[next-auth](https://next-auth.js.org/)，这里可以很方便的让我实现第三方的登录。
 
-### 安装
+### NEXT-AUTH安装
 
 ```bash
 pnpm add next-auth
@@ -1090,7 +1099,7 @@ pnpm add next-auth
 
 #### 申请Github登录
 
-进入 GitHub 之后，打开 [Settings](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fsettings "https://github.com/settings") 中的 [Developer Settings](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fsettings%2Fapps "https://github.com/settings/apps")，点击左侧的 [OAuth Apps](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fsettings%2Fdevelopers "https://github.com/settings/developers") 后，再点击右边的按钮 **New OAuth App**，创建一个新的配置。
+进入 GitHub 之后，打开 [Settings](https://github.com/settings) 中的 [Developer Settings](https://github.com/settings/apps)，点击左侧的 [OAuth Apps](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/WX20240731-224830%402x.png) 后，再点击右边的按钮 **New OAuth App**，创建一个新的配置。
 
 ![New OAuth App](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/WX20240731-224830%402x.png)，然后一步步往下走新建成功后，即可以拿到 `CLIENT_ID`和 `Secret`，可以把这些内容维护到 `env`文件中
 
@@ -1831,4 +1840,8 @@ Sitemap: https://super-super.cn/sitemap.xml // sitemap的地址
 - 埋点
   - 接入百度统计和谷歌统计
 - 响应式
-  
+
+- 全局搜索/标签搜索
+- 评论
+- 社交分享
+...

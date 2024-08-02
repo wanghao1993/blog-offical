@@ -49,9 +49,13 @@ export async function generateMetadata({
 }
 
 async function getBlogDetail(id: string) {
-  const res = await get<ArticleType.ArticleItem>("articles/detail", {
-    id,
-  });
+  const res = await get<ArticleType.ArticleItem>(
+    "articles/detail",
+    {
+      id,
+    },
+    1
+  );
   return res;
 }
 export default async function ArticleDetail({

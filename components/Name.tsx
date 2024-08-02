@@ -10,9 +10,9 @@ export default function BlogName() {
       className={`horizontal-underline  text-3xl font-extrabold sm:block ${
         pathName === "/" ? "horizontal-underline-active" : ""
       }`}
-      aria-label="Crow."
+      aria-label="Isaac Wang."
     >
-      Crow
+      I.W
     </Link>
   );
 }

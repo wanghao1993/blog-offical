@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Nextjs &#x662f;&#x4ec0;&#x4e48;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h2 id="nextjs-是什么">Nextjs 是什么</h2>
+<p><a href="https://nextjs.org/docs/getting-started/installation">NextJs</a> 是一个基于 React 的开源框架，用于构建生产级别的 React 应用程序。它为开发人员提供了一套丰富的工具和约定，使得创建高性能、可扩展的 Web 应用程序变得更加容易。</p>
+<h2 id="nextjs-的主要特性">Next.js 的主要特性：</h2>
+<p><strong>服务器端渲染 (SSR)：</strong></p>
+<pre><code>- 提高首屏加载速度，改善用户体验。
+- 有利于 SEO，搜索引擎可以更好地抓取页面内容。
+</code></pre>
+<p><strong>静态站点生成 (SSG)：</strong></p>
+<pre><code>- 将整个应用程序或部分页面预渲染成静态 HTML 文件。
+- 适用于数据变化不频繁的网站，提供极快的加载速度。
+</code></pre>
+<p><strong>API 路由：</strong></p>
+<pre><code>- 内置 API 路由功能，可以轻松创建 RESTful API 或 GraphQL API。
+</code></pre>
+<p><strong>文件系统路由：</strong></p>
+<pre><code>- 根据文件系统结构自动生成路由，简化路由配置。
+</code></pre>
+<p><strong>图像优化：</strong></p>
+<pre><code>- 内置图像优化功能，自动优化图片大小和格式，提升页面加载速度。
+</code></pre>
+<p><strong>TypeScript 支持：</strong></p>
+<pre><code>- 原生支持 TypeScript，提供静态类型检查，提高代码质量。
+</code></pre>
+<p><strong>自定义服务器：</strong></p>
+<pre><code>- 可以自定义服务器，满足各种复杂场景的需求。
+</code></pre>
+<p><strong>插件系统：</strong></p>
+<pre><code>- 丰富的插件生态系统，可以扩展 Next.js 的功能。
+</code></pre>
+<h2 id="安装">安装</h2>
+<p>使用官网推荐的方式安装，执行 <code>npx create-next-app@latest</code>，输入项目名称，选择相关options选项就可以完成项目的初始化。如下
+<img src="https://blog-1302483222.cos.ap-shanghai.myqcloud.com/mx_screencap_20240730_093007.png" alt="img">
+可以看到，我们可以选择是否使用 <code>ts</code>, <code>eslint</code>, <code>tailwindcss</code>等等。</p>
+<h2 id="锁定引擎">锁定引擎</h2>
+<p>在 <code>package.json</code>中添加 <code>&quot;engines&quot;: {     &quot;node&quot;: &quot;&gt;=18.0.0&quot;,     &quot;pnpm&quot;: &quot;&gt;=9.0.0&quot;   }</code> 这样可以限制启动的 <code>node</code>版本和 <code>pnpm</code>版本，防止出现兼容性问题。</p>
+<h2 id="启动">启动</h2>
+<p><code>pnpm dev</code>，看到这个界面就是启动成功了<img src="https://blog-1302483222.cos.ap-shanghai.myqcloud.com/next.png" alt="SUCCESS"></p>
+<blockquote>
+<p><a href="https://juejin.cn/post/7286362110211489855?from=search-suggest">pnpm/yarn/npm的区别</a></p>
+</blockquote>
+<h2 id="路由">路由</h2>
+<h3 id="创建路由">创建路由</h3>
+<p>nextjs中的路由采用的是 <code>约定式路由</code>，根据文件的配置自动生成，我们可以看一下默认生成的文件结构。<img src="https://blog-1302483222.cos.ap-shanghai.myqcloud.com/mx_screencap_20240730_104511.png" alt="目录结构"></p>
+<p><code>.next</code>目录是运行的文件，<code>app</code>是路由的目录，<code>public</code>可以用于存放一些静态资源。</p>
+<p>所有的路由文件都放在 <code>app</code>中，<code>page</code>就是内容页，<code>layout</code>就是布局页面的模板，<code>error</code>是错误页面，<code>loading</code>是加载页面，<code>not-found</code>是404页面。比如我们需要创建一个 <code>dashborad</code>页面，只需要在 <code>app</code>下新增一个 <code>dashboard/page.tsx</code>即可。</p>
+<p>带params的路由格式是 <code>[id].tsx</code>，如下。</p>
+<p><img src="https://blog-1302483222.cos.ap-shanghai.myqcloud.com/layout.png" alt="路由结构"></p>
+<p><strong>app/layout</strong>： 等于react中的main.ts，app.ts，以及Vue中的App.vue，全局的布局，可以用来加载全局的样式，字体，metadata等等。</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> type { <span class="hljs-title class_">Metadata</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next&quot;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Inter</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next/font/google&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;./globals.css&quot;</span>;
+
+<span class="hljs-keyword">const</span> inter = <span class="hljs-title class_">Inter</span>({ <span class="hljs-attr">subsets</span>: [<span class="hljs-string">&quot;latin&quot;</span>] });
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">metadata</span>: <span class="hljs-title class_">Metadata</span> = {
+  <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Create Next App&quot;</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;Generated by create next app&quot;</span>,
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">RootLayout</span>(<span class="hljs-params">{
+  children,
+}: Readonly&lt;{
+  children: React.ReactNode;
+}&gt;</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{inter.className}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;h-12 border-b&quot;</span>&gt;</span>头部<span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">main</span>&gt;</span>{children}<span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span>
+  );
+}
+</code></pre>
+<p><strong>[folder]/layout</strong>： 单个菜单下的布局，类似vue/react中的二级路由</p>
+<p><strong>page</strong>：页面内容</p>
+<h3 id="路由跳转">路由跳转</h3>
+<p>这里有四种方式来实现路由的跳转。</p>
+<ul>
+<li>
+<p>使用 <code>next/link</code>内置组件</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Link</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;next/link&#x27;</span>
+
+&lt;<span class="hljs-title class_">Link</span> href=<span class="hljs-string">&#x27;/dashborad&#x27;</span>&gt;&lt;/<span class="hljs-title class_">Link</span>&gt;
+</code></pre>
+</li>
+<li>
+<p>使用 <code>useRouter</code>钩子函数，适用于 <code>client</code></p>
+</li>
+</ul>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { useRouter } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;next/navigation&#x27;</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">Page</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">const</span> router = <span class="hljs-title function_">useRouter</span>()
+    <span class="hljs-keyword">return</span> (
+        <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;button&quot;</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> router.push(&#x27;/dashboard&#x27;)}&gt;
+            Dashboard
+        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+    )
+}
+</code></pre>
+<ul>
+<li>
+<p>对于 <code>server component</code></p>
+<pre><code class="language-js">    <span class="hljs-keyword">import</span> { redirect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;next/navigation&#x27;</span>
+
+    <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">fetchTeam</span>(<span class="hljs-params">id: string</span>) {
+    <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;https://...&#x27;</span>)
+    <span class="hljs-keyword">if</span> (!res.<span class="hljs-property">ok</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>
+        <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">json</span>()
+    }
+
+    <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">Profile</span>(<span class="hljs-params">{ params }: { params: { id: string } }</span>) {
+        <span class="hljs-keyword">const</span> team = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetchTeam</span>(params.<span class="hljs-property">id</span>)
+        <span class="hljs-keyword">if</span> (!team) {
+            <span class="hljs-title function_">redirect</span>(<span class="hljs-string">&#x27;/login&#x27;</span>)
+        }
+    <span class="hljs-comment">// ...</span>
+    }
+</code></pre>
+</li>
+<li>
+<p>使用原生 <code>history</code></p>
+<pre><code class="language-js">    <span class="hljs-string">&#x27;use client&#x27;</span>
+
+    <span class="hljs-keyword">import</span> { useSearchParams } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;next/navigation&#x27;</span>
+
+    <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">SortProducts</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">const</span> searchParams = <span class="hljs-title function_">useSearchParams</span>()
+
+    <span class="hljs-keyword">function</span> <span class="hljs-title function_">updateSorting</span>(<span class="hljs-params">sortOrder: string</span>) {
+        <span class="hljs-keyword">const</span> params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">URLSearchParams</span>(searchParams.<span class="hljs-title function_">toString</span>())
+        params.<span class="hljs-title function_">set</span>(<span class="hljs-string">&#x27;sort&#x27;</span>, sortOrder)
+        <span class="hljs-variable language_">window</span>.<span class="hljs-property">history</span>.<span class="hljs-title function_">pushState</span>(<span class="hljs-literal">null</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">`?<span class="hljs-subst">${params.toString()}</span>`</span>)
+    }
+
+    <span class="hljs-keyword">return</span> (
+        <span class="language-xml"><span class="hljs-tag">&lt;&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> updateSorting(&#x27;asc&#x27;)}&gt;Sort Ascending<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> updateSorting(&#x27;desc&#x27;)}&gt;Sort Descending<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+            <span class="hljs-tag">&lt;/&gt;</span></span>
+        )
+    }
+</code></pre>
+</li>
+</ul>
+<h3 id="路由参数传递和获取">路由参数传递和获取</h3>
+<p>对于服务端组件来说，主函数的参数中自动注入，<code>params</code>和 <code>searchParams</code>，例如我们访问这个链接的时候
+<code>http://localhost:3001/dashboard/1?a=1</code></p>
+<p>此时在主函数的 <code>datas</code>, 他的内容就是 <code>{ params: { id: '1' }, searchParams: { a: '1' } }</code></p>
+<pre><code class="language-js"><span class="hljs-comment">// { params: { id: &#x27;1&#x27; }, searchParams: { a: &#x27;1&#x27; } }</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">DashboardPage</span>(<span class="hljs-params">datas: any</span>) {
+  <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getData</span>();
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;h-[100vh]&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+        这是仪表盘页面 {datas.params.id} {JSON.stringify(data)}{&quot; &quot;}
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+}
+</code></pre>
+<p>对于客户端组件来说，也可以用上面的方式来获取，初次除此以外还可以通过 <code>useParams</code>和 <code>useSearchParams</code>来获取。</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { useParams, useSearchParams } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next/navigation&quot;</span>;
+
+<span class="hljs-comment">// { params: { id: &#x27;1&#x27; }, searchParams: { a: &#x27;1&#x27; } }</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">DashboardPage</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> params = <span class="hljs-title function_">useParams</span>();
+  <span class="hljs-keyword">const</span> searchParams = <span class="hljs-title function_">useSearchParams</span>();
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;h-[100vh]&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>这是仪表盘页面 {params.id}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+}
+</code></pre>
+<h3 id="api路由">API路由</h3>
+<p>由于nextjs是运行在服务端的，所以他也能实现后端的服务，实现的方式是在 <code>app</code>下创建一个 <code>api</code>目录。在 <code>api</code>目录下插入一个 <code>dashboard/metrics</code>目录，然后创建一个 <code>route.ts</code>，这样子就实现了一个api路由了。请求路径是 <code>/dashboard/metrics</code>，方法为 <code>get</code>的请求。</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { responseHandler } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/lib/fetch&quot;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">GET</span>(<span class="hljs-params">request: Request</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_">responseHandler</span>({
+        <span class="hljs-attr">rate</span>: <span class="hljs-string">&#x27;100%&#x27;</span>,
+        <span class="hljs-attr">rate2</span>: <span class="hljs-string">&#x27;100%&#x27;</span>,
+        <span class="hljs-attr">rate3</span>: <span class="hljs-string">&#x27;100%&#x27;</span>
+    });
+}
+
+</code></pre>
+<h3 id="文件约定">文件约定</h3>
+<p><strong>error.js</strong>：当页面UI加载错误的时候会显示此页面；</p>
+<p><strong>not-found.js</strong>: 当页面不存在的时候显示此页面；
+例如当我们访问这个链接 <code>http://localhost:3001/xx</code>，此时就会渲染此页面。</p>
+<p><strong>loading.js</strong>: 当组件加载的时候就会触发这个动画，使用<a href="https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming">Suspense</a>实现</p>
+<p><strong>middleware.js</strong>: 中间件，常用于来做鉴权，拦截， 重写和重定向，自定义头部，缓存等等。</p>
+<pre><code class="language-js">  
+  <span class="hljs-comment">// middleware.js </span>
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">middleware</span>(<span class="hljs-params">req</span>) { 
+      <span class="hljs-keyword">const</span> token = req.<span class="hljs-property">cookies</span>.<span class="hljs-property">token</span>;
+      <span class="hljs-keyword">if</span> (!token) { 
+          <span class="hljs-keyword">return</span> <span class="hljs-title class_">NextResponse</span>.<span class="hljs-title function_">redirect</span>(<span class="hljs-keyword">new</span> <span class="hljs-title function_">URL</span>(<span class="hljs-string">&#x27;/login&#x27;</span>, req.<span class="hljs-property">url</span>)); 
+      } <span class="hljs-comment">// 验证 token</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-title class_">NextResponse</span>.<span class="hljs-title function_">next</span>();
+   }
+   
+   <span class="hljs-comment">// 配置匹配的路由，符合才走中间件</span>
+   <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> config = { <span class="hljs-attr">matcher</span>: [<span class="hljs-string">&#x27;/protected/:path*&#x27;</span>] };
+</code></pre>
+<p>除 <code>middleware</code>外，其他都支持全局和局部。</p>
+<h2 id="数据请求">数据请求</h2>
+<ul>
+<li>
+<p>在服务端组件中，使用 <code>fetch</code>请求，而且自带缓存，<code>Post</code>请求不缓存，通过在 <code>fetch</code>中的配置，默认是
+<code>{ cache: 'force-cache' }</code>。</p>
+<p>如果需要重新验证数据的一致性，可以设置 <code>{ next: { revalidate: 3600 } }</code>，这样每小时会重新验证一次，或者在 <code>page/layout.ts</code>设置 <code>export const revalidate = 3600</code></p>
+</li>
+</ul>
+<pre><code class="language-js">        <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> revalidate = <span class="hljs-number">3600</span>
+
+        <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getData</span>(<span class="hljs-params"></span>) {
+            <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;http://localhost:3000/api/dashboard/metric&#x27;</span>)
+     
+            <span class="hljs-keyword">if</span> (!res.<span class="hljs-property">ok</span>) {
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;Failed to fetch data&#x27;</span>)
+            }
+          
+            <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">json</span>()
+        }
+      
+        <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">Page</span>(<span class="hljs-params"></span>) {
+        <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getData</span>()
+      
+        <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">main</span>&gt;</span>
+                指标是: {{ JSON.stringify(data.data) }}
+            <span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span></span>
+        }
+</code></pre>
+<p>也可以不缓存，通过设置 <code>{ cache: 'no-store' }</code>，也可以按需重新验证，参考此文档<a href="https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#on-demand-revalidation">on-demand-revalidation</a>，也可以在文件头部
+<code>export const dynamic = 'force-dynamic';</code>这样每次都会新的。</p>
+<ul>
+<li>Server Actions and Mutations</li>
+</ul>
+<h2 id="渲染">渲染</h2>
+<h3 id="服务端组件">服务端组件</h3>
+<p>在app下的</p>
+<p>服务端组件渲染有三种方式。</p>
+<ol>
+<li>Static Rendering(静态渲染)
+<blockquote>
+<p>这是默认的渲染方式，在build的时候就会完成数据的请求和页面组装，比如一个项目的首页</p>
+</blockquote>
+</li>
+<li>Dynamic Rendering(动态渲染)
+<blockquote>
+<p>在用户请求的时候渲染完成，比如一个订单的详情页，根据不同的ID来渲染不同的数据</p>
+</blockquote>
+</li>
+<li>Streaming(流式渲染)
+<blockquote>
+<p>简单来说就是将一整个 HTML 脚本文件通过切成一小段一小段的方式返回给客户端，客户端收到每一段内容时进行分批渲染。这样的方式相较于传统的服务端一次性渲染完成整个 HTML 内容进行返回，在视觉上大大减少了 TTFB 以及 FP 的时间，在用户体验上更好。主要原理是基于 <code>Suspense/Lazy</code> 进行异步渲染组件，这样我们可以把一些不变的静态数据和动态数据拆分成多个组件，父组件中用 <code>Suspense</code>包裹，然静态数据先渲染，从而提高 <code>TTFB（time to first byte）</code>和FP <code>（first paint）</code>指标。</p>
+</blockquote>
+</li>
+</ol>
+<pre><code class="language-js"><span class="hljs-comment">// Metric1.tsx</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">getDate</span>(<span class="hljs-params"></span>): <span class="hljs-title class_">Promise</span>&lt;string&gt; {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =&gt;</span>
+    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-title function_">resolve</span>(<span class="hljs-string">&quot;This is Great.&quot;</span>);
+    }, <span class="hljs-number">3000</span>)
+  );
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">Metric1</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> <span class="hljs-attr">data</span>: string = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getDate</span>();
+
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{data}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/&gt;</span></span>
+  );
+}
+
+</code></pre>
+<pre><code class="language-js"><span class="hljs-comment">// Metric2.tsx</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">getDate</span>(<span class="hljs-params"></span>): <span class="hljs-title class_">Promise</span>&lt;string&gt; {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =&gt;</span>
+    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-title function_">resolve</span>(<span class="hljs-string">&quot;This is Great.&quot;</span>);
+    }, <span class="hljs-number">3000</span>)
+  );
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">Metric1</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> <span class="hljs-attr">data</span>: string = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getDate</span>();
+
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{data}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/&gt;</span></span>
+  );
+}
+
+</code></pre>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Metric1</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/metric1&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">Metric2</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/metric2&quot;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Suspense</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getData</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&quot;http://localhost:3001/api/dashboard/metric/&quot;</span>);
+  <span class="hljs-comment">// The return value is *not* serialized</span>
+  <span class="hljs-comment">// You can return Date, Map, Set, etc.</span>
+
+  <span class="hljs-keyword">if</span> (!res.<span class="hljs-property">ok</span>) {
+    <span class="hljs-comment">// This will activate the closest `error.js` Error Boundary</span>
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;Failed to fetch data&quot;</span>);
+  }
+
+  <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">json</span>();
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">DashboardPage</span>(<span class="hljs-params">datas: any</span>) {
+  <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getData</span>();
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;h-[100vh]&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+        这是仪表盘页面 {datas.params.id} {JSON.stringify(data)}{&quot; &quot;}
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+      <span class="hljs-tag">&lt;<span class="hljs-name">Suspense</span> <span class="hljs-attr">fallback</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">div</span>&gt;</span>Loading metric1...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>}&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">Metric1</span> /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Suspense</span>&gt;</span>
+
+      <span class="hljs-tag">&lt;<span class="hljs-name">Suspense</span> <span class="hljs-attr">fallback</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">div</span>&gt;</span>Loading metric2...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>}&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">Metric2</span> /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Suspense</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+}
+
+</code></pre>
+<p>这时候我们就可以看到主体内容先渲染了，metric1，和metric2在loading，等待数据获得后再渲染。
+<img src="https://blog-1302483222.cos.ap-shanghai.myqcloud.com/streaming.png" alt="streaming"></p>
+<h4 id="优势">优势</h4>
+<p>在服务器上执行渲染工作有几个好处，包括：</p>
+<p><strong>数据提取</strong>：服务器组件允许您将数据提取移动到更接近数据源的服务器。这可以通过减少获取渲染所需数据所需的时间以及客户端需要发出的请求数量来提高性能。</p>
+<p><strong>安全</strong>：服务器组件允许您将敏感数据和逻辑保留在服务器上，例如令牌和API密钥，而不会面临将它们暴露给客户端的风险。</p>
+<p><strong>缓存</strong>：通过在服务器上呈现，结果可以被缓存并在后续请求和跨用户中重复使用。这可以通过减少每次请求上完成的渲染和数据获取量来提高性能并降低成本。</p>
+<p><strong>性能</strong>：服务器组件为您提供了额外的工具来从基线优化性能。例如，如果您从完全由客户端组件组成的应用程序开始，则将UI的非交互式部分移动到服务器组件可以减少所需的客户端JavaScript量。这对于互联网速度较慢或设备功能较弱的用户来说是有利的，因为浏览器需要下载、解析和执行的客户端JavaScript较少。</p>
+<p><strong>初始页面加载和第一个内容绘制（FCP）</strong>：在服务器上，我们可以生成HTML以允许用户立即查看页面，而无需等待客户端下载、解析和执行渲染页面所需的JavaScript。</p>
+<p><strong>搜索引擎优化和社交网络共享性</strong>：搜索引擎机器人可以使用渲染的HTML来索引页面，社交网络机器人可以使用渲染的HTML为您的页面生成社交卡预览。</p>
+<p><strong>流媒体</strong>：服务器组件允许您将渲染工作拆分为块，并在准备好后将其流媒体传输给客户端。这允许用户更早地查看页面的部分内容，而不必等待整个页面在服务器上呈现。</p>
+<h3 id="客户端组件client-components">客户端组件（Client Components）</h3>
+<p>使用客户端组件的方式也很简单，首行写 <code>use client</code>即开启</p>
+<pre><code class="language-js"><span class="hljs-string">&#x27;use client&#x27;</span>
+ 
+<span class="hljs-keyword">import</span> { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>
+ 
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">Counter</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [count, setCount] = <span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>)
+ 
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>You clicked {count} times<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setCount(count + 1)}&gt;Click me<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  )
+}
+</code></pre>
+<p>客户端组件并非仅仅在客户端渲染，也可以在服务端渲染，这取决于是否是全页面加载（Full page load），还是页面中导航过去的(<a href="https://nextjs.org/docs/app/building-your-application/rendering/client-components#subsequent-navigations">Subsequent Navigations</a>)。</p>
+<p>如果是全页加载的，即首次加载或刷新，这时候也是通过服务端渲染的而导航过去的，这时候是客户端渲染的。</p>
+<h4 id="优势-1">优势</h4>
+<ul>
+<li>可以使用相关的API和交互 <code>useEffect</code>，<code>state</code>，<code>event listener</code>等</li>
+<li>可以使用浏览器API</li>
+</ul>
+<h2 id="样式">样式</h2>
+<p>样式在初始化项目的时候安装了<a href="https://www.tailwindcss.cn/">tailwindcss</a>，可以看文档。</p>
+<h2 id="优化">优化</h2>
+<h3 id="字体">字体</h3>
+<p>nextjs中使用next/font来加载谷歌字体，而不是在css到声明字体，因为它帮我们优化了字体的加载，很方便使用各种各样的字体。官方推荐使用<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_fonts/Variable_fonts_guide">可变字体</a>，这里是<a href="https://fonts.google.com/variablefonts">字体库</a></p>
+<p>如下，我们可以看到引入了两种字体，字体中可以设置 <code>子集</code>，样式等options.</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Link</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next/link&quot;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Inter</span>, <span class="hljs-title class_">Roboto</span>_Mono } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next/font/google&quot;</span>;
+
+<span class="hljs-comment">// If loading a variable font, you don&#x27;t need to specify the font weight</span>
+<span class="hljs-keyword">const</span> inter = <span class="hljs-title class_">Inter</span>({
+  <span class="hljs-attr">subsets</span>: [<span class="hljs-string">&quot;latin&quot;</span>],
+  <span class="hljs-attr">display</span>: <span class="hljs-string">&quot;swap&quot;</span>,
+});
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> roboto_mono = <span class="hljs-title class_">Roboto</span>_Mono({
+  <span class="hljs-attr">subsets</span>: [<span class="hljs-string">&quot;latin&quot;</span>],
+  <span class="hljs-attr">weight</span>: [<span class="hljs-string">&quot;700&quot;</span>],
+  <span class="hljs-attr">display</span>: <span class="hljs-string">&quot;swap&quot;</span>,
+  <span class="hljs-attr">variable</span>: <span class="hljs-string">&quot;--Roboto_Mono&quot;</span>,
+});
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">Home</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">main</span>
+      <span class="hljs-attr">className</span>=<span class="hljs-string">{</span>`<span class="hljs-attr">flex</span> <span class="hljs-attr">min-h-screen</span> <span class="hljs-attr">flex-col</span> <span class="hljs-attr">items-center</span> <span class="hljs-attr">justify-between</span> <span class="hljs-attr">p-24</span> ${<span class="hljs-attr">inter.className</span>}`}
+    &gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">header</span>&gt;</span>这是头部<span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>这是一种字体<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{roboto_mono.className}</span>&gt;</span>这是另一种字体<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">{</span>&quot;/<span class="hljs-attr">dashboard</span>&quot;}&gt;</span>dashboard<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>这是footer<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span></span>
+  );
+}
+
+</code></pre>
+<p>同时也可以加载本地字体。</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> localFont <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;next/font/local&#x27;</span>
+<span class="hljs-keyword">const</span> myFont = <span class="hljs-title function_">localFont</span>({ <span class="hljs-attr">src</span>: <span class="hljs-string">&#x27;./my-font.woff2&#x27;</span>, <span class="hljs-attr">display</span>: <span class="hljs-string">&#x27;swap&#x27;</span>,})
+</code></pre>
+<p><code>display</code>就是“font-display”专用于 @font-face 指令的描述符，它可以取如下几个值：</p>
+<ul>
+<li>auto 。这个是 font-display 的默认值，字体的加载过程由浏览器自行决定，不过基本上和取值为 block 时的处理方式一致。</li>
+<li>block 。在字体加载前，会使用备用字体渲染，但是显示为空白，使得它一直处于阻塞期，当字体加载完成之后，进入交换期，用下载下来的字体进行文本渲染。不过有些浏览器并不会无限的处于阻塞期，会有超时限制，一般在 3 秒后，如果阻塞期仍然没有加载完字体，那么直接就进入交换期，显示后备字体（而非空白），等字体下载完成之后直接替换。</li>
+<li>swap 。基本上没有阻塞期，直接进入交换期，使用后备字体渲染文本，等用到的字体加载完成之后替换掉后备字体。</li>
+<li>fallback 。阻塞期很短（大约100毫秒），也就是说会有大约 100 毫秒的显示空白的后备字体，然后交换期也有时限（大约 3 秒），在这段时间内如果字体加载成功了就会替换成该字体，如果没有加载成功那么后续会一直使用后备字体渲染文本。</li>
+<li>optional 。与 fallback 的阻塞期一致，但是没有交换期，如果在阻塞期的 100 毫秒内字体加载完成，那么会使用该字体，否则直接使用后备字体。这个就是说指定的网络字体是可有可无的，如果加载很快那么可以显示，加载稍微慢一点就不会显示了，适合网络情况不好的时候，例如移动网络。</li>
+</ul>
+<h3 id="图片">图片</h3>
+<h4 id="优点">优点</h4>
+<p>Image组件，Image是在img得基础上的封装，主要增强了以下功能。</p>
+<p><strong>大小优化</strong>：使用 WebP 和 AVIF 等现代图像格式，自动为每台设备提供正确大小的图像。</p>
+<p><strong>视觉稳定</strong>：防止偏移，有效优化<a href="https://nextjs.org/learn-pages-router/seo/web-performance/cls">Cumulative Layout Shift (CLS)</a>累计布局偏移量。</p>
+<p><strong>更快的加载速度</strong>：进入视口后在进行加载，更快的页面加载速度。</p>
+<p><strong>自适应</strong>：可以设置优先级，压缩质量，包括宽高，即使图片是在服务器上。</p>
+<pre><code class="language-js">
+&lt;<span class="hljs-title class_">Image</span>
+    src={detail.<span class="hljs-property">coverImg</span>}
+    width={<span class="hljs-number">0</span>}
+    height={<span class="hljs-number">0</span>}
+    sizes=<span class="hljs-string">&quot;100%&quot;</span>
+    style={{ <span class="hljs-attr">width</span>: <span class="hljs-string">&quot;100%&quot;</span>, <span class="hljs-attr">height</span>: <span class="hljs-string">&quot;auto&quot;</span> }}
+    priority={<span class="hljs-literal">true</span>}
+    alt=<span class="hljs-string">&quot;cover_img&quot;</span>
+  /&gt;
+</code></pre>
+<h4 id="安全">安全</h4>
+<p>可以设置指定域名的远程图片，在 <code>next.config.mjs</code></p>
+<pre><code class="language-js"> <span class="hljs-attr">images</span>: {
+    <span class="hljs-attr">remotePatterns</span>: [
+      {
+        <span class="hljs-attr">protocol</span>: <span class="hljs-string">&quot;https&quot;</span>,
+        <span class="hljs-attr">hostname</span>: <span class="hljs-string">&quot;avatars.githubusercontent.com&quot;</span>,
+      },
+      {
+        <span class="hljs-attr">protocol</span>: <span class="hljs-string">&quot;https&quot;</span>,
+        <span class="hljs-attr">hostname</span>: <span class="hljs-string">&quot;**.myqcloud.com&quot;</span>,
+      },
+      {
+        <span class="hljs-attr">protocol</span>: <span class="hljs-string">&quot;https&quot;</span>,
+        <span class="hljs-attr">hostname</span>: <span class="hljs-string">&quot;**.xitu.io&quot;</span>,
+      },
+      {
+        <span class="hljs-attr">protocol</span>: <span class="hljs-string">&quot;https&quot;</span>,
+        <span class="hljs-attr">hostname</span>: <span class="hljs-string">&quot;**.byteimg.com&quot;</span>,
+      },
+    ],
+  },
+</code></pre>
+<h2 id="主题的实现">主题的实现</h2>
+<p>通用的主题的实现有以下几种方式。</p>
+<ol>
+<li>使用CSS变量来实现</li>
+<li>使用CSS-in-JS实现主题切换</li>
+<li>引入不同的CSS文件来实现主题的切换</li>
+<li>使用CSS预处理器来实现主题</li>
+</ol>
+<p>具体实现可以参考这篇文章<a href="https://super-super.cn/blog/66aa059a9822e0e619b587c7">如何实现前端页面主题切换：多种方法详解</a></p>
+<p>我们这里使用css变量的方式结合<a href="https://github.com/pacocoursey/next-themes#readme">next-themes</a>来实现，<code>暗黑</code>，<code>明亮</code>，<code>跟随系统</code>三种主题。</p>
+<h3 id="安装-1">安装</h3>
+<pre><code class="language-bash">pnpm add next-themes
+</code></pre>
+<h3 id="增加主题变量">增加主题变量</h3>
+<p>然后修改 <code>global.css</code></p>
+<pre><code class="language-css"><span class="hljs-keyword">@tailwind</span> base;
+<span class="hljs-keyword">@tailwind</span> components;
+<span class="hljs-keyword">@tailwind</span> utilities;
+
+<span class="hljs-selector-pseudo">:root</span> {
+  <span class="hljs-comment">/* 背景色 */</span>
+  <span class="hljs-attr">--background-color</span>: <span class="hljs-number">#111827</span>; 
+  <span class="hljs-comment">/* 文字颜色 */</span>
+  <span class="hljs-attr">--text-color</span>: white;
+}
+
+<span class="hljs-selector-tag">body</span> {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-built_in">var</span>(--background-color);
+  <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--text-color);
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.5</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;
+}
+
+// 明亮主题
+<span class="hljs-selector-class">.light</span> {
+  <span class="hljs-attr">--background-color</span>: <span class="hljs-number">#fff</span>;
+  <span class="hljs-attr">--text-color</span>: <span class="hljs-number">#111827</span>;
+}
+// 暗黑主题
+<span class="hljs-selector-class">.dark</span> {
+  <span class="hljs-attr">--background-color</span>: <span class="hljs-number">#111827</span>;
+  <span class="hljs-attr">--text-color</span>: <span class="hljs-number">#fff</span>;
+}
+
+// 系统自适应暗黑
+<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">prefers-color-scheme</span>: dark) {
+  <span class="hljs-selector-pseudo">:root</span><span class="hljs-selector-pseudo">:not</span>(<span class="hljs-selector-class">.dark</span>)<span class="hljs-selector-pseudo">:not</span>(<span class="hljs-selector-class">.light</span>) {
+    <span class="hljs-attr">--background-color</span>: <span class="hljs-number">#111827</span>;
+    <span class="hljs-attr">--text-color</span>: <span class="hljs-number">#fff</span>;
+  }
+ 
+}
+
+// 系统自适应明亮
+<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">prefers-color-scheme</span>: light) {
+  <span class="hljs-selector-pseudo">:root</span><span class="hljs-selector-pseudo">:not</span>(<span class="hljs-selector-class">.dark</span>)<span class="hljs-selector-pseudo">:not</span>(<span class="hljs-selector-class">.light</span>) {
+    <span class="hljs-attr">--background-color</span>: <span class="hljs-number">#fff</span>;
+    <span class="hljs-attr">--text-color</span>: <span class="hljs-number">#111827</span>;
+  }
+ 
+}
+</code></pre>
+<h3 id="实现themeprovider">实现ThemeProvider</h3>
+<p>然后在 <code>provider</code>目录创建 <code>ThemeProvider</code>.</p>
+<pre><code class="language-js"><span class="hljs-string">&quot;use client&quot;</span>;
+
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">ThemeProvider</span> <span class="hljs-keyword">as</span> <span class="hljs-title class_">NextThemesProvider</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next-themes&quot;</span>;
+<span class="hljs-keyword">import</span> type { <span class="hljs-title class_">ThemeProviderProps</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next-themes/dist/types&quot;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">ThemeProvider</span>(<span class="hljs-params">{
+  children,
+  ...props
+}: ThemeProviderProps</span>) {
+  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">NextThemesProvider</span> {<span class="hljs-attr">...props</span>}&gt;</span>{children}<span class="hljs-tag">&lt;/<span class="hljs-name">NextThemesProvider</span>&gt;</span></span>;
+}
+
+</code></pre>
+<p>最后在 <code>app/layout.txs</code>中使用，设置 <code>attribute</code>用class，默认主题用暗黑模式，支持跟随系统，mac支持，windows不支持。</p>
+<pre><code class="language-js"> &lt;<span class="hljs-title class_">ThemeProvider</span> attribute=<span class="hljs-string">&quot;class&quot;</span> defaultTheme=<span class="hljs-string">&quot;dark&quot;</span> enableSystem&gt;
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;h-12 border-b&quot;</span>&gt;</span>头部<span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span></span>
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">main</span>&gt;</span>{children}<span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span></span>
+&lt;/<span class="hljs-title class_">ThemeProvider</span>&gt;
+
+</code></pre>
+<h3 id="主题切换组件">主题切换组件</h3>
+<p>然后就可以创建一个切换主题的组件，通过 <code>setTheme</code>来实现主题的设置。</p>
+<pre><code class="language-js"><span class="hljs-string">&quot;use client&quot;</span>;
+<span class="hljs-keyword">import</span> { useTheme } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next-themes&quot;</span>;
+
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">ThemeChanger</span> = (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">const</span> { theme, setTheme } = <span class="hljs-title function_">useTheme</span>();
+
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+        现在主题是: <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{theme}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setTheme(&quot;light&quot;)}&gt;明亮<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      {&quot;  &quot;}
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setTheme(&quot;dark&quot;)}&gt;暗黑模式<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      {&quot;  &quot;}
+
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setTheme(&quot;os&quot;)}&gt;跟随系统<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">ThemeChanger</span>;
+
+</code></pre>
+<p>到此，我们即完成了切换主题。</p>
+<h2 id="滚动优化">滚动优化</h2>
+<p>此处我们我使用了 <code>lenis</code>来实现滚动的优化，代替默认的滚动。</p>
+<h3 id="安装-2">安装</h3>
+<pre><code class="language-bash">pnpm add lenis
+</code></pre>
+<h3 id="新建provider">新建Provider</h3>
+<p>创建 <code>provider/leniProvider.tsx</code></p>
+<pre><code class="language-ts"><span class="hljs-string">&quot;use client&quot;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">ReactLenis</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;lenis/react&quot;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">ReactNode</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">Props</span> {
+  <span class="hljs-attr">children</span>: <span class="hljs-title class_">ReactNode</span>;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">LenisProvider</span>(<span class="hljs-params">{ children }: Props</span>) {
+  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ReactLenis</span> <span class="hljs-attr">root</span>&gt;</span>{children}<span class="hljs-tag">&lt;/<span class="hljs-name">ReactLenis</span>&gt;</span></span>;
+}
+
+</code></pre>
+<p>创建 <code>provider/scrollProvider.tsx</code></p>
+<pre><code class="language-js"><span class="hljs-string">&quot;use client&quot;</span>;
+
+<span class="hljs-keyword">import</span> { useLenis } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;lenis/react&quot;</span>;
+<span class="hljs-keyword">import</span> { createContext, <span class="hljs-title class_">ReactNode</span>, useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+
+interface <span class="hljs-title class_">ScrollValue</span> {
+  <span class="hljs-attr">scrollY</span>: number;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title class_">ScrollContext</span> = createContext&lt;<span class="hljs-title class_">ScrollValue</span>&gt;({
+  <span class="hljs-attr">scrollY</span>: <span class="hljs-number">0</span>,
+});
+
+interface <span class="hljs-title class_">ScrollProviderProps</span> {
+  <span class="hljs-attr">children</span>: <span class="hljs-title class_">ReactNode</span>;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">ScrollProvider</span> = (<span class="hljs-params">{ children }: ScrollProviderProps</span>) =&gt; {
+  <span class="hljs-keyword">const</span> [scrollY, setScrollY] = <span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);
+
+  <span class="hljs-keyword">const</span> [mounted, setMounted] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">false</span>);
+
+  <span class="hljs-title function_">useLenis</span>(<span class="hljs-function">(<span class="hljs-params">{ scroll }: any</span>) =&gt;</span> {
+    <span class="hljs-title function_">setMounted</span>(<span class="hljs-literal">true</span>);
+    <span class="hljs-title function_">setScrollY</span>(scroll);
+  });
+  <span class="hljs-keyword">if</span> (!mounted) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ScrollContext.Provider</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">scrollY</span> }}&gt;</span>
+      {children}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ScrollContext.Provider</span>&gt;</span></span>
+  );
+};
+
+</code></pre>
+<h3 id="使用">使用</h3>
+<p>在 <code>app/layout.tsx</code>中使用。</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> type { <span class="hljs-title class_">Metadata</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next&quot;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Inter</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next/font/google&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;./globals.css&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">ThemeProvider</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/provider/themeprovider&quot;</span>;
+<span class="hljs-keyword">import</span> dynamic <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next/dynamic&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">LenisProvider</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/provider/LenisProvider&quot;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">ScrollProvider</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/provider/scrollProvider&quot;</span>;
+
+<span class="hljs-keyword">const</span> inter = <span class="hljs-title class_">Inter</span>({ <span class="hljs-attr">subsets</span>: [<span class="hljs-string">&quot;latin&quot;</span>] });
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">metadata</span>: <span class="hljs-title class_">Metadata</span> = {
+  <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Create Next App&quot;</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;Generated by create next app&quot;</span>,
+};
+
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">ThemeChanger</span> = <span class="hljs-title function_">dynamic</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">import</span>(<span class="hljs-string">&quot;@/components/theme&quot;</span>), {
+  <span class="hljs-attr">ssr</span>: <span class="hljs-literal">false</span>,
+});
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">RootLayout</span>(<span class="hljs-params">{
+  children,
+}: Readonly&lt;{
+  children: React.ReactNode;
+}&gt;</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span> <span class="hljs-attr">suppressHydrationWarning</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{inter.className}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ThemeProvider</span> <span class="hljs-attr">attribute</span>=<span class="hljs-string">&quot;class&quot;</span> <span class="hljs-attr">defaultTheme</span>=<span class="hljs-string">&quot;dark&quot;</span> <span class="hljs-attr">enableSystem</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">LenisProvider</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">ScrollProvider</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;h-12 border-b&quot;</span>&gt;</span>头部<span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">ThemeChanger</span> /&gt;</span>
+
+              <span class="hljs-tag">&lt;<span class="hljs-name">main</span>&gt;</span>{children}<span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">ScrollProvider</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;modal&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">LenisProvider</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">ThemeProvider</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span>
+  );
+}
+
+
+</code></pre>
+<p>此时我们可以通过 <code>Scrollprivider</code>来访问 <code>scrollY</code>，以及progress等等</p>
+<p>在 <code>dashboard/page.tsx</code>中我们使用context来inject进来scrollY。</p>
+<pre><code class="language-js"><span class="hljs-string">&quot;use client&quot;</span>;
+
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">ScrollContext</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/provider/scrollProvider&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">Link</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next/link&quot;</span>;
+<span class="hljs-keyword">import</span> { useContext } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">DashboardPage</span>(<span class="hljs-params">{
+  children,
+}: {
+  children: React.ReactNode;
+}</span>) {
+  <span class="hljs-keyword">const</span> { scrollY } = <span class="hljs-title function_">useContext</span>(<span class="hljs-title class_">ScrollContext</span>);
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;h-[100vh]&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">{</span>&quot;/<span class="hljs-attr">dashboard</span>/<span class="hljs-attr">1</span>&quot;}&gt;</span>我们去仪表盘1{scrollY}<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>scrollY: {scrollY}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{children}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+}
+
+</code></pre>
+<h2 id="数据库docker安装">数据库/Docker安装</h2>
+<p>我所使用的是腾讯云的服务器，系统为 <code>OpenCloudOS Docker版本</code>，所以不需要安装，只需要安装 <code>mongodb</code>即可。</p>
+<h3 id="docker命令">Docker命令</h3>
+<p>这里说明一下docker的常用命令。</p>
+<ul>
+<li><code>systemctl start docker</code> 启动</li>
+<li><code>systemctl stop docker</code> 启动</li>
+<li><code>systemctl enable docker</code> 开机启动</li>
+<li><code>docker search mongodb</code> 查询镜像</li>
+<li><code>docker pull mongodb</code> 拉取镜像</li>
+<li><code>docker run -d --name=xxx xxx mongodb:latest</code> 基于某镜像创建一个容器</li>
+<li><code>docker ps</code> 查看运行中的容器</li>
+<li><code>docker stop container_id/name</code> 停止运行中的容器</li>
+<li><code>docker start container_id/name</code> 启动运行中的容器
+这些是常用的命令。</li>
+</ul>
+<h3 id="mongodb">MongoDb</h3>
+<p>所以此处我们需要安装mongodb的话，就需要执行命令。</p>
+<p><code>docker pull mongo</code></p>
+<p>在启动之前，我们需要把数据挂载到本地服务器，这样容器重启数据也不会丢失，还有数据的备份，日志，配置等等。</p>
+<pre><code class="language-bash">// 数据保存到/data/mdb文件夹中
+<span class="hljs-built_in">mkdir</span> -p /data/mdb 
+
+// 数据备份
+<span class="hljs-built_in">mkdir</span> -p  /data/backup/mongodb
+
+// 日志
+<span class="hljs-built_in">mkdir</span> -p /data/mdblog
+
+// 配置
+<span class="hljs-built_in">mkdir</span> -p /data/mongo_conf
+</code></pre>
+<p>其它的东西不用动，我这边加了一个配置，需要设置一个bindIP和auth来设置需要密码和指定IP可访问，否则会被黑客勒索。</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Where and how to store data.</span>
+storage:
+  dbPath: /data/mdb
+  journal:
+    enabled: <span class="hljs-literal">true</span>
+systemLog:
+  destination: file
+  logAppend: <span class="hljs-literal">true</span>
+  path:  /data/mdblog/mongod.log
+
+<span class="hljs-comment"># network interfaces</span>
+net:
+  port: 3009
+  bindIp: 127.0.0.1,150.109.25.213
+
+<span class="hljs-comment">#auth </span>
+
+auth:<span class="hljs-literal">true</span>
+
+</code></pre>
+<p>现在我们就可以启动moogodb了。</p>
+<pre><code class="language-bash">docker run --name mongo --restart=always -p 3009:27017 -v /data/mdb:/data/db -v /data/backup/mongodb:/data/backup -v /data/mdblog:/data/log -v /data/mongo_conf:/data/conf -d mongo
+</code></pre>
+<p>// -v映射目录</p>
+<p>// --name名称</p>
+<p>// 3009:27017端口映射服务器的3009端口映射到容器的的27017端口</p>
+<p><img src="https://blog-1302483222.cos.ap-shanghai.myqcloud.com/WX20240731-232403%402x.png" alt="SUCCESS"></p>
+<p>这时候我们看到了已经启动成功了。</p>
+<h3 id="创建管理员账户">创建管理员账户</h3>
+<p>进入容器。</p>
+<pre><code class="language-BASH">docker <span class="hljs-built_in">exec</span> -it mongo mongosh
+</code></pre>
+<p><img src="https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/login_success.png" alt="LOGIN"></p>
+<p>显示这样基本上就表示登录成功。</p>
+<p>查看数据库。</p>
+<pre><code class="language-bash">show dbs;
+</code></pre>
+<p>这是可以看到现有的db</p>
+<p><img src="https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/show.png" alt="show_db"></p>
+<p>然后进入admin <code>use admin</code>.</p>
+<p>创建管理员账户。</p>
+<pre><code class="language-bash">admin&gt; db.createUser({ user: <span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-built_in">pwd</span>: <span class="hljs-string">&#x27;admin&#x27;</span>, roles: [ { role: <span class="hljs-string">&quot;userAdminAnyDatabase&quot;</span>, db: <span class="hljs-string">&quot;admin&quot;</span> } ] });
+{ ok: 1 }
+admin&gt; db.auth(<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;admin&#x27;</span>)
+{ ok: 1 }
+</code></pre>
+<p>这样就表示创建成功且auth通过，这时候就可以测试连接了。<code>mongodb://admin:admin@host:port/admin?authMechanism=DEFAULT</code></p>
+<h3 id="创建db">创建DB</h3>
+<p>这里我们创建一个 <code>blog</code>的db.</p>
+<pre><code class="language-bash">    use blog // 没有会自动创建
+
+    db.createCollection(<span class="hljs-string">&#x27;articles&#x27;</span>) // 创建一个集合
+
+    db.articles.insertOne({title: <span class="hljs-string">&#x27;xxx&#x27;</span>}) // 插入数据
+</code></pre>
+<p><img src="https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/mongo_DB.png" alt="查看数据"></p>
+<p>可以看到数据已经插入了。</p>
+<h3 id="mongoose">mongoose</h3>
+<p><a href="https://mongoosejs.com/">Mongoose</a> 提供了一种直接的、基于架构的解决方案来为您的应用程序数据建模。它包括内置的类型转换、验证、查询构建、业务逻辑挂钩等，开箱即用。</p>
+<h4 id="安装-3">安装</h4>
+<pre><code class="language-bash">pnpm add mongoose --save
+</code></pre>
+<p>创建一个工具函数 <code>lib/mongoose.ts</code></p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> mongoose <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;mongoose&quot;</span>;
+
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">connectMongo</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt;
+  <span class="hljs-keyword">await</span> mongoose.<span class="hljs-title function_">connect</span>(process.<span class="hljs-property">env</span>.<span class="hljs-property">MONGO_URI</span> <span class="hljs-keyword">as</span> string, {
+    <span class="hljs-attr">autoCreate</span>: <span class="hljs-literal">true</span>,
+  });
+<span class="hljs-comment">// MONGO_URI 写在环境变量中</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> connectMongo;
+
+</code></pre>
+<h4 id="数据模型">数据模型</h4>
+<p>我们先增加一个 <code>USER</code>，相关规则可以查看此处<a href="https://mongoosejs.com/docs/schematypes.html">schematypes</a></p>
+<p>首先定义一个user的 <code>DTO</code>和 <code>VO</code>在 <code>types/user.ts</code></p>
+<pre><code class="language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> USER_DTO {
+    <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;
+    <span class="hljs-attr">image</span>: <span class="hljs-built_in">string</span>;
+    <span class="hljs-attr">email</span>: <span class="hljs-built_in">string</span>;
+    <span class="hljs-attr">password</span>: <span class="hljs-built_in">string</span>;
+    created_at?: <span class="hljs-title class_">Date</span>;
+    updated_at?: <span class="hljs-title class_">Date</span>;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> USER_VO {
+    <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;
+    <span class="hljs-attr">image</span>: <span class="hljs-built_in">string</span>;
+    <span class="hljs-attr">email</span>: <span class="hljs-built_in">string</span>;
+    <span class="hljs-attr">created_at</span>: <span class="hljs-title class_">Date</span>;
+    <span class="hljs-attr">updated_at</span>: <span class="hljs-title class_">Date</span>;
+}
+
+</code></pre>
+<pre><code class="language-ts"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Schema</span>, model, models } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;mongoose&quot;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-variable constant_">USER_DTO</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/types/user
+
+const userSchema = new Schema&lt;USER_DTO&gt;({
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+    max_length: 50,
+  },
+  image: {
+    type: String,
+    required: true,
+    default: &quot;https://blog-1302483222.cos.ap-shanghai.myqcloud.com/images.jpg&quot;,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    lowercase: true,
+    match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*\.(\w{2,})+$/,
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 8,
+  },
+  created_at: {
+    type: Date,
+    default: Date.now,
+  },
+  updated_at: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const User = models?.User || model&lt;USER_DTO&gt;(&quot;User&quot;, userSchema);
+export default User;
+
+</span></code></pre>
+<h4 id="常用api">常用API</h4>
+<p>可以熟悉以下常用的语法。</p>
+<pre><code class="language-bash">
+**增**：Modal.save()
+
+**删**：Modal.deleteOne({name: <span class="hljs-string">&#x27;xxx&#x27;</span>})
+
+**改**：Modal.findByIdAndUpdate(<span class="hljs-built_in">id</span>, { name: <span class="hljs-string">&#x27;jason bourne&#x27;</span> }, options)
+
+**查**：：Modal.deleteOne({ name: <span class="hljs-string">&#x27;xxx })
+</span></code></pre>
+<p>每种操作都有很多种方法，可以按需使用，具体文档查找, <a href="https://mongoosejs.com/docs/api/model.html">model操作</a></p>
+<p>到这里我们就基本完成了数据库的部分，可以进入到下一阶段登录。</p>
+<h2 id="登录">登录</h2>
+<p>登录使用<a href="https://next-auth.js.org/">next-auth</a>，这里可以很方便的让我实现第三方的登录。</p>
+<h3 id="next-auth安装">NEXT-AUTH安装</h3>
+<pre><code class="language-bash">pnpm add next-auth
+</code></pre>
+<h3 id="初始化配置">初始化配置</h3>
+<p>新建配置，在 <code>lib</code>目录中创建 <code>auth_option.ts</code>，这边我打算使用自定义登录以及github和google登录，微信登录看了一下需要注册企业，个人的话也要交钱，所以就暂时没有接入，短信登录需要接入短信服务，也要收费。</p>
+<h4 id="申请github登录">申请Github登录</h4>
+<p>进入 GitHub 之后，打开 <a href="https://github.com/settings">Settings</a> 中的 <a href="https://github.com/settings/apps">Developer Settings</a>，点击左侧的 <a href="https://blog-1302483222.cos.ap-shanghai.myqcloud.com/WX20240731-224830%402x.png">OAuth Apps</a> 后，再点击右边的按钮 <strong>New OAuth App</strong>，创建一个新的配置。</p>
+<p><img src="https://blog-1302483222.cos.ap-shanghai.myqcloud.com/WX20240731-224830%402x.png" alt="New OAuth App">，然后一步步往下走新建成功后，即可以拿到 <code>CLIENT_ID</code>和 <code>Secret</code>，可以把这些内容维护到 <code>env</code>文件中</p>
+<p>然后完成以下配置。</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> <span class="hljs-title class_">GitHubProvider</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next-auth/providers/github&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">GoogleProvider</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next-auth/providers/google&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">CredentialsProvider</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next-auth/providers/credentials&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">User</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;models/user&quot;</span>;
+<span class="hljs-keyword">import</span> connectMongo <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/lib/mongoose&quot;</span>;
+<span class="hljs-keyword">import</span> { decrypt, encrypt } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/lib/crypto&quot;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">AuthOptions</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next-auth&quot;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">authOptions</span>: <span class="hljs-title class_">AuthOptions</span> = {
+    <span class="hljs-attr">secret</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">SECRET_KEY</span>, <span class="hljs-comment">// 密钥用来加密token</span>
+    <span class="hljs-comment">// adapter: PrismaAdapter(MongoPrisma as PrismaClient) as Adapter,</span>
+    <span class="hljs-attr">debug</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// 可以查看登录时候的日志</span>
+    <span class="hljs-attr">providers</span>: [
+      <span class="hljs-title class_">GitHubProvider</span>({
+        <span class="hljs-attr">clientId</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">GIT_CLIENT_ID</span> <span class="hljs-keyword">as</span> string,
+        <span class="hljs-attr">clientSecret</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">GIT_CLIENT_SECRET</span> <span class="hljs-keyword">as</span> string,
+        <span class="hljs-attr">httpOptions</span>: {
+          <span class="hljs-attr">timeout</span>: <span class="hljs-number">100000</span>,
+        },
+        <span class="hljs-comment">// 获取到用户profile后可以存储到数据库</span>
+        <span class="hljs-keyword">async</span> <span class="hljs-title function_">profile</span>(<span class="hljs-params">profile</span>) {
+          <span class="hljs-keyword">try</span> {
+            <span class="hljs-comment">// 连接数据库</span>
+            <span class="hljs-keyword">await</span> <span class="hljs-title function_">connectMongo</span>();
+          
+            <span class="hljs-comment">// 查询是否存在</span>
+            <span class="hljs-keyword">const</span> existingUser = <span class="hljs-keyword">await</span> <span class="hljs-title class_">User</span>.<span class="hljs-title function_">findOne</span>({ <span class="hljs-attr">email</span>: profile.<span class="hljs-property">email</span> });
+          
+
+            <span class="hljs-comment">// 如果存在就更新以下名字和图像</span>
+            <span class="hljs-keyword">if</span> (existingUser) {
+              <span class="hljs-comment">// Update existing user</span>
+              <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> <span class="hljs-title class_">User</span>.<span class="hljs-title function_">findByIdAndUpdate</span>(existingUser.<span class="hljs-property">_id</span>, {
+                <span class="hljs-attr">name</span>: profile.<span class="hljs-property">name</span> || profile.<span class="hljs-property">login</span>,
+                <span class="hljs-attr">image</span>: profile.<span class="hljs-property">avatar_url</span>,
+              });
+              <span class="hljs-keyword">return</span> existingUser;
+            }
+  
+            <span class="hljs-comment">/// 如果不存在就新增一个</span>
+            <span class="hljs-keyword">const</span> newUser = <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>({
+              <span class="hljs-attr">name</span>: profile.<span class="hljs-property">name</span> || profile.<span class="hljs-property">login</span>,
+              <span class="hljs-attr">email</span>: profile.<span class="hljs-property">email</span>,
+              <span class="hljs-attr">image</span>: profile.<span class="hljs-property">avatar_url</span>,
+              <span class="hljs-attr">password</span>: <span class="hljs-title function_">encrypt</span>(profile.<span class="hljs-property">id</span>.<span class="hljs-title function_">toString</span>()), <span class="hljs-comment">// Use GitHub ID as password</span>
+            });
+  
+            <span class="hljs-keyword">await</span> newUser.<span class="hljs-title function_">save</span>();
+  
+            <span class="hljs-keyword">return</span> newUser;
+          } <span class="hljs-keyword">catch</span> (<span class="hljs-attr">e</span>: any ) {
+            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(e.<span class="hljs-property">message</span>);
+          }
+        },
+      }),
+      <span class="hljs-title class_">GoogleProvider</span>({
+        <span class="hljs-attr">clientId</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">GOOGLE_ID</span> <span class="hljs-keyword">as</span> string,
+        <span class="hljs-attr">clientSecret</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">GOOGLE_SECRET_KEY</span> <span class="hljs-keyword">as</span> string,
+        <span class="hljs-attr">httpOptions</span>: {
+          <span class="hljs-attr">timeout</span>: <span class="hljs-number">100000</span>,
+        },
+      }),
+      <span class="hljs-title class_">CredentialsProvider</span>({
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Credentials&quot;</span>,
+        <span class="hljs-attr">credentials</span>: {
+          <span class="hljs-attr">email</span>: {
+            <span class="hljs-attr">label</span>: <span class="hljs-string">&quot;用户名&quot;</span>,
+            <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;text&quot;</span>,
+            <span class="hljs-attr">placeholder</span>: <span class="hljs-string">&quot;请输入用户名&quot;</span>,
+          },
+          <span class="hljs-attr">password</span>: {
+            <span class="hljs-attr">label</span>: <span class="hljs-string">&quot;密码&quot;</span>,
+            <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;password&quot;</span>,
+            <span class="hljs-attr">placeholder</span>: <span class="hljs-string">&quot;请输入密码&quot;</span>,
+          },
+        },
+
+        <span class="hljs-comment">// 自定义登录的鉴权</span>
+        <span class="hljs-keyword">async</span> <span class="hljs-title function_">authorize</span>(<span class="hljs-params">credentials, req</span>) {
+          <span class="hljs-comment">// 出入进来账号和密码</span>
+          <span class="hljs-keyword">if</span> (!credentials?.<span class="hljs-property">email</span> || !credentials?.<span class="hljs-property">password</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>
+          }
+          <span class="hljs-keyword">await</span> <span class="hljs-title function_">connectMongo</span>();
+          <span class="hljs-comment">// 查询用户</span>
+          <span class="hljs-keyword">const</span> user = <span class="hljs-keyword">await</span> <span class="hljs-title class_">User</span>.<span class="hljs-title function_">findOne</span>({ <span class="hljs-attr">email</span>: credentials.<span class="hljs-property">email</span> });
+
+          <span class="hljs-keyword">if</span> (!user) {
+            <span class="hljs-keyword">throw</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;用户不存在，请检查邮箱是否正确&#x27;</span>)
+          } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">if</span> (credentials.<span class="hljs-property">password</span> ===  <span class="hljs-title function_">decrypt</span>(user?.<span class="hljs-property">password</span> <span class="hljs-keyword">as</span> string)) {
+              <span class="hljs-keyword">return</span> user
+            } <span class="hljs-keyword">else</span> {
+              <span class="hljs-keyword">throw</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;密码不正确，请重新输入&#x27;</span>)
+            }
+          }
+        },
+      }),
+    ],
+    <span class="hljs-comment">// session 有效期 2天</span>
+    <span class="hljs-attr">session</span>: {
+      <span class="hljs-attr">strategy</span>: <span class="hljs-string">&quot;jwt&quot;</span>,
+      <span class="hljs-attr">maxAge</span>: <span class="hljs-number">2</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,
+    },
+
+    <span class="hljs-comment">// session的callback可以修改session传递的数据</span>
+    <span class="hljs-attr">callbacks</span>: {
+      <span class="hljs-attr">session</span>: <span class="hljs-keyword">async</span> (<span class="hljs-attr">data</span>: { <span class="hljs-attr">session</span>: any; }) =&gt; {
+        <span class="hljs-keyword">return</span> data.<span class="hljs-property">session</span>;
+      },
+    },
+  
+    <span class="hljs-attr">pages</span>: {
+      <span class="hljs-attr">signIn</span>: <span class="hljs-string">&quot;/&quot;</span>,
+    },
+  }
+</code></pre>
+<h3 id="创建路由-1">创建路由</h3>
+<p>在 <code>api</code>下创建，<code>[...nextauth]/route.ts</code></p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { authOptions } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/lib/auth_options&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">NextAuth</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next-auth&quot;</span>;
+
+<span class="hljs-keyword">const</span> handler = <span class="hljs-title class_">NextAuth</span>(authOptions);
+
+<span class="hljs-keyword">export</span> { handler <span class="hljs-keyword">as</span> <span class="hljs-variable constant_">GET</span>, handler <span class="hljs-keyword">as</span> <span class="hljs-variable constant_">POST</span> };
+
+</code></pre>
+<h3 id="编写登录组件">编写登录组件</h3>
+<p>通过调用 <code>signIn</code>的方法传入不同的参数即可实现对应的登录。</p>
+<pre><code class="language-js"><span class="hljs-string">&quot;use client&quot;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">ChangeEvent</span>, <span class="hljs-title class_">FocusEvent</span>, <span class="hljs-title class_">FormEvent</span>, useEffect, useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+<span class="hljs-keyword">import</span> loginStyle <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./login.module.scss&quot;</span>;
+<span class="hljs-keyword">import</span> classnames <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;classnames&quot;</span>;
+<span class="hljs-keyword">import</span> { motion } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;framer-motion&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">LoginBox</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./component/LoginBox&quot;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Modal</span>, <span class="hljs-title class_">Divider</span>, <span class="hljs-title class_">Button</span>, <span class="hljs-title class_">Input</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;antd&quot;</span>;
+<span class="hljs-keyword">import</span> { post } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;lib/fetch&quot;</span>;
+<span class="hljs-keyword">import</span> { signIn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next-auth/react&quot;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">SwapOutlined</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@ant-design/icons&quot;</span>;
+
+interface <span class="hljs-title class_">FormState</span> {
+  <span class="hljs-attr">password</span>: string;
+  <span class="hljs-attr">email</span>: string;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">LoginModal</span>(<span class="hljs-params">data: {
+  open: boolean;
+  className?: string;
+  onClose?: () =&gt; <span class="hljs-keyword">void</span>;
+}</span>) {
+  <span class="hljs-keyword">const</span> [formState, setFormState] = useState&lt;<span class="hljs-title class_">FormState</span>&gt;({
+    <span class="hljs-attr">email</span>: <span class="hljs-string">&quot;&quot;</span>,
+    <span class="hljs-attr">password</span>: <span class="hljs-string">&quot;&quot;</span>,
+  });
+  <span class="hljs-comment">//</span>
+
+  <span class="hljs-comment">// 登录</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">login</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-title function_">signIn</span>(<span class="hljs-string">&quot;credentials&quot;</span>, { ...formState });
+  };
+
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">confirm</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">if</span> (isLogin) {
+      <span class="hljs-title function_">login</span>();
+    }
+  };
+  <span class="hljs-keyword">const</span> [isLogin, setIsLogin] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">true</span>);
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Modal</span>
+        <span class="hljs-attr">open</span>=<span class="hljs-string">{data.open}</span>
+        <span class="hljs-attr">destroyOnClose</span>
+        <span class="hljs-attr">width</span>=<span class="hljs-string">{500}</span>
+        <span class="hljs-attr">footer</span>=<span class="hljs-string">{null}</span>
+        <span class="hljs-attr">onClose</span>=<span class="hljs-string">{data.onClose}</span>
+        <span class="hljs-attr">onCancel</span>=<span class="hljs-string">{data.onClose}</span>
+      &gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">section</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;flex flex-col items-center justify-center gap-6 pt-8&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;flex items-center  w-full&quot;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;text-2xl font-bold text-black&quot;</span>&gt;</span>
+                {isLogin ? &quot;登录&quot; : &quot;注册&quot;}
+                <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+                  <span class="hljs-attr">type</span>=<span class="hljs-string">{</span>&quot;<span class="hljs-attr">text</span>&quot;}
+                  <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setIsLogin(!isLogin)}
+                  icon={<span class="hljs-tag">&lt;<span class="hljs-name">SwapOutlined</span> /&gt;</span>}
+                &gt;
+                  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;sr-only&quot;</span>&gt;</span>
+                    {isLogin ? &quot;Switch to Register&quot; : &quot;Switch to Login&quot;}
+                  <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;w-full space-y-4&quot;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;space-y-2&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">htmlFor</span>=<span class="hljs-string">&quot;email&quot;</span>&gt;</span>邮箱<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Input</span>
+                  <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;email&quot;</span>
+                  <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;请输入邮箱&quot;</span>
+                  <span class="hljs-attr">onChange</span>=<span class="hljs-string">{(event:</span> <span class="hljs-attr">ChangeEvent</span>&lt;<span class="hljs-attr">HTMLInputElement</span>&gt;</span>) =&gt; {
+                    setFormState({
+                      email: event.target.value,
+                      password: formState.password,
+                    });
+                  }}
+                /&gt;
+              <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;space-y-2&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">htmlFor</span>=<span class="hljs-string">&quot;password&quot;</span>&gt;</span>密码<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Input</span>
+                  <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;password&quot;</span>
+                  <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;password&quot;</span>
+                  <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;请输入密码&quot;</span>
+                  <span class="hljs-attr">onChange</span>=<span class="hljs-string">{(event:</span> <span class="hljs-attr">ChangeEvent</span>&lt;<span class="hljs-attr">HTMLInputElement</span>&gt;</span>) =&gt; {
+                    setFormState({
+                      password: event.target.value,
+                      email: formState.email,
+                    });
+                  }}
+                /&gt;
+              <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+              {!isLogin &amp;&amp; (
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;space-y-2&quot;</span>&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">htmlFor</span>=<span class="hljs-string">&quot;password&quot;</span>&gt;</span>验证码<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+                  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Input</span>
+                      <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;password&quot;</span>
+                      <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;password&quot;</span>
+                      <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;请输入验证码&quot;</span>
+                      <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">width:</span> &quot;<span class="hljs-attr">250px</span>&quot; }}
+                    /&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>&gt;</span>发送验证码<span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span>
+                  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+              )}
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;w-full&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;primary&quot;</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> confirm()}&gt;
+              <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot; tracking-[] &quot;</span>&gt;</span>{isLogin ? &quot;登 录&quot; : &quot;注 册&quot;}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Divider</span>&gt;</span>或<span class="hljs-tag">&lt;/<span class="hljs-name">Divider</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">LoginBox</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Modal</span>&gt;</span>
+    <span class="hljs-tag">&lt;/&gt;</span>
+  );
+}
+
+// loginBox
+
+import { signIn } from &quot;next-auth/react&quot;;
+import { Button } from &quot;antd&quot;;
+import { GithubOutlined, GoogleOutlined } from &quot;@ant-design/icons&quot;;
+
+export default function LoginBox() {
+  const sign = async (type: &quot;github&quot; | &quot;google&quot;) =&gt; {
+    await signIn(type, {
+      callbackUrl: location.origin,
+    });
+  };
+  return (
+    <span class="hljs-tag">&lt;&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;text-xl&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+          <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;primary&quot;</span>
+          <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;w-full !bg-[#24292F] mb-4&quot;</span>
+          <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> sign(&quot;github&quot;)}
+          icon={<span class="hljs-tag">&lt;<span class="hljs-name">GithubOutlined</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">GithubOutlined</span>&gt;</span>}
+        &gt;
+          Login With Github
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+          <span class="hljs-attr">color</span>=<span class="hljs-string">&quot;red&quot;</span>
+          <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;w-full&quot;</span>
+          <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> sign(&quot;google&quot;)}
+          icon={<span class="hljs-tag">&lt;<span class="hljs-name">GoogleOutlined</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">GoogleOutlined</span>&gt;</span>}
+        &gt;
+          Login With Google
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/&gt;</span>
+  );
+}
+
+</span></code></pre>
+<p>在页面上点击登录，弹出登录窗口。
+<img src="https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/github_login.png" alt="LOGIN"></p>
+<p>登录成功后可以看到，返回了信息以及在 <code>cookie</code>中写入了token.</p>
+<p><img src="https://blog-1302483222.cos.ap-shanghai.myqcloud.com/session.png" alt="session"></p>
+<p><img src="https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/token.png" alt="token"></p>
+<p>这样我们就完成了登录，注册还没做可以用一个 <code>nodemailer</code>来实现发送验证码，数据存储在 <code>redis</code>，缓存有效期1分钟，注册的时候验证以下验证码即可，密码加密存入数据库即可。</p>
+<p>到此我们的准备工作基本上都做完了，现在就是业务开发了，这边直接不说了，没什么说的。</p>
+<hr>
+<h2 id="打包">打包</h2>
+<p>直接使用 <code>pnpm build</code>即可打包，记住，打包的时候dev模式需要停止。</p>
+<h2 id="ci">CI</h2>
+<p>这里使用 <code>GITHUB_ACTION</code>完成，在 <code>.github</code>下新增一个 <code>nodejs.yml</code>，添加如下内容。</p>
+<p>具体操作就是使用 <code>ssh</code>登录到服务端。</p>
+<p>然后执行拉取代码和打包的操作</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cd</span> /www/blog-offical &amp;&amp; git pull &amp;&amp; pnpm install &amp;&amp; pnpm build
+</code></pre>
+<pre><code class="language-yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">deploy</span>
+<span class="hljs-attr">on:</span>
+  <span class="hljs-attr">push:</span>
+    <span class="hljs-attr">branches:</span> [<span class="hljs-string">main</span>]
+  <span class="hljs-attr">pull_request:</span>
+    <span class="hljs-attr">branches:</span> [<span class="hljs-string">main</span>]
+
+<span class="hljs-attr">jobs:</span>
+  <span class="hljs-attr">build:</span>
+    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span>
+    <span class="hljs-attr">steps:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">executing</span> <span class="hljs-string">remote</span> <span class="hljs-string">ssh</span> <span class="hljs-string">commands</span>
+
+        <span class="hljs-attr">uses:</span> <span class="hljs-string">appleboy/ssh-action@master</span>
+        <span class="hljs-attr">with:</span>
+          <span class="hljs-attr">host:</span> <span class="hljs-string">${{secrets.DEPLOY_HOST}}</span>
+          <span class="hljs-attr">username:</span> <span class="hljs-string">${{secrets.DEPLOY_USER}}</span>
+          <span class="hljs-attr">password:</span> <span class="hljs-string">${{secrets.DEPLOY_PASS_WORD}}</span>
+          <span class="hljs-attr">script:</span> <span class="hljs-string">cd</span> <span class="hljs-string">/www/blog-offical</span> <span class="hljs-string">&amp;&amp;</span> <span class="hljs-string">git</span> <span class="hljs-string">pull</span> <span class="hljs-string">&amp;&amp;</span> <span class="hljs-string">pnpm</span> <span class="hljs-string">install</span> <span class="hljs-string">&amp;&amp;</span> <span class="hljs-string">pnpm</span> <span class="hljs-string">build</span> <span class="hljs-string">&amp;&amp;</span> <span class="hljs-string">pm2</span> <span class="hljs-string">stop</span> <span class="hljs-string">all</span> <span class="hljs-string">&amp;&amp;</span>  <span class="hljs-string">pm2</span> <span class="hljs-string">delete</span> <span class="hljs-string">blog</span> <span class="hljs-string">&amp;&amp;</span> <span class="hljs-string">pm2</span> <span class="hljs-string">start</span> <span class="hljs-string">--name</span> <span class="hljs-string">blog</span> <span class="hljs-string">npm</span> <span class="hljs-string">--</span> <span class="hljs-string">run</span> <span class="hljs-string">start</span>
+
+</code></pre>
+<h2 id="cd">CD</h2>
+<p>构建完成了，我们需要部署，部署的话我们采用 <code>nginx</code>来作为web服务器，使用 <code>pm2</code>来管理进程，确保稳定性。</p>
+<h3 id="nginx">Nginx</h3>
+<p>一般linux系统安装，是通过 <code>yum install nginx</code>来完成，安装目录在 <code>/etc/nginx</code></p>
+<p>这是Nginx的配置，开启了转发，http2，以及跨域问题，以及 <code>https</code> https的配置需要申请证书，一般都有免费的，只是时间比较短，需要经常更换。</p>
+<pre><code class="language-nginx">
+<span class="hljs-attribute">user</span> nginx;
+<span class="hljs-attribute">worker_processes</span> auto;
+<span class="hljs-attribute">error_log</span> /var/log/nginx/<span class="hljs-literal">error</span>.log;
+<span class="hljs-attribute">pid</span> /run/nginx.pid;
+
+<span class="hljs-comment"># Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.</span>
+<span class="hljs-attribute">include</span> /usr/share/nginx/modules/<span class="hljs-regexp">*.conf</span>;
+
+<span class="hljs-section">events</span> {
+    <span class="hljs-attribute">worker_connections</span> <span class="hljs-number">1024</span>;
+}
+
+<span class="hljs-section">http</span> {
+    <span class="hljs-attribute">log_format</span>  main  <span class="hljs-string">&#x27;<span class="hljs-variable">$remote_addr</span> - <span class="hljs-variable">$remote_user</span> [<span class="hljs-variable">$time_local</span>] &quot;<span class="hljs-variable">$request</span>&quot; &#x27;</span>
+                      <span class="hljs-string">&#x27;<span class="hljs-variable">$status</span> <span class="hljs-variable">$body_bytes_sent</span> &quot;<span class="hljs-variable">$http_referer</span>&quot; &#x27;</span>
+                      <span class="hljs-string">&#x27;&quot;<span class="hljs-variable">$http_user_agent</span>&quot; &quot;<span class="hljs-variable">$http_x_forwarded_for</span>&quot;&#x27;</span>;
+
+    <span class="hljs-attribute">access_log</span>  /var/log/nginx/access.log  main;
+
+    <span class="hljs-attribute">sendfile</span>            <span class="hljs-literal">on</span>;
+    <span class="hljs-attribute">tcp_nopush</span>          <span class="hljs-literal">on</span>;
+    <span class="hljs-attribute">tcp_nodelay</span>         <span class="hljs-literal">on</span>;
+    <span class="hljs-attribute">keepalive_timeout</span>   <span class="hljs-number">65</span>;
+    <span class="hljs-attribute">types_hash_max_size</span> <span class="hljs-number">2048</span>;
+
+    <span class="hljs-attribute">include</span>             /etc/nginx/mime.types;
+    <span class="hljs-attribute">default_type</span>        application/octet-stream;
+
+    <span class="hljs-comment"># Load modular configuration files from the /etc/nginx/conf.d directory.</span>
+    <span class="hljs-comment"># See http://nginx.org/en/docs/ngx_core_module.html#include</span>
+    <span class="hljs-comment"># for more information.</span>
+    <span class="hljs-attribute">include</span> /etc/nginx/conf.d/<span class="hljs-regexp">*.conf</span>;
+  
+    <span class="hljs-section">server</span> {
+        <span class="hljs-attribute">listen</span>       <span class="hljs-number">80</span> default_server;
+        <span class="hljs-attribute">listen</span>       [::]:<span class="hljs-number">80</span> default_server;
+        <span class="hljs-attribute">server_name</span>  _;
+        <span class="hljs-attribute">root</span>         /usr/share/nginx/html;
+        <span class="hljs-comment"># Load configuration files for the default server block.</span>
+        <span class="hljs-attribute">include</span> /etc/nginx/default.d/<span class="hljs-regexp">*.conf</span>;
+
+        <span class="hljs-section">location</span> /  {
+             <span class="hljs-comment"># 添加以下配置以启用 CORS</span>
+            <span class="hljs-attribute">if</span> (<span class="hljs-variable">$request_method</span> = <span class="hljs-string">&#x27;OPTIONS&#x27;</span>) {
+                <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Origin&#x27;</span> <span class="hljs-string">&#x27;*&#x27;</span>;
+                <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Methods&#x27;</span> <span class="hljs-string">&#x27;GET, POST, OPTIONS, DELETE, PUT&#x27;</span>;
+                <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Headers&#x27;</span> <span class="hljs-string">&#x27;Origin, Authorization, Accept, Content-Type, X-Requested-With&#x27;</span>;
+                <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Max-Age&#x27;</span> <span class="hljs-number">1728000</span>;
+                <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Content-Type&#x27;</span> <span class="hljs-string">&#x27;text/plain charset=UTF-8&#x27;</span>;
+                <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Content-Length&#x27;</span> <span class="hljs-number">0</span>;
+                <span class="hljs-attribute">return</span> <span class="hljs-number">204</span>;
+            }
+
+            <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Origin&#x27;</span> <span class="hljs-string">&#x27;*&#x27;</span>;
+            <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Methods&#x27;</span> <span class="hljs-string">&#x27;GET, POST, OPTIONS, DELETE, PUT&#x27;</span>;
+            <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Headers&#x27;</span> <span class="hljs-string">&#x27;Origin, Authorization, Accept, Content-Type, X-Requested-With&#x27;</span>;
+      
+            <span class="hljs-attribute">proxy_pass</span> http://localhost:3000;  <span class="hljs-comment"># 将请求转发到本地主机的 3000 端口</span>
+            <span class="hljs-attribute">proxy_set_header</span> Host <span class="hljs-variable">$host</span>;
+            <span class="hljs-attribute">proxy_set_header</span> X-Real-IP <span class="hljs-variable">$remote_addr</span>;
+            <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-For <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;
+            <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-Proto <span class="hljs-variable">$scheme</span>;
+        }
+
+        <span class="hljs-attribute">error_page</span> <span class="hljs-number">404</span> /<span class="hljs-number">404</span>.html;
+            <span class="hljs-section">location</span> = /40x.html {
+        }
+
+        <span class="hljs-attribute">error_page</span> <span class="hljs-number">500</span> <span class="hljs-number">502</span> <span class="hljs-number">503</span> <span class="hljs-number">504</span> /50x.html;
+            <span class="hljs-section">location</span> = /50x.html {
+        }
+    }
+
+<span class="hljs-comment"># Settings for a TLS enabled server.</span>
+
+    <span class="hljs-section">server</span> {
+        <span class="hljs-attribute">listen</span>       <span class="hljs-number">443</span> ssl http2 default_server;
+        <span class="hljs-attribute">listen</span>       [::]:<span class="hljs-number">443</span> ssl http2 default_server;
+        <span class="hljs-attribute">server_name</span>  _;
+        <span class="hljs-attribute">root</span>         /usr/share/nginx/html;
+
+        <span class="hljs-attribute">ssl_certificate</span> <span class="hljs-string">&quot;/www/cer/www.super-super.cn_bundle.pem&quot;</span>;
+        <span class="hljs-attribute">ssl_certificate_key</span> <span class="hljs-string">&quot;/www/cer/www.super-super.cn.key&quot;</span>;
+        <span class="hljs-attribute">ssl_session_cache</span> shared:SSL:<span class="hljs-number">1m</span>;
+        <span class="hljs-attribute">ssl_session_timeout</span>  <span class="hljs-number">10m</span>;
+        <span class="hljs-attribute">ssl_ciphers</span> PROFILE=SYSTEM;
+        <span class="hljs-attribute">ssl_prefer_server_ciphers</span> <span class="hljs-literal">on</span>;
+
+        <span class="hljs-comment"># Load configuration files for the default server block.</span>
+        <span class="hljs-attribute">include</span> /etc/nginx/default.d/<span class="hljs-regexp">*.conf</span>;
+
+        <span class="hljs-section">location</span> / {
+            <span class="hljs-attribute">if</span> (<span class="hljs-variable">$request_method</span> = <span class="hljs-string">&#x27;OPTIONS&#x27;</span>) {
+                <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Origin&#x27;</span> <span class="hljs-string">&#x27;*&#x27;</span>;
+                <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Methods&#x27;</span> <span class="hljs-string">&#x27;GET, POST, OPTIONS, DELETE, PUT&#x27;</span>;
+                <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Headers&#x27;</span> <span class="hljs-string">&#x27;Origin, Authorization, Accept, Content-Type, X-Requested-With&#x27;</span>;
+                <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Max-Age&#x27;</span> <span class="hljs-number">1728000</span>;
+                <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Content-Type&#x27;</span> <span class="hljs-string">&#x27;text/plain charset=UTF-8&#x27;</span>;
+                <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Content-Length&#x27;</span> <span class="hljs-number">0</span>;
+                <span class="hljs-attribute">return</span> <span class="hljs-number">204</span>;
+            }
+
+            <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Origin&#x27;</span> <span class="hljs-string">&#x27;*&#x27;</span>;
+            <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Methods&#x27;</span> <span class="hljs-string">&#x27;GET, POST, OPTIONS, DELETE, PUT&#x27;</span>;
+            <span class="hljs-attribute">add_header</span> <span class="hljs-string">&#x27;Access-Control-Allow-Headers&#x27;</span> <span class="hljs-string">&#x27;Origin, Authorization, Accept, Content-Type, X-Requested-With&#x27;</span>;
+      
+            <span class="hljs-attribute">proxy_pass</span> http://localhost:3000;  <span class="hljs-comment"># 将请求转发到本地主机的 3000 端口</span>
+            <span class="hljs-attribute">proxy_set_header</span> Host <span class="hljs-variable">$host</span>;
+            <span class="hljs-attribute">proxy_set_header</span> X-Real-IP <span class="hljs-variable">$remote_addr</span>;
+            <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-For <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;
+            <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-Proto <span class="hljs-variable">$scheme</span>;
+        }
+
+        <span class="hljs-attribute">error_page</span> <span class="hljs-number">404</span> /<span class="hljs-number">404</span>.html;
+            <span class="hljs-section">location</span> = /40x.html {
+        }
+
+        <span class="hljs-attribute">error_page</span> <span class="hljs-number">500</span> <span class="hljs-number">502</span> <span class="hljs-number">503</span> <span class="hljs-number">504</span> /50x.html;
+            <span class="hljs-section">location</span> = /50x.html {
+        }
+    }
+
+}
+
+</code></pre>
+<h3 id="常用命令">常用命令</h3>
+<p>启动服务</p>
+<pre><code>nginx
+</code></pre>
+<p>停止服务</p>
+<pre><code>nginx -s stop
+</code></pre>
+<p>重新加载，因为一般重新配置之后，不希望重启服务，这时可以使用重新加载。</p>
+<pre><code>nginx -s realod
+</code></pre>
+<h2 id="域名解析">域名解析</h2>
+<p>主要说一下域名解析的过程以及记录值的区别。</p>
+<h2 id="seo相关">SEO相关</h2>
+<h3 id="metadata">Metadata</h3>
+<p>在NextJs中，提供了设置metadata的方式，设置在<code>page.tsx</code>或者<code>layout.tsx</code>.</p>
+<p>分为静态和动态两种。</p>
+<h4 id="静态metadata">静态metadata</h4>
+<p>静态的metadata直接export一个metada对象即可。</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> type { <span class="hljs-title class_">Metadata</span>, <span class="hljs-title class_">Viewport</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;next&quot;</span>;
+
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">APP_NAME</span> = <span class="hljs-string">&quot;Blog&quot;</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">APP_DEFAULT_TITLE</span> = <span class="hljs-string">&quot;汪浩的博客&quot;</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">APP_TITLE_TEMPLATE</span> = <span class="hljs-string">&quot;博客&quot;</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">APP_DESCRIPTION</span> = <span class="hljs-string">&quot;汪浩（Isaac Wang）的博客，一些关于技术和生活的的记录&quot;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">metadata</span>: <span class="hljs-title class_">Metadata</span> = {
+  <span class="hljs-attr">keywords</span>:
+    <span class="hljs-string">&quot;博客，汪浩，Isaac Wang, Javascript, Vue, Css, Nextjs, React, TypeScript, NextJs, NestJs, Nodejs, Docker, web3，区块链&quot;</span>,
+  <span class="hljs-attr">applicationName</span>: <span class="hljs-variable constant_">APP_NAME</span>,
+  <span class="hljs-attr">title</span>: {
+    <span class="hljs-attr">default</span>: <span class="hljs-variable constant_">APP_DEFAULT_TITLE</span>,
+    <span class="hljs-attr">template</span>: <span class="hljs-variable constant_">APP_TITLE_TEMPLATE</span>,
+  },
+  <span class="hljs-attr">description</span>: <span class="hljs-variable constant_">APP_DESCRIPTION</span>,
+  <span class="hljs-attr">manifest</span>: <span class="hljs-string">&quot;./manifest.json&quot;</span>,
+  <span class="hljs-attr">appleWebApp</span>: {
+    <span class="hljs-attr">capable</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">statusBarStyle</span>: <span class="hljs-string">&quot;default&quot;</span>,
+    <span class="hljs-attr">title</span>: <span class="hljs-variable constant_">APP_DEFAULT_TITLE</span>,
+    <span class="hljs-comment">// startUpImage: [],</span>
+  },
+  <span class="hljs-attr">formatDetection</span>: {
+    <span class="hljs-attr">telephone</span>: <span class="hljs-literal">false</span>,
+  },
+  <span class="hljs-attr">openGraph</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;website&quot;</span>,
+    <span class="hljs-attr">siteName</span>: <span class="hljs-variable constant_">APP_NAME</span>,
+    <span class="hljs-attr">title</span>: {
+      <span class="hljs-attr">default</span>: <span class="hljs-variable constant_">APP_DEFAULT_TITLE</span>,
+      <span class="hljs-attr">template</span>: <span class="hljs-variable constant_">APP_TITLE_TEMPLATE</span>,
+    },
+    <span class="hljs-attr">description</span>: <span class="hljs-variable constant_">APP_DESCRIPTION</span>,
+  },
+  <span class="hljs-attr">twitter</span>: {
+    <span class="hljs-attr">card</span>: <span class="hljs-string">&quot;summary&quot;</span>,
+    <span class="hljs-attr">title</span>: {
+      <span class="hljs-attr">default</span>: <span class="hljs-variable constant_">APP_DEFAULT_TITLE</span>,
+      <span class="hljs-attr">template</span>: <span class="hljs-variable constant_">APP_TITLE_TEMPLATE</span>,
+    },
+    <span class="hljs-attr">description</span>: <span class="hljs-variable constant_">APP_DESCRIPTION</span>,
+  },
+};
+</code></pre>
+<p>然后就会在页面上得到解析，会被加载到head中。</p>
+<p><img src="https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/metadata_static.png" alt="metadata"></p>
+<h4 id="动态metadata">动态Metadata</h4>
+<p>比如我们一些详情页，希望我们的标题是详情的title，content是详情的内容。这时候我们就可以用，例如博客的详情页面，这时候我们可以先获取到数据，然后使用<code>generateMetadata</code>函数来生成动态的metadata，如下：</p>
+<pre><code class="language-js">
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">generateMetadata</span>(<span class="hljs-params">{
+  params,
+}: {
+  params: { id: string };
+}</span>): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">Metadata</span>&gt; {
+  <span class="hljs-keyword">const</span> detail = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getBlogDetail</span>(params.<span class="hljs-property">id</span>);
+
+  <span class="hljs-keyword">if</span> (!detail) {
+    <span class="hljs-keyword">return</span> {};
+  }
+
+  <span class="hljs-keyword">return</span> {
+    <span class="hljs-attr">title</span>: detail.<span class="hljs-property">title</span>,
+    <span class="hljs-attr">description</span>: detail.<span class="hljs-property">content</span>,
+    <span class="hljs-attr">keywords</span>: detail.<span class="hljs-property">tags</span>.<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot;,&quot;</span>),
+    <span class="hljs-attr">category</span>: detail.<span class="hljs-property">categories</span>.<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot;, &quot;</span>),
+    <span class="hljs-attr">abstract</span>: detail.<span class="hljs-property">abstract</span>,
+    <span class="hljs-attr">creator</span>: <span class="hljs-string">&quot;汪浩（isaac wang）&quot;</span>,
+    <span class="hljs-attr">authors</span>: [
+      { <span class="hljs-attr">url</span>: <span class="hljs-string">&quot;https://github.com/wanghao1993&quot;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;汪浩（isaac wang）&quot;</span> },
+    ],
+    <span class="hljs-attr">publisher</span>: <span class="hljs-string">&quot;汪浩（isaac wang）&quot;</span>,
+  };
+}
+
+</code></pre>
+<p>此时我们就可以在这里看到，刚刚动态配置的metadata。</p>
+<p><img src="https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/metadata_static.png" alt="动态的metadata"></p>
+<h3 id="sitemap">Sitemap</h3>
+<p>sitemap叫站点地图，可帮助搜索引擎更有效地发现您的网页并为其建立索引，也分为动态和静态两种。</p>
+<p>静态的，可以建立一个文件叫<code>app/sitemap.xml</code>，如下。</p>
+<pre><code class="language-xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">urlset</span>
+      <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;</span>
+      <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+      <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd&quot;</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">loc</span>&gt;</span>https://www.super-super.cn/<span class="hljs-tag">&lt;/<span class="hljs-name">loc</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">lastmod</span>&gt;</span>2024-07-22T07:08:29+00:00<span class="hljs-tag">&lt;/<span class="hljs-name">lastmod</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">priority</span>&gt;</span>1.00<span class="hljs-tag">&lt;/<span class="hljs-name">priority</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">loc</span>&gt;</span>https://www.super-super.cn/blog<span class="hljs-tag">&lt;/<span class="hljs-name">loc</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">lastmod</span>&gt;</span>2024-07-22T07:08:29+00:00<span class="hljs-tag">&lt;/<span class="hljs-name">lastmod</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">priority</span>&gt;</span>0.80<span class="hljs-tag">&lt;/<span class="hljs-name">priority</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">loc</span>&gt;</span>https://www.super-super.cn/about<span class="hljs-tag">&lt;/<span class="hljs-name">loc</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">lastmod</span>&gt;</span>2024-07-22T07:08:29+00:00<span class="hljs-tag">&lt;/<span class="hljs-name">lastmod</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">priority</span>&gt;</span>0.80<span class="hljs-tag">&lt;/<span class="hljs-name">priority</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">urlset</span>&gt;</span>
+</code></pre>
+<p>动态的可以建立一个文件叫<code>app/sitemap.ts</code>，如下</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MetadataRoute</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;next&#x27;</span>
+ 
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">sitemap</span>(<span class="hljs-params"></span>): <span class="hljs-title class_">MetadataRoute</span>.<span class="hljs-property">Sitemap</span> {
+  <span class="hljs-keyword">return</span> [
+    {
+      <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;https://acme.com&#x27;</span>,
+      <span class="hljs-attr">lastModified</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(),
+      <span class="hljs-attr">changeFrequency</span>: <span class="hljs-string">&#x27;yearly&#x27;</span>,
+      <span class="hljs-attr">priority</span>: <span class="hljs-number">1</span>,
+    },
+    {
+      <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;https://acme.com/about&#x27;</span>,
+      <span class="hljs-attr">lastModified</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(),
+      <span class="hljs-attr">changeFrequency</span>: <span class="hljs-string">&#x27;monthly&#x27;</span>,
+      <span class="hljs-attr">priority</span>: <span class="hljs-number">0.8</span>,
+    },
+    {
+      <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;https://acme.com/blog&#x27;</span>,
+      <span class="hljs-attr">lastModified</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(),
+      <span class="hljs-attr">changeFrequency</span>: <span class="hljs-string">&#x27;weekly&#x27;</span>,
+      <span class="hljs-attr">priority</span>: <span class="hljs-number">0.5</span>,
+    },
+  ]
+}
+</code></pre>
+<h3 id="实施开放图谱和-twitter-卡">实施开放图谱和 Twitter 卡：</h3>
+<p><a href="https://segmentfault.com/a/1190000040863000">OpenGraph</a>，又叫OG协议，可以简单的看一下介绍。</p>
+<p><strong>Twitter 卡片</strong>标签看上去与开放图谱标签相似，基于与开放图谱协议相同的约定。当使用开放图谱协议描述页面上的数据时，很容易生成 Twitter 卡片，而无需复制标签和数据。当 Twitter 卡片处理器在页面上寻找标签时，它会首先检查 Twitter 特定的属性；如果不存在，则会返回受支持的开放图谱属性。它允许在页面上独立定义这两种属性，并最大程度减少描述内容和体验所需的标记复制量。</p>
+<p>如何定义呢，也是在metadata中定义，openGraph和twitter。</p>
+<pre><code class="language-js"> <span class="hljs-attr">openGraph</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;website&quot;</span>,
+    <span class="hljs-attr">siteName</span>: <span class="hljs-variable constant_">APP_NAME</span>,
+    <span class="hljs-attr">title</span>: {
+      <span class="hljs-attr">default</span>: <span class="hljs-variable constant_">APP_DEFAULT_TITLE</span>,
+      <span class="hljs-attr">template</span>: <span class="hljs-variable constant_">APP_TITLE_TEMPLATE</span>,
+    },
+    <span class="hljs-attr">description</span>: <span class="hljs-variable constant_">APP_DESCRIPTION</span>,
+  },
+  <span class="hljs-attr">twitter</span>: {
+    <span class="hljs-attr">card</span>: <span class="hljs-string">&quot;summary&quot;</span>,
+    <span class="hljs-attr">title</span>: {
+      <span class="hljs-attr">default</span>: <span class="hljs-variable constant_">APP_DEFAULT_TITLE</span>,
+      <span class="hljs-attr">template</span>: <span class="hljs-variable constant_">APP_TITLE_TEMPLATE</span>,
+    },
+    <span class="hljs-attr">description</span>: <span class="hljs-variable constant_">APP_DESCRIPTION</span>,
+  },
+};
+
+</code></pre>
+<p>此时我们可以看到在metadata中多了几个。</p>
+<p><img src="https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/og-tw.png" alt="og-tw"></p>
+<h3 id="语义化标签">语义化标签</h3>
+<p>语义化的标签在SEO中也起到了很关键的作用，平时开发的时候也是需要注意的，这些都会被搜索引擎发现，比如<code>p</code>,<code>article</code>,<code>img.alt</code>等等标签都是会被作为seo的考虑的因素。</p>
+<h3 id="robotstxt">robots.txt</h3>
+<p>当我们的网站发布时，搜索引擎将会尝试去抓取我们的内容，这个时候<code>robots.txt</code>可以规定能够被抓取的范围。</p>
+<pre><code class="language-txt">User-Agent: * // 意思是任何搜索引擎都可以
+Allow: / // 允许抓取任何内容
+Disallow: /admin // /admin下的内容不允许
+
+Sitemap: https://super-super.cn/sitemap.xml // sitemap的地址
+</code></pre>
+<p>这是google的seo文档，介绍的很详细<a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=zh-cn">Google_SEO</a></p>
+<h2 id="未完成">未完成</h2>
+<ul>
+<li>
+<p>PWA</p>
+<ul>
+<li>通过next-pwa，manifast完成PWA</li>
+</ul>
+</li>
+<li>
+<p>埋点</p>
+<ul>
+<li>接入百度统计和谷歌统计</li>
+</ul>
+</li>
+<li>
+<p>响应式</p>
+</li>
+<li>
+<p>全局搜索/标签搜索</p>
+</li>
+<li>
+<p>评论</p>
+</li>
+<li>
+<p>社交分享
+...</p>
+</li>
+</ul>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>

@@ -1,11 +1,13 @@
 /** @type {import('next').NextConfig} */
 import withPWA from "next-pwa";
+import mdx from "@next/mdx";
 // const pwa = withPWA({
 //   dest: "public",
 //   disable: process.env.NODE_ENV === "development",
 //   register: true,
 //   skipWaiting: true,
 // });
+const withMDX = mdx();
 const nextConfig = {
   reactStrictMode: false,
   images: {
@@ -28,6 +30,7 @@ const nextConfig = {
       },
     ],
   },
+  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
 
   transpilePackages: ["next-mdx-remote"],
   // async headers() {
@@ -53,4 +56,4 @@ const nextConfig = {
   // },
 };
 
-export default nextConfig;
+export default withMDX(nextConfig);

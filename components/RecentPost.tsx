@@ -1,14 +1,17 @@
-"use sever";
 import { get } from "@/lib/fetch";
 import { ArticleType } from "@/types/article";
 import Link from "next/link";
 import SectionContainer from "./SectionContainer";
 
 export const getData = async () => {
-  const res = await get<ArticleType.GetBlogList>("articles/list", {
-    page: 1,
-    pageSize: 3,
-  });
+  const res = await get<ArticleType.GetBlogList>(
+    "articles/list",
+    {
+      page: 1,
+      pageSize: 3,
+    },
+    10
+  );
   return res.list || [];
 };
 export default async function RecentPosts() {

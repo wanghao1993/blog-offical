@@ -11,14 +11,14 @@ export default function ArticleItem(data: {
       <div className="p-4 flex-1">
         <div className="flex items-center justify-between mb-2">
           <div className="py-1 rounded-full text-xs font-medium">
-            {data.articleInfo.categories.map((item) => (
-              <Tag key={item}>{item}</Tag>
-            ))}
+            {data.articleInfo.categories &&
+              data.articleInfo.categories.map((item) => (
+                <Tag key={item}>{item}</Tag>
+              ))}
           </div>
           <div className="py-1 rounded-full text-xs font-medium">
-            {data.articleInfo.tags.map((item) => (
-              <Tag key={item}>{item}</Tag>
-            ))}
+            {data.articleInfo.tags &&
+              data.articleInfo.tags.map((item) => <Tag key={item}>{item}</Tag>)}
           </div>
         </div>
         <div className="block">

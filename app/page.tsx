@@ -7,7 +7,11 @@ import Works from "@/components/Works";
 import { Suspense } from "react";
 import RecentPosts from "@/components/RecentPost";
 import { Spin } from "antd";
+import { getAllPostsMeta } from "data/utils";
+export const dynamic = "force-dynamic";
 export default function Home() {
+  console.log(getAllPostsMeta(), "xxx");
+
   return (
     <div>
       <Intro></Intro>

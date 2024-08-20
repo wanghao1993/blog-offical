@@ -1,0 +1,401 @@
+---
+title: 全面解析：使用TypeScript和Rollup构建JavaScript库的生命周期及实践
+description: description
+categories: 前端
+tags: NPM
+data: 2023-12-19
+---
+![DALL·E 2024-04-26 16.36.49 - A detailed illustration for a tutorial on building and maintaining a TypeScript package. The image features a central flowchart showing the steps from.webp](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/94e6f78ebf2d4ab5877dc83bdb65604e~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1792&h=1024&s=426478&e=webp&b=a7ddea)
+在本文中，我们将详细探讨如何从零开始搭建一个使用 TypeScript 的 JavaScript 包，涵盖从环境配置到发布的整个过程。通过这一系列的步骤，你将能够理解并实践如何构建一个现代化的前端库或应用。
+
+
+## 一、初始准备和技术选型
+
+在开始项目之前，我们首先需要明确包的功能目的和技术选型。此外，选择合适的工具也是成功的关键。本项目中，我们将使用 TypeScript 作为开发语言，配合 Rollup 作为构建工具来处理模块打包。
+
+## 二. 开发环境详解
+
+首先需要明确此包的作用，以及技术栈，然后需要哪些工具。通常一个包的简单全生命周期是这样的。
+
+![流程](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3cc1ce733a564637bd13153f7919836b~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=3116\&h=832\&s=160959\&e=png\&b=ffffff)
+
+### 2.1 快速版
+
+-   **初始化项目**：使用 `pnpm` 进行初始化，生成基本的 `package.json` 文件。
+-   **配置构建工具**：选择 Rollup，并安装必要的插件如 `@rollup/plugin-typescript` 和 `@rollup/plugin-node-resolve` 等，确保 TypeScript 文件能被正确处理。
+
+-   **多格式支持**：配置 Rollup 以输出 CommonJS、ES Module 和 UMD 格式，满足不同使用场景的需求。
+-   **性能优化**：引入 `@rollup/plugin-terser` 和 `@rollup/plugin-swc` 以优化输出结果，提高编译效率。
+
+-   **Prettier**：配置代码格式化和校验工具，保持代码风格一致性。
+-   **Commit 规范**：通过 `commitlint` 和 `husky` 强制执行提交信息规范，以便自动生成 changelog。
+
+### 2.2 详细版
+
+#### 2.2.1 初始化
+首先这是一个纯js的包，这里选择**rollup**作为一个构建工具，技术栈为**typescript**，lint工具使用**prettier**来格式化和规范代码格式，首先初始化一个包，这里我选择用**pnpm**来作为包管理工具
+
+```bash
+pnpm init
+```
+
+然后生成一个默认的 `package.json`
+
+```json
+{
+  "name": "npm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+```
+
+这是一个默认的配置，然后我们用**rollup**作为构建工具，所以此处我们需要配置**rollup**和**ts**开发环境
+
+```javascript
+pnpm install -D @rollup/plugin-node-resolve @rollup/plugin-commonjs rollup @rollup/plugin-terser @rollup/plugin-typescript typescript @types/node
+```
+
+相关依赖完成以后需要配置一下tsconfig，如果全局安装过ts的话，可以直接执行下面的命令，就可以生成默认配置,详细配置可以参考官方文档。
+
+```ts
+tsc --init 如果没就 npx tsc --init
+```
+
+由于我们需要对现代js代码进行编译，所以需要安装类似babel的插件，这里我们使用swc来编译，据说很快，试一试。
+
+```ts
+pnpm install @rollup/plugin-swc -D
+```
+#### 2.2.2 构建配置
+
+在`package.json`中配置不同规范下相关导入的声明
+```json
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "umd": "./dist/index.umd.js",
+  "types": "./dist/types/index.d.ts",
+  "type": "module",
+```
+然后配置rollup的配置文件
+```js
+// rollup.config.js
+import typescript from "@rollup/plugin-typescript"; // 解析ts的插件
+import commonjs from "@rollup/plugin-commonjs"; // 转换cjs为esm，因为rollup默认只支持esm
+import resolvejs from "@rollup/plugin-node-resolve"; // 让rollup找到外部模块
+import teser from "@rollup/plugin-terser"; // 压缩，格式化，优化
+import pkg from "./package.json" assert { type: "json" };
+import swc from "@rollup/plugin-swc"; // 类似babel编译现代js代码，兼容低版本
+import os from "os";
+const env = process.env.NODE_ENV; // 当前运行环境，可通过 cross-env 命令行设置
+const { name } = pkg;
+const config = {
+  input: "src/main.ts",
+  // 输出三种格式commonjs,esmodule,umd
+  output: [
+    {
+      file: pkg.main,
+      format: "cjs",
+    },
+    {
+      file: pkg.module,
+      format: "es",
+    },
+    {
+      // umd 导出文件的全局变量
+      name,
+      file: pkg.umd,
+      format: "umd",
+    },
+  ],
+  plugins: [typescript(), commonjs(), resolvejs()],
+};
+
+// 如果是生产环境就增加压缩和混淆，使用多线程打包
+if (env === "production") {
+  config.plugins.push(
+    ...[
+      teser({
+        compress: true,
+        maxWorkers: os.cpus().length,
+        mangle: {
+          toplevel: true,
+        },
+      }),
+      // 此处使用swc编译，比babel快的多，据说大型项目有bug，不过我这个小项目可以用
+       swc({
+          include: ['src/*.ts'],
+          exclude: ['node_modules'],
+          swc: {
+            jsc: {
+              parser: {
+                syntax: 'typescript'
+              },
+              target: 'es3'
+            }
+          }
+        }),
+    ]
+  );
+}
+
+export default config;
+
+```
+
+在`package.json`中配置build和dev命令，用于生产和开发环境，这里还需要安装两个包
+```js
+pnpm install rimraf crosss-env -D
+```
+```js
+"build": "rimraf dist && cross-env NODE_ENV=production rollup -c rollup.config.js",
+"dev": "rimraf dist && rollup -c -w",
+```
+
+#### 2.2.3 配置代码规范和提交规范
+
+*prettier: 规范代码格式
+commitlint: 规范提交信息，第二为了自动生成changelog*
+
+```bash
+pnpm add prettier -D
+```
+
+然后创建一个.pretterrc文件
+
+```js
+{
+    "semi": false, // 是否要分号
+    "tabWidth": 2, //缩进长度
+    "singleQuote": true, // 单引号
+    "printWidth": 80, // 单行长度
+    "trailingComma": "none", // 多行时不打印尾随逗号
+    "arrowParens": "always" // 箭头函数的括号
+}
+```
+
+然后在package.json中新增几个scripts
+
+```js
+"lint": "prettier ./src ./__tests__ --check ",
+"fix": "prettier ./src ./__tests__ --write "
+```
+
+然后我们希望在提交的时候能够对提交的自动统一格式化，我们配置一个 `lint-staged`
+
+```
+pnpm add lint-staged -D
+```
+
+在package.json中加入，并且增加一条script, ` "lint-staged": "lint-staged"`
+
+```js
+  "lint-staged": {
+    "*.{ts,js}": [
+      "prettier --write"
+    ]
+  }
+```
+
+  这里我们用到githooks来在特定阶段触发一些事件，所以我们就用到 `husky`
+
+```
+  pnpm install husky -D
+```
+
+  并且增加一条script, `"prepare": "husky"`，然后npm run prepare会在.git目录下生成一个.husky的文件，此时我们添加一个勾子脚本.
+
+```bash
+  echo "npm run lint-staged > .husky/pre-commit" // mac上是这样的，window我不知道咋创建，我手动创建的
+```
+
+此时就会看到在 `.husky`中会有同一个文件 `pre-commit`文件，到此就已经完成了prettier和提交的时候自动prettier.
+
+接下来配置一下，commitlint和自动生成changelog.
+
+```bash
+pnpm install @commitlint/cli @commitlint/config-conventional -D
+```
+
+然后新增一个githook和一个commitlint.config.js
+
+```
+echo "npx --no -- commitlint --edit $1 > .husky/commit-msg"
+echo "module.exports = { extends: ['@commitlint/config-conventional'] } > commitlint.config.cjs"
+```
+
+到这里，我们应该完成了开发阶段的一些配置。
+
+这时候我们可以测试一下提交可以看到只能按照规范来填写commit信息。
+
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3e6981e1e5a9433cb8a2b402c33efe07~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=728&h=139&s=14275&e=png&b=191919)
+
+除此以外，我们还可以借助`commitizen`这个工具来提交代码。
+
+```js
+pnpm install commitizen cz-conventional-changelog -D
+```
+然后在`package.json`中配置一下path信息和增加一条命令。
+
+```js
+"commit": " git add . && git-cz"
+
+"config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+},
+```
+
+然后我们就可以通过`npm run commit`的命令来提交了。
+
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8094c63edfd743a1b67b9f441ea01ff7~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=806&h=166&s=18399&e=png&b=181818)
+
+#### 2.2.4 开发启动
+
+新建一个`src`目录新建一个入口文件main.ts，和index.html, 执行`npm run dev`，这时候就启动成功了。
+
+```js
+// main.ts
+class A {
+  name: string
+  constructor(name: string) {
+    this.name = name
+  }
+}
+
+class B extends A {
+  age: number
+  constructor(age: number, name: string) {
+    super(name)
+    this.age = age
+  }
+}
+
+export default B
+
+
+```
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/70c349c71ca3492087cf6a2798465e28~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=558&h=102&s=7742&e=png&b=181818)
+
+HTML内容，打开html就看了一看到i的内容是一个对象`{age: 12, name: '小明'}`
+```HTML
+// index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script ></script>
+</head>
+<body>
+    
+</body>
+
+<script  type="module">
+import B from './dist/index.esm.js'
+
+const i = new B(12, '小明')
+
+console.log(i)
+</script>
+</html>
+
+```
+
+看编译后的代码，已经被转换成es3了。
+
+![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fc285734fd9543b194c181e53d63ad2b~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=356&h=328&s=15874&e=png&b=1f1f1f)
+## 三. 测试和验证
+
+由于测试是纯js函数，这里我采用Jest来做测试框架，因为我用过，当然你也可以选择其他的。
+
+安装相关的包
+```bash
+pnpm install --save-dev jest ts-jest @types/jest
+```
+
+编写jest.config.js
+```js
+module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'node'
+}
+
+```
+
+增加命令`"test": "jest -c jest.config.cjs --no-cache"`
+
+然后在root目录下新增一个tests文件夹。
+通过`npx jest config:init`, 来初始化生成`jest.config.js`, 需要把js改成cjs。
+默认配置中新增一个配置rootDir
+```js
+/** @type {import('ts-jest').JestConfigWithTsJest} */
+module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  rootDir: 'tests'
+}
+
+```
+
+这时候我们添加一个测试脚本，`index.spec.ts`.
+
+```js
+import { numberPlus } from '../src/main'
+
+test('adds 1 + 2 to equal 3', () => {
+  expect(numberPlus(1, 2)).toBe(3)
+})
+
+```
+然后执行脚本`npm run test`
+
+![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/08011481fb0b480ca858803cd14759af~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=293&h=233&s=10215&e=png&b=181818)
+
+就可以看到测试用例执行成功了，到此我们的测试就配置完成了。
+
+## 四. 发布和维护
+
+### 4.1 版本管理和发布
+ 主要分为以下几个步骤。
+ - 测试
+ - 编译build
+ - 版本管理
+ - changeLog的生成
+ - npm发布
+
+changeLog和版本管理，我们用`standard-version`来完成, `standard-version`可以自动管理版本和生成changeLog并且提交。
+
+```bash
+pnpm install standard-version -D
+```
+然后新增2个script命令.
+
+```js
+"release": "npm run test && npm run build && standard-version"，
+"publishnpm": "npm publish && git push --follow-tags origin main"
+```
+
+### 4.2 npm 发布/持续集成
+
+首先需要一个npm的账号，然后`npm adduser`通过网页端的授权，授权完成后执行`npm run publishnpm`即可以发布到`npm`顺便打上`tag`.
+
+看我这里已经发布成功了。
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/57e11e00ac8946fa8173c6e52be6fc23~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=757&h=114&s=11591&e=png&b=ffffff)
+
+tag也有了。
+
+![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5ce673e5d0b7462a816c0e9d463d72e4~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=407&h=308&s=16281&e=png&b=ffffff)
+
+到此就完成了一个ts包的发布了，然后还有些工作还可以补充，比如库的声明文件没有生成，这个可以去看看ts的文档学习一下，我这里就不写了，还有可以通过gitaction来完成项目的build和publish，有兴趣的可以自行学习添加一下。
+
+[仓库地址](https://github.com/wanghao1993/rollup-ts-swc)，如果学到了点个star

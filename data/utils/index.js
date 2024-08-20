@@ -1,4 +1,4 @@
-import matter from "gray-matter";
+import * as matter from "gray-matter";
 import path from "path";
 import fs from "fs";
 const rootDirectory = path.join(process.cwd(), "data", "posts");
@@ -26,19 +26,18 @@ export const getAllPostsMeta = async () => {
   return datas;
 };
 export const getPostBySlug = async (dir) => {
-  const filePath = path.join(rootDirectory, `${dir}.mdx`);
+  const filePath = path.join(rootDirectory, `${decodeURI(dir)}.mdx`);
 
   const fileContent = fs.readFileSync(filePath, { encoding: "utf8" });
 
   // gray-matter库是一个解析markdown内容，可以拿到markdown文件的meta信息和content内容
-  const { data } = matter(fileContent);
+  const { content, data } = matter(fileContent);
 
-  console.log(fileContent);
   // 如果文件名是中文，转成拼音
   const id = dir;
 
   return {
     meta: { ...data, slug: dir, id },
-    content: fileContent,
+    content: content,
   };
 };

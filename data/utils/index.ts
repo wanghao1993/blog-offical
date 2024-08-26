@@ -12,7 +12,7 @@ export const getAllPostsMeta = async () => {
     });
 
   // 解析文章数据，拿到标题、日期、简介
-  let datas = await Promise.all(
+  let allData = await Promise.all(
     dirs.map(async (dir) => {
       const { meta, content } = await getPostBySlug(dir);
       return { meta, content };
@@ -20,12 +20,12 @@ export const getAllPostsMeta = async () => {
   );
 
   // 文章日期排序，最新的在最前面
-  datas.sort((a, b) => {
+  allData.sort((a, b) => {
     return Date.parse(a.meta.date) < Date.parse(b.meta.date) ? 1 : -1;
   });
-  return datas;
+  return allData;
 };
-export const getPostBySlug = async (dir) => {
+export const getPostBySlug = async (dir: string) => {
   const filePath = path.join(rootDirectory, `${decodeURI(dir)}.mdx`);
 
   const fileContent = fs.readFileSync(filePath, { encoding: "utf8" });
@@ -40,4 +40,38 @@ export const getPostBySlug = async (dir) => {
     meta: { ...data, slug: dir, id },
     content: content,
   };
+};
+
+export const getAllTags = async () => {
+  const allData = await getAllPostsMeta();
+  let allTagData: Record<string, number> = {};
+  allData.forEach((item) => {
+    const tags = item.meta.tags?.split(",") ?? [];
+    tags.forEach((item: string) => {
+      if (allTagData[item]) {
+        allTagData[item] = allTagData[item] + 1;
+      } else {
+        allTagData[item] = 1;
+      }
+    });
+  });
+
+  return allTagData;
+};
+
+export const getAllCategory = async () => {
+  const allData = await getAllPostsMeta();
+  let allCateData: Record<string, number> = {};
+  allData.forEach((item) => {
+    const tags = item.meta.categories?.split(",") ?? [];
+    tags.forEach((item: string | number) => {
+      if (allCateData[item]) {
+        allCateData[item] = allCateData[item] + 1;
+      } else {
+        allCateData[item] = 1;
+      }
+    });
+  });
+
+  return allCateData;
 };

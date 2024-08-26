@@ -4,17 +4,9 @@ export namespace ArticleType {
     categories: string;
     coverImg: string;
     tags: string;
-    abstract: string;
+    description: string;
     content: string;
-    isPublished: boolean;
-    viewsCount: number;
-    likesCount: number;
-    commentsCount: number;
-    readTime: number;
-    sharesCount: number;
-    _id: string;
-    createdAt: string;
-    updatedAt: string;
+    date: Date;
   }
 
   export interface GetBlogList {

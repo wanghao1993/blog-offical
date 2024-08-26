@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-a.link {
-  color: var(--link-color);
-}
 
 :deep(.ant-table-body) {
   ::-webkit-scrollbar {
@@ -44,9 +41,19 @@ a.link {
     width: 6px;
   }
 
-  a {
-    text-decoration: none;
-  }
+    a {
+      text-decoration: none;
+      border-color: var(--link-color);
+      @apply border-b;
+    }
+
+    a[target='_blank'] {
+      @apply border-b;
+      text-decoration: none;
+      border-bottom-width: 3px !important;
+      border-color: var(--link-color);
+    }
+    
   
   body {
     margin: 0;
@@ -150,7 +157,7 @@ header {
 }
 
 .horizontal-underline {
-  border-bottom-width: 0;
+  border-bottom-width: 0 !important;
   background-image: linear-gradient(transparent,transparent),linear-gradient(#1d91de,#2a108a);
   background-size: 0 3px;
   background-position: 0 100%;

@@ -1,26 +1,18 @@
 import MainLayout from "@/components/Layouts/MainLayout";
-import { get } from "@/lib/fetch";
-import { ArticleType } from "@/types/article";
-import { Empty, Divider } from "antd";
-import { CalendarOutlined, EyeOutlined, LikeOutlined } from "@ant-design/icons";
-import formatterDate from "@/lib/data_utils";
-import "juejin-markdown-themes/dist/mk-cute.css";
+import { Empty } from "antd";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import rehypeHighlight from "rehype-highlight";
 import "./index.scss";
 import "highlight.js/styles/monokai.min.css";
 import { SerializeOptions } from "node_modules/next-mdx-remote/dist/types";
 import { Metadata } from "next";
-import { EditIcon } from "@/components/blog/Edit";
 import ToTop from "@/components/toTop";
 import { GoogleTagManager } from "@next/third-parties/google";
-import Image from "next/image";
 import { getPostBySlug } from "data/utils";
-
+import Link from "next/link";
 const options: SerializeOptions = {
   mdxOptions: {
     remarkPlugins: [],
-    rehypePlugins: [rehypeHighlight],
+    rehypePlugins: [],
   },
 };
 
@@ -42,6 +34,12 @@ export async function generateMetadata({
     authors: [
       { url: "https://github.com/wanghao1993", name: "汪浩（isaac wang）" },
     ],
+    openGraph: {},
+    twitter: { card: "summary_large_image" },
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_DOMAIN}/blog/${detail.meta.title}`,
+    },
+    keywords: detail.meta.tags,
     publisher: "汪浩（isaac wang）",
   };
 }
@@ -56,18 +54,42 @@ export default async function ArticleDetail({
 }: {
   params: { id: string };
 }) {
-  getBlogDetail(params.id);
   const detail = await getBlogDetail(params.id);
   return (
     <MainLayout>
       <GoogleTagManager gtmId="G-4Z3CSGWXGR" />
       {detail ? (
         <div className="article-detail ">
-          <h1 className="font-semibold ">{detail.meta.title}</h1>
+          <div className="bg-primary space-y-1 rounded-lg  py-4 px-2 text-center sm:py-6 md:py-10">
+            <h1 className="font-semibold ">{detail.meta.title}</h1>
+            <div>{detail.meta.date.toLocaleDateString()}</div>
+          </div>
+          <div className="py-4 flex gap-4">
+            {detail.meta.categories &&
+              detail.meta.categories.split(",").map((item: string) => (
+                <Link
+                  key={item}
+                  href={`blog/category/${item}`}
+                  className="text-blue-100"
+                >
+                  {item}
+                </Link>
+              ))}
+
+            {detail.meta.tags &&
+              detail.meta.tags.split(",").map((item: string) => (
+                <Link
+                  key={item}
+                  href={`blog/tag/${item}`}
+                  className="text-blue-100"
+                >
+                  {item}
+                </Link>
+              ))}
+          </div>
           <article className="mt-4">
             <MDXRemote source={detail.content} options={options}></MDXRemote>
           </article>
-
           <ToTop />
         </div>
       ) : (

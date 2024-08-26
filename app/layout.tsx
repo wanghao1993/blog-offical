@@ -11,8 +11,7 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import { ScrollProvider } from "@/components/Providers/ScrollProvider";
 
 import Script from "next/script";
-import type { Metadata, Viewport } from "next";
-
+import type { Metadata } from "next";
 const APP_NAME = "汪浩的博客";
 const APP_DEFAULT_TITLE = "汪浩的博客";
 const APP_TITLE_TEMPLATE = "博客";

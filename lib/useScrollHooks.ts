@@ -1,4 +1,3 @@
-import { debounce } from "radash";
 import { useState, useEffect } from "react";
 
 function useScroll() {

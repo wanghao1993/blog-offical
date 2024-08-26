@@ -55,7 +55,6 @@ export default function About() {
                 <a
                   href="https://en.wikipedia.org/wiki/Isaac_Newton"
                   target="_blank"
-                  className="link"
                   rel="noopener noreferrer"
                 >
                   Isaac Newton(牛顿)
@@ -89,7 +88,32 @@ export default function About() {
                 <p className="text-muted-foreground">2024 - current</p>
                 <div className={AboutCss.prose}>
                   <ol>
-                    <li>开发和维护PC应用，使用Vue3, Typescript, Pinia</li>
+                    <li>
+                      开发和维护PC应用，使用
+                      <a
+                        href="https://vuejs.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Vue3
+                      </a>
+                      ,
+                      <a
+                        href="https://www.typescriptlang.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Typescript
+                      </a>
+                      ,
+                      <a
+                        href="http://"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Pinia
+                      </a>
+                    </li>
                   </ol>
                 </div>
               </div>
@@ -102,9 +126,67 @@ export default function About() {
                 <div className={AboutCss.prose}>
                   <ol>
                     <li>
-                      开发和维护PC应用，使用Vue 2/3, Typescript,
-                      Pinia/Vuex，Docker, Nginx，Jenkeins, Nodejs, Nestjs,
-                      Typeorm, Mysql
+                      开发和维护PC应用，使用
+                      <a
+                        href="https://vuejs.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Vue2/3
+                      </a>
+                      ,
+                      <a
+                        href="https://www.typescriptlang.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Typescript
+                      </a>
+                      ,
+                      <a
+                        href="http://"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Pinia
+                      </a>
+                      ，
+                      <a
+                        href="https://vuex.vuejs.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Vuex
+                      </a>
+                      ,
+                      <a
+                        href="https://nginx.org/en/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Nginx
+                      </a>
+                      ,
+                      <a
+                        href="http://nodejs.org"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Node
+                      </a>
+                      ,
+                      <a
+                        href="https://nestjs.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        NestJs
+                      </a>
+                      ,
+                      <a href="https://typeorm.io/" target="_blank">
+                        TypeOrm，
+                      </a>
+                      , Mysql
                     </li>
                     <li>业务组件库/脚手架开发</li>
                     <li>产品设计以及产品运营推广</li>
@@ -120,8 +202,39 @@ export default function About() {
                 <div className={AboutCss.prose}>
                   <ol>
                     <li>
-                      开发和维护PC应用，使用Vue 2/3, Typescript,
-                      Pinia/Vuex，Echarts, AMap, BMap, GoogleMap
+                      开发和维护PC应用，使用
+                      <a
+                        href="https://vuejs.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Vue2/3
+                      </a>
+                      ,
+                      <a
+                        href="https://www.typescriptlang.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Typescript
+                      </a>
+                      ,
+                      <a
+                        href="http://"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Pinia
+                      </a>
+                      ,
+                      <a
+                        href="https://vuex.vuejs.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Vuex
+                      </a>
+                      ， AMap, BMap, GoogleMap
                     </li>
                     <li>参与招聘，培训和指导实习生。。</li>
                     <li>参与产品设计和Code Review。</li>
@@ -147,7 +260,17 @@ export default function About() {
                 <p className="text-muted-foreground">2017 - 2018</p>
                 <div className={AboutCss.prose}>
                   <ol>
-                    <li>开发和维护PC应用以及小程序，使用Vue2，Jquery。</li>
+                    <li>
+                      开发和维护PC应用以及小程序，使用
+                      <a
+                        href="https://vuejs.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Vue2
+                      </a>
+                      ，Jquery。
+                    </li>
                     <li>参与组件库的开发。</li>
                   </ol>
                 </div>
@@ -179,7 +302,30 @@ export default function About() {
                       从蔚来离职，换了一份新工作，从事和仓库管理相关的项目
                     </li>
                     <li>
-                      学习React的SSR升级个人博客，使用Nextjs，RouteApi，Prisma，Mongodb
+                      学习React的SSR升级个人博客，使用
+                      <a
+                        href="http://nextjs.org"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Nextjs
+                      </a>
+                      ,
+                      <a
+                        href="http://www.prisma.io"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Prisma
+                      </a>
+                      ,
+                      <a
+                        href="http://www.mongodb.org"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        MongoDB
+                      </a>
                     </li>
                   </ol>
                 </div>
@@ -192,24 +338,17 @@ export default function About() {
                     <li>完成人生大事，我结婚了</li>
                     <li>
                       学习
-                      <a
-                        href="https://nestjs.com/"
-                        target="_blank"
-                        className="link"
-                      >
+                      <a href="https://nestjs.com/" target="_blank">
                         NestJs
                       </a>
                       ，使用NestJs开发一个通知系统的后端，React实现前端
                     </li>
                     <li>
                       掌握了
-                      <a
-                        href="https://typeorm.io/"
-                        target="_blank"
-                        className="link"
-                      >
-                        TypeOrm，快速实现数据库表的操作
+                      <a href="https://typeorm.io/" target="_blank">
+                        TypeOrm，
                       </a>
+                      快速实现数据库表的操作
                     </li>
                     <li>
                       学习web3的Dapp/智能合约的开发，学习区块链的相关知识，并成功部署一个智能合约
@@ -272,7 +411,6 @@ export default function About() {
                       <a
                         href="https://vuejs.org/"
                         target="_blank"
-                        className="link"
                         rel="noopener noreferrer"
                       >
                         vue
@@ -281,7 +419,6 @@ export default function About() {
                       <a
                         href="https://vuex.vuejs.org/"
                         target="_blank"
-                        className="link"
                         rel="noopener noreferrer"
                       >
                         vuex
@@ -290,7 +427,6 @@ export default function About() {
                       <a
                         href="https://router.vuejs.org/zh/"
                         target="_blank"
-                        className="link"
                         rel="noopener noreferrer"
                       >
                         vue-router
@@ -299,7 +435,6 @@ export default function About() {
                       <a
                         href="https://lodash.com/"
                         target="_blank"
-                        className="link"
                         rel="noopener noreferrer"
                       >
                         lodash
@@ -309,21 +444,34 @@ export default function About() {
                         href="https://element.eleme.io/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="link"
                       >
                         element-ui
                       </a>
                       ，等源码
                     </li>
                     <li>
-                      搭建个人博客，购买服务器，注册域名，学会如何部署，Nginx,
-                      Docker等等
+                      搭建个人博客，购买服务器，注册域名，学会如何部署，
+                      <a
+                        href="https://nginx.org/en/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Nginx
+                      </a>
+                      ,
+                      <a
+                        href="http://www.docker.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Docker
+                      </a>
+                      等等
                     </li>
                     <li>
                       学习
                       <a
                         href="https://flutter.dev/"
-                        className="link"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -349,11 +497,10 @@ export default function About() {
                 <div className={AboutCss.prose}>
                   <ol>
                     <li>
-                      在自己的项目上游刃有余，开始接触组件库的设计和开发和测试，参与设计和开发组件库{" "}
+                      在自己的项目上游刃有余，开始接触组件库的设计和开发和测试，参与设计和开发组件库
                       <a
                         href="https://magicbox.bk.tencent.com/static_api/v3/main/index.html"
                         target="_blank"
-                        className="link"
                         rel="noopener noreferrer"
                       >
                         Magicbox
@@ -365,11 +512,7 @@ export default function About() {
                     </li>
                     <li>
                       学习
-                      <a
-                        href="https://www.selenium.dev/"
-                        className="link"
-                        target="_blank"
-                      >
+                      <a href="https://www.selenium.dev/" target="_blank">
                         selenium
                       </a>
                       如何在项目中实现UI自动化测试

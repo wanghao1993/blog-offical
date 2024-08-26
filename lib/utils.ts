@@ -18,3 +18,11 @@ export function isImageUrl(url: string) {
     return false;
   }
 }
+
+export const generateColors = () => {
+  let color1 = Math.floor(Math.random() * 256);
+  let color2 = Math.floor(Math.random() * 256);
+  let color3 = Math.floor(Math.random() * 256);
+
+  return `rgba(${color1}, ${color2}, ${color3}, 0.88)`;
+};

@@ -4,20 +4,19 @@ import Article from "models/article";
 export async function GET(request: Request) {
   await connectMongo();
   const { searchParams } = new URL(request.url);
+
   const { page, pageSize } = searchParams as unknown as {
     page: number;
     pageSize: number;
     category: string[];
-    tags: string[]
+    tags: string[];
   };
+
   try {
     const totalCount = await Article.countDocuments();
-    const list = await Article.find({})
-      .skip((page - 1) * 5)
-      .limit(pageSize)
-      .sort({ _id: -1 })
-      .exec();
+    const list = await Article.find().limit(+pageSize).sort({ _id: -1 }).exec();
 
+    console.log("xxx");
     return responseHandler({
       list,
       totalCount,

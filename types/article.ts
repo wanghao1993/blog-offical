@@ -1,9 +1,9 @@
 export namespace ArticleType {
   export interface ArticleItem {
     title: string;
-    categories: string[];
+    categories: string;
     coverImg: string;
-    tags: string[];
+    tags: string;
     abstract: string;
     content: string;
     isPublished: boolean;

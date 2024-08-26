@@ -15,6 +15,7 @@ import { EditIcon } from "@/components/blog/Edit";
 import ToTop from "@/components/toTop";
 import { GoogleTagManager } from "@next/third-parties/google";
 import Image from "next/image";
+import { getPostBySlug } from "data/utils";
 
 const options: SerializeOptions = {
   mdxOptions: {
@@ -35,11 +36,8 @@ export async function generateMetadata({
   }
 
   return {
-    title: detail.title,
+    title: detail.meta.title,
     description: detail.content,
-    keywords: detail.tags.join(","),
-    category: detail.categories.join(", "),
-    abstract: detail.abstract,
     creator: "汪浩（isaac wang）",
     authors: [
       { url: "https://github.com/wanghao1993", name: "汪浩（isaac wang）" },
@@ -49,13 +47,8 @@ export async function generateMetadata({
 }
 
 async function getBlogDetail(id: string) {
-  const res = await get<ArticleType.ArticleItem>(
-    "articles/detail",
-    {
-      id,
-    },
-    1
-  );
+  const res = await getPostBySlug(id);
+
   return res;
 }
 export default async function ArticleDetail({
@@ -64,46 +57,14 @@ export default async function ArticleDetail({
   params: { id: string };
 }) {
   getBlogDetail(params.id);
-  const detail: ArticleType.ArticleItem = await getBlogDetail(params.id);
+  const detail = await getBlogDetail(params.id);
   return (
     <MainLayout>
       <GoogleTagManager gtmId="G-4Z3CSGWXGR" />
       {detail ? (
         <div className="article-detail ">
-          <h1 className="font-semibold ">{detail.title}</h1>
-          <div className="text-sm text-slate-400 flex items-center justify-between ">
-            <div className="flex items-center ">
-              <div>
-                <CalendarOutlined />
-                <span className="pl-1">{formatterDate(detail.createdAt)}</span>
-              </div>
-              <Divider type="vertical" className="mx-4!"></Divider>
-              <div>
-                <EyeOutlined />
-                <span className="pl-1">{detail.viewsCount}</span>
-              </div>
-              <Divider type="vertical" className="mx-2!"></Divider>
-              <div className="cursor-pointer hover:scale-110">
-                <LikeOutlined />
-                <span className="pl-1">{detail.likesCount}</span>
-              </div>
-            </div>
-            <div className="text-primary">
-              <span>{new Date(detail.updatedAt).toLocaleString()}</span>
-              <EditIcon detail={detail} />
-            </div>
-          </div>
+          <h1 className="font-semibold ">{detail.meta.title}</h1>
           <article className="mt-4">
-            {detail.coverImg && (
-              <Image
-                src={detail.coverImg}
-                width={2000}
-                height={1000}
-                style={{ width: "100%", height: "auto" }}
-                priority={true}
-                alt="cover_img"
-              />
-            )}
             <MDXRemote source={detail.content} options={options}></MDXRemote>
           </article>
 

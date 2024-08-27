@@ -2,7 +2,6 @@ import ArticleItem from "@/components/Article/ArticleItem";
 import MainLayout from "@/components/Layouts/MainLayout";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { getAllPostsMeta, getAllCategory, getAllTags } from "data/utils";
-import { Card } from "antd";
 import Link from "next/link";
 import { generateColors } from "@/lib/utils";
 const getPostsData = async () => {

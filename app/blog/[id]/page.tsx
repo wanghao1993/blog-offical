@@ -1,10 +1,11 @@
 import MainLayout from "@/components/Layouts/MainLayout";
-import { Empty } from "antd";
+import { Empty, Divider } from "antd";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import "./index.scss";
 import "highlight.js/styles/monokai.min.css";
 import { SerializeOptions } from "node_modules/next-mdx-remote/dist/types";
 import { Metadata } from "next";
+import rehypeHighlight from "rehype-highlight";
 import ToTop from "@/components/toTop";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { getPostBySlug } from "data/utils";
@@ -12,7 +13,7 @@ import Link from "next/link";
 const options: SerializeOptions = {
   mdxOptions: {
     remarkPlugins: [],
-    rehypePlugins: [],
+    rehypePlugins: [rehypeHighlight],
   },
 };
 
@@ -64,24 +65,25 @@ export default async function ArticleDetail({
             <h1 className="font-semibold ">{detail.meta.title}</h1>
             <div>{detail.meta.date.toLocaleDateString()}</div>
           </div>
-          <div className="py-4 flex gap-4">
+          <div className="py-4 flex gap-4 items-center">
             {detail.meta.categories &&
               detail.meta.categories.split(",").map((item: string) => (
                 <Link
                   key={item}
                   href={`blog/category/${item}`}
-                  className="text-blue-100"
+                  className="px-2 rounded-lg bg-primary-500 text-white"
                 >
                   {item}
                 </Link>
               ))}
 
+            <Divider type="vertical" />
             {detail.meta.tags &&
               detail.meta.tags.split(",").map((item: string) => (
                 <Link
                   key={item}
                   href={`blog/tag/${item}`}
-                  className="text-blue-100"
+                  className="px-2 rounded-lg bg-primary-500 text-white"
                 >
                   {item}
                 </Link>

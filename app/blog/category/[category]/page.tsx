@@ -21,8 +21,8 @@ export default async function Page(data: { params: { category: string } }) {
               ) > -1
           )
           .map((item) => (
-            <div className="mb-4">
-              <ArticleItem articleInfo={item.meta} key={item.meta.id} />
+            <div className="mb-4" key={item.meta.id}>
+              <ArticleItem articleInfo={item.meta} />
             </div>
           ))}
       </div>

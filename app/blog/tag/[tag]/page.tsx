@@ -19,8 +19,8 @@ export default async function Page(data: { params: { tag: string } }) {
               item.meta.tags?.indexOf(decodeURIComponent(data.params.tag)) > -1
           )
           .map((item) => (
-            <div className="mb-4">
-              <ArticleItem articleInfo={item.meta} key={item.meta.id} />
+            <div className="mb-4" key={item.meta.id}>
+              <ArticleItem articleInfo={item.meta} />
             </div>
           ))}
       </div>

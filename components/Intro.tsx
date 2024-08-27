@@ -14,7 +14,7 @@ export default function Into() {
           <div className="mt-2">
             <Link
               href="/about"
-              className="horizontal-underline horizontal-underline-active"
+              className="horizontal-underline horizontal-underline-active "
             >
               多一点了解 →
             </Link>

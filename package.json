@@ -36,6 +36,7 @@
     "react": "^18",
     "react-dom": "^18",
     "reading-time": "^1.5.0",
+    "rehype-highlight": "^7.0.0",
     "sharp": "^0.33.5",
     "tencentcloud-sdk-nodejs": "^4.0.888"
   },

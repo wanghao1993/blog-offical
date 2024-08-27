@@ -1,5 +1,3 @@
-import { get } from "@/lib/fetch";
-import { ArticleType } from "@/types/article";
 import Link from "next/link";
 import SectionContainer from "./SectionContainer";
 import ArticleItem from "./Article/ArticleItem";
@@ -15,7 +13,7 @@ export default async function RecentPosts() {
       <h2 className="my-6 text-2xl text-bold ">最近发布</h2>
       <section className="grid gap-y-6">
         {list.slice(0, 3).map((item) => (
-          <ArticleItem articleInfo={item.meta} />
+          <ArticleItem articleInfo={item.meta} key={item.meta.id} />
         ))}
       </section>
 

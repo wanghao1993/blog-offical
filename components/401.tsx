@@ -12,7 +12,7 @@ export default function PageNoAuth() {
         <div className="mt-6">
           <Link
             href="/"
-            className="horizontal-underline horizontal-underline-active"
+            className="horizontal-underline horizontal-underline-active "
             prefetch={false}
           >
             返回首页

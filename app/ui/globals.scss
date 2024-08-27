@@ -32,26 +32,17 @@
   color-scheme: light dark;
   --background-color: #111827; // 背景色
   --text-color: white; // 文字颜色
-  --table-bg-color: #111827;  // 表格颜色
-  --table-text-color: white; // 文字颜色
-  --table-border-color: #fafafa; // 边框颜色
   --secondary-text-color: #d3d3d3; // 次要文字颜色
   --link-color: #1890ff; 
   ::-webkit-scrollbar {
     width: 6px;
   }
 
-    a {
-      text-decoration: none;
-      border-color: var(--link-color);
-      @apply border-b;
-    }
-
-    a[target='_blank'] {
-      @apply border-b;
-      text-decoration: none;
-      border-bottom-width: 3px !important;
-      border-color: var(--link-color);
+      a[target='_blank'] {
+      @apply horizontal-underline horizontal-underline-active;
+      &:hover {
+        @apply bg-primary-500 text-white;
+      }
     }
     
   
@@ -73,45 +64,15 @@ header {
   background-color: var(--background-color);
   color: var(--text-color);
 }
-.ant-table-wrapper .ant-table {
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: rgb(179, 177, 177);
-    border-radius: 0px;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: rgb(136, 136, 136);
-    border-radius: 10px;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgb(100, 100, 100);
-    border-radius: 10px;
-  }
-  
-  ::-webkit-scrollbar-thumb:active {
-    background: rgb(68, 68, 68);
-    border-radius: 10px;
-  }
-}
 
 .light {
   --background-color: #fff;
   --text-color: #111827;
-  --table-bg-color: #fff;
-  --table-text-color: #111827;
-  --table-border-color: #fff;
   --secondary-text-color: #666
 }
 .dark {
   --background-color: #111827;
   --text-color: #fff;
-  --table-bg-color: #111827;
-  --table-text-color: white;
-  --table-border-color: #111827;
   --secondary-text-color: #d3d3d3
 }
 
@@ -144,21 +105,9 @@ header {
   }
 }
 
-.ant-table-thead th {
-  background-color: var(--table-bg-color) !important;
-  color: var(--table-text-color) !important;
-  border-color: var(--table-border-color) !important;
-}
-
-.ant-table-tbodyy td {
-  background-color: var(--table-bg-color) !important;
-  color: var(--table-text-color) !important;
-  border-color: var(--table-border-color) !important;
-}
-
 .horizontal-underline {
   border-bottom-width: 0 !important;
-  background-image: linear-gradient(transparent,transparent),linear-gradient(#1d91de,#2a108a);
+  background-image: linear-gradient(transparent,transparent),linear-gradient(rgb(173 94 243),rgb(173 94 243));
   background-size: 0 3px;
   background-position: 0 100%;
   background-repeat: no-repeat;

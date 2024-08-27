@@ -2,11 +2,10 @@ export namespace ArticleType {
   export interface ArticleItem {
     title: string;
     categories: string;
-    coverImg: string;
     tags: string;
     description: string;
-    content: string;
     date: Date;
+    id: string;
   }
 
   export interface GetBlogList {

@@ -3,11 +3,11 @@ import { usePathname } from "next/navigation";
 export default function Nav() {
   const navList = [
     {
-      title: "Blog",
+      title: "博客",
       path: "/blog",
     },
     {
-      title: "About",
+      title: "关于我",
       path: "/about",
     },
   ];
@@ -20,7 +20,7 @@ export default function Nav() {
         <Link
           href={nav.path}
           key={nav.path}
-          className={`horizontal-underline mr-3  text-xl font-extrabold sm:block md:inline-block ${
+          className={`horizontal-underline mr-3 text-lg font-extrabold sm:block md:inline-block ${
             pathName === nav.path ? "horizontal-underline-active" : ""
           }`}
           aria-label={nav.title}

@@ -15,12 +15,12 @@ export default function Nav() {
   const pathName = usePathname();
 
   return (
-    <div className="flex items-center text-lg ">
+    <div className="lg:flex-row flex-col flex  text-lg ">
       {navList.map((nav) => (
         <Link
           href={nav.path}
           key={nav.path}
-          className={`horizontal-underline mr-3 text-lg font-extrabold sm:block md:inline-block ${
+          className={`horizontal-underline mr-3 lg:text-lg font-medium sm:block md:inline-block ${
             pathName === nav.path ? "horizontal-underline-active" : ""
           }`}
           aria-label={nav.title}

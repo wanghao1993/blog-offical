@@ -40,15 +40,15 @@ export default function About() {
     <>
       <MainLayout>
         <GoogleTagManager gtmId="G-4Z3CSGWXGR" />
-        <header className="py-12 bg-muted">
-          <div className="container mx-auto px-4 md:px-6 flex flex-col items-center text-center">
+        <header className="py-12">
+          <div className="  items-center text-center">
             <h1 className="text-3xl font-bold mb-2">汪浩（Isaac Wang）</h1>
-            <p className="text-muted-foreground">前端开发工程师</p>
+            <p>前端开发工程师</p>
           </div>
         </header>
-        <main className="py-12 container mx-auto px-4 md:px-6 grid gap-12">
+        <main className="py-12 grid gap-12">
           <section>
-            <h2 className="text-2xl font-bold mb-4 max-w-[700px]">关于我</h2>
+            <h2 className="text-2xl font-bold mb-4">关于我</h2>
             <div className={AboutCss.prose}>
               <p>
                 Hi，我是汪浩，英文名 Isaac Wang，是的，
@@ -73,9 +73,9 @@ export default function About() {
             <h2 className="text-2xl font-bold mb-4">教育</h2>
             <div className="grid gap-6">
               <div className="grid gap-4">
-                <h3 className="text-xl font-semibold">机械设计制造及自动化</h3>
-                <p className="text-muted-foreground">柳州工学院</p>
-                <p className="text-muted-foreground">2011 - 2015</p>
+                <h3 className="text-lg font-semibold">机械设计制造及自动化</h3>
+                <p>柳州工学院</p>
+                <p>2011 - 2015</p>
               </div>
             </div>
           </section>
@@ -83,9 +83,9 @@ export default function About() {
             <h2 className="text-2xl font-bold mb-4">工作经历</h2>
             <div className="grid gap-6">
               <div className="grid gap-4">
-                <h3 className="text-xl font-semibold">高级前端开发</h3>
-                <p className="text-muted-foreground">佛山美的(外包)-大数据</p>
-                <p className="text-muted-foreground">2024 - current</p>
+                <h3 className="text-lg font-semibold">高级前端开发</h3>
+                <p>佛山美的(外包)-大数据</p>
+                <p>2024 - current</p>
                 <div className={AboutCss.prose}>
                   <ol>
                     <li>
@@ -118,11 +118,9 @@ export default function About() {
                 </div>
               </div>
               <div className="grid gap-4">
-                <h3 className="text-xl font-semibold">资深前端开发</h3>
-                <p className="text-muted-foreground">
-                  上海蔚来汽车-质量效能团队
-                </p>
-                <p className="text-muted-foreground">2022 - 2024</p>
+                <h3 className="text-lg font-semibold">资深前端开发</h3>
+                <p>上海蔚来汽车-质量效能团队</p>
+                <p>2022 - 2024</p>
                 <div className={AboutCss.prose}>
                   <ol>
                     <li>
@@ -196,9 +194,9 @@ export default function About() {
               </div>
 
               <div className="grid gap-4">
-                <h3 className="text-xl font-semibold">高级前端开发</h3>
-                <p className="text-muted-foreground">深圳依时货拉拉-大数据</p>
-                <p className="text-muted-foreground">2019 - 2022</p>
+                <h3 className="text-lg font-semibold">高级前端开发</h3>
+                <p>深圳依时货拉拉-大数据</p>
+                <p>2019 - 2022</p>
                 <div className={AboutCss.prose}>
                   <ol>
                     <li>
@@ -242,9 +240,9 @@ export default function About() {
                 </div>
               </div>
               <div className="grid gap-4">
-                <h3 className="text-xl font-semibold">前端开发</h3>
-                <p className="text-muted-foreground">中竞互联-技术部</p>
-                <p className="text-muted-foreground">2018 - 2019</p>
+                <h3 className="text-lg font-semibold">前端开发</h3>
+                <p>中竞互联-技术部</p>
+                <p>2018 - 2019</p>
                 <div className={AboutCss.prose}>
                   <ol>
                     <li>
@@ -255,9 +253,9 @@ export default function About() {
                 </div>
               </div>
               <div className="grid gap-4">
-                <h3 className="text-xl font-semibold">前端开发</h3>
-                <p className="text-muted-foreground">腾讯（外包）- IEG运营</p>
-                <p className="text-muted-foreground">2017 - 2018</p>
+                <h3 className="text-lg font-semibold">前端开发</h3>
+                <p>腾讯（外包）- IEG运营</p>
+                <p>2017 - 2018</p>
                 <div className={AboutCss.prose}>
                   <ol>
                     <li>
@@ -276,9 +274,9 @@ export default function About() {
                 </div>
               </div>
               <div className="grid gap-4">
-                <h3 className="text-xl font-semibold">结构设计工程师</h3>
-                <p className="text-muted-foreground">深圳千帆医疗- 技术部</p>
-                <p className="text-muted-foreground">2015 - 2017</p>
+                <h3 className="text-lg font-semibold">结构设计工程师</h3>
+                <p>深圳千帆医疗- 技术部</p>
+                <p>2015 - 2017</p>
                 <div className={AboutCss.prose}>
                   <ol>
                     <li>
@@ -295,7 +293,7 @@ export default function About() {
             <h2 className="text-2xl font-bold mb-4">时间线</h2>
             <div className="grid gap-6">
               <div className="grid gap-4">
-                <h3 className="text-xl font-semibold">2024</h3>
+                <h3 className="text-lg font-semibold">2024</h3>
                 <div className={AboutCss.prose}>
                   <ol>
                     <li>
@@ -332,7 +330,7 @@ export default function About() {
               </div>
 
               <div className="grid gap-4">
-                <h3 className="text-xl font-semibold">2023</h3>
+                <h3 className="text-lg font-semibold">2023</h3>
                 <div className={AboutCss.prose}>
                   <ol>
                     <li>完成人生大事，我结婚了</li>
@@ -358,7 +356,7 @@ export default function About() {
               </div>
 
               <div className="grid gap-4">
-                <h3 className="text-xl font-semibold">2022</h3>
+                <h3 className="text-lg font-semibold">2022</h3>
                 <div className={AboutCss.prose}>
                   <ol>
                     <li>入职蔚来汽车，接触到了不同的业务领域</li>
@@ -372,7 +370,7 @@ export default function About() {
               </div>
 
               <div className="grid gap-4">
-                <h3 className="text-xl font-semibold">2021</h3>
+                <h3 className="text-lg font-semibold">2021</h3>
                 <div className={AboutCss.prose}>
                   <ol>
                     <li>
@@ -385,7 +383,7 @@ export default function About() {
               </div>
 
               <div className="grid gap-4">
-                <h3 className="text-xl font-semibold">2020</h3>
+                <h3 className="text-lg font-semibold">2020</h3>
                 <div className={AboutCss.prose}>
                   <ol>
                     <li>开始接触大数据项目，开发报表和地图项目</li>
@@ -399,7 +397,7 @@ export default function About() {
                 </div>
               </div>
               <div className="grid gap-4">
-                <h3 className="text-xl font-semibold">2019</h3>
+                <h3 className="text-lg font-semibold">2019</h3>
                 <div className={AboutCss.prose}>
                   <ol>
                     <li>
@@ -493,7 +491,7 @@ export default function About() {
                 </div>
               </div>
               <div className="grid gap-4">
-                <h3 className="text-xl font-semibold">2018</h3>
+                <h3 className="text-lg font-semibold">2018</h3>
                 <div className={AboutCss.prose}>
                   <ol>
                     <li>
@@ -523,7 +521,7 @@ export default function About() {
               </div>
 
               <div className="grid gap-4">
-                <h3 className="text-xl font-semibold">2017</h3>
+                <h3 className="text-lg font-semibold">2017</h3>
                 <div className={AboutCss.prose}>
                   <ol>
                     <li>

@@ -43,30 +43,40 @@ export default function LoginInOut() {
   const [visible, setVisible] = useState(false);
 
   return (
-    <div className="mx-3">
-      <LoginModal open={visible} onClose={() => setVisible(false)} />
+    <div>
+      <div className="lg:mx-3 hidden lg:block">
+        <LoginModal open={visible} onClose={() => setVisible(false)} />
 
-      {status === "unauthenticated" ? (
-        <div onClick={() => setVisible(true)} className="login-icon">
-          <SignIn />
-        </div>
-      ) : status === "authenticated" ? (
-        <Dropdown
-          trigger={["click"]}
-          menu={{ items }}
-          dropdownRender={(node) => <span>{node}</span>}
-        >
-          <Avatar
-            size={28}
-            shape={"circle"}
-            src={session?.user?.image}
-            alt="avatar"
-            className=" cursor-pointer "
-          ></Avatar>
-        </Dropdown>
-      ) : (
-        <Spin />
-      )}
+        {status === "unauthenticated" ? (
+          <div onClick={() => setVisible(true)} className="login-icon">
+            <SignIn />
+          </div>
+        ) : status === "authenticated" ? (
+          <Dropdown
+            trigger={["click"]}
+            menu={{ items }}
+            dropdownRender={(node) => <span>{node}</span>}
+          >
+            <Avatar
+              size={28}
+              shape={"circle"}
+              src={session?.user?.image}
+              alt="avatar"
+              className=" cursor-pointer "
+            ></Avatar>
+          </Dropdown>
+        ) : (
+          <Spin />
+        )}
+      </div>
+
+      <div
+        className="lg:hidden block flex items-center text-lg  cursor-pointer"
+        onClick={() => signOut()}
+      >
+        <span className="mr-2">登出</span>
+        <SignOut color={"rgba(0, 0, 0, 0.6)"} />
+      </div>
     </div>
   );
 }

@@ -30,21 +30,21 @@
 
 :root {
   color-scheme: light dark;
-  --background-color: #111827; // 背景色
+  --background-color: #0a0d15; // 背景色
   --text-color: white; // 文字颜色
   --secondary-text-color: #d3d3d3; // 次要文字颜色
-  --link-color: #1890ff; 
+  --link-color: rgb(232 52 183); 
   ::-webkit-scrollbar {
     width: 6px;
   }
-
-      a[target='_blank'] {
-      @apply horizontal-underline horizontal-underline-active;
-      &:hover {
-        @apply bg-primary-500 text-white;
-      }
+  
+  a[target='_blank'] {
+    @apply horizontal-underline horizontal-underline-active;
+    &:hover {
+      @apply bg-primary-500 text-white;
     }
-    
+  }
+  
   
   body {
     margin: 0;
@@ -107,12 +107,11 @@ header {
 
 .horizontal-underline {
   border-bottom-width: 0 !important;
-  background-image: linear-gradient(transparent,transparent),linear-gradient(rgb(173 94 243),rgb(173 94 243));
+  background-image: linear-gradient(transparent,transparent),linear-gradient(rgb(232 52 183),rgb(232 52 183));
   background-size: 0 3px;
   background-position: 0 100%;
   background-repeat: no-repeat;
   transition: background-size .5s ease-in-out;
-  padding-bottom: 5px;
   &:hover {
     background-size: 100% 3px;
     background-position: 0 100%;

@@ -66,10 +66,10 @@ export default function ThemeSwitch() {
 
   return mounted ? (
     <div>
-      <div className="ml-4 lg:block hidden">
+      <div className="md:block hidden ">
         <motion.div
           onClick={() => setStatus(isActive ? false : true)}
-          className="cursor-pointer flex justify-end text-lg "
+          className="cursor-pointer flex justify-end text-xl "
           whileHover={{ scale: 1.3 }}
           id="swiththeme-btn"
         >
@@ -109,7 +109,7 @@ export default function ThemeSwitch() {
         )}
       </div>
 
-      <div className="lg:hidden">
+      <div className="md:hidden">
         <Divider />
         {Object.entries(osIconMap).map(([key, value]) => (
           <div key={key} className={className}>

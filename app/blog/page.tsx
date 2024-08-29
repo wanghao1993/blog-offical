@@ -4,6 +4,8 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import { getAllPostsMeta, getAllCategory, getAllTags } from "data/utils";
 import Link from "next/link";
 import { generateColors } from "@/lib/utils";
+import Tags from "@/components/blog/Tags";
+import Category from "@/components/blog/Categories";
 const getPostsData = async () => {
   return await getAllPostsMeta();
 };
@@ -16,10 +18,8 @@ const getCates = async () => {
   return await getAllCategory();
 };
 
-export default async function LoginPage() {
+export default async function BlogHomePage() {
   const list = await getPostsData();
-  const tags = await getTags();
-  const categories = await getCates();
   return (
     <MainLayout>
       <GoogleTagManager gtmId="G-4Z3CSGWXGR" />
@@ -30,42 +30,8 @@ export default async function LoginPage() {
           ))}
         </div>
         <div className="lg:w-1/4 space-y-4">
-          <div className="border rounded-lg">
-            <h2 className="px-4 py-2 border-b">分类</h2>
-            <div className="flex p-4">
-              {Object.keys(categories).map((item) => (
-                <Link
-                  key={item}
-                  className="mr-2 p-1 flex text-white item-center justify-center rounded-md text-xs"
-                  href={`/blog/category/${item}`}
-                  style={{ backgroundColor: generateColors() }}
-                >
-                  <span>{item}</span>
-                  <span className="bg-white px-1 text-black ml-1 rounded-sm">
-                    {categories[item]}
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
-          <div className="border rounded-lg">
-            <h2 className="px-4 py-2 border-b">标签</h2>
-            <div className="flex p-4">
-              {Object.keys(tags).map((item) => (
-                <Link
-                  key={item}
-                  className="mr-2 p-1 flex text-white item-center justify-center rounded-md text-xs"
-                  href={`/blog/tag/${item}`}
-                  style={{ backgroundColor: generateColors() }}
-                >
-                  <span>{item}</span>
-                  <span className="bg-white px-1 text-black ml-1 rounded-sm">
-                    {tags[item]}
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
+          <Category />
+          <Tags />
         </div>
       </div>
     </MainLayout>

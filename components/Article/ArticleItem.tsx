@@ -12,7 +12,7 @@ export default function ArticleItem(data: {
           href={`/blog/${data.articleInfo.title}`}
           className="horizontal-underline horizontal-underline-active "
         >
-          <h3 className="text-lg font-semibold  line-clamp-1 text-primary-500">
+          <h3 className="text-lg font-medium line-clamp-1 text-primary-500">
             {data.articleInfo.title}
           </h3>
         </Link>

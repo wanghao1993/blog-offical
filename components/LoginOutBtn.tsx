@@ -44,12 +44,12 @@ export default function LoginInOut() {
 
   return (
     <div>
-      <div className="lg:mx-3 hidden lg:block">
+      <div className="hidden md:block">
         <LoginModal open={visible} onClose={() => setVisible(false)} />
 
         {status === "unauthenticated" ? (
           <div onClick={() => setVisible(true)} className="login-icon">
-            <SignIn />
+            <SignIn color={"rgba(0, 0, 0, 0.6)"} />
           </div>
         ) : status === "authenticated" ? (
           <Dropdown
@@ -70,13 +70,23 @@ export default function LoginInOut() {
         )}
       </div>
 
-      <div
-        className="lg:hidden block flex items-center text-lg  cursor-pointer"
-        onClick={() => signOut()}
-      >
-        <span className="mr-2">登出</span>
-        <SignOut color={"rgba(0, 0, 0, 0.6)"} />
-      </div>
+      {status === "unauthenticated" ? (
+        <div
+          className="md:hidden  flex items-center text-lg  cursor-pointer"
+          onClick={() => setVisible(true)}
+        >
+          <span className="mr-2">登录</span>
+          <SignIn color={"var(--text-color)"} />
+        </div>
+      ) : (
+        <div
+          className="md:hidden  flex items-center text-lg  cursor-pointer"
+          onClick={() => signOut()}
+        >
+          <span className="mr-2">登出</span>
+          <SignOut color={"var(--text-color)"} />
+        </div>
+      )}
     </div>
   );
 }

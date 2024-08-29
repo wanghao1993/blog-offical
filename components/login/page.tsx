@@ -41,7 +41,6 @@ export default function LoginModal(data: {
       <Modal
         open={data.open}
         destroyOnClose
-        width={500}
         footer={null}
         onClose={data.onClose}
         onCancel={data.onClose}

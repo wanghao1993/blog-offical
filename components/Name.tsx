@@ -7,7 +7,7 @@ export default function BlogName() {
   return (
     <Link
       href="/"
-      className={`horizontal-underline  text-3xl font-extrabold sm:block ${
+      className={`horizontal-underline  text-3xl font-extrabold  ${
         pathName === "/" ? "horizontal-underline-active" : ""
       }`}
       aria-label="Isaac Wang."

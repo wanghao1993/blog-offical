@@ -77,7 +77,13 @@ export default async function ArticleDetail({
                 </Link>
               ))}
 
-            <Divider type="vertical" />
+            <Divider
+              type="vertical"
+              style={{
+                marginInline: "0px",
+                borderInlineStartColor: "var(--text-color)",
+              }}
+            />
             {detail.meta.tags &&
               detail.meta.tags.split(",").map((item: string) => (
                 <Link

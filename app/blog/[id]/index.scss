@@ -20,9 +20,16 @@
           @apply bg-primary-500 text-white;
         }
     }
-    code {
+    pre code {
         border-radius: 2px;
         margin-left: 4ch;
+    }
+
+    p code {
+        background-color: rgb(240, 117, 35);
+        color: #fff;
+        padding: 0.15rem 0.35rem;
+        border-radius: 2px;
     }
     .language-css {
         .hljs-selector-pseudo {

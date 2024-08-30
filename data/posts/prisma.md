@@ -1,0 +1,205 @@
+---
+title: prisma初体验
+date: 2023-12-19
+key: prisma-1,
+categories: 后端
+tags: prisma
+description: 初次使用prisma构建
+---
+
+## Prisma初体验
+
+[prisma](https://www.prisma.io/docs/getting-started) 是一个现代化的 Node.js 和 TypeScript 的 ORM（对象关系映射）库。
+
+用途：
+
+1. 简化数据库操作：它提供了一种直观且类型安全的方式来与数据库进行交互，使得开发者可以通过 JavaScript/TypeScript 对象来操作数据库中的数据，而无需直接编写复杂的 SQL 语句。
+2. 提高开发效率：减少了数据库操作相关的样板代码，让开发者能够更专注于业务逻辑的实现。
+3. 支持多种数据库：如 PostgreSQL、MySQL、SQLite 等，增加了应用的可扩展性和灵活性。
+
+优点：
+
+1. 类型安全：利用 TypeScript 的类型系统，在编译时就能检测到类型错误，提高代码的可靠性。
+2. 简洁的 API：提供了简洁、易于理解和使用的 API，降低了数据库操作的学习成本。
+3. 强大的查询构建：可以方便地构建复杂的查询，并且能够自动处理关联和关系。
+
+缺点：
+
+1. 性能开销：相对于直接编写原生的 SQL 语句，可能会存在一定的性能开销。
+2. 学习曲线：对于初次接触 ORM 概念的开发者来说，可能需要一些时间来理解和掌握其工作原理和用法。
+3. 某些复杂操作受限：对于一些非常特殊或复杂的数据库操作，可能不如直接编写 SQL 灵活。
+
+总体而言，Prisma 在提高开发效率和代码质量方面具有显著优势，但在对性能要求极其严格或遇到非常特殊的数据库操作需求时，需要谨慎权衡其使用。
+
+## 安装
+
+本次是在我的博客项目中替换数据库，所以直接安装即可，无需初始化一个项目。
+
+```bash
+npm install prisma
+# or
+yarn add prisma
+# or
+pnpm add prisma
+```
+
+然后执行`npx prisma init`，这个命令会执行两件事情。
+
+- 创建一个名为 prisma 的新目录，其中包含一个名为 schema.prisma 的文件，该文件包含了`prisma schema`以及数据模型
+- 创建一个`.env`文件在更目录下
+
+出现下面的log就初始化成功了，这时候我们可以看到产生了一个prisma目录以及`schema.prisma`文件和`.env`.
+
+![prisma-init](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/prisma-init.png?q-sign-algorithm=sha1&q-ak=AKIDrRaYms09JN-8iUaayQJW7tpvkn7KXciZEdcszE6tEgaTHbzJEDonHvDIaZrZhp9r&q-sign-time=1724999654;1725003254&q-key-time=1724999654;1725003254&q-header-list=&q-url-param-list=&q-signature=2805620d429687527db74ffddf112a2a899deae1&x-cos-security-token=k2uU2nfnAZdPkl0nsWsrAuxLJB6vZq1ae18dd34ed7be6d50e8c113d91dc1f5f3009mJHc-APpMxNUNJ1eib6zg1d779NIXA5t_f52SXt5OXut4ozjq5dkU9KA5P13WVFyQiIQW8AwDZz-Rw4XnuKVOzeojSaKXngjErCZkyWbaF-exLXBTwSTYVvTFXbgSNZLZzZw3k_O2UByXp_4V2pmHdUks81Nde34xI3XRZN_5nY3YKG2lvv4CyX_HAZBu&imageMogr2/interlace/0|watermark/2/text/5rGq5rWp/font/c2ltZmFuZ-S7v-Wuiy50dGY/fontsize/24/fill/Izk5MDA2Ng/dissolve/100/shadow/0/gravity/southeast/dx/20/dy/20)
+
+## 数据库配置
+
+我们可以看看刚刚创建的`schema.prisma`文件的内容.
+
+```js
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+```
+
+其中一个是`generator client`一个是`datasource db`,`client`是生成客户端代码,`database`是数据库连接信息。
+
+### 创建Model
+
+我用数据库的功能，主要是想做博客的点赞，查看数据等等。
+
+所以我们需要创建`User`, `Post`的model，还有转发和commont的以后再做，由于我的博客，用的是mdx，所以不需要存储内容等信息。只用给文章生成一个id保存到数据库即可，用于对其它数据做关联。
+
+```ts
+model Post {
+  blog_id     Int    @id @default(autoincrement())
+  blog_key    String
+  blog_title  String
+  likes_count Int[]
+  views_count Int[]
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+  password   String
+  name       String
+  image      String   @default("https://blog-1302483222.cos.ap-shanghai.myqcloud.com/images.jpg")
+}
+
+```
+
+这样我们就创建好了数据模型了。
+
+### 运行数据库迁移
+
+这里先需要安装`pnpm add  @prisma/client`，用来生成prisma客户端。
+
+![prisma-client-install-and-generat](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/prisma-client-install-and-generate-ece3e0733edc615e416d6d654c05e980.png)
+
+这是prisma官方文档的流程截图，我们只需要执行`npx prisma migrate dev --name init`命令就生成sql文件，在我们的数据prisma目录下，每次变更的话建议执行此命令，`name`参数需要变更，变更内容为本次修改数据库的备注。
+
+## 使用
+
+我们需要创建一个工具函数，来封装一下。
+
+```ts
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
+export default prisma;
+```
+
+接下来我们可以愉快的使用prisma了。
+
+我现在登录模块中使用一下，这样我们就完成了，用户在使用github登录的时候，没有用户就去新增用户，有的话，如果头像和名字发生了变更就去更新。
+
+```ts
+import GitHubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { decrypt, encrypt } from "@/lib/crypto";
+import { AuthOptions } from "next-auth";
+import prisma from "./pg";
+
+export const authOptions: AuthOptions = {
+  secret: process.env.SECRET_KEY,
+  debug: true,
+  providers: [
+    GitHubProvider({
+      clientId: process.env.GIT_CLIENT_ID as string,
+      clientSecret: process.env.GIT_CLIENT_SECRET as string,
+      httpOptions: {
+        timeout: 100000,
+      },
+      async profile(profile) {
+        try {
+            // 连接
+          await prisma.$connect();
+          // 查询是否有
+          const existingUser = await prisma.user.findUnique({
+            where: { email: profile.email },
+          });
+
+            // 更新
+           if (
+            existingUser &&
+            (existingUser.image !== profile.avatar_url ||
+              existingUser.name !== (profile.name || profile.login))
+          ) {
+            await prisma.user.update({
+              where: { email: profile.email },
+              data: {
+                name: profile.name || profile.login,
+                image: profile.avatar_url as string,
+              },
+            });
+
+            return existingUser as any;
+          }
+
+          // Create new user
+
+          // 新增
+          const res = await prisma.user.create({
+            data: {
+              name: profile.name || profile.login,
+              email: profile.email,
+              image: profile.avatar_url,
+              password: encrypt(profile.id.toString()), // Use GitHub ID as default password
+            },
+          });
+
+          prisma.$disconnect();
+          return res as any;
+        } catch (e: any) {
+          console.log(e.message);
+        }
+      },
+    }),
+  ],
+  session: {
+    strategy: "jwt",
+    maxAge: 2 * 24 * 60 * 60,
+  },
+  callbacks: {
+    session: async (data: { session: any }) => {
+      return data.session;
+    },
+  },
+
+  pages: {
+    signIn: "/",
+  },
+};
+
+```

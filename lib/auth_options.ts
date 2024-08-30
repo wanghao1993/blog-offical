@@ -1,10 +1,9 @@
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import User from "models/user";
-import connectMongo from "@/lib/mongoose";
 import { decrypt, encrypt } from "@/lib/crypto";
 import { AuthOptions } from "next-auth";
+import prisma from "./pg";
 
 export const authOptions: AuthOptions = {
   secret: process.env.SECRET_KEY,
@@ -19,27 +18,39 @@ export const authOptions: AuthOptions = {
       },
       async profile(profile) {
         try {
-          await connectMongo();
+          await prisma.$connect();
+          const existingUser = await prisma.user.findUnique({
+            where: { email: profile.email },
+          });
 
-          const existingUser = await User.findOne({ email: profile.email });
-
-          if (existingUser) {
-            await User.findByIdAndUpdate(existingUser._id, {
-              name: profile.name || profile.login,
-              image: profile.avatar_url,
+          if (
+            existingUser &&
+            (existingUser.image !== profile.avatar_url ||
+              existingUser.name !== (profile.name || profile.login))
+          ) {
+            await prisma.user.update({
+              where: { email: profile.email },
+              data: {
+                name: profile.name || profile.login,
+                image: profile.avatar_url as string,
+              },
             });
-            return existingUser;
+
+            return existingUser as any;
           }
 
           // Create new user
-          const newUser = new User();
-          newUser.name = profile.name || profile.login;
-          newUser.email = profile.email;
-          newUser.image = profile.avatar_url;
-          (newUser.password = encrypt(profile.id.toString())), // Use GitHub ID as default password
-            await newUser.save();
+          const res = await prisma.user.create({
+            data: {
+              name: profile.name || profile.login,
+              email: profile.email,
+              image: profile.avatar_url,
+              password: encrypt(profile.id.toString()), // Use GitHub ID as default password
+            },
+          });
 
-          return newUser;
+          prisma.$disconnect();
+          return res as any;
         } catch (e: any) {
           console.log(e.message);
         }

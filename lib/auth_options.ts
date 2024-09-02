@@ -23,20 +23,21 @@ export const authOptions: AuthOptions = {
             where: { email: profile.email },
           });
 
-          if (
-            existingUser &&
-            (existingUser.image !== profile.avatar_url ||
-              existingUser.name !== (profile.name || profile.login))
-          ) {
-            await prisma.user.update({
-              where: { email: profile.email },
-              data: {
-                name: profile.name || profile.login,
-                image: profile.avatar_url as string,
-              },
-            });
-
-            return existingUser as any;
+          if (existingUser) {
+            if (
+              existingUser.image !== profile.avatar_url ||
+              existingUser.name !== (profile.name || profile.login)
+            ) {
+              return await prisma.user.update({
+                where: { email: profile.email },
+                data: {
+                  name: profile.name || profile.login,
+                  image: profile.avatar_url as string,
+                },
+              });
+            } else {
+              return existingUser as any;
+            }
           }
 
           // Create new user

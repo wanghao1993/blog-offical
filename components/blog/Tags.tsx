@@ -1,11 +1,11 @@
 import { getAllTags } from "data/utils";
 import Link from "next/link";
 
-const getTags = async () => {
-  return await getAllTags();
+const getTags = () => {
+  return getAllTags();
 };
 export default async function Tags() {
-  const tags = await getTags();
+  const tags = getTags();
 
   return (
     <div className="border rounded-lg">

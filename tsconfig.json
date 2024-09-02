@@ -18,6 +18,9 @@
     "incremental": true,
     "baseUrl": "./",
     "paths": {
+      "contentlayer/generated": [
+        "./.contentlayer/generated"
+      ],
       "@/components/*": [
         "components/*"
       ],
@@ -41,6 +44,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    ".contentlayer/generated",
     ".next/types/**/*.ts"
   ],
   "exclude": [

@@ -1,11 +1,11 @@
 import { getAllCategory } from "data/utils";
 import Link from "next/link";
 
-const getCategory = async () => {
-  return await getAllCategory();
+const getCategory = () => {
+  return getAllCategory();
 };
 export default async function Category() {
-  const categories = await getCategory();
+  const categories = getCategory();
 
   return (
     <div className="border rounded-lg">

@@ -1,25 +1,24 @@
-import { ArticleType } from "@/types/article";
 import Link from "next/link";
 import { Divider } from "antd";
-export default function ArticleItem(data: {
-  articleInfo: ArticleType.ArticleItem;
-}) {
+import { Post } from "contentlayer/generated";
+export default function ArticleItem(data: { articleInfo: Post }) {
+  const { articleInfo } = data;
   return (
     <div className="border rounded-lg">
       <div className="p-4">
         {/* title */}
         <Link
-          href={`/blog/${data.articleInfo.title}`}
+          href={`/blog/${articleInfo.key}`}
           className="horizontal-underline horizontal-underline-active "
         >
           <h3 className="text-lg font-medium line-clamp-1 text-primary-500">
-            {data.articleInfo.title}
+            {articleInfo.title}
           </h3>
         </Link>
 
         <div className="flex items-center ">
           <div className="mr-2 text-gray-400">
-            {data.articleInfo.date.toLocaleDateString()}
+            {new Date(articleInfo.date).toLocaleDateString()}
           </div>
         </div>
       </div>

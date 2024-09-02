@@ -1,5 +1,21 @@
-import { defineDocumentType, makeSource } from "contentlayer/source-files";
-
+import {
+  defineDocumentType,
+  makeSource,
+  ComputedFields,
+} from "contentlayer/source-files";
+import readingTime from "reading-time";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeHightLight from "rehype-highlight";
+import rehypeSlug from "rehype-slug";
+import { extractTocHeadings } from "./lib/heading";
+const computedFields: ComputedFields = {
+  readingTime: { type: "json", resolve: (doc) => readingTime(doc.body.raw) },
+  slug: {
+    type: "string",
+    resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ""),
+  },
+  toc: { type: "string", resolve: (doc) => extractTocHeadings(doc.body.raw) },
+};
 const Post = defineDocumentType(() => ({
   name: "Post",
   filePathPattern: `**/*.mdx`,
@@ -41,10 +57,19 @@ const Post = defineDocumentType(() => ({
       type: "string",
       resolve: (doc) => `/posts/${doc._raw.flattenedPath}`,
     },
+    ...computedFields,
   },
 }));
 
 export default makeSource({
   contentDirPath: "posts",
   documentTypes: [Post],
+  mdx: {
+    cwd: process.cwd(),
+    rehypePlugins: [
+      rehypeSlug,
+      rehypeAutolinkHeadings,
+      rehypeHightLight as any,
+    ],
+  },
 });

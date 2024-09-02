@@ -1,70 +1,18 @@
-import matter from "gray-matter";
-import path from "path";
-import fs from "fs";
-import { ArticleType } from "@/types/article";
-const rootDirectory = path.join(process.cwd(), "data", "posts");
+import { allPosts } from "contentlayer/generated";
 
-export const getAllPostsMeta = async () => {
-  // 获取到data/posts/下所有文件
-  const dirs = fs
-    .readdirSync(rootDirectory, { withFileTypes: true })
-    .map((item) => {
-      return item.name.split(".mdx")[0];
-    });
-
-  // 解析文章数据，拿到标题、日期、简介
-  let allData = await Promise.all(
-    dirs.map(async (dir) => {
-      const { meta, content } = await getPostBySlug(dir);
-      return { meta, content };
-    })
-  );
-
+export const getAllPostsMeta = () => {
   // 文章日期排序，最新的在最前面
-  allData.sort((a, b) => {
-    return Date.parse(a.meta.date.toLocaleDateString()) <
-      Date.parse(b.meta.date.toLocaleDateString())
-      ? 1
-      : -1;
+  allPosts.sort((a, b) => {
+    return +new Date(a.date) < +new Date(a.date) ? 1 : -1;
   });
-  return allData;
+  return allPosts;
 };
 
-interface POSTINFO {
-  meta: ArticleType.ArticleItem;
-  content: string;
-}
-export const getPostBySlug: (dir: string) => Promise<POSTINFO> = async (
-  dir: string
-) => {
-  const filePath = path.join(rootDirectory, `${decodeURI(dir)}.mdx`);
-
-  const fileContent = fs.readFileSync(filePath, { encoding: "utf8" });
-
-  // gray-matter库是一个解析markdown内容，可以拿到markdown文件的meta信息和content内容
-  const { content, data } = matter(fileContent);
-
-  // 如果文件名是中文，转成拼音
-  const id = dir;
-
-  return {
-    meta: {
-      title: decodeURIComponent(dir),
-      id,
-      description: data.description as string,
-      date: data.date as Date,
-      categories: data.categories as string,
-      tags: data.tags as string,
-    },
-    content: content,
-  };
-};
-
-export const getAllTags = async () => {
-  const allData = await getAllPostsMeta();
+export const getAllTags = () => {
+  const allData = getAllPostsMeta();
   let allTagData: Record<string, number> = {};
   allData.forEach((item) => {
-    const tags = item.meta.tags?.split(",") ?? [];
+    const tags = item.tags?.split(",") ?? [];
     tags.forEach((item: string) => {
       if (allTagData[item]) {
         allTagData[item] = allTagData[item] + 1;
@@ -77,11 +25,11 @@ export const getAllTags = async () => {
   return allTagData;
 };
 
-export const getAllCategory = async () => {
-  const allData = await getAllPostsMeta();
+export const getAllCategory = () => {
+  const allData = getAllPostsMeta();
   let allCateData: Record<string, number> = {};
   allData.forEach((item) => {
-    const tags = item.meta.categories?.split(",") ?? [];
+    const tags = item.categories?.split(",") ?? [];
     tags.forEach((item: string | number) => {
       if (allCateData[item]) {
         allCateData[item] = allCateData[item] + 1;

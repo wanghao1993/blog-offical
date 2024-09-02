@@ -9,7 +9,7 @@ export const getAllPostsMeta = async () => {
   const dirs = fs
     .readdirSync(rootDirectory, { withFileTypes: true })
     .map((item) => {
-      return item.name.split(".md")[0];
+      return item.name.split(".mdx")[0];
     });
 
   // 解析文章数据，拿到标题、日期、简介
@@ -37,7 +37,7 @@ interface POSTINFO {
 export const getPostBySlug: (dir: string) => Promise<POSTINFO> = async (
   dir: string
 ) => {
-  const filePath = path.join(rootDirectory, `${decodeURI(dir)}.md`);
+  const filePath = path.join(rootDirectory, `${decodeURI(dir)}.mdx`);
 
   const fileContent = fs.readFileSync(filePath, { encoding: "utf8" });
 

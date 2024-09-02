@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 import mdx from "@next/mdx";
+import { withContentlayer } from "next-contentlayer";
 const withMDX = mdx();
 const nextConfig = {
   reactStrictMode: false,
@@ -28,4 +29,4 @@ const nextConfig = {
   transpilePackages: ["next-mdx-remote"],
 };
 
-export default withMDX(nextConfig);
+export default withContentlayer(withMDX(nextConfig));

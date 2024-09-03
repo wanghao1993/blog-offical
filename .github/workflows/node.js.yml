@@ -17,4 +17,4 @@ jobs:
           host: ${{secrets.DEPLOY_HOST}}
           username: ${{secrets.DEPLOY_USER}}
           password: ${{secrets.DEPLOY_PASS_WORD}}
-          script: cd /www/blog-offical && git fetch  && git reset  --hard HEAD  && git merge origin/main && rm -rf node_modules && pnpm install && npx prisma generate &&pnpm build && pm2 stop all &&  pm2 delete blog && pm2 start --name blog npm -- run start
+          script: cd /www/blog-offical && git fetch  && git reset  --hard HEAD  && git merge origin/main && rm -rf node_modules && pnpm install && npx prisma generate && pnpm build && pm2 stop all &&  pm2 delete blog && pm2 start --name blog npm -- run start

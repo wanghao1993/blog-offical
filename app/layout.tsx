@@ -14,7 +14,7 @@ import Script from "next/script";
 import type { Metadata } from "next";
 const APP_NAME = "汪浩的博客";
 const APP_DEFAULT_TITLE = "汪浩的博客";
-const APP_TITLE_TEMPLATE = "博客";
+const APP_TITLE_TEMPLATE = "汪浩（Isaac Wang）的博客";
 const APP_DESCRIPTION = "汪浩（Isaac Wang）的博客，一些关于技术和生活的的记录";
 
 export const metadata: Metadata = {

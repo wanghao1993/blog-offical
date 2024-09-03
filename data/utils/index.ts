@@ -3,7 +3,7 @@ import { allPosts } from "contentlayer/generated";
 export const getAllPostsMeta = () => {
   // 文章日期排序，最新的在最前面
   allPosts.sort((a, b) => {
-    return +new Date(a.date) < +new Date(a.date) ? 1 : -1;
+    return +new Date(a.date) < +new Date(b.date) ? 1 : -1;
   });
   return allPosts;
 };

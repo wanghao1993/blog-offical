@@ -5,7 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = "https://super-super.cn/";
   const allBlogs = getAllPostsMeta();
   const blogRoutes = allBlogs.map((post) => ({
-    url: `${siteUrl}/blog/${post.key}`,
+    url: `${siteUrl}blog/${post.key}`,
     lastModified: post.date,
   }));
 

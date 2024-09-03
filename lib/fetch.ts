@@ -53,6 +53,7 @@ export async function get<T>(
 export async function post<T>(
   url: string,
   data: any,
+  revalidate = 60,
   headers?: HttpRequestHeader
 ): Promise<T> {
   const isFile = Object.prototype.toString.call(data) === "[object FormData]";
@@ -61,6 +62,7 @@ export async function post<T>(
     method: "POST",
     body: isFile ? data : JSON.stringify(data),
     headers,
+    next: { revalidate },
     credentials: "same-origin",
   });
 }

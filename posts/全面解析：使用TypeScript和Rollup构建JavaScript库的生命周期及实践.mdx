@@ -3,11 +3,12 @@ title: 全面解析：使用TypeScript和Rollup构建JavaScript库的生命周�
 description: description
 categories: 前端
 tags: NPM
+keywords: npm,rollup,规范,最佳实践,ts,swc
 key: 'use-ts-and-rollup-build-a-npm-package'
 date: 2023-12-19
 ---
 
-![DALL·E 2024-04-26 16.36.49 - A detailed illustration for a tutorial on building and maintaining a TypeScript package. The image features a central flowchart showing the steps from.webp](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/94e6f78ebf2d4ab5877dc83bdb65604e~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1792&h=1024&s=426478&e=webp&b=a7ddea)
+![coverimage](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/mx_screencap_20240722_101317.png)
 在本文中，我们将详细探讨如何从零开始搭建一个使用 TypeScript 的 JavaScript 包，涵盖从环境配置到发布的整个过程。通过这一系列的步骤，你将能够理解并实践如何构建一个现代化的前端库或应用。
 
 ## 一、初始准备和技术选型
@@ -18,7 +19,7 @@ date: 2023-12-19
 
 首先需要明确此包的作用，以及技术栈，然后需要哪些工具。通常一个包的简单全生命周期是这样的。
 
-![流程](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3cc1ce733a564637bd13153f7919836b~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=3116&h=832&s=160959&e=png&b=ffffff)
+![流程](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/%E6%97%A0%E6%A0%87%E9%A2%98-2022-07-03-1612.png)
 
 ### 2.1 快速版
 
@@ -241,7 +242,7 @@ echo "module.exports = { extends: ['@commitlint/config-conventional'] } > commit
 
 这时候我们可以测试一下提交可以看到只能按照规范来填写 commit 信息。
 
-![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3e6981e1e5a9433cb8a2b402c33efe07~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=728&h=139&s=14275&e=png&b=191919)
+![image.png](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/commitinfo-pic.png)
 
 除此以外，我们还可以借助`commitizen`这个工具来提交代码。
 
@@ -263,7 +264,7 @@ pnpm install commitizen cz-conventional-changelog -D
 
 然后我们就可以通过`npm run commit`的命令来提交了。
 
-![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8094c63edfd743a1b67b9f441ea01ff7~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=806&h=166&s=18399&e=png&b=181818)
+
 
 #### 2.2.4 开发启动
 
@@ -288,8 +289,6 @@ class B extends A {
 
 export default B;
 ```
-
-![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/70c349c71ca3492087cf6a2798465e28~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=558&h=102&s=7742&e=png&b=181818)
 
 HTML 内容，打开 html 就看了一看到 i 的内容是一个对象`{age: 12, name: '小明'}`
 
@@ -321,7 +320,7 @@ console.log(i)
 
 看编译后的代码，已经被转换成 es3 了。
 
-![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fc285734fd9543b194c181e53d63ad2b~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=356&h=328&s=15874&e=png&b=1f1f1f)
+![image.png](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/es3.png)
 
 ## 三. 测试和验证
 
@@ -369,7 +368,7 @@ test("adds 1 + 2 to equal 3", () => {
 
 然后执行脚本`npm run test`
 
-![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/08011481fb0b480ca858803cd14759af~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=293&h=233&s=10215&e=png&b=181818)
+![image.png](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/test.png)
 
 就可以看到测试用例执行成功了，到此我们的测试就配置完成了。
 
@@ -403,11 +402,11 @@ pnpm install standard-version -D
 首先需要一个 npm 的账号，然后`npm adduser`通过网页端的授权，授权完成后执行`npm run publishnpm`即可以发布到`npm`顺便打上`tag`.
 
 看我这里已经发布成功了。
-![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/57e11e00ac8946fa8173c6e52be6fc23~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=757&h=114&s=11591&e=png&b=ffffff)
+![image.png](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/rollup.png)
 
 tag 也有了。
 
-![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5ce673e5d0b7462a816c0e9d463d72e4~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=407&h=308&s=16281&e=png&b=ffffff)
+![image.png](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/tags.png)
 
 到此就完成了一个 ts 包的发布了，然后还有些工作还可以补充，比如库的声明文件没有生成，这个可以去看看 ts 的文档学习一下，我这里就不写了，还有可以通过 gitaction 来完成项目的 build 和 publish，有兴趣的可以自行学习添加一下。
 

@@ -1,5 +1,4 @@
 import GithubSlugger from "github-slugger";
-// import { Heading } from "mdast";
 import { toString } from "mdast-util-to-string";
 import { remark } from "remark";
 import { visit } from "unist-util-visit";

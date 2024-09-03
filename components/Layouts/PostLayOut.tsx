@@ -3,11 +3,6 @@ import { Post } from "contentlayer/generated";
 import Link from "next/link";
 import { ReactNode } from "react";
 
-const postDateTemplate: Intl.DateTimeFormatOptions = {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-};
 export type CoreContent<T> = Omit<T, "body" | "_raw" | "_id">;
 interface Props {
   post: Post;
@@ -21,9 +16,13 @@ export default function PostLayout({ post, children, next, prev }: Props) {
 
   return (
     <article className="article-detail ">
-      <div className="bg-primary space-y-1 rounded-lg  py-4 px-2 text-center sm:py-6 md:py-10">
-        <h1 className="font-semibold ">{post.title}</h1>
-        <div>{new Date(post.date).toLocaleDateString()}</div>
+      <div className="bg-primary-400 text-white space-y-1 rounded-lg  py-4 px-2 text-center sm:py-6 md:py-10">
+        <h1 className="font-semibold !text-white">{title}</h1>
+        <div>
+          {new Date(date).toLocaleDateString()}
+          {"  "}共{readingTime.words}字{"  "}阅读需要
+          {(readingTime.time / 60000).toFixed(0)}分钟
+        </div>
       </div>
       <div className="py-4 flex gap-4 items-center">
         {post.categories &&

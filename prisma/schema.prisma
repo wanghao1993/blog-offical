@@ -5,10 +5,10 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 model Post {
   blog_id     Int    @id @default(autoincrement())
-  blog_key    String
+  blog_key    String @unique
   blog_title  String
   likes_count Int[]
-  views_count Int[]
+  views_count Int
 }
 
 model User {

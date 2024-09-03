@@ -1,5 +1,0 @@
-User-Agent: *
-Allow: /
-Disallow: /admin
-
-Sitemap: https://super-super.cn/sitemap.xml

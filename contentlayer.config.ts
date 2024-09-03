@@ -31,6 +31,11 @@ const Post = defineDocumentType(() => ({
       description: "唯一key",
       required: true,
     },
+    keywords: {
+      type: "string",
+      description: "关键词",
+      required: true,
+    },
     date: {
       type: "date",
       description: "日期",

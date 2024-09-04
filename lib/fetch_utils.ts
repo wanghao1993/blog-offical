@@ -23,7 +23,5 @@ export function responseHandler<T>(
   code = BusinessCode.normal,
   message = "success"
 ) {
-  prisma.$disconnect();
-
   return NextResponse.json({ message, data, code }, { status });
 }

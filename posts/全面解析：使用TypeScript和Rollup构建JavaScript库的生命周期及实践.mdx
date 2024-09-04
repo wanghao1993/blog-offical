@@ -4,9 +4,13 @@ description: description
 categories: 前端
 tags: NPM
 keywords: npm,rollup,规范,最佳实践,ts,swc
-key: 'use-ts-and-rollup-build-a-npm-package'
+key: "use-ts-and-rollup-build-a-npm-package"
 date: 2023-12-19
 ---
+
+import TOCInline from "@/components/TOCInline";
+
+<TOCInline toc={props.toc} exclude="Overview" heading={3} />
 
 ![coverimage](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/mx_screencap_20240722_101317.png)
 在本文中，我们将详细探讨如何从零开始搭建一个使用 TypeScript 的 JavaScript 包，涵盖从环境配置到发布的整个过程。通过这一系列的步骤，你将能够理解并实践如何构建一个现代化的前端库或应用。
@@ -263,8 +267,6 @@ pnpm install commitizen cz-conventional-changelog -D
 ```
 
 然后我们就可以通过`npm run commit`的命令来提交了。
-
-
 
 #### 2.2.4 开发启动
 

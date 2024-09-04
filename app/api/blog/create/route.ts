@@ -18,6 +18,7 @@ export async function POST(request: Request) {
           views_count: 1,
         },
       });
+
       return responseHandler(res);
     } else {
       const updateRes = await prisma.post.update({
@@ -28,10 +29,10 @@ export async function POST(request: Request) {
           views_count: res.views_count + 1,
         },
       });
+
       return responseHandler(updateRes);
     }
   } catch (e) {
-    console.log(e);
     return responseHandler(
       null,
       BusinessCode.normal,

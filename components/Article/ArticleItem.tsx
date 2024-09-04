@@ -33,7 +33,7 @@ export default function ArticleItem(data: { articleInfo: Post }) {
               <Link
                 key={item}
                 href={`blog/category/${item}`}
-                className="px-2 rounded-lg bg-primary-500 text-white"
+                className="px-2 mr-1 rounded-lg bg-primary-500 text-white"
               >
                 {item}
               </Link>
@@ -47,7 +47,7 @@ export default function ArticleItem(data: { articleInfo: Post }) {
               <Link
                 key={item}
                 href={`/blog/tag/${item}`}
-                className="px-2 rounded-lg bg-primary-500 text-white"
+                className="px-2 mr-1 rounded-lg bg-primary-500 text-white"
               >
                 {item}
               </Link>

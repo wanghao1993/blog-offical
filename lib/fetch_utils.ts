@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import prisma from "./pg";
 
 export const StatusMsg = {
   200: "Success",
@@ -22,5 +23,7 @@ export function responseHandler<T>(
   code = BusinessCode.normal,
   message = "success"
 ) {
+  prisma.$disconnect();
+
   return NextResponse.json({ message, data, code }, { status });
 }

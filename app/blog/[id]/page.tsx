@@ -11,8 +11,8 @@ import { MDXLayoutRenderer } from "@/components/Layouts/MdxLayout";
 import Link from "next/link";
 import { post } from "@/lib/fetch";
 
-const setBlogToDb = async (key: string, title: string) => {
-  await post(
+const setBlogToDb = (key: string, title: string) => {
+  post(
     "/blog/create",
     {
       blog_key: key,
@@ -72,7 +72,7 @@ export default async function ArticleDetail({
 
   const nextPost = allPosts[index + 1];
   if (post) {
-    await setBlogToDb(params.id, post.title);
+    setBlogToDb(params.id, post.title);
   }
   return (
     <MainLayout>

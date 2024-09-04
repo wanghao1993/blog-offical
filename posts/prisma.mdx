@@ -8,7 +8,11 @@ keywords: prisma,数据库,nextjs
 description: 初次使用prisma构建
 ---
 
-## Prisma初体验
+import TOCInline from "@/components/TOCInline";
+
+<TOCInline toc={props.toc} exclude="Overview" heading={4} />
+
+## Prisma 初体验
 
 [prisma](https://www.prisma.io/docs/getting-started) 是一个现代化的 Node.js 和 TypeScript 的 ORM（对象关系映射）库。
 
@@ -49,7 +53,7 @@ pnpm add prisma
 - 创建一个名为 prisma 的新目录，其中包含一个名为 schema.prisma 的文件，该文件包含了`prisma schema`以及数据模型
 - 创建一个`.env`文件在更目录下
 
-出现下面的log就初始化成功了，这时候我们可以看到产生了一个prisma目录以及`schema.prisma`文件和`.env`.
+出现下面的 log 就初始化成功了，这时候我们可以看到产生了一个 prisma 目录以及`schema.prisma`文件和`.env`.
 
 ![prisma-init](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/prisma-init.png?q-sign-algorithm=sha1&q-ak=AKIDrRaYms09JN-8iUaayQJW7tpvkn7KXciZEdcszE6tEgaTHbzJEDonHvDIaZrZhp9r&q-sign-time=1724999654;1725003254&q-key-time=1724999654;1725003254&q-header-list=&q-url-param-list=&q-signature=2805620d429687527db74ffddf112a2a899deae1&x-cos-security-token=k2uU2nfnAZdPkl0nsWsrAuxLJB6vZq1ae18dd34ed7be6d50e8c113d91dc1f5f3009mJHc-APpMxNUNJ1eib6zg1d779NIXA5t_f52SXt5OXut4ozjq5dkU9KA5P13WVFyQiIQW8AwDZz-Rw4XnuKVOzeojSaKXngjErCZkyWbaF-exLXBTwSTYVvTFXbgSNZLZzZw3k_O2UByXp_4V2pmHdUks81Nde34xI3XRZN_5nY3YKG2lvv4CyX_HAZBu&imageMogr2/interlace/0|watermark/2/text/5rGq5rWp/font/c2ltZmFuZ-S7v-Wuiy50dGY/fontsize/24/fill/Izk5MDA2Ng/dissolve/100/shadow/0/gravity/southeast/dx/20/dy/20)
 
@@ -71,11 +75,11 @@ datasource db {
 
 其中一个是`generator client`一个是`datasource db`,`client`是生成客户端代码,`database`是数据库连接信息。
 
-### 创建Model
+### 创建 Model
 
 我用数据库的功能，主要是想做博客的点赞，查看数据等等。
 
-所以我们需要创建`User`, `Post`的model，还有转发和commont的以后再做，由于我的博客，用的是mdx，所以不需要存储内容等信息。只用给文章生成一个id保存到数据库即可，用于对其它数据做关联。
+所以我们需要创建`User`, `Post`的 model，还有转发和 commont 的以后再做，由于我的博客，用的是 mdx，所以不需要存储内容等信息。只用给文章生成一个 id 保存到数据库即可，用于对其它数据做关联。
 
 ```ts
 model Post {
@@ -83,7 +87,7 @@ model Post {
   blog_key    String
   blog_title  String
   likes_count Int[]
-  views_count Int[]
+  views_count Int
 }
 
 model User {
@@ -102,11 +106,11 @@ model User {
 
 ### 运行数据库迁移
 
-这里先需要安装`pnpm add  @prisma/client`，用来生成prisma客户端。
+这里先需要安装`pnpm add  @prisma/client`，用来生成 prisma 客户端。
 
 ![prisma-client-install-and-generat](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/prisma-client-install-and-generate-ece3e0733edc615e416d6d654c05e980.png)
 
-这是prisma官方文档的流程截图，我们只需要执行`npx prisma migrate dev --name init`命令就生成sql文件，在我们的数据prisma目录下，每次变更的话建议执行此命令，`name`参数需要变更，变更内容为本次修改数据库的备注。
+这是 prisma 官方文档的流程截图，我们只需要执行`npx prisma migrate dev --name init`命令就生成 sql 文件，在我们的数据 prisma 目录下，每次变更的话建议执行此命令，`name`参数需要变更，变更内容为本次修改数据库的备注。
 
 ## 使用
 
@@ -120,9 +124,9 @@ const prisma = new PrismaClient();
 export default prisma;
 ```
 
-接下来我们可以愉快的使用prisma了。
+接下来我们可以愉快的使用 prisma 了。
 
-我现在登录模块中使用一下，这样我们就完成了，用户在使用github登录的时候，没有用户就去新增用户，有的话，如果头像和名字发生了变更就去更新。
+我现在登录模块中使用一下，这样我们就完成了，用户在使用 github 登录的时候，没有用户就去新增用户，有的话，如果头像和名字发生了变更就去更新。
 
 ```ts
 import GitHubProvider from "next-auth/providers/github";
@@ -144,15 +148,15 @@ export const authOptions: AuthOptions = {
       },
       async profile(profile) {
         try {
-            // 连接
+          // 连接
           await prisma.$connect();
           // 查询是否有
           const existingUser = await prisma.user.findUnique({
             where: { email: profile.email },
           });
 
-            // 更新
-           if (
+          // 更新
+          if (
             existingUser &&
             (existingUser.image !== profile.avatar_url ||
               existingUser.name !== (profile.name || profile.login))
@@ -202,5 +206,4 @@ export const authOptions: AuthOptions = {
     signIn: "/",
   },
 };
-
 ```

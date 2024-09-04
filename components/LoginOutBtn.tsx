@@ -48,8 +48,11 @@ export default function LoginInOut() {
         <LoginModal open={visible} onClose={() => setVisible(false)} />
 
         {status === "unauthenticated" ? (
-          <div onClick={() => setVisible(true)} className="login-icon">
-            <SignIn color={"rgba(0, 0, 0, 0.6)"} />
+          <div
+            onClick={() => setVisible(true)}
+            className="login-icon cursor-pointer"
+          >
+            <SignIn color={"rgba(0, 0, 0, 0.8)"} />
           </div>
         ) : status === "authenticated" ? (
           <Dropdown
@@ -62,7 +65,7 @@ export default function LoginInOut() {
               shape={"circle"}
               src={session?.user?.image}
               alt="avatar"
-              className=" cursor-pointer "
+              className="cursor-pointer "
             ></Avatar>
           </Dropdown>
         ) : (

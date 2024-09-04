@@ -1,0 +1,291 @@
+---
+title: 性能优化-Performance
+date: 2021-12-05
+key: "web-performance-optimization-2"
+categories: 性能优化
+tags: 性能指标,优化手段,perfermanceApi
+keywords: 性能优化 浏览器 web加载 渲染流程
+description: 这篇文章主要介绍了性能指标，如何测试指标，指标上报等等：
+---
+
+import TOCInline from "@/components/TOCInline";
+
+<TOCInline toc={props.toc} exclude="Overview" heading={4} />
+
+# 性能优化2
+
+第一章讲到从url输入到页面显示经历了哪些过程，这一节我们来讲一讲如何检测一个网页的性能。
+
+## web性能标准
+
+本章内容主要讲解以下内容：
+
+![png](https://user-gold-cdn.xitu.io/2020/5/12/172067ba148dacfc?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+
+## 性能度量
+
+我们关注的页面性能主要包括页面呈现时间以及交互时候的流畅度。当页面呈现时间越短，交互越流畅的时，我们主观上会认为页面性能越好。
+
+客观上我们需要从相关指标去检测性能以及根据检测结果做出相应的优化。
+
+web性能API，Performance就可以为这些指标的分析提供数据支持。
+
+那么Performance从何而来呢？
+
+[web Performance Working Group](https://www.w3.org/webperf/)制定了这些标准。文档中给出了定义和说明。
+```txt
+    Status说明：
+
+    Recommendation（REC）正式发布
+
+    Proposed Recommendation（PR）提出推荐
+
+    Candidate Recommendation（CR）候选推荐
+
+    Working Draft（WD）工作草案
+
+    Editor's Draft（ED）编辑草案，最早期的版本，可能会各种改来改去，变数比较大，属于非官方行为
+
+    Retired（ret）已退休，不推荐
+
+    Group Note（Note）工作组笔记
+```
+
+## High Resolution Time（高精度时间）
+
+这个规范包含了三个部分内容：
+
+**1.定义了测量数据的初始时间(Time Origin)**
+**2.定义了高精度时间戳 DOMHighResTimeStamp**
+**3.定义了 Performance 对象，以及 Performance 对象的几个属性和方法**
+
+
+## Performance Timeline
+
+这个规范包含了三个部分内容：
+
+**1.给Performance添加三个方法**
+
+    - getEntries()
+    - getEntriesByType()
+    - getEntriesByName()
+
+type和name可以在[这里查到](https://www.w3.org/TR/timing-entrytypes-registry/)
+
+**2.定义了 PerformanceEntry 对象**
+
+    PerformanceEntry对象包含四个属性：duration，entryType, name, startTime
+    
+**3.定义了 PerformanceObserver 对象**
+
+用于观察性能时间线，以便在记录新的性能指标时发出通知, 这在采集性能数据时经常用到。例如下面的例子，观察 resource 类型的性能数据并打印。
+
+## Resource Timing
+
+该规范定义了用于访问文档中资源的完整计时信息的 API， 例如请求资源的 DNS、TCP、Request 等的开始时间和结束时间，可以帮助我们收集文档中静态资源的加载时间线、资源大小和资源类型。
+![png](https://user-gold-cdn.xitu.io/2020/5/10/171fbe834ad606c5?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+
+资源处理流出
+
+该规范定义了三个内容：
+
+**1.定义了 [PerformanceResourceTiming](https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming) 对象**
+
+**2.给 Performance 对象添加了如下方法**
+- clearResourceTimings()
+- setResourceTimingBufferSize()
+
+**3.定义了 Timing-Allow-Origin 响应头**
+
+对于跨域请求的资源，获取到的 PerformanceResourceTiming 对象中的属性值（时间），由于跨域限制，浏览器不会将资源的性能数据提供给用户，这些时间值都会被设置为 0 。
+如果服务端在请求资源的响应头中添加 Timing-Allow-Origin，则浏览器就会将此资源的性能时间值暴露给用户。
+我们可以通过以下语句获取文档中所有资源的性能数据：
+    
+```js
+performance.getEntriesByType('resource');
+```
+
+或者指定资源：
+```js
+performance.getEntriesByName('https://xxxxxx/img/logo_white.636ab47.png');
+```
+
+## Navigation Timing
+
+此标准定义了文档导航过程中完整的性能度量，即一个文档从发起请求到加载完毕各阶段的性能耗时。
+
+
+Navigation Timing 有两个版本：
+1.[Navigation Timing Level 1](https://www.w3.org/TR/navigation-timing/)
+2.[Navigation Timing Level 2](https://www.w3.org/TR/navigation-timing-2/)
+
+
+### Navigation Timing Level 1
+
+给performance新增了两个属性，timing和navigation
+
+**1.定义了 PerformanceTiming 对象**
+
+用来衡量页面性能，我们可以通过通过&nbsp;window.performance.timing 获取页面的性能数据，返回的对象中每个字段的含义可以在 [PerformanceTiming | MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/PerformanceTiming) 上查阅。
+
+按照事件发生的先后顺序，这些性能数据的 TimeLine 如下：
+
+![png](https://user-gold-cdn.xitu.io/2020/5/10/171fbe8383a1bf40?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+
+
+**2、定义了 PerformanceNavigation 对象**
+
+用来描述加载相关的操作，通过 window.performance.navigation 获得，返回的 PerformanceNavigation 对象存储了两个属性，它们表示触发页面加载的原因。这些原因可能是页面重定向、前进后退按钮或者普通的 URL 加载。
+
+相关参数表示请查阅这里：[navigation](https://developer.mozilla.org/zh-CN/docs/Web/API/PerformanceNavigation)
+
+**3、定义了 window.performance 属性**
+
+为 Window 对象添加了 performance 属性：timing 和 navigation
+
+### Navigation Timing Level 2
+
+将会替代 Navigation Timing Level 1。在 Navigation Timing Level 1 中定义的两个属性 performance.timing 和 performance.navigation 被废弃了。
+
+**1、定义了 PerformanceNavigationTiming 对象**
+
+此对象用于度量文档的性能，我们可以通过以下方式获取文档的性能数据，所有时间值都是以 Origin Time 为起点测量的。
+
+```
+window.performance.getEntriesByType("navigation");
+```
+
+并且更新了 Processing Model
+
+![png](https://user-gold-cdn.xitu.io/2020/5/10/171fbe839645dd88?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+
+
+**2、定义了 NavigationType 的枚举值**
+
+NavigationType 是一个枚举类型，包含四种值：navigate、reload 、 back_forward 和 prerender
+
+
+## Paint Timing
+
+此规范定义了一个 API 用来记录在页面加载期间的一些关键时间点的性能度量，比如 First Paint 、First Contentful Paint。
+
+此规范包含以下内容：
+
+**1、定义了 PerformancePaintTiming 对象**
+
+用于描述在页面加载期间的一些关键时间点的性能度量，我们可以在控制台通过以下语句查看：
+
+```js
+performance.getEntriesByType('paint');
+```
+
+结果返回一个每一项都为 PerformancePaintTiming 类型的数组，一项为 first-paint ，另一项为 first-contentful-paint。
+
+**2、提出了一些关键时间点的定义，例如  First Paint 、First Contentful Paint
+**
+
+**First Paint**，是从导航到浏览器将第一个像素呈现到屏幕的时间，这不包括默认的背景绘制，但包括非默认的背景绘制。这是开发人员关心页面加载的第一个关键时刻——当浏览器开始呈现页面时。
+**First Contentful Paint (FCP)**，是当浏览器呈现来自 DOM 的第一位内容时，向用户提供页面实际加载的第一个反馈。这是用户第一次开始使用页面内容。
+好了，了解了此规范定义的内容，大家也清楚了为什么此规范名为 Paint Timing 了吧？因为该规范定义了获取Paint 关键时间点的性能数据的 API。
+
+性能指标会在下一章讲解。
+
+
+## User Timing
+
+此规范定义了一个可以让 Web 开发者测量性能的 API 。
+
+**1、给 Performance 对象添加了几个方法**
+
+    - mark
+    - clearmark
+    - measure
+    - clearMeasures
+
+**2、定义了 PerformanceMark 对象**
+
+**3、定义了 PerformanceMeasure 对象**
+
+## Server Timing
+
+**1、定义了与服务端的通信协议：Server-Timing 响应头**
+
+响应头信息如下, 可以在 [https://www.w3.org/TR/server-timing/#examples](https://www.w3.org/TR/server-timing/#examples) 查看响应头的具体含义
+
+**2、定义了描述服务端性能度量的接口 PerformanceServerTiming 对象**
+
+**3、给 PerformanceResourceTiming 对象添加了 serverTiming 属性**
+
+
+## Long Tasks API
+
+当用户与页面交互时，应用程序和浏览器都会将浏览器随后执行的各种事件排队，例如，用户代理根据用户的活动安排输入事件，应用程序为 requestAnimationFrame 和其他回调等安排回调。一旦进入队列，这些事件就会被浏览器安排逐个出列并执行。
+但是，有些任务可能需要很长时间，如果发生这种情况，UI 线程将被锁定，所有其他任务也将被阻止。对于用户来说，这是一个卡死的页面，浏览器无法响应用户的输入，这是目前 Web 上不良用户体验的主要来源。
+此规范定义了一个 API，可以使用它来检测这些“长任务（Long Task）”的存在，“长任务”在很长一段时间内独占 UI 线程，并阻止执行其他关键任务，例如响应用户输入。
+
+[Long Tasks API](https://www.w3.org/TR/longtasks-1/)
+
+此规范包含以下内容：
+
+**1、定义了 PerformanceLongTaskTiming 对象**
+用于描述 Long Task 信息，对象中各字段的含义可在 [Long Tasks API | MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Long_Tasks_API)  查阅。
+
+**2、定义了什么是 Long Task**
+
+Long Task 是指超过 50ms 的事件循环任务。
+
+# 优化策略
+
+## Resource Hints - 加载性能
+
+此规范定义了 HTML 的 link 元素的 rel 属性值，包括 dns-prefetch、preconnect、prefetch 和 prerender。我们可以使用这些资源提示让用用户代理帮助我们预解析 DNS、预链接、预加载资源以及预处理资源以提高页面性能。
+
+此规范目前只有一个版本，还在工作草案阶段。
+
+[Resource Hints](https://www.w3.org/TR/resource-hints/)
+
+下面介绍此规范定义的 4 个资源提示：
+
+**1、资源提示: dns-prefetch(Resource Hints: dns-prefetch)**
+
+``` css
+<link rel="dns-prefetch" href="//example.com">
+```
+
+**2、资源提示:预连接(Resource Hints: preconnect)**
+
+``` css
+<link rel="preconnect" href="//example.com">
+<link rel="preconnect" href="//cdn.example.com" crossorigin>
+
+```
+
+**3、资源提示:预取(Resource Hints: prefetch)**
+
+```css
+<link rel="prefetch" href="//example.com/next-page.html" as="document" crossorigin="use-credentials">
+<link rel="prefetch" href="/library.js" as="script">
+```
+
+**4、资源提示:预渲染(Resource Hints: prerender)**
+
+
+## Page Visibility - 节省资源
+
+
+此规范提供了观察页面可见性状态的 API ，例如当用户最小化窗口或切换到另一个选项卡时，API 会发送[visibilitychange](https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilitychange_event) 事件，让监听者知道页面状态已更改，我们可以检测事件并执行某些操作。
+
+
+## requestIdleCallback API - 充分利用资源
+
+## Beacon - 数据上报
+
+解决数据上报占用线程的，或者遗漏卸载的时候的异步请求中的数据
+
+```js
+window.addEventListener('unload', logData, false);
+
+function logData() {
+    navigator.sendBeacon("/log", analyticsData (url, data));
+}
+```

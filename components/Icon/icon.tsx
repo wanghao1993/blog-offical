@@ -40,8 +40,8 @@ export function SignIn(props: { color: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="1.2em"
-      height="1.2em"
+      width="1.4em"
+      height="1.4em"
       viewBox="0 0 24 24"
     >
       <rect width="24" fill="none" height="24" />

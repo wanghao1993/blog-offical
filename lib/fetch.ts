@@ -14,25 +14,29 @@ interface FetcherOptions extends RequestInit {
 }
 
 async function fetcher<T>(url: string, options: FetcherOptions): Promise<T> {
-  const res = await fetch(`${BASE_URL}${url}`, {
-    ...options,
-    headers: {
-      ...options.headers,
-    },
-    body: options.body,
-  });
+  try {
+    const res = await fetch(`${BASE_URL}${url}`, {
+      ...options,
+      headers: {
+        ...options.headers,
+      },
+      body: options.body,
+    });
 
-  const json = await res.json();
-  if (!res.ok) {
-    const error = new Error("An error occurred while fetching the data.");
+    const json = await res.json();
+    if (!res.ok) {
+      const error = new Error("An error occurred while fetching the data.");
 
-    throw error;
-  }
-  if (json.code === 200) {
-    return json.data;
-  } else {
-    message.error(json.message);
-    return Promise.reject(json.message);
+      throw error;
+    }
+    if (json.code === 200) {
+      return json.data;
+    } else {
+      message.error(json.message);
+      return Promise.reject(json.message);
+    }
+  } catch (e) {
+    return Promise.reject(e);
   }
 }
 

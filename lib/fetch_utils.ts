@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import prisma from "./pg";
 
 export const StatusMsg = {
   200: "Success",

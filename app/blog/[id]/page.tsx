@@ -4,7 +4,6 @@ import "./index.scss";
 import "highlight.js/styles/monokai.min.css";
 import { Metadata } from "next";
 import ToTop from "@/components/toTop";
-import { GoogleTagManager } from "@next/third-parties/google";
 import { allPosts } from "contentlayer/generated";
 import PostLayout from "@/components/Layouts/PostLayOut";
 import { MDXLayoutRenderer } from "@/components/Layouts/MdxLayout";
@@ -76,7 +75,6 @@ export default async function ArticleDetail({
   }
   return (
     <MainLayout>
-      <GoogleTagManager gtmId="G-4Z3CSGWXGR" />
       {post ? (
         <PostLayout post={post}>
           <MDXLayoutRenderer content={post} toc={post.toc}></MDXLayoutRenderer>

@@ -6,7 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const allBlogs = getAllPostsMeta();
   const blogRoutes = allBlogs.map((post) => ({
     url: `${siteUrl}blog/${post.key}`,
-    lastModified: post.date,
+    lastModified: new Date().toISOString().split("T")[0],
   }));
 
   const routes = ["", "about"].map((route) => ({

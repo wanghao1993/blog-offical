@@ -74,9 +74,14 @@ export default function RootLayout({
             <LenisProvider>
               <ScrollProvider>
                 <NextAuthProvider>
-                  <Header />
-                  <main className="min-h-[calc(100vh-110px)] ">{children}</main>
-                  <Footer />
+                  <section
+                    className="grid"
+                    style={{ gridTemplateColumns: "200px 1fr" }}
+                  >
+                    <Header />
+                    <main>{children}</main>
+                    {/* <Footer /> */}
+                  </section>
                 </NextAuthProvider>
               </ScrollProvider>
             </LenisProvider>

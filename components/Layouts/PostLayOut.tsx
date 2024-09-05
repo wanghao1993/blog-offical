@@ -15,8 +15,10 @@ export default function PostLayout({ post, children, next, prev }: Props) {
   const { date, title, readingTime } = post;
 
   return (
-    <article className="article-detail ">
-      <div className="bg-primary-400 text-white space-y-1 rounded-lg  py-4 px-2 text-center sm:py-6 md:py-10">
+    <div className="article-detail ">
+      <title>{title}</title>
+
+      <div className="bg-primary-400 text-white space-y-1 rounded-lg  text-center sm:py-6 md:py-10">
         <h1 className="font-semibold !text-white">{title}</h1>
         <div>
           {new Date(date).toLocaleDateString()}
@@ -54,10 +56,7 @@ export default function PostLayout({ post, children, next, prev }: Props) {
             </Link>
           ))}
       </div>
-      <article className="mt-4">
-        {children}
-        {/* <MDXRemote source={post.content} options={options}></MDXRemote> */}
-      </article>
-    </article>
+      <article className="mt-4">{children}</article>
+    </div>
   );
 }

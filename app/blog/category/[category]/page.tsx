@@ -1,13 +1,11 @@
 import ArticleItem from "@/components/Article/ArticleItem";
 import MainLayout from "@/components/Layouts/MainLayout";
-import { GoogleTagManager } from "@next/third-parties/google";
 import { allPosts } from "contentlayer/generated";
 
 export default async function Page(data: { params: { category: string } }) {
   const list = allPosts;
   return (
     <MainLayout>
-      <GoogleTagManager gtmId="G-4Z3CSGWXGR" />
       <div>
         {list
           .filter(

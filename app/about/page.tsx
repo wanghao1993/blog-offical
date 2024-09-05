@@ -8,7 +8,6 @@ import {
   IconParkMovie,
   LucideOrigami,
 } from "@/components/Icon/icon";
-import { GoogleTagManager } from "@next/third-parties/google";
 export default function About() {
   const interests = [
     {
@@ -39,7 +38,6 @@ export default function About() {
   return (
     <>
       <MainLayout>
-        <GoogleTagManager gtmId="G-4Z3CSGWXGR" />
         <header className="py-12">
           <div className="  items-center text-center">
             <h1 className="text-3xl font-bold mb-2">汪浩（Isaac Wang）</h1>

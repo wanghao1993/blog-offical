@@ -18,7 +18,6 @@ export const authOptions: AuthOptions = {
       },
       async profile(profile) {
         try {
-          await prisma.$connect();
           const existingUser = await prisma.user.findUnique({
             where: { email: profile.email },
           });
@@ -50,7 +49,6 @@ export const authOptions: AuthOptions = {
             },
           });
 
-          prisma.$disconnect();
           return res as any;
         } catch (e: any) {
           console.log(e.message);

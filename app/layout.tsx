@@ -2,7 +2,6 @@ import LenisProvider from "@/components/Providers/LenisProvider";
 import ThemeProvider from "@/components/Providers/ThemeProvider";
 import "./ui/globals.scss";
 import Header from "@/components/Header";
-
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { NextAuthProvider } from "@/components/Providers/AuthProvider";
 import { content } from "@/lib/font";
@@ -13,11 +12,15 @@ import { ScrollProvider } from "@/components/Providers/ScrollProvider";
 import Script from "next/script";
 import type { Metadata } from "next";
 const APP_NAME = "汪浩的博客";
-const APP_DEFAULT_TITLE = "汪浩的博客";
+const APP_DEFAULT_TITLE = "汪浩（Isaac Wang）的博客";
 const APP_TITLE_TEMPLATE = "汪浩（Isaac Wang）的博客";
 const APP_DESCRIPTION = "汪浩（Isaac Wang）的博客，一些关于技术和生活的的记录";
 
-export const metadata: Metadata = {
+export type Metadatas = Metadata & {
+  "baidu-site-verification": string;
+};
+
+export const metadata: Metadatas = {
   keywords:
     "博客，汪浩，Isaac Wang, Javascript, Vue, Css, Nextjs, Nodejs, Docker, web3，区块链",
   applicationName: APP_NAME,
@@ -25,6 +28,7 @@ export const metadata: Metadata = {
     default: APP_DEFAULT_TITLE,
     template: APP_TITLE_TEMPLATE,
   },
+  "baidu-site-verification": "codeva-n7vACpBbX1",
   description: APP_DESCRIPTION,
   manifest: "./manifest.json",
   appleWebApp: {
@@ -68,6 +72,7 @@ export default function RootLayout({
       />
 
       <GoogleTagManager gtmId="G-4Z3CSGWXGR" />
+      <meta name="baidu-site-verification" content="codeva-n7vACpBbX1" />
       <body className={content.className}>
         <AntdRegistry>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>

@@ -148,8 +148,6 @@ export const authOptions: AuthOptions = {
       },
       async profile(profile) {
         try {
-          // 连接
-          await prisma.$connect();
           // 查询是否有
           const existingUser = await prisma.user.findUnique({
             where: { email: profile.email },
@@ -184,7 +182,6 @@ export const authOptions: AuthOptions = {
             },
           });
 
-          prisma.$disconnect();
           return res as any;
         } catch (e: any) {
           console.log(e.message);

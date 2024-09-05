@@ -6,7 +6,6 @@ export default function ArticleItem(data: { articleInfo: Post }) {
   return (
     <div className="border rounded-lg">
       <div className="p-4">
-        {/* title */}
         <Link
           href={`/blog/${articleInfo.key}`}
           className="horizontal-underline horizontal-underline-active "
@@ -27,13 +26,13 @@ export default function ArticleItem(data: { articleInfo: Post }) {
         {data.articleInfo.description}
       </p>
       <div className="py-1 rounded-full text-xs font-medium m-4 flex">
-        <div>
+        <div className="flex flex-wrap items-center">
           {data.articleInfo.categories &&
             data.articleInfo.categories.split(",").map((item) => (
               <Link
                 key={item}
                 href={`blog/category/${item}`}
-                className="px-2 mr-1 rounded-lg bg-primary-500 text-white"
+                className="px-2 mr-1 rounded-lg bg-primary-500 text-white min-w-10"
               >
                 {item}
               </Link>
@@ -41,7 +40,7 @@ export default function ArticleItem(data: { articleInfo: Post }) {
         </div>
 
         <Divider type="vertical" />
-        <div>
+        <div className="flex flex-wrap space-y-2 items-baseline">
           {data.articleInfo.tags &&
             data.articleInfo.tags.split(",").map((item) => (
               <Link

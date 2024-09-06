@@ -1,7 +1,6 @@
 import ArticleItem from "@/components/Article/ArticleItem";
 import MainLayout from "@/components/Layouts/MainLayout";
 import { getAllPostsMeta } from "data/utils";
-import Link from "next/link";
 import Tags from "@/components/blog/Tags";
 import Category from "@/components/blog/Categories";
 

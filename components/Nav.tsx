@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 export default function Nav() {
@@ -15,7 +17,7 @@ export default function Nav() {
   const pathName = usePathname();
 
   return (
-    <div className="md:flex-row flex-col flex text-lg gap-4 ">
+    <div className="flex text-md gap-4 ">
       {navList.map((nav) => (
         <Link
           href={nav.path}

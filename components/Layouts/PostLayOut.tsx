@@ -18,7 +18,7 @@ export default function PostLayout({ post, children, next, prev }: Props) {
     <div className="article-detail ">
       <title>{title}</title>
 
-      <div className="bg-primary-400 text-white space-y-1 rounded-lg  text-center sm:py-6 md:py-10">
+      <div className="bg-primary-400 text-white space-y-1 rounded-lg  text-center sm:py-6 sm:py-10">
         <h1 className="font-semibold !text-white">{title}</h1>
         <div>
           {new Date(date).toLocaleDateString()}
@@ -26,7 +26,7 @@ export default function PostLayout({ post, children, next, prev }: Props) {
           {(readingTime.time / 60000).toFixed(0)}分钟
         </div>
       </div>
-      <div className="py-4 flex gap-4 items-center">
+      <div className="py-4 flex gap-4 flex-wrap items-center">
         {post.categories &&
           post.categories.split(",").map((item: string) => (
             <Link

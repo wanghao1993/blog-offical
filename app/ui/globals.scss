@@ -39,14 +39,6 @@
     width: 6px;
   }
   
-  a[target='_blank'] {
-    @apply horizontal-underline horizontal-underline-active;
-    &:hover {
-      @apply bg-primary-500 text-white;
-    }
-  }
-  
-  
   body {
     margin: 0;
     padding: 0;

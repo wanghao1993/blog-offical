@@ -3,11 +3,9 @@ import ThemeProvider from "@/components/Providers/ThemeProvider";
 import "./ui/globals.scss";
 import Header from "@/components/Header";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import { NextAuthProvider } from "@/components/Providers/AuthProvider";
 import { content } from "@/lib/font";
 import Footer from "@/components/Footer";
 import { GoogleTagManager } from "@next/third-parties/google";
-import { ScrollProvider } from "@/components/Providers/ScrollProvider";
 
 import Script from "next/script";
 import type { Metadata } from "next";
@@ -77,18 +75,11 @@ export default function RootLayout({
         <AntdRegistry>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <LenisProvider>
-              <ScrollProvider>
-                <NextAuthProvider>
-                  <section
-                    className="grid"
-                    style={{ gridTemplateColumns: "200px 1fr" }}
-                  >
-                    <Header />
-                    <main>{children}</main>
-                    {/* <Footer /> */}
-                  </section>
-                </NextAuthProvider>
-              </ScrollProvider>
+              <div className="sticky top-0 z-10">
+                <Header />
+              </div>
+              <main className="min-h-[calc(100vh-110px)] ">{children}</main>
+              <Footer />
             </LenisProvider>
           </ThemeProvider>
         </AntdRegistry>

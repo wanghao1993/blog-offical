@@ -23,13 +23,13 @@ export default function Menus() {
   }, []);
   return (
     <>
-      <div className="items-center hidden md:flex gap-4">
+      <div className="items-center hidden sm:flex gap-4">
         <Nav />
         <ThemeSwitch />
         <LoginInOut />
       </div>
 
-      <div className="block md:hidden">
+      <div className="block sm:hidden">
         <MenuOutlined className="text-lg" onClick={() => setOpen(true)} />
 
         <Drawer

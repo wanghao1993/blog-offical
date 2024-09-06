@@ -6,16 +6,13 @@ import Works from "@/components/Works";
 // import Contact from "@/components/Contact";
 import { Suspense } from "react";
 import RecentPosts from "@/components/RecentPost";
-import { Spin } from "antd";
 export const dynamic = "force-dynamic";
 export default function Home() {
   return (
     <div>
       <Intro></Intro>
       <Works></Works>
-      <Suspense fallback={<Spin />}>
-        <RecentPosts />
-      </Suspense>
+      <RecentPosts />
     </div>
   );
 }

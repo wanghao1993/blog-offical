@@ -35,6 +35,7 @@ export default function Header({ ...props }) {
             <div className="flex space-x-2">
               {Object.keys(osIconMap).map((item) => (
                 <button
+                  key={item}
                   onClick={() => setTheme(item)}
                   className={`p-2 rounded-md flex items-center justify-center ${
                     item === theme ? "bg-primary-300" : ""
@@ -45,7 +46,6 @@ export default function Header({ ...props }) {
               ))}
             </div>
             <Star />
-
             <MobileNav />
           </div>
         </header>

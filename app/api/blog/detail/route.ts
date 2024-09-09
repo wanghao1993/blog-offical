@@ -53,7 +53,7 @@ export async function POST(req: Request, res: Response) {
   if (post && session?.user) {
     const user = await prisma.user.findUnique({
       where: {
-        email: session.user.email,
+        email: session.user.email as string,
       },
     });
     const likes_count = post.likes_count;

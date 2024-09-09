@@ -5,7 +5,7 @@ import { GithubOutlined, GoogleOutlined } from "@ant-design/icons";
 export default function LoginBox() {
   const sign = async (type: "github" | "google") => {
     await signIn(type, {
-      callbackUrl: location.origin,
+      callbackUrl: location.href,
     });
   };
   return (

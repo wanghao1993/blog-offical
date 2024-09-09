@@ -28,7 +28,7 @@ export default function ToTop() {
           duration: 0,
           delay: 0,
         }}
-        className={`progress w-2 bg-primary-500 rounded-md  fixed left-0 right-0 w-full top-[55px] z-10 h-1`}
+        className={`progress w-2 bg-primary-500 rounded-md  fixed left-0 right-0 w-full top-0 z-10 h-1`}
       ></motion.div>
 
       {y > 200 && (

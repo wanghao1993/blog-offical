@@ -2,7 +2,9 @@ import { Divider } from "antd";
 import { Post } from "contentlayer/generated";
 import Link from "next/link";
 import { ReactNode } from "react";
-
+import LikeAndCollect from "../LikeAndCollect";
+import { Suspense } from "react";
+import { NextAuthProvider } from "../Providers/AuthProvider";
 export type CoreContent<T> = Omit<T, "body" | "_raw" | "_id">;
 interface Props {
   post: Post;
@@ -17,7 +19,6 @@ export default function PostLayout({ post, children, next, prev }: Props) {
   return (
     <div className="article-detail ">
       <title>{title}</title>
-
       <div className="bg-primary-400 text-white space-y-1 rounded-lg  text-center sm:py-6 sm:py-10">
         <h1 className="font-semibold !text-white">{title}</h1>
         <div>
@@ -26,6 +27,7 @@ export default function PostLayout({ post, children, next, prev }: Props) {
           {(readingTime.time / 60000).toFixed(0)}分钟
         </div>
       </div>
+
       <div className="py-4 flex gap-4 flex-wrap items-center">
         {post.categories &&
           post.categories.split(",").map((item: string) => (
@@ -56,6 +58,12 @@ export default function PostLayout({ post, children, next, prev }: Props) {
             </Link>
           ))}
       </div>
+
+      <Suspense fallback={"loading"}>
+        <NextAuthProvider>
+          <LikeAndCollect blogKey={post.key}></LikeAndCollect>
+        </NextAuthProvider>
+      </Suspense>
       <article className="mt-4">{children}</article>
     </div>
   );

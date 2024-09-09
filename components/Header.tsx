@@ -1,21 +1,20 @@
 "use client";
 import BlogName from "./Name";
-import Menus from "./Menu/menu";
 import Nav from "./Nav";
 import ThemeSwitch from "./ThemeToggle";
 import LoginInOut from "./LoginOutBtn";
-import { SessionProvider } from "next-auth/react";
 import Star from "./Star";
 import MobileNav from "./MobileNav";
 import MainLayout from "./Layouts/MainLayout";
 import { osIconMap } from "./themeconfig";
 import { useTheme } from "next-themes";
-import { motion } from "framer-motion";
+import classNames from "classnames";
+import { NextAuthProvider } from "./Providers/AuthProvider";
 export default function Header({ ...props }) {
   const { theme, setTheme } = useTheme();
   return (
     <MainLayout>
-      <SessionProvider>
+      <NextAuthProvider>
         <header
           className="z-10"
           {...props}
@@ -26,8 +25,8 @@ export default function Header({ ...props }) {
             <div className="flex items-center space-x-4">
               <Nav />
               <ThemeSwitch />
-              <LoginInOut />
               <Star />
+              <LoginInOut />
             </div>
           </div>
 
@@ -37,9 +36,11 @@ export default function Header({ ...props }) {
                 <button
                   key={item}
                   onClick={() => setTheme(item)}
-                  className={`p-2 rounded-md flex items-center justify-center ${
-                    item === theme ? "bg-primary-300" : ""
-                  } `}
+                  className={classNames(
+                    `p-2 rounded-md flex items-center justify-center`,
+                    { "bg-primary-300": item === theme },
+                    { "text-white": item === theme }
+                  )}
                 >
                   {osIconMap[item].icon}
                 </button>
@@ -49,7 +50,7 @@ export default function Header({ ...props }) {
             <MobileNav />
           </div>
         </header>
-      </SessionProvider>
+      </NextAuthProvider>
     </MainLayout>
   );
 }

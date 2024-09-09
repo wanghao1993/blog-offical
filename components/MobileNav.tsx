@@ -6,12 +6,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
-import LoginInOut from "./LoginOutBtn";
-import Star from "./Star";
 import LoginModal from "./login/page";
 import { signOut, useSession } from "next-auth/react";
-import { SignIn, SignOut } from "./Icon/icon";
 import Image from "next/image";
+import useLoginModal from "./LoginModal";
 const headerNavLinks = [
   {
     title: "博客",
@@ -40,7 +38,7 @@ export default function MobileNav() {
     }
   }, [navShow]);
 
-  const [visible, setVisible] = useState(false);
+  const [setVisible] = useLoginModal();
 
   const { data: session, status } = useSession();
   return (
@@ -110,7 +108,6 @@ export default function MobileNav() {
             })}
 
             <div key="Login" className="px-12 py-4">
-              <LoginModal open={visible} onClose={() => setVisible(false)} />
               {status === "unauthenticated" ? (
                 <div
                   className=" font-bold tracking-widest text-gray-900 backdrop:text-2xl dark:text-gray-100"

@@ -1,7 +1,6 @@
 "use client";
 import { useSession, signOut } from "next-auth/react";
-import { SignIn, SignOut } from "./Icon/icon";
-import { MenuProps } from "antd";
+import { Avatar, Dropdown, MenuProps } from "antd";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 const LoginModal = dynamic(
@@ -15,22 +14,9 @@ const LoginModal = dynamic(
 export default function LoginInOut() {
   const { data: session, status } = useSession();
   const items: MenuProps["items"] = [
-    // {
-    //   label: (
-    //     <div className="flex items-center  ">
-    //       <UserOutlined />
-    //       <span>个人资料</span>
-    //     </div>
-    //   ),
-    //   key: "profile",
-    //   onClick: () => {
-    //     signOut();
-    //   },
-    // },
     {
       label: (
         <div className="flex items-center">
-          <SignOut />
           <span>登出</span>
         </div>
       ),
@@ -45,24 +31,29 @@ export default function LoginInOut() {
 
   return (
     <div>
+      <LoginModal open={visible} onClose={() => setVisible(false)}></LoginModal>
       {status === "unauthenticated" ? (
         <div
-          className="sm:hidden  flex items-center text-lg  cursor-pointer"
+          className=" w-fit font-extrabold cursor-pointer"
           onClick={() => setVisible(true)}
           style={{ color: "var(--text-color)" }}
         >
           <span className="mr-2">登录</span>
-          <SignIn />
         </div>
       ) : (
-        <div
-          className="sm:hidden  flex items-center text-lg  cursor-pointer"
-          onClick={() => signOut()}
-          style={{ color: "var(--text-color)" }}
+        <Dropdown
+          trigger={["click"]}
+          menu={{ items }}
+          dropdownRender={(node) => <span>{node}</span>}
         >
-          <span className="mr-2">登出</span>
-          <SignOut />
-        </div>
+          <Avatar
+            size={28}
+            shape={"circle"}
+            src={session?.user?.image}
+            alt="avatar"
+            className=" cursor-pointer "
+          ></Avatar>
+        </Dropdown>
       )}
     </div>
   );

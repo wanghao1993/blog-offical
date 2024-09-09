@@ -3,7 +3,6 @@ import prisma from "@/lib/pg";
 
 export const dynamic = "force-dynamic"; // defaults to auto
 export async function POST(request: Request) {
-  await prisma.$connect();
   const body = await request.json();
   try {
     const res = await prisma.post.findUnique({

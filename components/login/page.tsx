@@ -1,5 +1,12 @@
 "use client";
-import { ChangeEvent, FocusEvent, FormEvent, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  FocusEvent,
+  FormEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import loginStyle from "./login.module.scss";
 import classnames from "classnames";
 import { motion } from "framer-motion";
@@ -36,6 +43,8 @@ export default function LoginModal(data: {
     }
   };
   const [isLogin, setIsLogin] = useState(true);
+
+  const ref = useRef();
   return (
     <>
       <Modal

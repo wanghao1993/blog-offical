@@ -4,6 +4,7 @@ import { PostTypes } from "@/types/post";
 import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import { authOptions } from "@/lib/auth_options";
+import { message } from "antd";
 export const dynamic = "force-dynamic"; // defaults to auto
 export async function GET(request: Request) {
   const key = new URL(request.url).searchParams.get("key");
@@ -65,16 +66,40 @@ export async function POST(req: Request, res: Response) {
       } else {
         likes_count.push(user.id);
       }
-      const updatePost = await prisma.post.update({
-        where: {
-          blog_key: body.blog_key,
-        },
-        data: {
-          likes_count,
-        },
-      });
 
-      return responseHandler(updatePost);
+      try {
+        const updatePost = await prisma.post.update({
+          where: {
+            blog_key: body.blog_key,
+          },
+          data: {
+            likes_count,
+          },
+        });
+
+        return responseHandler(updatePost);
+      } catch (e) {
+        return responseHandler(
+          null,
+          BusinessCode.normal,
+          BusinessCode.abnormal,
+          e.message
+        );
+      }
+    } else {
+      return responseHandler(
+        null,
+        BusinessCode.normal,
+        BusinessCode.abnormal,
+        "用户查询错误"
+      );
     }
+  } else {
+    return responseHandler(
+      null,
+      BusinessCode.normal,
+      BusinessCode.abnormal,
+      "文章不存在"
+    );
   }
 }

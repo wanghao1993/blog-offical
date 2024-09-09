@@ -7,7 +7,6 @@ import prisma from "./pg";
 
 export const authOptions: AuthOptions = {
   secret: process.env.SECRET_KEY,
-  // adapter: PrismaAdapter(MongoPrisma as PrismaClient) as Adapter,
   debug: true,
   providers: [
     GitHubProvider({

@@ -3,6 +3,8 @@ import prisma from "@/lib/pg";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth_options";
 import { z } from "zod";
+import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
 export const dynamic = "force-dynamic";
 
@@ -11,7 +13,7 @@ const postDetailSchema = z.object({
   // 其他字段的验证规则，如果有的话
 });
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   const key = new URL(request.url).searchParams.get("key");
   if (!key) {
     return responseHandler(
@@ -45,7 +47,7 @@ export async function GET(request: Request) {
   }
 }
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: NextRequest, res: NextResponse) {
   const rawBody = await req.json();
   const validationResult = postDetailSchema.safeParse(rawBody);
   if (!validationResult.success) {
@@ -57,14 +59,15 @@ export async function POST(req: Request, res: Response) {
     );
   }
   const body = validationResult.data;
-  const session = await getServerSession(authOptions);
+  const session = await getToken({ req, secret: process.env.SECRET_KEY });
   const post = await prisma.post.findUnique({
     where: { blog_key: body.blog_key },
   });
+  console.log("session", session);
   if (post && session) {
     try {
       const user = await prisma.user.findUnique({
-        where: { email: session.user.email as string },
+        where: { email: session.email as string },
       });
       if (!user) {
         return responseHandler(

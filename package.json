@@ -52,7 +52,8 @@
     "sharp": "^0.33.5",
     "tencentcloud-sdk-nodejs": "^4.0.888",
     "unist-util-visit": "^5.0.0",
-    "vfile": "^6.0.3"
+    "vfile": "^6.0.3",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/crypto-js": "^4.2.2",

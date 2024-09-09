@@ -37,7 +37,7 @@ export async function GET(request: Request) {
       );
     }
     return responseHandler(res);
-  } catch (error) {
+  } catch (error: any) {
     console.error("GET 请求错误：", error);
     return responseHandler(
       null,
@@ -89,7 +89,7 @@ export async function POST(req: Request, res: Response) {
         data: { likes_count },
       });
       return responseHandler(updatePost);
-    } catch (error) {
+    } catch (error: any) {
       console.error("POST 请求错误：", error);
       return responseHandler(
         null,

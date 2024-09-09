@@ -10,16 +10,12 @@ import { useEffect, useState } from "react";
 export default function LikeAndCollect(data: { blogKey: string }) {
   const [detail, setDetail] = useState<PostTypes.PostDetail>();
 
-  const getData = async () => {
-    const res = await get<PostTypes.PostDetail>("blog/detail", {
-      key: data.blogKey,
-    });
-
-    setDetail(res);
-  };
-
   useEffect(() => {
-    getData();
+    get<PostTypes.PostDetail>("blog/detail", {
+      key: data.blogKey,
+    }).then((res) => {
+      setDetail(res);
+    });
   }, [data.blogKey]);
   const session = useSession();
 

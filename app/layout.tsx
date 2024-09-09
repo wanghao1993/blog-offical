@@ -1,7 +1,6 @@
 import LenisProvider from "@/components/Providers/LenisProvider";
 import ThemeProvider from "@/components/Providers/ThemeProvider";
 import "./ui/globals.scss";
-import Header from "@/components/Header";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { content } from "@/lib/font";
 import Footer from "@/components/Footer";

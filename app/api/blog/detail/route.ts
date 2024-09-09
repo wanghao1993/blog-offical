@@ -1,8 +1,9 @@
 import { BusinessCode, responseHandler } from "@/lib/fetch_utils";
 import prisma from "@/lib/pg";
 import { PostTypes } from "@/types/post";
+import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
-
+import { authOptions } from "@/lib/auth_options";
 export const dynamic = "force-dynamic"; // defaults to auto
 export async function GET(request: Request) {
   const key = new URL(request.url).searchParams.get("key");
@@ -40,16 +41,16 @@ export async function GET(request: Request) {
   }
 }
 
-export async function POST(request: Request) {
-  const body: PostTypes.PostDetail = await request.json();
-  const session = await getSession();
+export async function POST(req: Request, res: Response) {
+  const body: PostTypes.PostDetail = await req.json();
+  const session = await getServerSession(authOptions);
   const post = await prisma.post.findUnique({
     where: {
       blog_key: body.blog_key,
     },
   });
 
-  if (post && session?.user.email) {
+  if (post && session?.user) {
     const user = await prisma.user.findUnique({
       where: {
         email: session.user.email,

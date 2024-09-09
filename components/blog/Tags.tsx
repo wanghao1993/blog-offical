@@ -4,7 +4,7 @@ import Link from "next/link";
 const getTags = () => {
   return getAllTags();
 };
-export default async function Tags() {
+export default function Tags() {
   const tags = getTags();
 
   return (

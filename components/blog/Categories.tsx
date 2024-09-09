@@ -5,9 +5,9 @@ const getCategory = () => {
   return getAllCategory();
 };
 
-export default async function Category() {
+export default function Category() {
   const categories = getCategory();
-
+  console.log("render");
   return (
     <div className="border rounded-lg">
       <h2 className="px-4 py-2 border-b">分类</h2>

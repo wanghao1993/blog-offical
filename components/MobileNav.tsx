@@ -9,7 +9,6 @@ import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import LoginModal from "./login/page";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import useLoginModal from "./LoginModal";
 const headerNavLinks = [
   {
     title: "博客",
@@ -38,11 +37,12 @@ export default function MobileNav() {
     }
   }, [navShow]);
 
-  const [setVisible] = useLoginModal();
-
+  const [visible, setVisible] = useState(false);
   const { data: session, status } = useSession();
   return (
     <div className="sm:hidden">
+      <LoginModal open={visible} onClose={() => setVisible(false)}></LoginModal>
+
       <button
         type="button"
         className="ml-1 flex justify-center items-center mr-1 h-8 w-8 rounded py-1"

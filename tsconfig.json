@@ -18,6 +18,12 @@
     "incremental": true,
     "baseUrl": "./",
     "paths": {
+      "@/content/*": [
+        "content/*"
+      ],
+      "@/layouts/*": [
+        "components/layouts/*"
+      ],
       "contentlayer/generated": [
         "./.contentlayer/generated"
       ],

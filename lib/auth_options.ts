@@ -101,8 +101,12 @@ export const authOptions: AuthOptions = {
     maxAge: 2 * 24 * 60 * 60,
   },
   callbacks: {
-    session: async (data: { session: any }) => {
-      return data.session;
+    session: async ({ session, token, user }) => {
+      session.user.id = user?.id;
+      return session;
+    },
+    jwt(params) {
+      return params.token;
     },
   },
 

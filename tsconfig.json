@@ -21,8 +21,8 @@
       "@/content/*": [
         "content/*"
       ],
-      "@/layouts/*": [
-        "components/layouts/*"
+      "@/Layouts/*": [
+        "components/Layouts/*"
       ],
       "contentlayer/generated": [
         "./.contentlayer/generated"

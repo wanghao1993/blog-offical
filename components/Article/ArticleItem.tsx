@@ -31,7 +31,7 @@ export default function ArticleItem(data: { articleInfo: Post }) {
             data.articleInfo.categories.split(",").map((item) => (
               <Link
                 key={item}
-                href={`blog/category/${item}`}
+                href={`/blog/category/${item}`}
                 className="px-2 mr-1 rounded-lg bg-primary-500 text-white min-w-10"
               >
                 {item}

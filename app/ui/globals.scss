@@ -65,14 +65,14 @@ header {
 }
 .dark {
   --background-color: #111827;
-  --text-color: #fff;
+  --text-color: rgb(215 215 215);
   --secondary-text-color: #d3d3d3
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not(.dark):not(.light) {
     --background-color: #111827;
-    --text-color: #fff;
+    --text-color: rgb(215 215 215);
     --secondary-text-color: #d3d3d3
   }
   .login-icon path {

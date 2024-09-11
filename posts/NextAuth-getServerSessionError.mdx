@@ -1,0 +1,29 @@
+---
+title: NextAuth在生产环境getSeverSession始终为null
+date: 2024-09-13
+key: "js-handerwriting"
+categories: 问题记录
+tags: NextJS
+keywords: next-auth getSeverSession nextjs
+description: NextAuth在生产环境getSeverSession始终为null的解决方法
+---
+import TOCInline from "@/components/TOCInline";
+
+<TOCInline toc={props.toc} exclude="Overview" heading={3} />
+
+## 问题描述
+在一次开发API路由的时候，在本地测试环境是正常的，但是部署到线上通过`getSeverSession`，无法获取到session.
+
+```js
+  const session = await getSeverSession(authOption); // null
+```
+
+## 问题解决
+
+搜索了一下发现很多人都遇到了类似的问题，有说需要在环境变量中配置`AUTH_SECRET_KEY`，但是这个我是配置了，依然获取不到，最后通过实用`getToken`获取到了session的信息。
+
+```js
+
+  const session = await getToken({ req, secret: process.env.SECRET_KEY });
+
+```

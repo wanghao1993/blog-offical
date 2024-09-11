@@ -11,7 +11,6 @@ import Pagination from "@/components/pagination";
 const MemoCategory = memo(Category);
 const MemoTags = memo(Tags);
 const MemoPagination = memo(Pagination);
-const MemoList = memo(ArticleList);
 export default function BlogHomePage() {
   const list = getAllPostsMeta();
 
@@ -75,7 +74,7 @@ export default function BlogHomePage() {
               />
             </svg>
           </div>
-          <MemoList posts={memoPost} />
+          <ArticleList posts={memoPost} />
           <MemoPagination
             currentPage={curPage}
             pageChange={setCurPage}

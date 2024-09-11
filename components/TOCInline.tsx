@@ -56,7 +56,7 @@ const TOCInline = ({
           key={heading.value}
           className={`${heading.depth >= indentDepth && "ml-6"}`}
         >
-          <a href={heading.url} className="text-black dark:text-white">
+          <a href={heading.url} style={{ color: "var(--text-color)" }}>
             {heading.value}
           </a>
         </li>

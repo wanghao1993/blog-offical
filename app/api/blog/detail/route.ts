@@ -63,7 +63,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
   const post = await prisma.post.findUnique({
     where: { blog_key: body.blog_key },
   });
-  console.log("session", session);
   if (post && session) {
     try {
       const user = await prisma.user.findUnique({

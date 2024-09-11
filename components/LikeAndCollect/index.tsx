@@ -44,9 +44,9 @@ export default function LikeAndCollect(data: { blogKey: string }) {
         <EyeOutlined /> {detail.views_count}
       </div>
 
-      <div onClick={() => like()} className="text-primary-100 cursor-pointer">
+      {/* <div onClick={() => like()} className="text-primary-100 cursor-pointer">
         <LikeOutlined /> {detail.likes_count.length}
-      </div>
+      </div> */}
       <LoginModal open={visible} onClose={() => setVisible(false)}></LoginModal>
     </div>
   );

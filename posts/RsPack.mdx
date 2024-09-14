@@ -1,0 +1,196 @@
+---
+title: 从 Vite 切换到 Rspack：探索新的前端构建利器
+date: 2024-09-14
+key: "vite-to-rspack"
+categories: 工程化
+tags: vite,rspack
+keywords: rspack
+description: 记录如何把从vite切换到rspack
+---
+import TOCInline from "@/components/TOCInline";
+
+<TOCInline toc={props.toc} exclude="Overview" heading={3} />
+
+# 前言
+
+最近[Rspack](https://rspack.dev/zh/guide/start/quick-start)正式发布了，rspack是新一代基于Rust开发的构建工具，对于js和ts的便宜采用的是swc而并非babel，
+我抱了吃螃蟹的心态打算把一个项目从vite切换到rspack来，来看看对开发的提升能有多大，看了一下官方文档，有明确的指引来切换。
+
+## 操作步骤
+
+### 安装
+
+```js
+pnpm remove vite
+
+pnpm add @rsbuild/core -D
+```
+
+### 修改Script
+
+```js
+{
+  "scripts": {
+-   "dev": "vite",
+-   "build": "vite build",
+-   "preview": "vite preview"
++   "dev": "rsbuild dev",
++   "build": "rsbuild build",
++   "preview": "rsbuild preview"
+  }
+}
+
+
+```
+### 配置
+
+创建配置文件`rsbuild.config.ts`
+
+```ts
+import { defineConfig } from '@rsbuild/core';
+
+export default defineConfig({
+  html: {
+    template: './index.html',
+  },
+  source: {
+    entry: {
+      index: './src/main.ts',
+    },
+  },
+  plugins: [],
+});
+
+```
+
+由于是使用的是vite，vue技术栈，所以还需要替换掉一些常用的vite插件。例如：
+
+- @vitejs/plugin-vue-jsx
+- @vitejs/plugin-vue
+
+
+**这里如果需要使用`@vitejs/plugin-vue-jsx`，就必须要使用`@rsbuild/plugin-babel`，否则会报错。**
+
+然后就是样式的处理。
+
+样式的处理有`@rsbuild/plugin-sass`, `@rsbuild/plugin-less`来处理sass和less。
+
+至于代理等等和vite几乎一直，不需要改动，直接复制过来即可。
+
+最终配置
+
+```ts
+import { pluginSass } from "@rsbuild/plugin-sass"
+import { pluginVueJsx } from "@rsbuild/plugin-vue-jsx"
+import { pluginVue } from "@rsbuild/plugin-vue"
+import { loadEnv } from "@rsbuild/core"
+import { pluginLess } from "@rsbuild/plugin-less"
+import { pluginBabel } from "@rsbuild/plugin-babel"
+const { publicVars } = loadEnv({ prefixes: ["VITE_"] })
+const outDir = "dist"
+export default {
+  html: {
+    template: "./index.html"
+  },
+  build: { outDir },
+  plugins: [
+    pluginBabel({
+      include: /\.(?:jsx|tsx)$/
+    }),
+    pluginVue(),
+    pluginVueJsx(),
+    pluginLess(),
+    pluginSass({
+      sassLoaderOptions(config) {
+        config.additionalData = `@use "@/assets/css/mixin.scss" as *;`
+      }
+    })
+  ],
+  server: {
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    },
+    // 本地开发连接本地后台时
+    host: "0.0.0.0",
+    port: 8089,
+    proxy: {
+      "/v2": {
+        target: "xxxx",
+        changeOrigin: true
+      }
+    }
+  },
+  source: {
+    define: publicVars,
+    entry: {
+      index: "./src/main.ts"
+    },
+    alias: {
+      "@": "/src",
+      "#": "/types"
+    }
+  }
+}
+
+```
+
+## 环境变量
+
+rspack预先定义了`development`, `production`, `none` 三种模式。
+
+可以通过`import.meta.env.MODE`来访问到。
+
+**当 mode 的值为 development 时：**
+
+- 开启 HMR，注册 HotModuleReplacementPlugin。
+- 生成 JavaScript 的 source map，不生成 CSS 的 source map，详见 output.sourceMap。
+- 源代码中的 process.env.NODE_ENV 会被替换为 'development'。
+- 源代码中的 import.meta.env.MODE 会被替换为 'development'。
+- 源代码中的 import.meta.env.DEV 会被替换为 true。
+- 源代码中的 import.meta.env.PROD 会被替换为 false。
+
+***当 mode 的值为 production 时：*
+
+- 开启 JavaScript 代码压缩，注册 SwcJsMinimizerRspackPlugin。
+- 开启 CSS 代码压缩，注册 LightningCssMinimizerRspackPlugin。
+- 生成的 JavaScript 和 CSS 文件名会带有 hash 后缀，详见 output.filenameHash。
+- 生成的 CSS Modules 类名更简短，详见 cssModules.localIdentName。
+- 不生成 JavaScript 和 CSS 的 source map，详见 output.sourceMap。
+- 源代码中的 process.env.NODE_ENV 会被替换为 'production'。
+- 源代码中的 import.meta.env.MODE 会被替换为 'production'。
+- 源代码中的 import.meta.env.DEV 会被替换为 false。
+- 源代码中的 import.meta.env.PROD 会被替换为 true。
+
+***当 mode 的值为 none 时：*
+
+- 不开启任何优化。
+- 源代码中的 process.env.NODE_ENV 不会被替换。
+- 源代码中的 import.meta.env.MODE 会被替换为 'none'。
+- 源代码中的 import.meta.env.DEV 会被替换为 false。
+- 源代码中的 import.meta.env.PROD 会被替换为 false。
+
+在vite项目中，只会收集env文件中以`VITE`开头的变量，在rspack中可以通过指定prefixes来获取特定的变量。
+
+
+```js
+const { publicVars } = loadEnv({ prefixes: ['REACT_APP_'] });
+```
+
+此外，rspack同样支持通过`dotenv`传递环境变量，也可以在script传递
+例如，我们需要打包不同环境的包:
+
+```js
+"build:uat": "rsbuild build --env-mode uat",
+"build:test": "rsbuild build --env-mode test",
+```
+
+## 成果
+
+替换后，热更新只需要0.04S左右，初次加载时间大大缩短，build时间也快很多，由于没有记录替换之前的数据，所以没有办法贴图了。
+
+## 问题
+
+通读了一下官方的文档，功能还是很强大的，有vite和webpack的影子，配置方面及其重。好在初始化需要配置的东西很少，上手很快，下面说一下我遇到的问题：
+
+1. 配置更新的时候重启，偶尔会爆栈。
+2. 原来的项目有直接渲染`md`文件的，在这里我不知道如何去实现这样的功能。

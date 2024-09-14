@@ -1,0 +1,780 @@
+---
+title: TS学习
+date: 2022-1-21
+key: "typescript-study-1"
+categories: TypeScript
+tags: 
+keywords: typescript 类型体操 交叉 联合 interface type
+description: 记录typescript的学习
+---
+
+import TOCInline from "@/components/TOCInline";
+
+<TOCInline toc={props.toc}  toHeading={3} />
+
+## 为什么要使用TypeScript
+
+JS是弱类型的语言，经常在开发的过程中会看到很多类型导致的错误。例如
+
+
+![ts](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/ts-1.png)
+但是Ts也是有缺点的，例如在大型项目中会增加编译负担，热更新会变得缓慢。
+
+## 数据类型及类型声明
+
+TS是JS的超集，所以包含了js的所有数据类型和语法，同时还有自己的类型和语法。
+
+例如： <font color="#e62525">number、boolean、string、object、bigint、symbol、undefined、null </font>还有就是它们的包装类型 <font color="#e62525">Number、Boolean、String、Object、Symbol</font>
+。
+
+
+这些很容易理解，给 JS 添加静态类型，总没有必要重新造一套基础类型吧，直接复用 JS 的基础类型就行。
+
+复合类型方面，JS 有 class、Array，这些 TypeScript 类型系统也都支持，但是又多加了三种类型：元组（Tuple）、接口（Interface）、枚举（Enum）
+
+### 基础类型声明
+
+```ts
+// boolean 类型
+let bool: boolean = true
+// number 类型
+let num: number = 123
+// string 类型
+let str: string = 'abc'
+// 大数
+const bigNumber: bigint = 100n
+// symbol
+const s1: symbol = Symbol(1)
+// 数组
+
+// 两种声明方式
+let arr1: number[] = [1, 2, 3]
+let arr2: Array<number> = [1, 2, 3, 4]
+
+// 这样子会报错哦
+let arr3: Array<number> = [1, 2, 3, '4'] 
+```
+**注意**：默认情况下 <font color="#e62525">null</font>和<font color="#e62525">undefined</font>是所有类型的子类型，可以把<font color="#e62525">null</font>和<font color="#e62525">undefined</font>赋值给其它任何类型：
+
+
+**元组** 类型允许表示一个已知元素数量和类型的数组，各元素的类型不必相同。 比如，你可以定义一对值分别为 string和number类型的元组。
+```ts
+let tuple: [number, string] = [0, '1']
+// 可以push等操作，但是通过下标获取的时候会有错误提示，索引不存在
+tuple.push(2)
+// error Tuple type '[number, string]' of length '2' has no element at index '2'
+tuple[2] 
+// 也能通过遍历得到结果
+tuple.forEach((item) => {
+    console.log(item)
+})
+```
+
+**接口** (Interface）可以描述函数、对象、构造器的结构
+
+描述对象
+
+```ts
+interface UserInfo {
+    name: string;
+    id: string
+}
+const user1: UserInfo = {
+    name: 'xiugougou1',
+    id: '222'
+}
+// 如果类型不匹配的话，会提示错误。
+
+```
+![interface](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/ts-2.png)
+
+```ts
+class UserDetailInfo implements UserInfo {
+    name: string;
+    id: string;
+    age: number
+}
+
+const xiugougou2: UserDetailInfo = {
+    name: 'xiugougou2',
+    id: '2',
+    age: 2
+}
+```
+
+假如我们用一个对象来描述一些未知的属性，或者可选属性怎么办？我们可以通过可选符号 `?`来表示，例如：
+
+```ts
+interface UserInfo {
+    name: string;
+    id: string;
+    city?: string; // city 为可选属性
+}
+// 有时候我们希望一个接口允许有任意的属性，可以使用如下方式：
+
+interface UserInfo {
+    name: string;
+    id: string;
+    city?: string; // city 为可选属性
+    [propName: string]: any
+}
+```
+
+此外还有只读属性等等，可以用readonly来表示，例如：
+
+
+```ts
+interface UserInfo {
+    readonly name: string;
+    id: string;
+    city?: string; // city 为可选属性
+}
+
+const obj: Person = {
+    name: 'guang',
+    city: 18,
+    id: '22'
+}
+// 此时就会提示错误，
+// Cannot assign to 'name' because it is a read-only property.
+obj.name = 'xxx'
+```
+
+描述函数
+
+```ts
+interface FuncA {
+    (name: string ):string
+}
+
+const hello: FuncA = (name) => `${name}`
+
+```
+
+描述构造器
+
+
+```ts
+interface UserInfo {
+    name: string;
+    id: string;
+}
+
+interface UserConstructor {
+    new (name: string, id: number): UserInfo;
+}
+
+function createUser(ctor: UserConstructor):IPerson {
+    return new ctor('xiugougou3', 18);
+}
+
+```
+
+**枚举类型** 是一系列数据的集合
+
+```ts
+
+
+// 数字枚举
+enum Role {
+    Reporter = 1,
+    Developer,
+    Maintainer,
+    Owner,
+    Guest
+}
+// console.log(Role.Reporter)
+// console.log(Role)
+
+// 1: "Reporter"
+// 2: "Developer"
+// 3: "Maintainer"
+// 4: "Owner"
+// 5: "Guest"
+// Developer: 2
+// Guest: 5
+// Maintainer: 3
+// Owner: 4
+// Reporter: 1
+
+// 字符串枚举
+enum Message {
+    Success = '恭喜你，成功了',
+    Fail = '抱歉，失败了'
+}
+
+// {
+// Fail: "抱歉，失败了"
+// Success: "恭喜你，成功了"
+// }
+
+// 异构枚举
+enum Answer {
+    N,
+    Y = 'Yes'
+}
+// 解析出来是这样的
+// 0: "N"
+// N: 0
+// Y: "Yes"
+
+
+// 枚举成员
+// Role.Reporter = 0
+enum Char {
+    // const member
+    a,
+    b = Char.a,
+    c = 1 + 3,
+    // computed member
+    d = Math.random(),
+    e = '123'.length,
+    f = 4
+}
+
+// 0: "b"
+// 0.8325154981306795: "d"
+// 3: "e"
+// 4: "f"
+// a: 0
+// b: 0
+// c: 4
+// d: 0.8325154981306795
+// e: 3
+// f: 4
+
+// 常量枚举
+const enum Month {
+    Jan,
+    Feb,
+    Mar,
+    Apr = Month.Mar + 1,
+    // May = () => 5
+}
+let month = [Month.Jan, Month.Feb, Month.Mar]
+
+// 枚举类型
+enum E { a, b }
+enum F { a = 0, b = 1 }
+enum G { a = 'apple', b = 'banana' }
+
+let e: E = 3
+let f: F = 3
+// console.log(e === f) false 
+
+let e1: E.a = 3
+let e2: E.b = 3
+let e3: E.a = 3
+// console.log(e1 === e2) false
+// console.log(e1 === e3) true
+
+let g1: G = G.a
+let g2: G.a = G.a
+
+
+```
+
+还有一些symbol等等就不一个个写了，还有字面量类型，看看文档就知道了。
+
+除此以外还有一些四个特殊的类型，`unknown, never, void, any`
+
+- never 代表不可达，比如函数抛异常的时候，返回值就是 never。
+- void 代表空，可以是 undefined 或 never。
+- any 是任意类型，任何类型都可以赋值给它，它也可以赋值给任何类型（除了 never）。
+- unknown 是未知类型，任何类型都可以赋值给它，但是它不可以赋值给别的类型。
+
+### 泛型
+
+假如我们一个方法可以接受任何类型的参数，怎么办？那我是不是要写很多个方法，或者使用函数的重载来解决，或者直接any。实际上我们可以通过 泛型 来解决这个问题，来支持未来的扩展，例如：
+
+```ts
+
+// 接口
+
+interface Swap <T, U>{
+  (param: [T, U]): [U, T]
+}
+// 泛型变量
+
+const swap: Swap[number, string] = <T, U>(tuple: [T, U]): [U, T] => {
+  return [tuple[1], tuple[0]]
+}
+
+
+// 泛型类
+class SomeClass<T> {
+    private arr: T[] = []
+    public push(item: T) {
+        this.arr.push(item)
+    }
+}
+
+```
+### 交叉类型和联合类型
+
+联合类型，有时候单个类型无法满足我们的需求，这时候就需要使用联合类型。
+
+```ts
+// 这时候uniType既可以是string类型也可以是数组
+
+const uniType: string|string[] = []
+
+uniType = '1'
+
+uniType = ['1']
+```
+
+交叉类型，为了合并类型，例如合并b,c 
+
+```ts
+
+interface B {
+  name: string;
+  age: number
+}
+
+interface C {
+  area: string;
+  female: number
+}
+
+type Person = B & C
+const persona: Person = {
+  name: 'xiaoming',
+  age: 18,
+  area: 'shanghai',
+  female: 1,
+}
+```
+
+<b>
+看起来交叉类型和联合类型，都能够合并类型，那么他们的区别是什么呢？
+</b>
+
+<br />
+
+- 联合类型，每次只能联合一个类型
+- 交叉类型每次都是多个属性的合并
+    ```ts
+    例如：
+
+    type A = string | number
+
+    type B = string & number
+    
+    ```
+
+    ![-](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/WX20220806-112009%402x.png)
+
+    这时候可以看到如果对同一个type做单个类型的交叉，会变成 <font color="#e62525">never</font>，无法赋值。
+
+### 类型别名
+
+类型可以用来定义，任何类型，不仅仅是一个对象，也可以是任何基础类型。
+
+```ts
+type A = number | string
+
+type B = {
+    name: string;
+    age: number;
+}
+```
+
+
+### 字面量类型
+
+除了一般类型string和之外number，我们还可以在类型位置引用特定的字符串和数字。
+
+```ts
+type Hello= 'hello'
+
+
+const h: Hello = 'hello world'
+```
+
+单独是用文字类型，通常来说没有什么意义。但是我们可以组合使用。
+
+```ts
+
+function printText(s: string, alignment: "left" | "right" | "center") {
+  // ...
+}
+printText("Hello, world", "left");
+printText("G'day, mate", "centre");
+```
+
+这样我们可以限制 `alignment` 为指定的几种值。
+
+
+
+### 类型断言
+
+类型断言的作用是为了，ts再不能很好的推断类型的时候，确定类型。例如：在获取一个元素的时候，我们知道一定是input，但是ts只能推断是一个html元素。
+
+通过 <font color="#e62525">as</font> 来确定是一个 <font color="#e62525">input</font>
+```ts
+const el: HTMLInputElement = document.getElementById('input_1') as HTMLInputElement
+```
+
+
+## 带了问题去思考1
+
+学完了变量的声明，我们基本上知道了如何去定义一个变量，或则一个函数等等，那么我们来思考一下，以下的几个问题？
+
+### interface 和 type的区别，什么时候用interface什么时候用type？
+
+大部分情况下，interface 可以实现的 type都可以实现，但是他们也有区别。
+> **不同点：**
+  1. 继承扩展方式不同，interface 可以通过extends来扩展，type不可以
+
+```ts
+
+// 接口的继承扩展
+
+interface Animal {
+  type: string
+}
+
+interface Cat {
+  name: string
+}
+
+interface Tiger extends Animal, Cat {}
+
+const t1: Tiger = {
+  type: 'tiger',
+  name: '胖虎'
+}
+
+// type的继承扩展
+
+type Animal1 = {
+  type: string
+}
+
+type Cat1 = {
+  name: string
+}
+
+type Tiger2  = Animal1 & Cat1
+
+const t2: Tiger2 = {
+  type: 'tiger',
+  name: '瘦虎'
+}
+
+
+```
+
+ 2. 接口声明可以合并，type不可以
+
+ ```ts
+
+interface Animal {
+  type: string
+}
+
+interface Cat {
+  name: string
+}
+
+
+interface Animal {
+  age?: string
+}
+
+ =======
+ 
+ 等价于：
+
+interface Animal {
+  type: string,
+  age?: string
+}
+ 
+此时的Animal会合并里面两个属性。
+
+type Animal = {
+  type: string
+}
+
+type Animal =  { // error
+  age?: string
+}
+
+
+```
+而type是不可以的。
+
+![](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/WX20220806-112009%402x.png)
+
+3. type可以定义任何类型，interface通常用来定义对象
+```ts
+type s1 = string
+
+interface s1 string // error
+```
+
+### 常量枚举和普通枚举有什么区别？
+
+普通枚举对象被被编译的时候会同时生成对象，而常量枚举不会，会被删除。
+
+![enum](https://blog-1302483222.cos.ap-shanghai.myqcloud.com/WX20220806-150851%402x.png)
+
+
+## 为什么开源的库写的Typescript看不懂
+
+因为ts，除了基本的类型声明外，还具备类型编程的功能，由于使用了大量的类型编程，导致看起来非常难懂。例如以下这一段：
+
+```ts
+
+type ParseParam<Param extends string> = 
+    Param extends `${infer Key}=${infer Value}`
+        ? {
+            [K in Key]: Value 
+        } : {};
+
+type MergeValues<One, Other> = 
+    One extends Other 
+        ? One
+        : Other extends unknown[]
+            ? [One, ...Other]
+            : [One, Other];
+
+type MergeParams<
+    OneParam extends Record<string, any>,
+    OtherParam extends Record<string, any>
+> = {
+  [Key in keyof OneParam | keyof OtherParam]: 
+    Key extends keyof OneParam
+        ? Key extends keyof OtherParam
+            ? MergeValues<OneParam[Key], OtherParam[Key]>
+            : OneParam[Key]
+        : Key extends keyof OtherParam 
+            ? OtherParam[Key] 
+            : never
+}
+type ParseQueryString<Str extends string> = 
+    Str extends `${infer Param}&${infer Rest}`
+        ? MergeParams<ParseParam<Param>, ParseQueryString<Rest>>
+        : ParseParam<Str>;
+```
+
+TypeScript 的类型系统是图灵完备的，也就是能描述各种可计算逻辑。简单点来理解就是循环、条件等各种 JS 里面有的语法它都有，JS 能写的逻辑它都能写，可以单独对类型编程，这才是其强大的地方，也是复杂的地方。
+
+
+## TypeScript支持哪些运算
+
+
+### 条件运算 extends ?
+
+例如，我们需要去判断一下类型，入参是什么类型，在做出对应的操作
+
+这样我们可以用同一个type去声明不同的类型。
+
+```ts
+type isString<T> = T extends string ? string : number
+
+type res1 = isString<'2'> // 此处 isString是string，
+
+type res2 = isString<1>   // 此处 isString是number
+
+const a: res1 = 'aaa' // yes
+
+const b: res2 = 'aaa' // error
+
+```
+
+这种类型也叫做 <font color="#e62525">高级类型</font>
+
+
+高级类型的特点是 <font color="#e62525">传入类型参数，经过一系列类型运算逻辑后，返回新的类型。</font>
+
+
+### infer推导
+
+表示在 extends 条件语句中待推断的类型变量。
+
+如何提取类型的一部分呢？答案是 <font color="#e62525">infer</font>，例如：
+
+```ts
+type ParamType<T> = T extends (arg: infer P) => any ? P : T;
+interface User {
+  name: string;
+  age: number;
+}
+
+type Func = (user: User) => void;
+
+type Param = ParamType<Func>; // Param = User
+type AA = ParamType<string>; // string
+
+```
+意思就是，如果 ParamType 的类型约束符合 <font color="#e62525">(arg: infer P) => any</font>就返回 P 否则返回 T
+
+### 交叉 ｜
+
+### 联合 & 
+
+### 映射类型
+
+对象、class 在 TypeScript 对应的类型是索引类型（Index Type），那么如何对索引类型作修改呢？
+
+答案是 <font color="#e62525">映射类型</font>
+
+```ts
+type MapType<T> = {
+    [Key in keyof T]: [T[Key], T[Key], T[Key]]
+}
+
+
+type Res = MapType<{
+    a: 1
+}>
+
+const res1: Res = {
+    a: [1,1,1]
+}
+```
+
+- <font color="#e62525">keyof</font> 获取对象的key值集合。 
+
+- <font color="#e62525">in</font> 遍历集合。
+
+- <font color="#e62525">T[Key]</font> 获取值。
+
+## TS有哪些套路
+
+TypeScript 类型编程的代码看起来比较复杂，但其实这些逻辑用 JS 大家都会写，之所以到了类型体操就不会了，那是因为还不熟悉一些套路。
+
+所以，这节开始我们就来学习一些类型体操的套路，熟悉这些套路之后，各种类型体操逻辑就能够很顺畅的写出来。
+
+首先，我们来学习类型体操的第一个套路：模式匹配做提取。
+
+### 模式匹配
+
+在js中，我们可以根据正则来提取匹配的内容，那么ts中我们如何做呢？
+
+#### 模拟数组的取数
+
+我们需要提取数组的第一个值，在js中直接  <font color="#e62525">arr[0]</font>就可以了，那么在ts中如何处理呢？
+
+提取数组中的第一个；
+
+```ts
+
+type First<Arr extends unknown[]> = Arr extends [infer First, ...unknown[]] ? First : never
+
+type F1 = First<['1',2,3]>
+
+type F2 = First<[1,2,3]>
+
+const ff1: F1 = '1'
+const ff2: F2 = 1
+```
+
+同理我们也可以提取最后一个
+
+```ts
+type Last<Arr extends unknown[]> = Arr extends [...unknown[], infer Last] ? Last : never
+
+type L1 = Last<['1',2,'33']>
+
+type L2 = Last<[1,2,3]>
+
+const Ll1: L1 = '33'
+const Ll2: L2 = 3
+```
+
+#### 实现字符串的split
+
+意思就是，S是否满足 `${infer S1}${SEP}${infer S2}` 的格式，如果满足就继续递归执行 <font color="#e62525">Split</font>，否则合并[...R, S1]，最终输入[...R, S]
+
+```ts
+type Split<
+  S extends string,
+  SEP extends string,
+  R extends any[] = []
+> = S extends `${infer _}`
+      ? S extends `${infer S1}${SEP}${infer S2}`
+        ? Split<S2, SEP, [...R, S1]>
+        : S extends ''
+          ? SEP extends ''
+            ? R
+            : [...R, S]
+          : [...R, S]
+      : string[]
+
+type StrArr = Split<'hello world', ' '>
+```
+
+
+<font color="#e62525">
+TypeScript 类型的模式匹配是通过类型 extends 一个模式类型，把需要提取的部分放到通过 infer 声明的局部变量里，后面可以从这个局部变量拿到类型做各种后续处理。
+</font>
+
+
+### 重新构造做变换
+
+#### 数组变成元组
+
+有这样一种场景，我们声明了一个数组，但是我们需要让他插入其他类型，变成一个元组，怎么办？
+
+此处我们，讲arr重新构造称一个 <font color="#e62525">unknown[]</font>
+
+```ts
+
+type Arr = string[]
+
+type ArrToTuple<arr extends unknown[], count extends number> = [...arr, count]
+
+type Tup1 = ArrToTuple<['1', '2'], 3>
+
+```
+
+#### 数组的降维
+
+首先先构造一个一维数组，然后进行递归。
+
+
+```ts
+type Flatten<
+  T extends any[]
+> = T extends [infer L, ...infer R]
+      ? L extends any[]
+        ? [...Flatten<L>, ...Flatten<R>]
+        : [L, ...Flatten<R>]
+      : []
+
+type Fla1 = Flatten<[[1,2], 4]>
+```
+
+#### 字符串转数组
+
+```ts
+
+type StringToArr<S extends string, U extends unknown[]> = S extends `${infer Char}${infer R}` ? StringToArr<R, [...U, Char]> : U
+
+
+type Sa = StringToArr<'我有一个梦想', []>  // type Sa = ["我", "有", "一", "个", "梦", "想"]
+```
+
+#### 数组转字符串
+
+```ts
+type ArrToString<Arr extends any[], R extends string = ''> = Arr extends [infer First, ...infer Rest] ? Rest['length'] extends 0 
+? `${Rest extends '' ? '' : `${R}`}${First&string}` : ArrToString<Rest, `${R extends '' ? '' : `${R}`}${First&string}`> : R
+
+type R1 = ArrToString<['1', '2']> // R1 = '12'
+
+```
+
+
+<font color="#e62525">
+重新构造做变换的套路就是，重新构造一个新的类型，然后经过转换，最后返回
+</font>
+
+### 递归
+
+其实可以看到前面的几个例子，我们都用到了，递归。比如数组的降维。

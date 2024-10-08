@@ -91,7 +91,7 @@ export const authOptions: AuthOptions = {
           throw Error("用户不存在，请检查邮箱是否正确");
         } else {
           if (credentials.password === decrypt(user?.password as string)) {
-            return user;
+            return user as any;
           } else {
             throw Error("密码不正确，请重新输入");
           }

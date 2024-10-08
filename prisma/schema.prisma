@@ -21,6 +21,15 @@ model User {
   image      String    @default("https://blog-1302483222.cos.ap-shanghai.myqcloud.com/images.jpg")
 }
 
+model Email {
+  id         Int       @id @default(autoincrement())
+  email      String
+  code       String
+  created_at DateTime? @default(now())
+  expired_at DateTime
+  status     Int
+}
+
 generator client {
   provider = "prisma-client-js"
 }

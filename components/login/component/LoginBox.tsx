@@ -20,14 +20,14 @@ export default function LoginBox() {
           Login With Github
         </Button>
 
-        <Button
+        {/* <Button
           color="red"
           className="w-full"
           onClick={() => sign("google")}
           icon={<GoogleOutlined></GoogleOutlined>}
         >
           Login With Google
-        </Button>
+        </Button> */}
       </div>
     </>
   );

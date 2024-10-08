@@ -25,14 +25,14 @@ export default function ArticleItem(data: { articleInfo: Post }) {
       <p className="text-muted-foreground line-clamp-2 px-4 text-sm opacity-80 ">
         {data.articleInfo.description}
       </p>
-      <div className="py-1 rounded-full text-xs font-medium m-4 flex">
-        <div className="flex flex-wrap items-center">
+      <div className="text-xs font-medium m-4 flex">
+        <div className="flex flex-wrap items-baseline">
           {data.articleInfo.categories &&
             data.articleInfo.categories.split(",").map((item) => (
               <Link
                 key={item}
                 href={`/blog/category/${item}`}
-                className="px-2 mr-1 rounded-lg bg-primary-500 text-white min-w-10"
+                className="px-2 rounded-lg mb-2 bg-primary-500 text-white min-w-10"
               >
                 {item}
               </Link>
@@ -40,13 +40,13 @@ export default function ArticleItem(data: { articleInfo: Post }) {
         </div>
 
         <Divider type="vertical" />
-        <div className="flex flex-wrap space-y-2 items-baseline">
+        <div className="flex flex-wrap space-x-2 items-baseline ">
           {data.articleInfo.tags &&
             data.articleInfo.tags.split(",").map((item) => (
               <Link
                 key={item}
                 href={`/blog/tag/${item}`}
-                className="px-2 mr-1 rounded-lg bg-primary-500 text-white"
+                className="px-2 rounded-lg mb-2 bg-primary-500 text-white"
               >
                 {item}
               </Link>

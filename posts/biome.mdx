@@ -1,0 +1,182 @@
+---
+title: 前端工具链-biome简介
+date: 2024-10-10
+key: frontend-toolchian-biome
+tags: Biome
+keywords: LINT FORMATTER
+categories: 工具
+description: 最近在使用RsPack的过程中，发现了官方提供的项目模板中有一个biome.json，不太清楚这是，于是乎我就去查找了一下相关的资料。最后发现这个一个rust的前端的格式化和修复的工具，且非常快，和更好的提示。
+---
+
+import TOCInline from "@/components/TOCInline";
+
+<TOCInline toc={props.toc} exclude="Overview" heading={3} />
+
+最近在使用RsPack的过程中，发现了官方提供的项目模板中有一个`biome.json`，不太清楚这是，于是乎我就去查找了一下相关的资料。最后发现这个一个rust的前端的格式化和修复的工具，且非常快，和更好的提示。
+
+# 什么是Biome
+
+官方的介绍是这样的
+
+> Biome 是一个适用于 JavaScript、TypeScript、JSX、JSON、CSS 和 GraphQL 的快速格式化工具，与 Prettier 有高达 97% 的兼容覆盖率，能有效节约持续化集成和开发者的时间。
+
+> Biome 是一个适用于 JavaScript、TypeScript、JSX、CSS 和 GraphQL 的高性能 linter，拥有来自 ESLint、typescript-eslint 以及其它规则源的超过 200 条规则。Biome 可以输出详细且上下文相结合的诊断信息来帮助你改进你的代码，成为更优秀的程序员！
+
+官方给出的示例中，相较于 Prettier 的速度提升。搭配英特尔酷睿 i7 1270P，格式化 2,104 个文件中的 171,127 行代码，速度是prettier的 35X
+
+##  安装
+
+```bash
+pnpm i -D --save-exact @biomejs/biome
+
+npx @biomejs/biome lint --write ./src
+```
+
+可以看出和prettier，eslint的命令很像，这是格式化lint某一个文件。
+
+也可以对整个工程使用，有两种方式`包管理器的方式`和`插件`[integrate-in-editor](https://biomejs.dev/zh-cn/guides/integrate-in-editor/)
+
+我推荐包管理器的方式，这样每个人用的标准都是一样的，便于团队的管理。
+
+```bash
+pnpm biome init
+```
+
+## 配置和继承
+运行后会生成一个`biome.json`的文件，里面有很多的配置，我们可以根据自己的需求进行配置。
+
+```json
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.3/schema.json",
+  "organizeImports": {
+    "enabled": false
+  },
+  "linter": {
+    "enabled": true, // 启动lint
+    "rules": {
+      "recommended": true // 推荐规则
+    }
+  }
+}
+```
+
+biome支持多目录使用，每个目录都可以有单独的配置，和作用域链一样。如果Biome在那里找不到配置文件，它会向上遍历文件系统的目录，直到找到一个配置文件。
+
+例如这样：backend和frontend各种各的配置。
+
+```bash
+
+app
+├── backend
+│   ├── biome.json
+│   └── package.json
+└── frontend
+    ├── biome.json
+    ├── legacy-app
+    │   └── package.json
+    └── new-app
+        └── package.json
+
+```
+
+同样也可以继承，例如backend，需要继承frontend的配置，很方便。
+
+```json
+{
+  "extends": ["../frontend/biome.json"],
+  "formatter": {
+    "indentStyle": "space"
+  }
+}
+```
+
+## 格式化
+
+在formatter中配置格式化的规则，与prettier相同之处有95%，基本上可以完全替代，且遵循和prettier一样的理念-现有的格式化选项集被认为是稳定的，并且不太可能考虑新选项。，目前支持的规则有如下：
+
+```json
+{
+  "extends": ["../frontend/biome.json"],
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "ignore": [],
+    "attributePosition": "auto",
+    "indentStyle": "tab",
+    "indentWidth": 2,
+    "lineWidth": 80,
+    "lineEnding": "lf"
+  },
+  "javascript": {
+    "formatter": {
+      "arrowParentheses":"always",
+      "bracketSameLine": false,
+      "bracketSpacing": true,
+      "jsxQuoteStyle": "double",
+      "quoteProperties": "asNeeded",
+      "semicolons": "always",
+      "trailingCommas": "all"
+    }
+  },
+  "json": {
+    "formatter": {
+      "trailingCommas": "none"
+    }
+  }
+}
+```
+
+## Lint & Fix
+
+完整配置：[rules](https://biomejs.dev/linter/rules/)
+
+```json
+{
+  "extends": ["../frontend/biome.json"],
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "ignore": [],
+    "attributePosition": "auto",
+    "indentStyle": "tab",
+    "indentWidth": 2,
+    "lineWidth": 80,
+    "lineEnding": "lf"
+  },
+   "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "off"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "arrowParentheses":"always",
+      "bracketSameLine": false,
+      "bracketSpacing": true,
+      "jsxQuoteStyle": "double",
+      "quoteProperties": "asNeeded",
+      "semicolons": "always",
+      "trailingCommas": "all"
+    }
+  },
+  "json": {
+    "formatter": {
+      "trailingCommas": "none"
+    }
+  }
+}
+```
+
+我大概配置了一些，这时候我们再去运行的时候就能看到了，会有提示优化信息，可以根据提示进行优化。比如说这里就是一个性能优化，forEach遍历的性能没有for of 高。推荐我们用for of。
+
+![alt text](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/biome.png)
+
+## 总结
+
+Biome 是一个基于 Rust 的前端格式化和修复工具，它适用于 JavaScript、TypeScript、JSX、JSON、CSS 和 GraphQL 等多种编程语言。Biome 与 Prettier 有高达 97% 的兼容覆盖率，并且在格式化速度上有显著提升。
+
+同时避免使用过多的lint和formatter工具，配置起来比较麻烦以及冲突。

@@ -22,12 +22,11 @@ n.prototype = {
   // 更新振荡值
   update: function () {
     this.phase += this.frequency;
-    return (e = this.offset + Math.sin(this.phase) * this.amplitude);
-  },
-  // 返回当前振荡值
-  value: function () {
+    e = this.offset + Math.sin(this.phase) * this.amplitude;
     return e;
   },
+  // 返回当前振荡值
+  value: () => e,
 };
 
 // 线条类
@@ -41,7 +40,7 @@ Line.prototype = {
     this.spring = e.spring + 0.1 * Math.random() - 0.05; // 弹性系数
     this.friction = E.friction + 0.01 * Math.random() - 0.005; // 摩擦力
     this.nodes = []; // 节点数组
-    for (var t, n = 0; n < E.size; n++) {
+    for (let t, n = 0; n < E.size; n++) {
       t = new Node();
       t.x = pos.x;
       t.y = pos.y;
@@ -50,11 +49,11 @@ Line.prototype = {
   },
   // 更新线条节点位置
   update: function () {
-    var e = this.spring,
-      t = this.nodes[0];
+    let e = this.spring;
+    let t = this.nodes[0];
     t.vx += (pos.x - t.x) * e;
     t.vy += (pos.y - t.y) * e;
-    for (var n, i = 0, a = this.nodes.length; i < a; i++) {
+    for (let n, i = 0, a = this.nodes.length; i < a; i++) {
       t = this.nodes[i];
       if (i > 0) {
         n = this.nodes[i - 1];
@@ -72,21 +71,20 @@ Line.prototype = {
   },
   // 绘制线条
   draw: function () {
-    var e,
-      t,
-      n = this.nodes[0].x,
-      i = this.nodes[0].y;
+    let e;
+    let t;
+    let n = this.nodes[0].x;
+    let i = this.nodes[0].y;
     ctx.beginPath();
     ctx.moveTo(n, i);
-    for (var a = 1, o = this.nodes.length - 2; a < o; a++) {
+    for (let a = 1, o = this.nodes.length - 2; a < o; a++) {
       e = this.nodes[a];
       t = this.nodes[a + 1];
       n = 0.5 * (e.x + t.x);
       i = 0.5 * (e.y + t.y);
       ctx.quadraticCurveTo(e.x, e.y, n, i);
     }
-    e = this.nodes[a];
-    t = this.nodes[a + 1];
+
     ctx.quadraticCurveTo(e.x, e.y, t.x, t.y);
     ctx.stroke();
     ctx.closePath();
@@ -97,7 +95,7 @@ Line.prototype = {
 function onMousemove(e) {
   function o() {
     lines = [];
-    for (var e = 0; e < E.trails; e++) {
+    for (let e = 0; e < E.trails; e++) {
       lines.push(new Line({ spring: 0.45 + (e / E.trails) * 0.025 }));
     }
   }
@@ -112,7 +110,7 @@ function onMousemove(e) {
     e.preventDefault();
   }
   function l(e) {
-    if (e.touches.length == 1) {
+    if (e.touches.length === 1) {
       pos.x = e.touches[0].pageX;
       pos.y = e.touches[0].pageY;
     }
@@ -133,9 +131,9 @@ function render() {
     ctx.globalCompositeOperation = "source-over";
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.globalCompositeOperation = "lighter";
-    ctx.strokeStyle = "hsla(" + Math.round(f.update()) + ",90%,50%,0.25)";
+    ctx.strokeStyle = `hsla(${Math.round(f.update())},90%,50%,0.25)`;
     ctx.lineWidth = 1;
-    for (var e, t = 0; t < E.trails; t++) {
+    for (let e, t = 0; t < E.trails; t++) {
       e = lines[t];
       e.update();
       e.draw();
@@ -152,22 +150,22 @@ function resizeCanvas() {
 }
 
 // 全局变量和配置
-var ctx,
-  f,
-  e = 0,
-  pos = {},
-  lines = [],
-  E = {
-    debug: true, // 调试模式
-    friction: 0.5, // 摩擦力
-    trails: 20, // 轨迹数量
-    size: 50, // 节点数量
-    dampening: 0.25, // 阻尼系数
-    tension: 0.98, // 拉力系数
-  };
+let ctx;
+let f;
+let e = 0;
+const pos = {};
+let lines = [];
+const E = {
+  debug: true, // 调试模式
+  friction: 0.5, // 摩擦力
+  trails: 20, // 轨迹数量
+  size: 50, // 节点数量
+  dampening: 0.25, // 阻尼系数
+  tension: 0.98, // 拉力系数
+};
 
 // 导出渲染Canvas的函数
-export const renderCanvas = function () {
+export const renderCanvas = () => {
   ctx = document.getElementById("canvas").getContext("2d");
   ctx.running = true;
   ctx.frame = 1;

@@ -4,7 +4,7 @@ import Aegis from "aegis-web-sdk";
 import { useEffect } from "react";
 export default function LoadScript() {
   useEffect(() => {
-    if (typeof Aegis === "function") {
+    if (typeof Aegis === "function" && process.env.NODE_ENV !== "development") {
       new Aegis({
         id: "3oOZnfLdDd2ExXl11g",
         reportApiSpeed: true,

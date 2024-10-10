@@ -1,5 +1,6 @@
 import LenisProvider from "@/components/Providers/LenisProvider";
 import ThemeProvider from "@/components/Providers/ThemeProvider";
+import { ScrollProvider } from "@/components/Providers/ScrollProvider";
 import "./ui/globals.scss";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { content } from "@/lib/font";
@@ -71,13 +72,15 @@ export default function RootLayout({
         <AntdRegistry>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <LenisProvider>
-              <ProgressProvider>
-                <div className="sticky top-0 z-10">
-                  <DHeader />
-                </div>
-                <main className="min-h-[calc(100vh-110px)] ">{children}</main>
-                <Footer />
-              </ProgressProvider>
+              <ScrollProvider>
+                <ProgressProvider>
+                  <div className="sticky top-0 z-10">
+                    <DHeader />
+                  </div>
+                  <main className="min-h-[calc(100vh-110px)] ">{children}</main>
+                  <Footer />
+                </ProgressProvider>
+              </ScrollProvider>
             </LenisProvider>
           </ThemeProvider>
         </AntdRegistry>

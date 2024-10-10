@@ -21,6 +21,7 @@
     "@tailwindcss/typography": "^0.5.13",
     "@types/mdx": "^2.0.13",
     "@types/nodemailer": "^6.4.16",
+    "aegis-web-sdk": "^1.39.2",
     "antd": "^5.17.4",
     "classnames": "^2.5.1",
     "contentlayer": "^0.3.4",

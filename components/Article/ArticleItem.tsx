@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Divider } from "antd";
-import { Post } from "contentlayer/generated";
+import type { Post } from "contentlayer/generated";
 export default function ArticleItem(data: { articleInfo: Post }) {
   const { articleInfo } = data;
   return (
@@ -27,30 +27,28 @@ export default function ArticleItem(data: { articleInfo: Post }) {
       </p>
       <div className="text-xs font-medium m-4 flex">
         <div className="flex flex-wrap items-baseline">
-          {data.articleInfo.categories &&
-            data.articleInfo.categories.split(",").map((item) => (
-              <Link
-                key={item}
-                href={`/blog/category/${item}`}
-                className="px-2 rounded-lg mb-2 bg-primary-500 text-white min-w-10"
-              >
-                {item}
-              </Link>
-            ))}
+          {data.articleInfo.categories?.split(",").map((item) => (
+            <Link
+              key={item}
+              href={`/blog/category/${item}`}
+              className="px-2 rounded-lg mb-2 bg-primary-500 text-white min-w-10"
+            >
+              {item}
+            </Link>
+          ))}
         </div>
 
         <Divider type="vertical" />
         <div className="flex flex-wrap space-x-2 items-baseline ">
-          {data.articleInfo.tags &&
-            data.articleInfo.tags.split(",").map((item) => (
-              <Link
-                key={item}
-                href={`/blog/tag/${item}`}
-                className="px-2 rounded-lg mb-2 bg-primary-500 text-white"
-              >
-                {item}
-              </Link>
-            ))}
+          {data.articleInfo.tags?.split(",").map((item) => (
+            <Link
+              key={item}
+              href={`/blog/tag/${item}`}
+              className="px-2 rounded-lg mb-2 bg-primary-500 text-white"
+            >
+              {item}
+            </Link>
+          ))}
         </div>
       </div>
     </div>

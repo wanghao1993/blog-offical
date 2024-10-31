@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @keyframes fadeInOut {
+            0% {
+                left: 0px;
+            }
+
+            50% {
+                left: 100px;
+            }
+
+            100% {
+                left: 200px;
+            }
+        }
+
+        .animation {
+            position: relative;
+            width: 200px;
+            animation-duration: 3s;
+            animation-timing-function: linear;
+            animation-delay: 0s;
+            animation-iteration-count: 5;
+            animation-direction: normal;
+            animation-fill-mode: none;
+            animation-play-state: running;
+            animation-name: fadeInOut;
+            animation-timeline: auto;
+            animation-range-start: 20;
+            animation-range-end: 80;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <!-- css3 动画 -->
+
+    <div class="animation">
+        动画
+    </div>
+
+</body>
+
+</html>

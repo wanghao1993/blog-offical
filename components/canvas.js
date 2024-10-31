@@ -7,11 +7,11 @@ function Node() {
 }
 
 // 振荡类
-function n(e) {
+function N(e) {
   this.init(e || {});
 }
 
-n.prototype = {
+N.prototype = {
   // 初始化振荡参数
   init: function (e) {
     this.phase = e.phase || 0; // 相位
@@ -98,6 +98,7 @@ function onMousemove(e) {
     for (let e = 0; e < E.trails; e++) {
       lines.push(new Line({ spring: 0.45 + (e / E.trails) * 0.025 }));
     }
+    console.log(lines);
   }
   function c(e) {
     if (e.touches) {
@@ -169,7 +170,7 @@ export const renderCanvas = () => {
   ctx = document.getElementById("canvas").getContext("2d");
   ctx.running = true;
   ctx.frame = 1;
-  f = new n({
+  f = new N({
     phase: Math.random() * 2 * Math.PI,
     amplitude: 85,
     frequency: 0.0015,

@@ -1,0 +1,365 @@
+---
+title: 前端面试题整理-css
+date: 2024-11-01
+key: "interview_css"
+categories: 面试
+tags: css
+keywords: css 动画 flex grid bfc 模块化 预处理器 性能优化 兼容性 选择器 动画
+description: 前端面试题相关,这部分主要介绍css相关的面试题,从基础的盒模型,定位,BFC,flex,grid,css选择器,css动画,css预处理器,css模块化,css性能优化,css兼容性,css预处理器,css模块化,css性能优化,动画等等
+---
+import TOCInline from "@/components/TOCInline";
+
+<TOCInline toc={props.toc} exclude="Overview" heading={4} />
+
+## CSS
+
+### 盒模型
+
+在 CSS 中，所有的元素都被一个个的“盒子”包围着，理解这些“盒子”的基本原理，是我们使用 CSS 实现准确布局、处理元素排列的关键。
+
+一个盒通常由内容，内边距，边框和外边距组成。普通盒模型中，一个元素的占位，是
+
+>boxWidth = contentWidth + XPadding + XBorderWidth + XMargin
+>boxHeight = contentHeight + YPadding + YBorderWidth + YMargin
+
+```css
+div {
+    width: 400px;
+    height: 100px;
+    padding: 20px;
+    border: 5px solid;
+    margin: 10px;
+}
+```
+
+那么这个div的占位宽度为:400+20+20+5+5 = 450, 高度为 100 + 10 + 10 + 5 + 5 = 130
+
+还有IE的怪异盒模型，表现和 box-size：border-box一直，总的占位宽度为设置的宽度和高度，包含了border和padding在内。
+
+此为块级元素相连的元素margin会合并，以大的为准，行内元素不会。
+
+### BFC
+
+块级格式上下文，BFC中的元素的样式变化不会对周围的元素的布局造成影响。这里我们就能通过bfc来解决，之前说到的margin重叠的问题。
+
+那么如何才能触发BFC呢？主要有以下几种方案：
+
+- 设置float
+- overflow设置不为visible，scroll,auto,hidden
+- display设置为inline-block，flex， grid，table等等
+- position设置为absoulte，fixed
+
+```css
+p {
+    width: 400px;
+    height: 100px;
+    padding: 20px;
+    border: 5px solid;
+    margin: 10px;
+}
+```
+
+```html
+<!-- before -->
+    <p>
+    p1
+    </p>
+    <p>
+    p2
+    </p>
+    <!-- after -->
+     <!-- div 触发了bfc,内容的布局对外部不会有影响,所以不会发生合并 -->
+    <div style="overflow: auto">
+        <p>
+        p1
+        </p>
+    </div>
+    <p>
+    p2
+    </p>
+```
+
+所以这里我们可以通过把其中一个元素添加一个父元素，且设置overflow：hidden，来避免margin重叠，因为设置。
+
+### Position的值有哪些
+
+Position属性有以下几种值：
+
+1. **static**：默认值。元素按照正常的文档流进行定位，不受top, right, bottom, left属性的影响。
+2. **relative**：相对定位。元素相对于其正常位置进行定位，可以使用top, right, bottom, left属性进行偏移。
+3. **absolute**：绝对定位。元素相对于最近的已定位祖先元素进行定位，如果没有已定位的祖先元素，则相对于初始包含块进行定位。
+4. **fixed**：固定定位。元素相对于浏览器窗口进行定位，即使页面滚动，元素也不会移动。
+5. **sticky**：粘性定位。元素根据用户的滚动位置进行定位，在相对定位和固定定位之间切换。
+
+```css
+/* 示例 */
+.element {
+    position: relative;
+    top: 10px;
+    left: 20px;
+}
+```
+
+### 水平垂直居中
+
+在CSS中，实现水平垂直居中的方法有很多种，以下是几种常见的方案：
+
+使用`flexbox`
+
+```css
+.container {
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    height: 100vh; /* 父容器高度 */
+}
+```
+
+```html
+<div class="container">
+    <div class="content">居中内容</div>
+</div>
+```
+
+使用`grid`
+
+```css
+.container {
+    display: grid;
+    place-items: center; /* 水平垂直居中 */
+    height: 100vh; /* 父容器高度 */
+}
+```
+
+```html
+<div class="container">
+    <div class="content">居中内容</div>
+</div>
+```
+
+使用绝对定位
+
+```css
+.container {
+    position: relative;
+    height: 100vh; /* 父容器高度 */
+}
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 水平垂直居中 */
+}
+```
+
+```html
+<div class="container">
+    <div class="content">居中内容</div>
+</div>
+```
+
+使用`table-cell`
+
+```css
+.container {
+    display: table;
+    width: 100%;
+    height: 100vh; /* 父容器高度 */
+}
+.content {
+    display: table-cell;
+    vertical-align: middle; /* 垂直居中 */
+    text-align: center; /* 水平居中 */
+}
+```
+
+```html
+<div class="container">
+    <div class="content">居中内容</div>
+</div>
+```
+
+这些方法都可以实现水平垂直居中，根据具体需求选择合适的方案。
+
+### 隐藏元素的方式和区别
+
+在CSS中，有多种方式可以隐藏元素，每种方式都有其特定的应用场景和效果。以下是几种常见的隐藏元素的方式及其区别：
+
+1. **display: none**：
+    - **效果**：元素从文档流中完全移除，不占据任何空间。
+    - **应用场景**：需要完全隐藏元素，并且不希望它占据任何空间时使用。
+    - **注意事项**：元素及其子元素的所有事件监听器将被禁用。
+
+    ```css
+    .hidden {
+        display: none;
+    }
+    ```
+
+2. **visibility: hidden**：
+    - **效果**：元素在文档中仍然占据空间，但不可见。
+    - **应用场景**：需要隐藏元素，但希望它仍然占据空间时使用。
+    - **注意事项**：元素的事件监听器仍然有效。
+
+    ```css
+    .hidden {
+        visibility: hidden;
+    }
+    ```
+
+3. **opacity: 0**：
+    - **效果**：元素完全透明，但仍然占据空间。
+    - **应用场景**：需要隐藏元素，但希望它仍然占据空间，并且希望保留其动画效果时使用。
+    - **注意事项**：元素的事件监听器仍然有效。
+
+    ```css
+    .hidden {
+        opacity: 0;
+    }
+    ```
+
+4. **position: absolute; left: -9999px**：
+    - **效果**：元素被移出可视区域，但仍然存在于文档中。
+    - **应用场景**：需要隐藏元素，但希望它仍然存在于文档中，并且不影响布局时使用。
+    - **注意事项**：元素的事件监听器仍然有效。
+
+    ```css
+    .hidden {
+        position: absolute;
+        left: -9999px;
+    }
+    ```
+
+5. **clip-path: inset(100%)**：
+    - **效果**：元素被裁剪，完全不可见，但仍然占据空间。
+    - **应用场景**：需要隐藏元素，但希望它仍然占据空间，并且希望保留其动画效果时使用。
+    - **注意事项**：元素的事件监听器仍然有效。
+
+    ```css
+    .hidden {
+        clip-path: inset(100%);
+    }
+    ```
+
+6. **height: 0; overflow: hidden**：
+    - **效果**：元素高度为0，不可见，但仍然占据空间。
+    - **应用场景**：需要隐藏元素的内容，但希望它仍然占据空间时使用。
+    - **注意事项**：元素的事件监听器仍然有效。
+
+    ```css
+    .hidden {
+        height: 0;
+        overflow: hidden;
+    }
+    ```
+
+每种隐藏方式都有其特定的应用场景和效果，根据具体需求选择合适的方式来隐藏元素。
+
+### CSS3动画实现
+
+```css
+/* 定义淡入淡出的关键帧动画 */
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* 应用动画到元素 */
+.fade-in-out {
+    position: relative;
+    width: 200px;
+    animation: fadeInOut 3s infinite;
+    /* 等于 */
+
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    animation-fill-mode: none;
+    animation-play-state: running;
+    animation-name: fadeInOut;
+    animation-timeline: none;
+    animation-range-start: none;
+    animation-range-end: none;
+}
+```
+
+```html
+<div class="fade-in-out">淡入淡出效果</div>
+```
+
+动画的关键在于动画的实现和持续时间,以及 播放方式.
+
+#### animation属性
+
+在CSS中，`animation`属性用于定义动画效果。以下是`animation`属性的各个参数及其解析：
+
+1. **animation-duration**: 动画持续时间
+    - **值**: 时间（如`3s`表示3秒）
+    - **示例**: `animation-duration: 3s;`
+
+2. **animation-timing-function**: 动画的时间函数
+    - **值**: 预定义的时间函数（如`ease`, `linear`, `ease-in`, `ease-out`, `ease-in-out`等）
+    - **示例**: `animation-timing-function: ease;`
+
+3. **animation-delay**: 动画延迟时间
+    - **值**: 时间（如`0s`表示无延迟）
+    - **示例**: `animation-delay: 0s;`
+
+4. **animation-iteration-count**: 动画循环次数
+    - **值**: 数字或`infinite`（无限循环）
+    - **示例**: `animation-iteration-count: infinite;`
+
+5. **animation-direction**: 动画方向
+    - **值**: `normal`（正常方向）, `reverse`（反向）, `alternate`（交替）, `alternate-reverse`（反向交替）
+    - **示例**: `animation-direction: normal;`
+
+6. **animation-fill-mode**: 动画结束后的状态
+    - **值**: `none`, `forwards`, `backwards`, `both`
+    - **示例**: `animation-fill-mode: none;`
+
+7. **animation-play-state**: 动画播放状态
+    - **值**: `running`（播放）, `paused`（暂停）
+    - **示例**: `animation-play-state: running;`
+
+8. **animation-name**: 动画名称
+    - **值**: 动画的名称（如`fadeInOut`）
+    - **示例**: `animation-name: fadeInOut;`
+
+9. **animation-timeline**: 动画时间线
+    - **值**: `auto`（自动）
+    - **示例**: `animation-timeline: auto;`
+
+10. **animation-range-start**: 动画范围起点
+    - **值**: `normal`（正常）
+    - **示例**: `animation-range-start: normal;`
+
+11. **animation-range-end**: 动画范围终点
+    - **值**: `normal`（正常）
+    - **示例**: `animation-range-end: normal;`
+
+通过这些参数，可以灵活地控制动画的各个方面，从而实现丰富的动画效果。
+
+### Flex
+
+当我写到这里的时候我感到很沮丧，最近在找工作，[个人简介](https://super-super.cn/about)这里有的一些信息，我做前端7年了。
+
+现在又面临找工作了，这么些年都在工作没休息过以一个月，也有在认真的对待每一份工作，尽心尽力，也有在持续学习，从最开始的jq到后来的vue，Ionic，angularjs到后来的react，nextjs，再到后来的nestjs，构建工具从gulp到webpack，rollup，vite，rspack等等。
+
+多年来都在坚持学习，虽然有些项目上用不到，但是也有在自己模拟做项目。现在我真的想要放弃了，我三本的学历，我不是天才，只是普通人，我做不到大牛的水平，只会是大号的螺丝钉。
+
+现在职业寒冬，我找不到工作，只能做做外包。我不知道我的坚持有什么意义，我要放弃了，真的要放弃了。挪出位置给后来的人吧，或者说给那些7 8年经验在一线城市可以接受10k 15k还要996的人吧，你们更勇敢。
+
+前几天偷偷改了boss上的学校（不需要认证），改成深圳大学，没一会就收到了很多的投递邀请，我没有回复他们，也没有投递简历，我又默默的把学校改回来了。
+
+努力了，可我看不到光。
+
+

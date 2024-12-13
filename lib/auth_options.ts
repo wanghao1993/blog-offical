@@ -4,8 +4,12 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { decrypt, encrypt } from "@/lib/crypto";
 import { AuthOptions } from "next-auth";
 import prisma from "./pg";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { PrismaClient } from "@/prisma/generated/client";
 
+const Prisma = new PrismaClient();
 export const authOptions: AuthOptions = {
+  adapter: PrismaAdapter(Prisma),
   secret: process.env.SECRET_KEY,
   debug: true,
   providers: [
@@ -15,52 +19,21 @@ export const authOptions: AuthOptions = {
       httpOptions: {
         timeout: 100000,
       },
-      async profile(profile) {
-        try {
-          const existingUser = await prisma.user.findUnique({
-            where: { email: profile.email },
-          });
-
-          if (existingUser) {
-            if (
-              existingUser.image !== profile.avatar_url ||
-              existingUser.name !== (profile.name || profile.login)
-            ) {
-              return await prisma.user.update({
-                where: { email: profile.email },
-                data: {
-                  name: profile.name || profile.login,
-                  image: profile.avatar_url as string,
-                },
-              });
-            } else {
-              return existingUser as any;
-            }
-          }
-
-          // Create new user
-          const res = await prisma.user.create({
-            data: {
-              name: profile.name || profile.login,
-              email: profile.email,
-              image: profile.avatar_url,
-              password: encrypt(profile.id.toString()), // Use GitHub ID as default password
-            },
-          });
-
-          return res as any;
-        } catch (e: any) {
-          console.log(e.message);
-        }
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID as string,
+      clientSecret: process.env.GOOGLE_SECRET_KEY as string,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
+      httpOptions: {
+        timeout: 100000,
       },
     }),
-    // GoogleProvider({
-    //   clientId: process.env.GOOGLE_ID as string,
-    //   clientSecret: process.env.GOOGLE_SECRET_KEY as string,
-    //   httpOptions: {
-    //     timeout: 100000,
-    //   },
-    // }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -102,15 +75,6 @@ export const authOptions: AuthOptions = {
   session: {
     strategy: "jwt",
     maxAge: 2 * 24 * 60 * 60,
-  },
-  callbacks: {
-    session: async ({ session, token, user }) => {
-      session.user.id = user?.id;
-      return session;
-    },
-    jwt(params) {
-      return params.token;
-    },
   },
 
   pages: {

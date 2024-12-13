@@ -14,7 +14,6 @@ const APP_NAME = "汪浩的博客";
 const APP_DEFAULT_TITLE = "汪浩（Isaac Wang）的博客";
 const APP_TITLE_TEMPLATE = "汪浩（Isaac Wang）的博客";
 const APP_DESCRIPTION = "汪浩（Isaac Wang）的博客，一些关于技术和生活的的记录";
-
 export type Metadatas = Metadata & {
   "baidu-site-verification": string;
 };
@@ -30,7 +29,7 @@ export const metadata: Metadatas = {
   },
   "baidu-site-verification": "codeva-n7vACpBbX1",
   description: APP_DESCRIPTION,
-  manifest: "./manifest.json",
+  manifest: "/manifest.json",
   formatDetection: {
     telephone: false,
   },

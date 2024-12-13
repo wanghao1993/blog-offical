@@ -107,7 +107,7 @@ export default function MobileNav() {
               );
             })}
 
-            <div key="Login" className="px-12 py-4">
+            <div key="Login" className="px-12 py-4 flex items-center">
               {status === "unauthenticated" ? (
                 <div
                   className=" font-bold tracking-widest text-gray-900 backdrop:text-2xl dark:text-gray-100"

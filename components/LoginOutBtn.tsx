@@ -30,15 +30,15 @@ export default function LoginInOut() {
   const [visible, setVisible] = useState(false);
 
   return (
-    <div>
+    <>
       <LoginModal open={visible} onClose={() => setVisible(false)}></LoginModal>
       {status === "unauthenticated" ? (
         <div
-          className=" w-fit font-extrabold cursor-pointer"
+          className=" w-fit font-extrabold cursor-pointer ml-2 mt-1"
           onClick={() => setVisible(true)}
           style={{ color: "var(--text-color)" }}
         >
-          <span className="mr-2">登录</span>
+          登录
         </div>
       ) : (
         <Dropdown
@@ -51,10 +51,10 @@ export default function LoginInOut() {
             shape={"circle"}
             src={session?.user?.image}
             alt="avatar"
-            className=" cursor-pointer "
+            className="cursor-pointer"
           ></Avatar>
         </Dropdown>
       )}
-    </div>
+    </>
   );
 }

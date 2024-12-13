@@ -1,6 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-const colors = require("tailwindcss/colors");
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,6 +6,13 @@ export default {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   darkMode: "class",
+  shortcuts: {
+    "flex-center": "flex justify-center items-center",
+    "flex-between": "flex justify-between items-center",
+    "flex-left": "flex justify-left items-center",
+    "flex-right": "flex justify-right items-center",
+  },
+  debugger: true,
   theme: {
     extend: {
       colors: {
@@ -23,5 +28,4 @@ export default {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
 };

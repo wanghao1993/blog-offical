@@ -7,7 +7,6 @@ import Works from "@/components/Works";
 import RecentPosts from "@/components/RecentPost";
 export const dynamic = "force-dynamic";
 import dynamicImport from "next/dynamic";
-
 const LoadScript = dynamicImport(() => import("@/components/Script"), {
   ssr: false,
 });

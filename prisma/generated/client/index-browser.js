@@ -6,7 +6,8 @@ const {
   objectEnumValues,
   makeStrictEnum,
   Public,
-  getRuntime
+  getRuntime,
+  skip
 } = require('./runtime/index-browser.js')
 
 
@@ -16,12 +17,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 5.19.0
- * Query Engine version: 5fe21811a6ba0b952a3bc71400666511fe3b902f
+ * Prisma Client JS version: 6.0.1
+ * Query Engine version: 5dbef10bdbfb579e07d35cc85fb1518d357cb99e
  */
 Prisma.prismaVersion = {
-  client: "5.19.0",
-  engine: "5fe21811a6ba0b952a3bc71400666511fe3b902f"
+  client: "6.0.1",
+  engine: "5dbef10bdbfb579e07d35cc85fb1518d357cb99e"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -47,11 +48,6 @@ In case this error is unexpected for you, please report it in https://pris.ly/pr
 Prisma.PrismaClientValidationError = () => {
   const runtimeName = getRuntime().prettyName;
   throw new Error(`PrismaClientValidationError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.NotFoundError = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`NotFoundError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
 In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
 )}
 Prisma.Decimal = Decimal
@@ -107,6 +103,8 @@ Prisma.NullTypes = {
   JsonNull: objectEnumValues.classes.JsonNull,
   AnyNull: objectEnumValues.classes.AnyNull
 }
+
+
 
 /**
  * Enums

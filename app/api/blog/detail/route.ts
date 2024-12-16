@@ -13,12 +13,8 @@ const postDetailSchema = z.object({
   // 其他字段的验证规则，如果有的话
 });
 
-export async function GET(request: NextRequest) {
+export async function GET(request: NextRequest, res: NextResponse) {
   const key = new URL(request.url).searchParams.get("key");
-  const session = await getToken({
-    req: request,
-    secret: process.env.SECRET_KEY,
-  });
   if (!key) {
     return responseHandler(
       null,
@@ -28,10 +24,11 @@ export async function GET(request: NextRequest) {
     );
   }
   try {
-    const res = await prisma.post.findUnique({
+    const post = await prisma.post.findUnique({
       where: { blog_key: key },
     });
-    if (!res) {
+
+    if (!post) {
       return responseHandler(
         null,
         BusinessCode.normal,
@@ -39,14 +36,14 @@ export async function GET(request: NextRequest) {
         "key 值错误"
       );
     }
-    return responseHandler(res);
+    return responseHandler(post);
   } catch (error: any) {
     console.error("GET 请求错误：", error);
     return responseHandler(
       null,
       BusinessCode.normal,
       BusinessCode.abnormal,
-      "未知异常"
+      error.message || "未知异常"
     );
   }
 }

@@ -1,13 +1,19 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+datasource blog {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
 model Post {
-  blog_id     Int    @id @default(autoincrement())
-  blog_key    String @unique
+  blog_id     Int      @id @default(autoincrement())
+  blog_key    String   @unique
   blog_title  String
-  likes_count Int[]
+  likes_count String[]
   views_count Int
 }
 
@@ -26,15 +32,14 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @blog.Text
-  access_token      String? @blog.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @blog.Text
+  id_token          String?
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -53,19 +58,10 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?   @default("https://blog-1302483222.cos.ap-shanghai.myqcloud.com/images.jpg")
+  like_posts    String[]
   accounts      Account[]
   sessions      Session[]
 }
-
-// model User {
-//   id         Int       @id @default(autoincrement())
-//   email      String    @unique
-//   created_at DateTime? @default(now())
-//   updated_at DateTime? @default(now())
-//   password   String
-//   name       String
-//   image      String    @default("https://blog-1302483222.cos.ap-shanghai.myqcloud.com/images.jpg")
-// }
 
 model VerificationToken {
   identifier String
@@ -73,15 +69,4 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
-}
-
-generator client {
-  provider = "prisma-client-js"
-  output   = "./generated/client"
-}
-
-datasource blog {
-  provider          = "postgresql"
-  url               = env("DATABASE_URL")
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }

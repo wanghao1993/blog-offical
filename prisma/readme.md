@@ -1,9 +1,31 @@
-## npx prisma migrate dev
-目的：此命令根据您的 Prisma 架构更改生成并应用新迁移。它会创建保留更改历史记录的迁移文件。
-用例：当您想要维护数据库更改记录时使用此功能，这对于生产环境或团队工作至关重要。它允许对数据库架构进行版本控制。
-优点：此命令还包括以受控方式应用迁移的检查，确保数据完整性。
+ Examples
 
-## npx prisma db push
-目的：此命令用于将您当前的 Prisma 架构直接推送到数据库。它会应用您对架构所做的任何更改，而无需创建迁移文件。
-用例：在开发阶段，当您想要快速将数据库模式与 Prisma 模式同步而不必担心迁移历史时，它特别有用。
-注意：如果您的架构更改影响现有表或列，它可能会覆盖数据，因此它最适合早期开发或原型设计。
+      Set up a new Prisma project
+      $ prisma init
+
+      Generate artifacts (e.g. Prisma Client)
+      $ prisma generate
+
+      Browse your data
+      $ prisma studio
+
+      Create migrations from your Prisma schema, apply them to the database, generate artifacts (e.g. Prisma Client)
+      $ prisma migrate dev
+
+      Pull the schema from an existing database, updating the Prisma schema
+      $ prisma db pull
+
+      Push the Prisma schema state to the database
+      $ prisma db push
+
+      Validate your Prisma schema
+      $ prisma validate
+
+      Format your Prisma schema
+      $ prisma format
+
+      Display Prisma version info
+      $ prisma version
+
+      Display Prisma debug info
+      $ prisma debug

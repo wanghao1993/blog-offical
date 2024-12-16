@@ -3,7 +3,7 @@ CREATE TABLE "Post" (
     "blog_id" SERIAL NOT NULL,
     "blog_key" TEXT NOT NULL,
     "blog_title" TEXT NOT NULL,
-    "likes_count" INTEGER[],
+    "likes_count" TEXT[],
     "views_count" INTEGER NOT NULL,
 
     CONSTRAINT "Post_pkey" PRIMARY KEY ("blog_id")
@@ -56,6 +56,7 @@ CREATE TABLE "User" (
     "email" TEXT,
     "emailVerified" TIMESTAMP(3),
     "image" TEXT DEFAULT 'https://blog-1302483222.cos.ap-shanghai.myqcloud.com/images.jpg',
+    "like_count" TEXT[],
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );

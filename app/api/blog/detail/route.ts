@@ -15,6 +15,10 @@ const postDetailSchema = z.object({
 
 export async function GET(request: NextRequest) {
   const key = new URL(request.url).searchParams.get("key");
+  const session = await getToken({
+    req: request,
+    secret: process.env.SECRET_KEY,
+  });
   if (!key) {
     return responseHandler(
       null,
@@ -86,6 +90,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
       const updatePost = await prisma.post.update({
         where: { blog_key: body.blog_key },
         data: { likes_count },
+      });
+
+      const userLikePosts = user.like_posts || [];
+      if (userLikePosts.includes(body.blog_key)) {
+        userLikePosts.splice(userLikePosts.indexOf(body.blog_key), 1);
+      } else {
+        userLikePosts.push(body.blog_key);
+      }
+      await prisma.user.update({
+        where: { id: user.id as string },
+        data: { like_posts: userLikePosts },
       });
       return responseHandler(updatePost);
     } catch (error: any) {

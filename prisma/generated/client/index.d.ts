@@ -1324,13 +1324,11 @@ export namespace Prisma {
 
   export type PostAvgAggregateOutputType = {
     blog_id: number | null
-    likes_count: number | null
     views_count: number | null
   }
 
   export type PostSumAggregateOutputType = {
     blog_id: number | null
-    likes_count: number[]
     views_count: number | null
   }
 
@@ -1360,13 +1358,11 @@ export namespace Prisma {
 
   export type PostAvgAggregateInputType = {
     blog_id?: true
-    likes_count?: true
     views_count?: true
   }
 
   export type PostSumAggregateInputType = {
     blog_id?: true
-    likes_count?: true
     views_count?: true
   }
 
@@ -1483,7 +1479,7 @@ export namespace Prisma {
     blog_id: number
     blog_key: string
     blog_title: string
-    likes_count: number[]
+    likes_count: string[]
     views_count: number
     _count: PostCountAggregateOutputType | null
     _avg: PostAvgAggregateOutputType | null
@@ -1538,7 +1534,7 @@ export namespace Prisma {
       blog_id: number
       blog_key: string
       blog_title: string
-      likes_count: number[]
+      likes_count: string[]
       views_count: number
     }, ExtArgs["result"]["post"]>
     composites: {}
@@ -1936,7 +1932,7 @@ export namespace Prisma {
     readonly blog_id: FieldRef<"Post", 'Int'>
     readonly blog_key: FieldRef<"Post", 'String'>
     readonly blog_title: FieldRef<"Post", 'String'>
-    readonly likes_count: FieldRef<"Post", 'Int[]'>
+    readonly likes_count: FieldRef<"Post", 'String[]'>
     readonly views_count: FieldRef<"Post", 'Int'>
   }
     
@@ -5158,6 +5154,7 @@ export namespace Prisma {
     email: number
     emailVerified: number
     image: number
+    like_posts: number
     _all: number
   }
 
@@ -5184,6 +5181,7 @@ export namespace Prisma {
     email?: true
     emailVerified?: true
     image?: true
+    like_posts?: true
     _all?: true
   }
 
@@ -5265,6 +5263,7 @@ export namespace Prisma {
     email: string | null
     emailVerified: Date | null
     image: string | null
+    like_posts: string[]
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -5290,6 +5289,7 @@ export namespace Prisma {
     email?: boolean
     emailVerified?: boolean
     image?: boolean
+    like_posts?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -5301,6 +5301,7 @@ export namespace Prisma {
     email?: boolean
     emailVerified?: boolean
     image?: boolean
+    like_posts?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -5309,6 +5310,7 @@ export namespace Prisma {
     email?: boolean
     emailVerified?: boolean
     image?: boolean
+    like_posts?: boolean
   }
 
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5330,6 +5332,7 @@ export namespace Prisma {
       email: string | null
       emailVerified: Date | null
       image: string | null
+      like_posts: string[]
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -5730,6 +5733,7 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly emailVerified: FieldRef<"User", 'DateTime'>
     readonly image: FieldRef<"User", 'String'>
+    readonly like_posts: FieldRef<"User", 'String[]'>
   }
     
 
@@ -7022,7 +7026,8 @@ export namespace Prisma {
     name: 'name',
     email: 'email',
     emailVerified: 'emailVerified',
-    image: 'image'
+    image: 'image',
+    like_posts: 'like_posts'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -7132,7 +7137,7 @@ export namespace Prisma {
     blog_id?: IntFilter<"Post"> | number
     blog_key?: StringFilter<"Post"> | string
     blog_title?: StringFilter<"Post"> | string
-    likes_count?: IntNullableListFilter<"Post">
+    likes_count?: StringNullableListFilter<"Post">
     views_count?: IntFilter<"Post"> | number
   }
 
@@ -7151,7 +7156,7 @@ export namespace Prisma {
     OR?: PostWhereInput[]
     NOT?: PostWhereInput | PostWhereInput[]
     blog_title?: StringFilter<"Post"> | string
-    likes_count?: IntNullableListFilter<"Post">
+    likes_count?: StringNullableListFilter<"Post">
     views_count?: IntFilter<"Post"> | number
   }, "blog_id" | "blog_key">
 
@@ -7175,7 +7180,7 @@ export namespace Prisma {
     blog_id?: IntWithAggregatesFilter<"Post"> | number
     blog_key?: StringWithAggregatesFilter<"Post"> | string
     blog_title?: StringWithAggregatesFilter<"Post"> | string
-    likes_count?: IntNullableListFilter<"Post">
+    likes_count?: StringNullableListFilter<"Post">
     views_count?: IntWithAggregatesFilter<"Post"> | number
   }
 
@@ -7390,6 +7395,7 @@ export namespace Prisma {
     email?: StringNullableFilter<"User"> | string | null
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
+    like_posts?: StringNullableListFilter<"User">
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
   }
@@ -7400,6 +7406,7 @@ export namespace Prisma {
     email?: SortOrderInput | SortOrder
     emailVerified?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
+    like_posts?: SortOrder
     accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
   }
@@ -7413,6 +7420,7 @@ export namespace Prisma {
     name?: StringNullableFilter<"User"> | string | null
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
+    like_posts?: StringNullableListFilter<"User">
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
   }, "id" | "email">
@@ -7423,6 +7431,7 @@ export namespace Prisma {
     email?: SortOrderInput | SortOrder
     emailVerified?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
+    like_posts?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -7437,6 +7446,7 @@ export namespace Prisma {
     email?: StringNullableWithAggregatesFilter<"User"> | string | null
     emailVerified?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
+    like_posts?: StringNullableListFilter<"User">
   }
 
   export type VerificationTokenWhereInput = {
@@ -7485,7 +7495,7 @@ export namespace Prisma {
   export type PostCreateInput = {
     blog_key: string
     blog_title: string
-    likes_count?: PostCreatelikes_countInput | number[]
+    likes_count?: PostCreatelikes_countInput | string[]
     views_count: number
   }
 
@@ -7493,14 +7503,14 @@ export namespace Prisma {
     blog_id?: number
     blog_key: string
     blog_title: string
-    likes_count?: PostCreatelikes_countInput | number[]
+    likes_count?: PostCreatelikes_countInput | string[]
     views_count: number
   }
 
   export type PostUpdateInput = {
     blog_key?: StringFieldUpdateOperationsInput | string
     blog_title?: StringFieldUpdateOperationsInput | string
-    likes_count?: PostUpdatelikes_countInput | number[]
+    likes_count?: PostUpdatelikes_countInput | string[]
     views_count?: IntFieldUpdateOperationsInput | number
   }
 
@@ -7508,7 +7518,7 @@ export namespace Prisma {
     blog_id?: IntFieldUpdateOperationsInput | number
     blog_key?: StringFieldUpdateOperationsInput | string
     blog_title?: StringFieldUpdateOperationsInput | string
-    likes_count?: PostUpdatelikes_countInput | number[]
+    likes_count?: PostUpdatelikes_countInput | string[]
     views_count?: IntFieldUpdateOperationsInput | number
   }
 
@@ -7516,14 +7526,14 @@ export namespace Prisma {
     blog_id?: number
     blog_key: string
     blog_title: string
-    likes_count?: PostCreatelikes_countInput | number[]
+    likes_count?: PostCreatelikes_countInput | string[]
     views_count: number
   }
 
   export type PostUpdateManyMutationInput = {
     blog_key?: StringFieldUpdateOperationsInput | string
     blog_title?: StringFieldUpdateOperationsInput | string
-    likes_count?: PostUpdatelikes_countInput | number[]
+    likes_count?: PostUpdatelikes_countInput | string[]
     views_count?: IntFieldUpdateOperationsInput | number
   }
 
@@ -7531,7 +7541,7 @@ export namespace Prisma {
     blog_id?: IntFieldUpdateOperationsInput | number
     blog_key?: StringFieldUpdateOperationsInput | string
     blog_title?: StringFieldUpdateOperationsInput | string
-    likes_count?: PostUpdatelikes_countInput | number[]
+    likes_count?: PostUpdatelikes_countInput | string[]
     views_count?: IntFieldUpdateOperationsInput | number
   }
 
@@ -7753,6 +7763,7 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    like_posts?: UserCreatelike_postsInput | string[]
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
   }
@@ -7763,6 +7774,7 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    like_posts?: UserCreatelike_postsInput | string[]
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
@@ -7773,6 +7785,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    like_posts?: UserUpdatelike_postsInput | string[]
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
   }
@@ -7783,6 +7796,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    like_posts?: UserUpdatelike_postsInput | string[]
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -7793,6 +7807,7 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    like_posts?: UserCreatelike_postsInput | string[]
   }
 
   export type UserUpdateManyMutationInput = {
@@ -7801,6 +7816,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    like_posts?: UserUpdatelike_postsInput | string[]
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -7809,6 +7825,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    like_posts?: UserUpdatelike_postsInput | string[]
   }
 
   export type VerificationTokenCreateInput = {
@@ -7879,11 +7896,11 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type IntNullableListFilter<$PrismaModel = never> = {
-    equals?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    has?: number | IntFieldRefInput<$PrismaModel> | null
-    hasEvery?: number[] | ListIntFieldRefInput<$PrismaModel>
-    hasSome?: number[] | ListIntFieldRefInput<$PrismaModel>
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
     isEmpty?: boolean
   }
 
@@ -7897,7 +7914,6 @@ export namespace Prisma {
 
   export type PostAvgOrderByAggregateInput = {
     blog_id?: SortOrder
-    likes_count?: SortOrder
     views_count?: SortOrder
   }
 
@@ -7917,7 +7933,6 @@ export namespace Prisma {
 
   export type PostSumOrderByAggregateInput = {
     blog_id?: SortOrder
-    likes_count?: SortOrder
     views_count?: SortOrder
   }
 
@@ -8217,6 +8232,7 @@ export namespace Prisma {
     email?: SortOrder
     emailVerified?: SortOrder
     image?: SortOrder
+    like_posts?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -8259,7 +8275,7 @@ export namespace Prisma {
   }
 
   export type PostCreatelikes_countInput = {
-    set: number[]
+    set: string[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8267,8 +8283,8 @@ export namespace Prisma {
   }
 
   export type PostUpdatelikes_countInput = {
-    set?: number[]
-    push?: number | number[]
+    set?: string[]
+    push?: string | string[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -8327,6 +8343,10 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSessionsInput, UserUpdateWithoutSessionsInput>, UserUncheckedUpdateWithoutSessionsInput>
   }
 
+  export type UserCreatelike_postsInput = {
+    set: string[]
+  }
+
   export type AccountCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -8353,6 +8373,11 @@ export namespace Prisma {
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
     createMany?: SessionCreateManyUserInputEnvelope
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  }
+
+  export type UserUpdatelike_postsInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type AccountUpdateManyWithoutUserNestedInput = {
@@ -8605,6 +8630,7 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    like_posts?: UserCreatelike_postsInput | string[]
     sessions?: SessionCreateNestedManyWithoutUserInput
   }
 
@@ -8614,6 +8640,7 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    like_posts?: UserCreatelike_postsInput | string[]
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -8639,6 +8666,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    like_posts?: UserUpdatelike_postsInput | string[]
     sessions?: SessionUpdateManyWithoutUserNestedInput
   }
 
@@ -8648,6 +8676,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    like_posts?: UserUpdatelike_postsInput | string[]
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -8657,6 +8686,7 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    like_posts?: UserCreatelike_postsInput | string[]
     accounts?: AccountCreateNestedManyWithoutUserInput
   }
 
@@ -8666,6 +8696,7 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    like_posts?: UserCreatelike_postsInput | string[]
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -8691,6 +8722,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    like_posts?: UserUpdatelike_postsInput | string[]
     accounts?: AccountUpdateManyWithoutUserNestedInput
   }
 
@@ -8700,6 +8732,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    like_posts?: UserUpdatelike_postsInput | string[]
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
   }
 

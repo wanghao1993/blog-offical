@@ -77,6 +77,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
           "用户查询错误"
         );
       }
+      console.log("USER", user);
       const likes_count = post.likes_count || [];
       const idx = likes_count.findIndex((item) => item === user.id);
       if (idx > -1) {
@@ -89,16 +90,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
         data: { likes_count },
       });
 
-      const userLikePosts = user.like_posts || [];
-      if (userLikePosts.includes(body.blog_key)) {
-        userLikePosts.splice(userLikePosts.indexOf(body.blog_key), 1);
-      } else {
-        userLikePosts.push(body.blog_key);
-      }
-      await prisma.user.update({
-        where: { id: user.id as string },
-        data: { like_posts: userLikePosts },
-      });
       return responseHandler(updatePost);
     } catch (error: any) {
       console.error("POST 请求错误：", error);

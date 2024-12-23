@@ -72,7 +72,7 @@ const TOCInline = ({
           <div className="ml-6">{tocList}</div>
         </details>
       ) : (
-        <div>
+        <div className="fixed right-4">
           <h1>目录</h1>
           {tocList}
         </div>

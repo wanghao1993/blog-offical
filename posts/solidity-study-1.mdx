@@ -4,8 +4,8 @@ date: 2024-01-13
 key: solidity-study-1
 categories: solidity
 tags: web3, solidity
-keywords: solidity, web3, 智能合约
-description: solidity学习，语法学习，智能合约开发
+keywords: solidity, web3, 智能合约，以太坊，声明，数据类型，函数，事件，修饰器，错误处理，抽象合约，接口
+description: solidity学习，包括常见的数据类型，函数，事件，修饰器，错误处理，抽象合约，接口，继承等内容。
 ---
 
 import TOCInline from "@/components/TOCInline";
@@ -28,6 +28,16 @@ Solidity支持多种数据类型，包括布尔值、整数、地址、字符串
 
 布尔值有两个取值：`true`和`false`。
 
+和其它语言一样，solidity支持逻辑运算符`&&`、`||`、`!`。
+
+```solidity
+bool public _bool1 = !_bool; // 取非
+bool public _bool2 = _bool && _bool1; // 与
+bool public _bool3 = _bool || _bool1; // 或
+bool public _bool4 = _bool == _bool1; // 相等
+bool public _bool5 = _bool != _bool1; // 不相等
+```
+
 ```solidity
 bool flag = true;
 ```
@@ -45,8 +55,12 @@ uint b = 20;
 
 地址类型是一个20字节的值，它存储了一个以太坊地址。
 
+地址类型有2中，一种是普通地址，一种是payable address，这种地址可以用来接收资产，比普通地址多了 transfer 和 send 两个成员方法，用于接收转账。定义的时候用修饰符`payable`
+
 ```solidity
 address addr = 0x1234567890123456789012345678901234567890;
+
+address payable public _address1 = payable(_address); // payable address，可以转账、查余额
 ```
 
 #### 2.1.4 字符串
@@ -54,7 +68,7 @@ address addr = 0x1234567890123456789012345678901234567890;
 字符串类型是一个动态的字节数组，它存储了一个UTF-8编码的字符串。
 
 ```solidity
-string str = "Hello, World!";
+string str = "Hello, World!"
 ```
 
 #### 2.1.5 数组
@@ -89,15 +103,125 @@ enum Color { Red, Green, Blue }
 Color color = Color.Red;
 ```
 
+#### 2.1.8 Mapping
+
+mapping是一种键值对的数据结构，它可以存储多个键值对。mapping的键可以是任意类型，值可以是任意类型，但键的类型和值的类型必须是一致的。且mapping的键是不可迭代的。存储在storage中。
+
+```solidity
+
+mapping(address => uint) public balances;
+
+// set
+balances[0x1234567890123456789012345678901234567890] = 100;
+
+// get
+unit256 count = balances[0x1234567890123456789012345678901234567890];
+
+// delete
+delete balances[0x1234567890123456789012345678901234567890];
+```
+
+
 ### 2.2 函数
 
 Solidity中的函数是合约中的一种特殊类型，它可以被外部调用，也可以被其他函数调用。
+
+```solidity
+function <function name>(<parameter types>) {internal|external|public|private} [pure|view|payable] [returns (<return types>)]
+
+```
+
+看着有一些复杂，让我们从前往后逐个解释(方括号中的是可写可不 写的关键字)：
+
+function：声明函数时的固定用法。要编写函数，就需要以 function 关键字开头。
+
+`function name`：函数名。
+
+`<parameter types>`：圆括号内写入函数的参数，即输入到函数的变量类型和名称。
+
+`internal|external|public|private`：函数可见性说明符，共有4种。
+
+ - public：内部和外部均可见。
+ - private：只能从本合约内部访问，继承的合约也不能使用。
+ - external：只能从合约外部访问（但内部可以通过 this.f() 来调用，f是函数名）。
+ - internal: 只能从合约内部访问，继承的合约可以用。
+注意 1：合约中定义的函数需要明确指定可见性，它们没有默认值。
+
+注意 2：public|private|internal 也可用于修饰状态变量。public变量会自动生成同名的getter函数，用于查询数值。未标明可见性类型的状态变量，默认为internal。
+
+[pure|view|payable]：决定函数权限/功能的关键字。payable（可支付的）很好理解，带着它的函数，运行的时候可以给合约转入 ETH，pure函数不会读取或写入区块链状态，view函数不会写入区块链状态。
+
+[returns ()]：函数返回的变量类型和名称。
+
 
 ```solidity
 
 contract MyContract {
     function add(uint a, uint b) public pure returns (uint) {
         return a + b;
+    }
+}
+
+```
+
+```solidity
+// 合约A
+contract MyToken {
+    uint256 public num = 100;
+
+    // 内部函数
+    function min() internal  {
+        num -= 1;
+    }
+    // 可被外部调用
+    function minCell()  external  {
+        // 合约内部调用直接通过f()调用
+        min();
+    }
+
+}
+
+// 合约B
+contract B is MyToken {
+    // 继承MyToken合约
+    constructor() MyToken() {
+
+    }
+    // 可被外部调用
+    function Bmin() external {
+        this.minCell();
+    }
+}
+
+```
+
+![internal & external](https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/screenshot_2024-12-23_11-40-41.png)
+
+通过remix编译部署后，我们可看到，只有external的函数才可以看到。
+
+函数的返回值可以使用多个返回值，也可以使用命名返回值。
+
+```solidity
+
+contract MyContract {
+    // return 返回
+    function add(uint a, uint b) public pure returns (uint) {
+        return a + b;
+    }
+
+    function sub(uint a, uint b) public pure returns (uint) {
+        return a - b;
+    }
+    // 命名返回，在函数声明时，可以指定返回值的名称，其中定义的变量名可以在函数体中直接使用会直接返回无需return
+    function addSub(uint a, uint b) public pure returns (uint sum, uint diff) {
+        sum = a + b;
+        diff = a - b;
+    }
+
+    // 支持解构返回
+    function addSub2(uint a, uint b) public pure returns (uint sum, uint diff) {
+        (_, diff) = addSub(a, b);
+        // 此处的diff是addSub的返回值
     }
 }
 
@@ -123,14 +247,18 @@ contract MyContract {
 
 修饰器是一种特殊的函数，它可以在函数执行前或执行后执行一些操作。
 
+#### modifier
+
+modifier是一种特殊的函数，它可以在函数执行前或执行后执行一些操作。
 ```solidity
 
 contract MyContract {
+    // 定义一个onlyOwner修饰器函数
     modifier onlyOwner() {
         require(msg.sender == owner, "Only owner can call this function");
         _;
     }
-
+    // 当执行doSomething函数时，会先执行onlyOwner修饰器函数
     function doSomething() public onlyOwner {
         // Only owner can call this function
     }
@@ -138,28 +266,251 @@ contract MyContract {
 
 ```
 
-## 3. 智能合约开发
+### 2.5 事件
 
-智能合约是一种在区块链上运行的程序，它可以自动执行合约中的代码，实现合约中的业务逻辑。
+事件是合约中的一种特殊类型，它用来记录合约中的重要信息。
+
+应用程序（ethers.js）可以通过RPC接口订阅和监听这些事件，并在前端做响应。
 
 ```solidity
 
 contract MyContract {
-    uint public value;
+    // 定义一个Log事件
+    event Log(string message);
 
-    function setValue(uint _value) public {
-        value = _value;
-    }
-
-    function getValue() public view returns (uint) {
-        return value;
+    // 当执行doSomething函数时，会触发Log事件
+    function doSomething() public {
+        emit Log("Something happened!");
     }
 }
 
 ```
 
-## 4. 总结
+### 2.6 继承
 
-Solidity是一种面向合约的、为实现智能合约而创建的高级编程语言，它支持多种数据类型、函数、事件、修饰器等特性，可以用它来创建智能合约。
+Solidity支持合约之间的继承，一个合约可以继承另一个合约的所有属性和方法。
 
+例如：
+```solidity
+contract A {
+    uint public num = 100;
+}
+
+contract B is A {
+    function getNum() public view returns (uint) {
+        return num;
+    }
+}
+```
+也支持多个合约继承，多重继承，例如C继承B和A。
+
+```solidity
+
+contract A {
+    uint public num = 100;
+}
+
+contract B {
+    uint public num = 200;
+}
+
+contract C is A, B {
+    function getNum() public view returns (uint, uint) {
+        return (num, num);
+    }
+}
+
+```
+
+如果需要对父合约中的方法重写，可以使用`override`关键字，能被重用的合约方法需要使用`virtual`关键字。
+
+```solidity
+
+调用父合约的方法，有2中方式，一种是通过父合约的合约名调用，另一种是通过super关键字调用。
+
+ - 通过父合约的合约名调用
+    parentContract.functionName();
+ - 通过super关键字调用，会调用最近的父类的functionName方法
+    super.functionName();
+
+```solidity
+
+contract A {
+    function doSomething() public virtual {
+        // A
+    }
+}
+
+contract B is A {
+    function doSomething() public override {
+        // B
+        // B中的doSomething方法会覆盖A中的doSomething方法
+
+        // B调用A中的doSomething方法
+        super.doSomething();
+        A.doSomething();
+    }
+}
+
+```
+
+### 2.7 错误处理
+
+错误处理有三种方式，`require`、`revert`、`assert`。
+
+#### 2.7.1 assert
+
+断言是一种用来检查合约状态的机制，如果断言失败，合约会立即停止执行。
+
+```solidity
+
+contract MyContract {
+    function doSomething() public {
+        assert(1 == 2);
+    }
+}
+
+```
+
+#### 2.7.2 require
+
+
+```solidity
+
+contract MyContract {
+    function doSomething() public {
+        require(1 == 2, "1 is not equal to 2");
+    }
+}
+
+```
+
+#### 2.7.3 revert
+
+revert是一种用来回滚交易的机制，如果revert被调用，交易会被回滚。
+
+```solidity
+
+contract MyContract {
+    function doSomething() public {
+        if (1 != 2) {
+            revert("Something went wrong");
+        }
+    }
+}
+
+```
+
+#### 2.7.4 Error
+
+error是solidity 0.8.4版本新加的内容，方便且高效（省gas）地向用户解释操作失败的原因，同时还可以在抛出异常的同时携带参数，帮助开发者更好地调试。人们可以在contract之外定义异常。下面，我们定义一个TransferNotOwner异常，当用户不是代币owner的时候尝试转账，会抛出错误：
+
+
+```solidity
+error TransferNotOwner(address sender)
+
+// error的使用必须搭配revert
+function transferOwner1(uint256 tokenId, address newOwner) public {
+    if(_owners[tokenId] != msg.sender){
+        // revert TransferNotOwner();
+        revert TransferNotOwner(msg.sender);
+    }
+    _owners[tokenId] = newOwner;
+}
+```
+
+### 2.7.4 错误处理的区别
+
+- assert：用于检查合约的内部错误，如果断言失败，合约会立即停止执行。
+- require：用于检查合约的输入参数，如果条件不满足，合约会回滚。
+- revert：用于检查合约的状态，如果条件不满足，合约会回滚。
+
+### 2.8 抽象合约和接口
+
+如果一个智能合约里至少有一个未实现的函数，即某个函数缺少主体{}中的内容，则必须将该合约标为abstract，不然编译会报错；另外，未实现的函数需要加virtual，以便子合约重写。
+
+拿我们之前的插入排序合约为例，如果我们还没想好具体怎么实现插入排序函数，那么可以把合约标为abstract，之后让别人补写上。
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/interfaces/IERC165.sol";
+
+abstract contract InsertionSort{
+    function insertionSort(uint[] memory a) public pure virtual returns(uint[] memory);
+}
+
+```
+
+接口是一种不能包含任何代码的合约，它只能包含函数声明，不能包含函数实现。例如：
+
+```solidity
+
+interface IERC721 is IERC165 {
+    event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
+    event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
+    event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
+    
+    function balanceOf(address owner) external view returns (uint256 balance);
+
+    function ownerOf(uint256 tokenId) external view returns (address owner);
+
+    function safeTransferFrom(address from, address to, uint256 tokenId) external;
+
+    function transferFrom(address from, address to, uint256 tokenId) external;
+
+    function approve(address to, uint256 tokenId) external;
+
+    function getApproved(uint256 tokenId) external view returns (address operator);
+
+    function setApprovalForAll(address operator, bool _approved) external;
+
+    function isApprovedForAll(address owner, address operator) external view returns (bool);
+
+    function safeTransferFrom( address from, address to, uint256 tokenId, bytes calldata data) external;
+}
+```
+
+#### IERC721事件
+
+`IERC721`包含3个事件，其中Transfer和Approval事件在ERC20中也有。
+
+- Transfer事件：在转账时被释放，记录代币的发出地址from，接收地址to和tokenId。
+- Approval事件：在授权时被释放，记录授权地址owner，被授权地址approved和tokenId。
+- ApprovalForAll事件：在批量授权时被释放，记录批量授权的发出地址owner，被授权地址operator和授权与否的approved。
+
+#### IERC721函数
+
+- balanceOf：返回某地址的NFT持有量balance。
+- ownerOf：返回某tokenId的主人owner。
+- transferFrom：普通转账，参数为转出地址from，接收地址to和tokenId。
+- safeTransferFrom：安全转账（如果接收方是合约地址，会要求实现ERC721Receiver接口）。参数为转出地址from，接收地址to和tokenId。
+- approve：授权另一个地址使用你的NFT。参数为被授权地址approve和tokenId。
+- getApproved：查询tokenId被批准给了哪个地址。
+- setApprovalForAll：将自己持有的该系列NFT批量授权给某个地址operator。
+- isApprovedForAll：查询某地址的NFT是否批量授权给了另一个operator地址。
+- safeTransferFrom：安全转账的重载函数，参数里面包含了data。
+
+什么时候使用接口呢？
+
+- 当你想要定义一个标准的API，让其他合约实现这个API时，可以使用接口。
+
+```solidity
+contract interactBAYC {
+    // 利用BAYC地址创建接口合约变量（ETH主网）
+    IERC721 BAYC = IERC721(0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D);
+
+    // 通过接口调用BAYC的balanceOf()查询持仓量
+    function balanceOfBAYC(address owner) external view returns (uint256 balance){
+        return BAYC.balanceOf(owner);
+    }
+
+    // 通过接口调用BAYC的safeTransferFrom()安全转账
+    function safeTransferFromBAYC(address from, address to, uint256 tokenId) external{
+        BAYC.safeTransferFrom(from, to, tokenId);
+    }
+}
+
+```
 

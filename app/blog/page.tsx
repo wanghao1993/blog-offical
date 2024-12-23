@@ -41,7 +41,6 @@ export default function BlogHomePage() {
   const memoPost = useMemo(() => posts, [posts]);
 
   useEffect(() => {
-    console.log(renderList);
     setPost(renderList.slice((curPage - 1) * pageSize, curPage * pageSize));
   }, [curPage, renderList]);
 

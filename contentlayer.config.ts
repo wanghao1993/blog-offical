@@ -8,6 +8,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHightLight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
 import { extractTocHeadings } from "./lib/heading";
+
 const computedFields: ComputedFields = {
   readingTime: { type: "json", resolve: (doc) => readingTime(doc.body.raw) },
   slug: {

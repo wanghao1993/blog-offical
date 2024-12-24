@@ -6,8 +6,7 @@ import model from "./genAi";
 async function getSummary(content: string) {
   "use server";
   const prompt =
-    "请帮我总结以下内容，限制在300个字内，提供中英文版本，注意样式排版，中文和英文之间需要换行，不要使用markdown语法：" +
-    content;
+    "请帮我总结以下内容，限制在300个字内，不要使用markdown语法：" + content;
 
   try {
     const result: GenerateContentResult = await model.generateContent(prompt);
@@ -15,14 +14,15 @@ async function getSummary(content: string) {
     const text = result.response.text();
     return text;
   } catch (e) {
-    console.log(e);
-
     return "AI总结失败";
   }
 }
 
 const AISummay = async ({ content }: { content: string }) => {
-  const summary = await getSummary(content);
+  const summary =
+    process.env.NODE_ENV === "production"
+      ? await getSummary(content)
+      : "dev环境没有总结";
 
   return (
     <div className="px-3 bg-[#28282c] text-white">

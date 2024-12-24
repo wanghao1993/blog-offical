@@ -11,7 +11,7 @@ const Prisma = new PrismaClient();
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(Prisma),
   secret: process.env.SECRET_KEY,
-  debug: true,
+  debug: process.env.NODE_ENV === "development",
   providers: [
     GitHubProvider({
       clientId: process.env.GIT_CLIENT_ID as string,

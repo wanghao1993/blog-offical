@@ -1,5 +1,6 @@
 "use server";
 
+import { GenerateContentResult } from "@google/generative-ai";
 import model from "./genAi";
 
 async function getSummary(content: string) {
@@ -8,11 +9,14 @@ async function getSummary(content: string) {
     "请帮我总结以下内容，限制在300个字体内，提供中英文版本：" + content;
 
   try {
-    const result = await model.generateContent(prompt);
-    console.log(result, "result");
-    return result;
+    const result: GenerateContentResult = await model.generateContent(prompt);
+
+    const text = result.response.text();
+    return text;
   } catch (e) {
     console.log(e);
+
+    return "AI总结失败";
   }
 }
 

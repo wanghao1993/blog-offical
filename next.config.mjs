@@ -6,7 +6,6 @@ const withMDX = mdx();
 const withPWA = pwa({
   dest: "public",
   register: true,
-  skipWaiting: true,
 });
 const nextConfig = {
   reactStrictMode: false,

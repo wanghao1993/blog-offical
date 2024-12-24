@@ -1,7 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-console.log(process.env.GOOGLE_API_KEY, "process.env.GOOGLE_API_KEY");
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY as string);
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY as string);
 
 declare global {
   var model: any;

@@ -1,7 +1,13 @@
 /** @type {import('next').NextConfig} */
 import mdx from "@next/mdx";
+import pwa from "next-pwa";
 import { withContentlayer } from "next-contentlayer";
 const withMDX = mdx();
+const withPWA = pwa({
+  dest: "public",
+  register: true,
+  skipWaiting: true,
+});
 const nextConfig = {
   reactStrictMode: false,
   images: {
@@ -29,4 +35,4 @@ const nextConfig = {
   transpilePackages: ["next-mdx-remote"],
 };
 
-export default withContentlayer(withMDX(nextConfig));
+export default withContentlayer(withMDX(withPWA(nextConfig)));

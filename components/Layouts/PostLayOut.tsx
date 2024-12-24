@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 import LikeAndCollect from "../LikeAndCollect";
 import { Suspense } from "react";
 import { NextAuthProvider } from "../Providers/AuthProvider";
+import AISummay from "../AiSummary";
 export type CoreContent<T> = Omit<T, "body" | "_raw" | "_id">;
 interface Props {
   post: Post;
@@ -64,6 +65,7 @@ export default function PostLayout({ post, children, next, prev }: Props) {
           <LikeAndCollect blogKey={post.key}></LikeAndCollect>
         </NextAuthProvider>
       </Suspense>
+      <AISummay content={"xxx"} />
       <article className="mt-4">{children}</article>
     </div>
   );

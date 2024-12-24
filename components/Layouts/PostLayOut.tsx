@@ -65,7 +65,7 @@ export default function PostLayout({ post, children, next, prev }: Props) {
           <LikeAndCollect blogKey={post.key}></LikeAndCollect>
         </NextAuthProvider>
       </Suspense>
-      <AISummay content={"xxx"} />
+      <AISummay content={post.body.raw} />
       <article className="mt-4">{children}</article>
     </div>
   );

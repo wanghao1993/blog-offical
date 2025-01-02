@@ -1,18 +1,14 @@
 "use server";
-
-import { GenerateContentResult } from "@google/generative-ai";
-import model from "./genAi";
-
+import { generative } from "./genAi";
 async function getSummary(content: string) {
   "use server";
   const prompt =
     "请帮我总结以下内容，限制在300个字内，不要使用markdown语法：" + content;
 
   try {
-    const result: GenerateContentResult = await model.generateContent(prompt);
+    const result = await generative(prompt);
 
-    const text = result.response.text();
-    return text;
+    return result;
   } catch (e) {
     return "AI总结失败";
   }

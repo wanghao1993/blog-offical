@@ -1,14 +1,15 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import OpenAI from "openai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY as string);
+const openai = new OpenAI({
+  baseURL: "https://api.deepseek.com",
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
-declare global {
-  var model: any;
+export async function generative(content: string) {
+  const completion = await openai.chat.completions.create({
+    messages: [{ role: "system", content }],
+    model: "deepseek-chat",
+  });
+  return completion.choices[0].message.content;
 }
-
-globalThis.model =
-  globalThis.model || genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-const model = globalThis.model;
-
-export default model;

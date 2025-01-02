@@ -122,3 +122,14 @@ header {
   background-size: 100% 3px;
   background-position: 0 100%;
 }
+
+:root {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+body {
+    position: absolute;
+    width: 100vw;
+    overflow: hidden;
+}

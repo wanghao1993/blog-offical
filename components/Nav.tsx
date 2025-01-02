@@ -9,6 +9,10 @@ export default function Nav() {
       path: "/blog",
     },
     {
+      title: "工具",
+      path: "/tools",
+    },
+    {
       title: "关于我",
       path: "/about",
     },

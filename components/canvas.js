@@ -98,7 +98,6 @@ function onMousemove(e) {
     for (let e = 0; e < E.trails; e++) {
       lines.push(new Line({ spring: 0.45 + (e / E.trails) * 0.025 }));
     }
-    console.log(lines);
   }
   function c(e) {
     if (e.touches) {

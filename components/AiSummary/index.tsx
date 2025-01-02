@@ -15,10 +15,12 @@ async function getSummary(content: string) {
 }
 
 const AISummay = async ({ content }: { content: string }) => {
-  const summary =
-    process.env.NODE_ENV === "production"
-      ? await getSummary(content)
-      : "dev环境没有总结";
+  // const summary =
+  //   process.env.NODE_ENV === "production"
+  //     ? await getSummary(content)
+  //     : "dev环境没有总结";
+
+  const summary = await getSummary(content);
 
   return (
     <div className="px-3 bg-[#28282c] text-white">

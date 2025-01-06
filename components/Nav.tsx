@@ -9,8 +9,9 @@ export default function Nav() {
       path: "/blog",
     },
     {
-      title: "工具",
-      path: "/tools",
+      title: "AI工具",
+      path: "/ai-tools",
+      target: "_blank",
     },
     {
       title: "关于我",
@@ -30,6 +31,7 @@ export default function Nav() {
           className={`horizontal-underline w-fit font-extrabold  ${
             pathName === nav.path ? "horizontal-underline-active" : ""
           }`}
+          target={nav.target || "_self"}
           aria-label={nav.title}
         >
           {nav.title}

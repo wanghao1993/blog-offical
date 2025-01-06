@@ -61,6 +61,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <link rel="icon" href="/favicon.ico" sizes="any" />
+
+      <Script
+        async
+        crossOrigin="anonymous"
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6644990816670539"
+      ></Script>
       <Script
         id="stripe-js"
         src="https://hm.baidu.com/hm.js?922218601e8a18ab79e59afcf18803b9"

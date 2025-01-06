@@ -5,7 +5,7 @@ import "./ui/globals.scss";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { content } from "@/lib/font";
 import Footer from "@/components/Footer";
-import { GoogleTagManager } from "@next/third-parties/google";
+import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import { ProgressProvider } from "@/components/Providers/ProgressProdivder";
 import Script from "next/script";
 import type { Metadata } from "next";
@@ -61,7 +61,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <link rel="icon" href="/favicon.ico" sizes="any" />
-
       <Script
         async
         crossOrigin="anonymous"
@@ -72,7 +71,7 @@ export default function RootLayout({
         src="https://hm.baidu.com/hm.js?922218601e8a18ab79e59afcf18803b9"
       />
       {process.env.mode !== "development" && (
-        <GoogleTagManager gtmId="G-4Z3CSGWXGR" />
+        <GoogleAnalytics gaId="G-4Z3CSGWXGR" />
       )}
       <meta name="baidu-site-verification" content="codeva-n7vACpBbX1" />
       <body className={content.className}>

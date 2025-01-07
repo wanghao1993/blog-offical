@@ -70,6 +70,7 @@ export default function RootLayout({
         <GoogleAnalytics gaId="G-4Z3CSGWXGR" />
       )}
       <meta name="baidu-site-verification" content="codeva-Nwhahifnu3" />
+      <meta name="sogou_site_verification" content="Fjbw33vsbV" />
       <body className={content.className}>
         <AntdRegistry>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>

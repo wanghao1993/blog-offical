@@ -3,10 +3,9 @@ import { AiTypes } from "@/types/ai";
 import { Col, Row } from "antd";
 import { Sidebar } from "./component/siderbar";
 import { AIToolCard } from "./component/aitoolcard";
-import MainLayout from "@/Layouts/MainLayout";
 
 async function getAllAiTools() {
-  return await get<AiTypes.AiTools>("/ai");
+  return await get<AiTypes.AiTools>("ai");
 }
 
 export default async function ToolsHomePage() {

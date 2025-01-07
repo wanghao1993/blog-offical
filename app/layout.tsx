@@ -28,7 +28,7 @@ export const metadata: Metadatas = {
     default: APP_DEFAULT_TITLE,
     template: APP_TITLE_TEMPLATE,
   },
-  "baidu-site-verification": "codeva-n7vACpBbX1",
+  "baidu-site-verification": "codeva-Nwhahifnu3",
   description: APP_DESCRIPTION,
   manifest: "manifest.json",
   formatDetection: {
@@ -73,7 +73,6 @@ export default function RootLayout({
       {process.env.mode !== "development" && (
         <GoogleAnalytics gaId="G-4Z3CSGWXGR" />
       )}
-      <meta name="baidu-site-verification" content="codeva-n7vACpBbX1" />
       <body className={content.className}>
         <AntdRegistry>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>

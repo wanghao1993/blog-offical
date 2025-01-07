@@ -70,3 +70,21 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model AiToolsCategory {
+  id         Int      @id @default(autoincrement())
+  title      String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model AiTools {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  url         String
+  content     String
+  category_id Int
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}

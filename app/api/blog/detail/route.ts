@@ -77,7 +77,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
           "用户查询错误"
         );
       }
-      console.log("USER", user);
       const likes_count = post.likes_count || [];
       const idx = likes_count.findIndex((item) => item === user.id);
       if (idx > -1) {

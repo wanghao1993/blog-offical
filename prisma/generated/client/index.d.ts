@@ -43,6 +43,16 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  * 
  */
 export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTokenPayload>
+/**
+ * Model AiToolsCategory
+ * 
+ */
+export type AiToolsCategory = $Result.DefaultSelection<Prisma.$AiToolsCategoryPayload>
+/**
+ * Model AiTools
+ * 
+ */
+export type AiTools = $Result.DefaultSelection<Prisma.$AiToolsPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -226,6 +236,26 @@ export class PrismaClient<
     * ```
     */
   get verificationToken(): Prisma.VerificationTokenDelegate<ExtArgs>;
+
+  /**
+   * `prisma.aiToolsCategory`: Exposes CRUD operations for the **AiToolsCategory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AiToolsCategories
+    * const aiToolsCategories = await prisma.aiToolsCategory.findMany()
+    * ```
+    */
+  get aiToolsCategory(): Prisma.AiToolsCategoryDelegate<ExtArgs>;
+
+  /**
+   * `prisma.aiTools`: Exposes CRUD operations for the **AiTools** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AiTools
+    * const aiTools = await prisma.aiTools.findMany()
+    * ```
+    */
+  get aiTools(): Prisma.AiToolsDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -671,7 +701,9 @@ export namespace Prisma {
     Account: 'Account',
     Session: 'Session',
     User: 'User',
-    VerificationToken: 'VerificationToken'
+    VerificationToken: 'VerificationToken',
+    AiToolsCategory: 'AiToolsCategory',
+    AiTools: 'AiTools'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -687,7 +719,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "post" | "email" | "account" | "session" | "user" | "verificationToken"
+      modelProps: "post" | "email" | "account" | "session" | "user" | "verificationToken" | "aiToolsCategory" | "aiTools"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1108,6 +1140,146 @@ export namespace Prisma {
           count: {
             args: Prisma.VerificationTokenCountArgs<ExtArgs>
             result: $Utils.Optional<VerificationTokenCountAggregateOutputType> | number
+          }
+        }
+      }
+      AiToolsCategory: {
+        payload: Prisma.$AiToolsCategoryPayload<ExtArgs>
+        fields: Prisma.AiToolsCategoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AiToolsCategoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsCategoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AiToolsCategoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsCategoryPayload>
+          }
+          findFirst: {
+            args: Prisma.AiToolsCategoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsCategoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AiToolsCategoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsCategoryPayload>
+          }
+          findMany: {
+            args: Prisma.AiToolsCategoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsCategoryPayload>[]
+          }
+          create: {
+            args: Prisma.AiToolsCategoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsCategoryPayload>
+          }
+          createMany: {
+            args: Prisma.AiToolsCategoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AiToolsCategoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsCategoryPayload>[]
+          }
+          delete: {
+            args: Prisma.AiToolsCategoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsCategoryPayload>
+          }
+          update: {
+            args: Prisma.AiToolsCategoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsCategoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.AiToolsCategoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AiToolsCategoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.AiToolsCategoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsCategoryPayload>
+          }
+          aggregate: {
+            args: Prisma.AiToolsCategoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAiToolsCategory>
+          }
+          groupBy: {
+            args: Prisma.AiToolsCategoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AiToolsCategoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AiToolsCategoryCountArgs<ExtArgs>
+            result: $Utils.Optional<AiToolsCategoryCountAggregateOutputType> | number
+          }
+        }
+      }
+      AiTools: {
+        payload: Prisma.$AiToolsPayload<ExtArgs>
+        fields: Prisma.AiToolsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AiToolsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AiToolsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsPayload>
+          }
+          findFirst: {
+            args: Prisma.AiToolsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AiToolsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsPayload>
+          }
+          findMany: {
+            args: Prisma.AiToolsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsPayload>[]
+          }
+          create: {
+            args: Prisma.AiToolsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsPayload>
+          }
+          createMany: {
+            args: Prisma.AiToolsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AiToolsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsPayload>[]
+          }
+          delete: {
+            args: Prisma.AiToolsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsPayload>
+          }
+          update: {
+            args: Prisma.AiToolsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsPayload>
+          }
+          deleteMany: {
+            args: Prisma.AiToolsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AiToolsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.AiToolsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AiToolsPayload>
+          }
+          aggregate: {
+            args: Prisma.AiToolsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAiTools>
+          }
+          groupBy: {
+            args: Prisma.AiToolsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AiToolsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AiToolsCountArgs<ExtArgs>
+            result: $Utils.Optional<AiToolsCountAggregateOutputType> | number
           }
         }
       }
@@ -6958,6 +7130,1858 @@ export namespace Prisma {
 
 
   /**
+   * Model AiToolsCategory
+   */
+
+  export type AggregateAiToolsCategory = {
+    _count: AiToolsCategoryCountAggregateOutputType | null
+    _avg: AiToolsCategoryAvgAggregateOutputType | null
+    _sum: AiToolsCategorySumAggregateOutputType | null
+    _min: AiToolsCategoryMinAggregateOutputType | null
+    _max: AiToolsCategoryMaxAggregateOutputType | null
+  }
+
+  export type AiToolsCategoryAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AiToolsCategorySumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AiToolsCategoryMinAggregateOutputType = {
+    id: number | null
+    title: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type AiToolsCategoryMaxAggregateOutputType = {
+    id: number | null
+    title: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type AiToolsCategoryCountAggregateOutputType = {
+    id: number
+    title: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type AiToolsCategoryAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type AiToolsCategorySumAggregateInputType = {
+    id?: true
+  }
+
+  export type AiToolsCategoryMinAggregateInputType = {
+    id?: true
+    title?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type AiToolsCategoryMaxAggregateInputType = {
+    id?: true
+    title?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type AiToolsCategoryCountAggregateInputType = {
+    id?: true
+    title?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type AiToolsCategoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AiToolsCategory to aggregate.
+     */
+    where?: AiToolsCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AiToolsCategories to fetch.
+     */
+    orderBy?: AiToolsCategoryOrderByWithRelationInput | AiToolsCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AiToolsCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AiToolsCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AiToolsCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AiToolsCategories
+    **/
+    _count?: true | AiToolsCategoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AiToolsCategoryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AiToolsCategorySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AiToolsCategoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AiToolsCategoryMaxAggregateInputType
+  }
+
+  export type GetAiToolsCategoryAggregateType<T extends AiToolsCategoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateAiToolsCategory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAiToolsCategory[P]>
+      : GetScalarType<T[P], AggregateAiToolsCategory[P]>
+  }
+
+
+
+
+  export type AiToolsCategoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AiToolsCategoryWhereInput
+    orderBy?: AiToolsCategoryOrderByWithAggregationInput | AiToolsCategoryOrderByWithAggregationInput[]
+    by: AiToolsCategoryScalarFieldEnum[] | AiToolsCategoryScalarFieldEnum
+    having?: AiToolsCategoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AiToolsCategoryCountAggregateInputType | true
+    _avg?: AiToolsCategoryAvgAggregateInputType
+    _sum?: AiToolsCategorySumAggregateInputType
+    _min?: AiToolsCategoryMinAggregateInputType
+    _max?: AiToolsCategoryMaxAggregateInputType
+  }
+
+  export type AiToolsCategoryGroupByOutputType = {
+    id: number
+    title: string
+    created_at: Date
+    updated_at: Date
+    _count: AiToolsCategoryCountAggregateOutputType | null
+    _avg: AiToolsCategoryAvgAggregateOutputType | null
+    _sum: AiToolsCategorySumAggregateOutputType | null
+    _min: AiToolsCategoryMinAggregateOutputType | null
+    _max: AiToolsCategoryMaxAggregateOutputType | null
+  }
+
+  type GetAiToolsCategoryGroupByPayload<T extends AiToolsCategoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AiToolsCategoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AiToolsCategoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AiToolsCategoryGroupByOutputType[P]>
+            : GetScalarType<T[P], AiToolsCategoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AiToolsCategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["aiToolsCategory"]>
+
+  export type AiToolsCategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["aiToolsCategory"]>
+
+  export type AiToolsCategorySelectScalar = {
+    id?: boolean
+    title?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+
+  export type $AiToolsCategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AiToolsCategory"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      title: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["aiToolsCategory"]>
+    composites: {}
+  }
+
+  type AiToolsCategoryGetPayload<S extends boolean | null | undefined | AiToolsCategoryDefaultArgs> = $Result.GetResult<Prisma.$AiToolsCategoryPayload, S>
+
+  type AiToolsCategoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<AiToolsCategoryFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: AiToolsCategoryCountAggregateInputType | true
+    }
+
+  export interface AiToolsCategoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AiToolsCategory'], meta: { name: 'AiToolsCategory' } }
+    /**
+     * Find zero or one AiToolsCategory that matches the filter.
+     * @param {AiToolsCategoryFindUniqueArgs} args - Arguments to find a AiToolsCategory
+     * @example
+     * // Get one AiToolsCategory
+     * const aiToolsCategory = await prisma.aiToolsCategory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AiToolsCategoryFindUniqueArgs>(args: SelectSubset<T, AiToolsCategoryFindUniqueArgs<ExtArgs>>): Prisma__AiToolsCategoryClient<$Result.GetResult<Prisma.$AiToolsCategoryPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one AiToolsCategory that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {AiToolsCategoryFindUniqueOrThrowArgs} args - Arguments to find a AiToolsCategory
+     * @example
+     * // Get one AiToolsCategory
+     * const aiToolsCategory = await prisma.aiToolsCategory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AiToolsCategoryFindUniqueOrThrowArgs>(args: SelectSubset<T, AiToolsCategoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AiToolsCategoryClient<$Result.GetResult<Prisma.$AiToolsCategoryPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first AiToolsCategory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AiToolsCategoryFindFirstArgs} args - Arguments to find a AiToolsCategory
+     * @example
+     * // Get one AiToolsCategory
+     * const aiToolsCategory = await prisma.aiToolsCategory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AiToolsCategoryFindFirstArgs>(args?: SelectSubset<T, AiToolsCategoryFindFirstArgs<ExtArgs>>): Prisma__AiToolsCategoryClient<$Result.GetResult<Prisma.$AiToolsCategoryPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first AiToolsCategory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AiToolsCategoryFindFirstOrThrowArgs} args - Arguments to find a AiToolsCategory
+     * @example
+     * // Get one AiToolsCategory
+     * const aiToolsCategory = await prisma.aiToolsCategory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AiToolsCategoryFindFirstOrThrowArgs>(args?: SelectSubset<T, AiToolsCategoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__AiToolsCategoryClient<$Result.GetResult<Prisma.$AiToolsCategoryPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more AiToolsCategories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AiToolsCategoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AiToolsCategories
+     * const aiToolsCategories = await prisma.aiToolsCategory.findMany()
+     * 
+     * // Get first 10 AiToolsCategories
+     * const aiToolsCategories = await prisma.aiToolsCategory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const aiToolsCategoryWithIdOnly = await prisma.aiToolsCategory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AiToolsCategoryFindManyArgs>(args?: SelectSubset<T, AiToolsCategoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AiToolsCategoryPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a AiToolsCategory.
+     * @param {AiToolsCategoryCreateArgs} args - Arguments to create a AiToolsCategory.
+     * @example
+     * // Create one AiToolsCategory
+     * const AiToolsCategory = await prisma.aiToolsCategory.create({
+     *   data: {
+     *     // ... data to create a AiToolsCategory
+     *   }
+     * })
+     * 
+     */
+    create<T extends AiToolsCategoryCreateArgs>(args: SelectSubset<T, AiToolsCategoryCreateArgs<ExtArgs>>): Prisma__AiToolsCategoryClient<$Result.GetResult<Prisma.$AiToolsCategoryPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many AiToolsCategories.
+     * @param {AiToolsCategoryCreateManyArgs} args - Arguments to create many AiToolsCategories.
+     * @example
+     * // Create many AiToolsCategories
+     * const aiToolsCategory = await prisma.aiToolsCategory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AiToolsCategoryCreateManyArgs>(args?: SelectSubset<T, AiToolsCategoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AiToolsCategories and returns the data saved in the database.
+     * @param {AiToolsCategoryCreateManyAndReturnArgs} args - Arguments to create many AiToolsCategories.
+     * @example
+     * // Create many AiToolsCategories
+     * const aiToolsCategory = await prisma.aiToolsCategory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AiToolsCategories and only return the `id`
+     * const aiToolsCategoryWithIdOnly = await prisma.aiToolsCategory.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AiToolsCategoryCreateManyAndReturnArgs>(args?: SelectSubset<T, AiToolsCategoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AiToolsCategoryPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a AiToolsCategory.
+     * @param {AiToolsCategoryDeleteArgs} args - Arguments to delete one AiToolsCategory.
+     * @example
+     * // Delete one AiToolsCategory
+     * const AiToolsCategory = await prisma.aiToolsCategory.delete({
+     *   where: {
+     *     // ... filter to delete one AiToolsCategory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AiToolsCategoryDeleteArgs>(args: SelectSubset<T, AiToolsCategoryDeleteArgs<ExtArgs>>): Prisma__AiToolsCategoryClient<$Result.GetResult<Prisma.$AiToolsCategoryPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one AiToolsCategory.
+     * @param {AiToolsCategoryUpdateArgs} args - Arguments to update one AiToolsCategory.
+     * @example
+     * // Update one AiToolsCategory
+     * const aiToolsCategory = await prisma.aiToolsCategory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AiToolsCategoryUpdateArgs>(args: SelectSubset<T, AiToolsCategoryUpdateArgs<ExtArgs>>): Prisma__AiToolsCategoryClient<$Result.GetResult<Prisma.$AiToolsCategoryPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more AiToolsCategories.
+     * @param {AiToolsCategoryDeleteManyArgs} args - Arguments to filter AiToolsCategories to delete.
+     * @example
+     * // Delete a few AiToolsCategories
+     * const { count } = await prisma.aiToolsCategory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AiToolsCategoryDeleteManyArgs>(args?: SelectSubset<T, AiToolsCategoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AiToolsCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AiToolsCategoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AiToolsCategories
+     * const aiToolsCategory = await prisma.aiToolsCategory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AiToolsCategoryUpdateManyArgs>(args: SelectSubset<T, AiToolsCategoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one AiToolsCategory.
+     * @param {AiToolsCategoryUpsertArgs} args - Arguments to update or create a AiToolsCategory.
+     * @example
+     * // Update or create a AiToolsCategory
+     * const aiToolsCategory = await prisma.aiToolsCategory.upsert({
+     *   create: {
+     *     // ... data to create a AiToolsCategory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AiToolsCategory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AiToolsCategoryUpsertArgs>(args: SelectSubset<T, AiToolsCategoryUpsertArgs<ExtArgs>>): Prisma__AiToolsCategoryClient<$Result.GetResult<Prisma.$AiToolsCategoryPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of AiToolsCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AiToolsCategoryCountArgs} args - Arguments to filter AiToolsCategories to count.
+     * @example
+     * // Count the number of AiToolsCategories
+     * const count = await prisma.aiToolsCategory.count({
+     *   where: {
+     *     // ... the filter for the AiToolsCategories we want to count
+     *   }
+     * })
+    **/
+    count<T extends AiToolsCategoryCountArgs>(
+      args?: Subset<T, AiToolsCategoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AiToolsCategoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AiToolsCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AiToolsCategoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AiToolsCategoryAggregateArgs>(args: Subset<T, AiToolsCategoryAggregateArgs>): Prisma.PrismaPromise<GetAiToolsCategoryAggregateType<T>>
+
+    /**
+     * Group by AiToolsCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AiToolsCategoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AiToolsCategoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AiToolsCategoryGroupByArgs['orderBy'] }
+        : { orderBy?: AiToolsCategoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AiToolsCategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAiToolsCategoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AiToolsCategory model
+   */
+  readonly fields: AiToolsCategoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AiToolsCategory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AiToolsCategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AiToolsCategory model
+   */ 
+  interface AiToolsCategoryFieldRefs {
+    readonly id: FieldRef<"AiToolsCategory", 'Int'>
+    readonly title: FieldRef<"AiToolsCategory", 'String'>
+    readonly created_at: FieldRef<"AiToolsCategory", 'DateTime'>
+    readonly updated_at: FieldRef<"AiToolsCategory", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AiToolsCategory findUnique
+   */
+  export type AiToolsCategoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiToolsCategory
+     */
+    select?: AiToolsCategorySelect<ExtArgs> | null
+    /**
+     * Filter, which AiToolsCategory to fetch.
+     */
+    where: AiToolsCategoryWhereUniqueInput
+  }
+
+  /**
+   * AiToolsCategory findUniqueOrThrow
+   */
+  export type AiToolsCategoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiToolsCategory
+     */
+    select?: AiToolsCategorySelect<ExtArgs> | null
+    /**
+     * Filter, which AiToolsCategory to fetch.
+     */
+    where: AiToolsCategoryWhereUniqueInput
+  }
+
+  /**
+   * AiToolsCategory findFirst
+   */
+  export type AiToolsCategoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiToolsCategory
+     */
+    select?: AiToolsCategorySelect<ExtArgs> | null
+    /**
+     * Filter, which AiToolsCategory to fetch.
+     */
+    where?: AiToolsCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AiToolsCategories to fetch.
+     */
+    orderBy?: AiToolsCategoryOrderByWithRelationInput | AiToolsCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AiToolsCategories.
+     */
+    cursor?: AiToolsCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AiToolsCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AiToolsCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AiToolsCategories.
+     */
+    distinct?: AiToolsCategoryScalarFieldEnum | AiToolsCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * AiToolsCategory findFirstOrThrow
+   */
+  export type AiToolsCategoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiToolsCategory
+     */
+    select?: AiToolsCategorySelect<ExtArgs> | null
+    /**
+     * Filter, which AiToolsCategory to fetch.
+     */
+    where?: AiToolsCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AiToolsCategories to fetch.
+     */
+    orderBy?: AiToolsCategoryOrderByWithRelationInput | AiToolsCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AiToolsCategories.
+     */
+    cursor?: AiToolsCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AiToolsCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AiToolsCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AiToolsCategories.
+     */
+    distinct?: AiToolsCategoryScalarFieldEnum | AiToolsCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * AiToolsCategory findMany
+   */
+  export type AiToolsCategoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiToolsCategory
+     */
+    select?: AiToolsCategorySelect<ExtArgs> | null
+    /**
+     * Filter, which AiToolsCategories to fetch.
+     */
+    where?: AiToolsCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AiToolsCategories to fetch.
+     */
+    orderBy?: AiToolsCategoryOrderByWithRelationInput | AiToolsCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AiToolsCategories.
+     */
+    cursor?: AiToolsCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AiToolsCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AiToolsCategories.
+     */
+    skip?: number
+    distinct?: AiToolsCategoryScalarFieldEnum | AiToolsCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * AiToolsCategory create
+   */
+  export type AiToolsCategoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiToolsCategory
+     */
+    select?: AiToolsCategorySelect<ExtArgs> | null
+    /**
+     * The data needed to create a AiToolsCategory.
+     */
+    data: XOR<AiToolsCategoryCreateInput, AiToolsCategoryUncheckedCreateInput>
+  }
+
+  /**
+   * AiToolsCategory createMany
+   */
+  export type AiToolsCategoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AiToolsCategories.
+     */
+    data: AiToolsCategoryCreateManyInput | AiToolsCategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AiToolsCategory createManyAndReturn
+   */
+  export type AiToolsCategoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiToolsCategory
+     */
+    select?: AiToolsCategorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many AiToolsCategories.
+     */
+    data: AiToolsCategoryCreateManyInput | AiToolsCategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AiToolsCategory update
+   */
+  export type AiToolsCategoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiToolsCategory
+     */
+    select?: AiToolsCategorySelect<ExtArgs> | null
+    /**
+     * The data needed to update a AiToolsCategory.
+     */
+    data: XOR<AiToolsCategoryUpdateInput, AiToolsCategoryUncheckedUpdateInput>
+    /**
+     * Choose, which AiToolsCategory to update.
+     */
+    where: AiToolsCategoryWhereUniqueInput
+  }
+
+  /**
+   * AiToolsCategory updateMany
+   */
+  export type AiToolsCategoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AiToolsCategories.
+     */
+    data: XOR<AiToolsCategoryUpdateManyMutationInput, AiToolsCategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which AiToolsCategories to update
+     */
+    where?: AiToolsCategoryWhereInput
+  }
+
+  /**
+   * AiToolsCategory upsert
+   */
+  export type AiToolsCategoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiToolsCategory
+     */
+    select?: AiToolsCategorySelect<ExtArgs> | null
+    /**
+     * The filter to search for the AiToolsCategory to update in case it exists.
+     */
+    where: AiToolsCategoryWhereUniqueInput
+    /**
+     * In case the AiToolsCategory found by the `where` argument doesn't exist, create a new AiToolsCategory with this data.
+     */
+    create: XOR<AiToolsCategoryCreateInput, AiToolsCategoryUncheckedCreateInput>
+    /**
+     * In case the AiToolsCategory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AiToolsCategoryUpdateInput, AiToolsCategoryUncheckedUpdateInput>
+  }
+
+  /**
+   * AiToolsCategory delete
+   */
+  export type AiToolsCategoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiToolsCategory
+     */
+    select?: AiToolsCategorySelect<ExtArgs> | null
+    /**
+     * Filter which AiToolsCategory to delete.
+     */
+    where: AiToolsCategoryWhereUniqueInput
+  }
+
+  /**
+   * AiToolsCategory deleteMany
+   */
+  export type AiToolsCategoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AiToolsCategories to delete
+     */
+    where?: AiToolsCategoryWhereInput
+  }
+
+  /**
+   * AiToolsCategory without action
+   */
+  export type AiToolsCategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiToolsCategory
+     */
+    select?: AiToolsCategorySelect<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AiTools
+   */
+
+  export type AggregateAiTools = {
+    _count: AiToolsCountAggregateOutputType | null
+    _avg: AiToolsAvgAggregateOutputType | null
+    _sum: AiToolsSumAggregateOutputType | null
+    _min: AiToolsMinAggregateOutputType | null
+    _max: AiToolsMaxAggregateOutputType | null
+  }
+
+  export type AiToolsAvgAggregateOutputType = {
+    id: number | null
+    category_id: number | null
+  }
+
+  export type AiToolsSumAggregateOutputType = {
+    id: number | null
+    category_id: number | null
+  }
+
+  export type AiToolsMinAggregateOutputType = {
+    id: number | null
+    title: string | null
+    description: string | null
+    url: string | null
+    content: string | null
+    category_id: number | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type AiToolsMaxAggregateOutputType = {
+    id: number | null
+    title: string | null
+    description: string | null
+    url: string | null
+    content: string | null
+    category_id: number | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type AiToolsCountAggregateOutputType = {
+    id: number
+    title: number
+    description: number
+    url: number
+    content: number
+    category_id: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type AiToolsAvgAggregateInputType = {
+    id?: true
+    category_id?: true
+  }
+
+  export type AiToolsSumAggregateInputType = {
+    id?: true
+    category_id?: true
+  }
+
+  export type AiToolsMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    url?: true
+    content?: true
+    category_id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type AiToolsMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    url?: true
+    content?: true
+    category_id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type AiToolsCountAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    url?: true
+    content?: true
+    category_id?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type AiToolsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AiTools to aggregate.
+     */
+    where?: AiToolsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AiTools to fetch.
+     */
+    orderBy?: AiToolsOrderByWithRelationInput | AiToolsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AiToolsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AiTools from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AiTools.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AiTools
+    **/
+    _count?: true | AiToolsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AiToolsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AiToolsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AiToolsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AiToolsMaxAggregateInputType
+  }
+
+  export type GetAiToolsAggregateType<T extends AiToolsAggregateArgs> = {
+        [P in keyof T & keyof AggregateAiTools]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAiTools[P]>
+      : GetScalarType<T[P], AggregateAiTools[P]>
+  }
+
+
+
+
+  export type AiToolsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AiToolsWhereInput
+    orderBy?: AiToolsOrderByWithAggregationInput | AiToolsOrderByWithAggregationInput[]
+    by: AiToolsScalarFieldEnum[] | AiToolsScalarFieldEnum
+    having?: AiToolsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AiToolsCountAggregateInputType | true
+    _avg?: AiToolsAvgAggregateInputType
+    _sum?: AiToolsSumAggregateInputType
+    _min?: AiToolsMinAggregateInputType
+    _max?: AiToolsMaxAggregateInputType
+  }
+
+  export type AiToolsGroupByOutputType = {
+    id: number
+    title: string
+    description: string
+    url: string
+    content: string
+    category_id: number
+    created_at: Date
+    updated_at: Date
+    _count: AiToolsCountAggregateOutputType | null
+    _avg: AiToolsAvgAggregateOutputType | null
+    _sum: AiToolsSumAggregateOutputType | null
+    _min: AiToolsMinAggregateOutputType | null
+    _max: AiToolsMaxAggregateOutputType | null
+  }
+
+  type GetAiToolsGroupByPayload<T extends AiToolsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AiToolsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AiToolsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AiToolsGroupByOutputType[P]>
+            : GetScalarType<T[P], AiToolsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AiToolsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    url?: boolean
+    content?: boolean
+    category_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["aiTools"]>
+
+  export type AiToolsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    url?: boolean
+    content?: boolean
+    category_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["aiTools"]>
+
+  export type AiToolsSelectScalar = {
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    url?: boolean
+    content?: boolean
+    category_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+
+  export type $AiToolsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AiTools"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      title: string
+      description: string
+      url: string
+      content: string
+      category_id: number
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["aiTools"]>
+    composites: {}
+  }
+
+  type AiToolsGetPayload<S extends boolean | null | undefined | AiToolsDefaultArgs> = $Result.GetResult<Prisma.$AiToolsPayload, S>
+
+  type AiToolsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<AiToolsFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: AiToolsCountAggregateInputType | true
+    }
+
+  export interface AiToolsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AiTools'], meta: { name: 'AiTools' } }
+    /**
+     * Find zero or one AiTools that matches the filter.
+     * @param {AiToolsFindUniqueArgs} args - Arguments to find a AiTools
+     * @example
+     * // Get one AiTools
+     * const aiTools = await prisma.aiTools.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AiToolsFindUniqueArgs>(args: SelectSubset<T, AiToolsFindUniqueArgs<ExtArgs>>): Prisma__AiToolsClient<$Result.GetResult<Prisma.$AiToolsPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one AiTools that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {AiToolsFindUniqueOrThrowArgs} args - Arguments to find a AiTools
+     * @example
+     * // Get one AiTools
+     * const aiTools = await prisma.aiTools.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AiToolsFindUniqueOrThrowArgs>(args: SelectSubset<T, AiToolsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AiToolsClient<$Result.GetResult<Prisma.$AiToolsPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first AiTools that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AiToolsFindFirstArgs} args - Arguments to find a AiTools
+     * @example
+     * // Get one AiTools
+     * const aiTools = await prisma.aiTools.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AiToolsFindFirstArgs>(args?: SelectSubset<T, AiToolsFindFirstArgs<ExtArgs>>): Prisma__AiToolsClient<$Result.GetResult<Prisma.$AiToolsPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first AiTools that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AiToolsFindFirstOrThrowArgs} args - Arguments to find a AiTools
+     * @example
+     * // Get one AiTools
+     * const aiTools = await prisma.aiTools.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AiToolsFindFirstOrThrowArgs>(args?: SelectSubset<T, AiToolsFindFirstOrThrowArgs<ExtArgs>>): Prisma__AiToolsClient<$Result.GetResult<Prisma.$AiToolsPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more AiTools that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AiToolsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AiTools
+     * const aiTools = await prisma.aiTools.findMany()
+     * 
+     * // Get first 10 AiTools
+     * const aiTools = await prisma.aiTools.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const aiToolsWithIdOnly = await prisma.aiTools.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AiToolsFindManyArgs>(args?: SelectSubset<T, AiToolsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AiToolsPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a AiTools.
+     * @param {AiToolsCreateArgs} args - Arguments to create a AiTools.
+     * @example
+     * // Create one AiTools
+     * const AiTools = await prisma.aiTools.create({
+     *   data: {
+     *     // ... data to create a AiTools
+     *   }
+     * })
+     * 
+     */
+    create<T extends AiToolsCreateArgs>(args: SelectSubset<T, AiToolsCreateArgs<ExtArgs>>): Prisma__AiToolsClient<$Result.GetResult<Prisma.$AiToolsPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many AiTools.
+     * @param {AiToolsCreateManyArgs} args - Arguments to create many AiTools.
+     * @example
+     * // Create many AiTools
+     * const aiTools = await prisma.aiTools.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AiToolsCreateManyArgs>(args?: SelectSubset<T, AiToolsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AiTools and returns the data saved in the database.
+     * @param {AiToolsCreateManyAndReturnArgs} args - Arguments to create many AiTools.
+     * @example
+     * // Create many AiTools
+     * const aiTools = await prisma.aiTools.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AiTools and only return the `id`
+     * const aiToolsWithIdOnly = await prisma.aiTools.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AiToolsCreateManyAndReturnArgs>(args?: SelectSubset<T, AiToolsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AiToolsPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a AiTools.
+     * @param {AiToolsDeleteArgs} args - Arguments to delete one AiTools.
+     * @example
+     * // Delete one AiTools
+     * const AiTools = await prisma.aiTools.delete({
+     *   where: {
+     *     // ... filter to delete one AiTools
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AiToolsDeleteArgs>(args: SelectSubset<T, AiToolsDeleteArgs<ExtArgs>>): Prisma__AiToolsClient<$Result.GetResult<Prisma.$AiToolsPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one AiTools.
+     * @param {AiToolsUpdateArgs} args - Arguments to update one AiTools.
+     * @example
+     * // Update one AiTools
+     * const aiTools = await prisma.aiTools.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AiToolsUpdateArgs>(args: SelectSubset<T, AiToolsUpdateArgs<ExtArgs>>): Prisma__AiToolsClient<$Result.GetResult<Prisma.$AiToolsPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more AiTools.
+     * @param {AiToolsDeleteManyArgs} args - Arguments to filter AiTools to delete.
+     * @example
+     * // Delete a few AiTools
+     * const { count } = await prisma.aiTools.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AiToolsDeleteManyArgs>(args?: SelectSubset<T, AiToolsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AiTools.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AiToolsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AiTools
+     * const aiTools = await prisma.aiTools.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AiToolsUpdateManyArgs>(args: SelectSubset<T, AiToolsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one AiTools.
+     * @param {AiToolsUpsertArgs} args - Arguments to update or create a AiTools.
+     * @example
+     * // Update or create a AiTools
+     * const aiTools = await prisma.aiTools.upsert({
+     *   create: {
+     *     // ... data to create a AiTools
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AiTools we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AiToolsUpsertArgs>(args: SelectSubset<T, AiToolsUpsertArgs<ExtArgs>>): Prisma__AiToolsClient<$Result.GetResult<Prisma.$AiToolsPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of AiTools.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AiToolsCountArgs} args - Arguments to filter AiTools to count.
+     * @example
+     * // Count the number of AiTools
+     * const count = await prisma.aiTools.count({
+     *   where: {
+     *     // ... the filter for the AiTools we want to count
+     *   }
+     * })
+    **/
+    count<T extends AiToolsCountArgs>(
+      args?: Subset<T, AiToolsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AiToolsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AiTools.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AiToolsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AiToolsAggregateArgs>(args: Subset<T, AiToolsAggregateArgs>): Prisma.PrismaPromise<GetAiToolsAggregateType<T>>
+
+    /**
+     * Group by AiTools.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AiToolsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AiToolsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AiToolsGroupByArgs['orderBy'] }
+        : { orderBy?: AiToolsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AiToolsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAiToolsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AiTools model
+   */
+  readonly fields: AiToolsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AiTools.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AiToolsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AiTools model
+   */ 
+  interface AiToolsFieldRefs {
+    readonly id: FieldRef<"AiTools", 'Int'>
+    readonly title: FieldRef<"AiTools", 'String'>
+    readonly description: FieldRef<"AiTools", 'String'>
+    readonly url: FieldRef<"AiTools", 'String'>
+    readonly content: FieldRef<"AiTools", 'String'>
+    readonly category_id: FieldRef<"AiTools", 'Int'>
+    readonly created_at: FieldRef<"AiTools", 'DateTime'>
+    readonly updated_at: FieldRef<"AiTools", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AiTools findUnique
+   */
+  export type AiToolsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiTools
+     */
+    select?: AiToolsSelect<ExtArgs> | null
+    /**
+     * Filter, which AiTools to fetch.
+     */
+    where: AiToolsWhereUniqueInput
+  }
+
+  /**
+   * AiTools findUniqueOrThrow
+   */
+  export type AiToolsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiTools
+     */
+    select?: AiToolsSelect<ExtArgs> | null
+    /**
+     * Filter, which AiTools to fetch.
+     */
+    where: AiToolsWhereUniqueInput
+  }
+
+  /**
+   * AiTools findFirst
+   */
+  export type AiToolsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiTools
+     */
+    select?: AiToolsSelect<ExtArgs> | null
+    /**
+     * Filter, which AiTools to fetch.
+     */
+    where?: AiToolsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AiTools to fetch.
+     */
+    orderBy?: AiToolsOrderByWithRelationInput | AiToolsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AiTools.
+     */
+    cursor?: AiToolsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AiTools from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AiTools.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AiTools.
+     */
+    distinct?: AiToolsScalarFieldEnum | AiToolsScalarFieldEnum[]
+  }
+
+  /**
+   * AiTools findFirstOrThrow
+   */
+  export type AiToolsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiTools
+     */
+    select?: AiToolsSelect<ExtArgs> | null
+    /**
+     * Filter, which AiTools to fetch.
+     */
+    where?: AiToolsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AiTools to fetch.
+     */
+    orderBy?: AiToolsOrderByWithRelationInput | AiToolsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AiTools.
+     */
+    cursor?: AiToolsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AiTools from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AiTools.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AiTools.
+     */
+    distinct?: AiToolsScalarFieldEnum | AiToolsScalarFieldEnum[]
+  }
+
+  /**
+   * AiTools findMany
+   */
+  export type AiToolsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiTools
+     */
+    select?: AiToolsSelect<ExtArgs> | null
+    /**
+     * Filter, which AiTools to fetch.
+     */
+    where?: AiToolsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AiTools to fetch.
+     */
+    orderBy?: AiToolsOrderByWithRelationInput | AiToolsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AiTools.
+     */
+    cursor?: AiToolsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AiTools from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AiTools.
+     */
+    skip?: number
+    distinct?: AiToolsScalarFieldEnum | AiToolsScalarFieldEnum[]
+  }
+
+  /**
+   * AiTools create
+   */
+  export type AiToolsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiTools
+     */
+    select?: AiToolsSelect<ExtArgs> | null
+    /**
+     * The data needed to create a AiTools.
+     */
+    data: XOR<AiToolsCreateInput, AiToolsUncheckedCreateInput>
+  }
+
+  /**
+   * AiTools createMany
+   */
+  export type AiToolsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AiTools.
+     */
+    data: AiToolsCreateManyInput | AiToolsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AiTools createManyAndReturn
+   */
+  export type AiToolsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiTools
+     */
+    select?: AiToolsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many AiTools.
+     */
+    data: AiToolsCreateManyInput | AiToolsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AiTools update
+   */
+  export type AiToolsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiTools
+     */
+    select?: AiToolsSelect<ExtArgs> | null
+    /**
+     * The data needed to update a AiTools.
+     */
+    data: XOR<AiToolsUpdateInput, AiToolsUncheckedUpdateInput>
+    /**
+     * Choose, which AiTools to update.
+     */
+    where: AiToolsWhereUniqueInput
+  }
+
+  /**
+   * AiTools updateMany
+   */
+  export type AiToolsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AiTools.
+     */
+    data: XOR<AiToolsUpdateManyMutationInput, AiToolsUncheckedUpdateManyInput>
+    /**
+     * Filter which AiTools to update
+     */
+    where?: AiToolsWhereInput
+  }
+
+  /**
+   * AiTools upsert
+   */
+  export type AiToolsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiTools
+     */
+    select?: AiToolsSelect<ExtArgs> | null
+    /**
+     * The filter to search for the AiTools to update in case it exists.
+     */
+    where: AiToolsWhereUniqueInput
+    /**
+     * In case the AiTools found by the `where` argument doesn't exist, create a new AiTools with this data.
+     */
+    create: XOR<AiToolsCreateInput, AiToolsUncheckedCreateInput>
+    /**
+     * In case the AiTools was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AiToolsUpdateInput, AiToolsUncheckedUpdateInput>
+  }
+
+  /**
+   * AiTools delete
+   */
+  export type AiToolsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiTools
+     */
+    select?: AiToolsSelect<ExtArgs> | null
+    /**
+     * Filter which AiTools to delete.
+     */
+    where: AiToolsWhereUniqueInput
+  }
+
+  /**
+   * AiTools deleteMany
+   */
+  export type AiToolsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AiTools to delete
+     */
+    where?: AiToolsWhereInput
+  }
+
+  /**
+   * AiTools without action
+   */
+  export type AiToolsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiTools
+     */
+    select?: AiToolsSelect<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -7041,6 +9065,30 @@ export namespace Prisma {
   };
 
   export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
+
+
+  export const AiToolsCategoryScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type AiToolsCategoryScalarFieldEnum = (typeof AiToolsCategoryScalarFieldEnum)[keyof typeof AiToolsCategoryScalarFieldEnum]
+
+
+  export const AiToolsScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    url: 'url',
+    content: 'content',
+    category_id: 'category_id',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type AiToolsScalarFieldEnum = (typeof AiToolsScalarFieldEnum)[keyof typeof AiToolsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7493,6 +9541,124 @@ export namespace Prisma {
     expires?: DateTimeWithAggregatesFilter<"VerificationToken"> | Date | string
   }
 
+  export type AiToolsCategoryWhereInput = {
+    AND?: AiToolsCategoryWhereInput | AiToolsCategoryWhereInput[]
+    OR?: AiToolsCategoryWhereInput[]
+    NOT?: AiToolsCategoryWhereInput | AiToolsCategoryWhereInput[]
+    id?: IntFilter<"AiToolsCategory"> | number
+    title?: StringFilter<"AiToolsCategory"> | string
+    created_at?: DateTimeFilter<"AiToolsCategory"> | Date | string
+    updated_at?: DateTimeFilter<"AiToolsCategory"> | Date | string
+  }
+
+  export type AiToolsCategoryOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type AiToolsCategoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: AiToolsCategoryWhereInput | AiToolsCategoryWhereInput[]
+    OR?: AiToolsCategoryWhereInput[]
+    NOT?: AiToolsCategoryWhereInput | AiToolsCategoryWhereInput[]
+    title?: StringFilter<"AiToolsCategory"> | string
+    created_at?: DateTimeFilter<"AiToolsCategory"> | Date | string
+    updated_at?: DateTimeFilter<"AiToolsCategory"> | Date | string
+  }, "id">
+
+  export type AiToolsCategoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: AiToolsCategoryCountOrderByAggregateInput
+    _avg?: AiToolsCategoryAvgOrderByAggregateInput
+    _max?: AiToolsCategoryMaxOrderByAggregateInput
+    _min?: AiToolsCategoryMinOrderByAggregateInput
+    _sum?: AiToolsCategorySumOrderByAggregateInput
+  }
+
+  export type AiToolsCategoryScalarWhereWithAggregatesInput = {
+    AND?: AiToolsCategoryScalarWhereWithAggregatesInput | AiToolsCategoryScalarWhereWithAggregatesInput[]
+    OR?: AiToolsCategoryScalarWhereWithAggregatesInput[]
+    NOT?: AiToolsCategoryScalarWhereWithAggregatesInput | AiToolsCategoryScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"AiToolsCategory"> | number
+    title?: StringWithAggregatesFilter<"AiToolsCategory"> | string
+    created_at?: DateTimeWithAggregatesFilter<"AiToolsCategory"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"AiToolsCategory"> | Date | string
+  }
+
+  export type AiToolsWhereInput = {
+    AND?: AiToolsWhereInput | AiToolsWhereInput[]
+    OR?: AiToolsWhereInput[]
+    NOT?: AiToolsWhereInput | AiToolsWhereInput[]
+    id?: IntFilter<"AiTools"> | number
+    title?: StringFilter<"AiTools"> | string
+    description?: StringFilter<"AiTools"> | string
+    url?: StringFilter<"AiTools"> | string
+    content?: StringFilter<"AiTools"> | string
+    category_id?: IntFilter<"AiTools"> | number
+    created_at?: DateTimeFilter<"AiTools"> | Date | string
+    updated_at?: DateTimeFilter<"AiTools"> | Date | string
+  }
+
+  export type AiToolsOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    url?: SortOrder
+    content?: SortOrder
+    category_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type AiToolsWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: AiToolsWhereInput | AiToolsWhereInput[]
+    OR?: AiToolsWhereInput[]
+    NOT?: AiToolsWhereInput | AiToolsWhereInput[]
+    title?: StringFilter<"AiTools"> | string
+    description?: StringFilter<"AiTools"> | string
+    url?: StringFilter<"AiTools"> | string
+    content?: StringFilter<"AiTools"> | string
+    category_id?: IntFilter<"AiTools"> | number
+    created_at?: DateTimeFilter<"AiTools"> | Date | string
+    updated_at?: DateTimeFilter<"AiTools"> | Date | string
+  }, "id">
+
+  export type AiToolsOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    url?: SortOrder
+    content?: SortOrder
+    category_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: AiToolsCountOrderByAggregateInput
+    _avg?: AiToolsAvgOrderByAggregateInput
+    _max?: AiToolsMaxOrderByAggregateInput
+    _min?: AiToolsMinOrderByAggregateInput
+    _sum?: AiToolsSumOrderByAggregateInput
+  }
+
+  export type AiToolsScalarWhereWithAggregatesInput = {
+    AND?: AiToolsScalarWhereWithAggregatesInput | AiToolsScalarWhereWithAggregatesInput[]
+    OR?: AiToolsScalarWhereWithAggregatesInput[]
+    NOT?: AiToolsScalarWhereWithAggregatesInput | AiToolsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"AiTools"> | number
+    title?: StringWithAggregatesFilter<"AiTools"> | string
+    description?: StringWithAggregatesFilter<"AiTools"> | string
+    url?: StringWithAggregatesFilter<"AiTools"> | string
+    content?: StringWithAggregatesFilter<"AiTools"> | string
+    category_id?: IntWithAggregatesFilter<"AiTools"> | number
+    created_at?: DateTimeWithAggregatesFilter<"AiTools"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"AiTools"> | Date | string
+  }
+
   export type PostCreateInput = {
     blog_key: string
     blog_title: string
@@ -7869,6 +10035,126 @@ export namespace Prisma {
     identifier?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AiToolsCategoryCreateInput = {
+    title: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type AiToolsCategoryUncheckedCreateInput = {
+    id?: number
+    title: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type AiToolsCategoryUpdateInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AiToolsCategoryUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AiToolsCategoryCreateManyInput = {
+    id?: number
+    title: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type AiToolsCategoryUpdateManyMutationInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AiToolsCategoryUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AiToolsCreateInput = {
+    title: string
+    description: string
+    url: string
+    content: string
+    category_id: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type AiToolsUncheckedCreateInput = {
+    id?: number
+    title: string
+    description: string
+    url: string
+    content: string
+    category_id: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type AiToolsUpdateInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    category_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AiToolsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    category_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AiToolsCreateManyInput = {
+    id?: number
+    title: string
+    description: string
+    url: string
+    content: string
+    category_id: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type AiToolsUpdateManyMutationInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    category_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AiToolsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    category_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -8273,6 +10559,78 @@ export namespace Prisma {
     identifier?: SortOrder
     token?: SortOrder
     expires?: SortOrder
+  }
+
+  export type AiToolsCategoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type AiToolsCategoryAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type AiToolsCategoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type AiToolsCategoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type AiToolsCategorySumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type AiToolsCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    url?: SortOrder
+    content?: SortOrder
+    category_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type AiToolsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    category_id?: SortOrder
+  }
+
+  export type AiToolsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    url?: SortOrder
+    content?: SortOrder
+    category_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type AiToolsMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    url?: SortOrder
+    content?: SortOrder
+    category_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type AiToolsSumOrderByAggregateInput = {
+    id?: SortOrder
+    category_id?: SortOrder
   }
 
   export type PostCreatelikes_countInput = {

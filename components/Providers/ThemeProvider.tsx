@@ -8,7 +8,14 @@ export default function ThemeProvider({
   ...props
 }: ThemeProviderProps) {
   return (
-    <ConfigProvider>
+    <ConfigProvider
+      theme={{
+        token: {
+          // Seed Token，影响范围大
+          colorPrimary: "rgb(232 52 183)",
+        },
+      }}
+    >
       <NextThemesProvider {...props}>{children}</NextThemesProvider>
     </ConfigProvider>
   );

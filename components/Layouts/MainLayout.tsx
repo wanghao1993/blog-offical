@@ -20,7 +20,7 @@ export default function MainLayout({ children, ...props }: Props) {
     <SectionContainer {...props}>
       <motion.main
         data-scroll
-        className="mb-auto"
+        className="mb-auto relative"
         initial="hidden"
         animate="enter"
         exit="exit"

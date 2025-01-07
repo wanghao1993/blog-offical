@@ -1,40 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useLenis } from "lenis/react";
-import { motion } from "framer-motion";
 export default function ToTop() {
-  const [lenis, setLenis] = useState<any>();
-  const [progress, setProgress] = useState(0);
   const [y, setY] = useState(0);
-  let mounted = false;
-  useLenis((data) => {
-    if (mounted) {
-      setLenis(data);
-      setProgress(data.progress);
-      setY(data.scroll);
-    }
-    mounted = true;
-  });
 
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setY(window.scrollY);
+    });
+  });
   return (
     <div>
-      <motion.div
-        animate={{
-          width: `${progress * 100}%`,
-          height: "2px",
-        }}
-        transition={{
-          duration: 0,
-          delay: 0,
-        }}
-        className={`progress w-2 bg-primary-500 rounded-md  fixed left-0 right-0 w-full top-0 z-10 h-1`}
-      ></motion.div>
-
-      {y > 200 && (
+      {y > 300 && (
         <div
-          className="fixed bottom-4 right-0 shadow-md rounded-full cursor-pointer z-10"
-          onClick={() => lenis?.scrollTo(0)}
+          className="fixed bottom-4 right-4 shadow-md rounded-full cursor-pointer z-10"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
           <svg
             viewBox="0 0 1024 1024"

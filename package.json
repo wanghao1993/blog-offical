@@ -9,6 +9,7 @@
     "lint": "next lint",
     "postinstall": "prisma generate"
   },
+  "type": "module",
   "dependencies": {
     "@alex_xu/react-slider-vertify": "^1.2.0",
     "@ant-design/icons": "^5.3.7",
@@ -61,6 +62,7 @@
     "sharp": "^0.33.5",
     "tailwindcss": "^3.4.16",
     "tencentcloud-sdk-nodejs": "^4.0.888",
+    "ts-node": "^10.9.2",
     "unist-util-visit": "^5.0.0",
     "vfile": "^6.0.3",
     "zod": "^3.23.8"

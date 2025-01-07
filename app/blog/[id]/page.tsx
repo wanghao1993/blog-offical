@@ -97,7 +97,6 @@ export default async function ArticleDetail({
               </Link>
             )}
           </div>
-          <ToTop></ToTop>
         </PostLayout>
       ) : (
         <Empty></Empty>

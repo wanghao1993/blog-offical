@@ -14,12 +14,9 @@ const APP_NAME = "汪浩的博客";
 const APP_DEFAULT_TITLE = "汪浩（Isaac Wang）的博客";
 const APP_TITLE_TEMPLATE = "汪浩（Isaac Wang）的博客";
 const APP_DESCRIPTION = "汪浩（Isaac Wang）的博客，一些关于技术和生活的的记录";
-export type Metadatas = Metadata & {
-  "baidu-site-verification": string;
-};
 
 const DHeader = dynamic(() => import("@/components/Header"), { ssr: false });
-export const metadata: Metadatas = {
+export const metadata = {
   keywords:
     "博客，汪浩，Isaac Wang, Javascript, Vue, Css, Nextjs, Nodejs, Docker, web3，区块链",
   applicationName: APP_NAME,
@@ -28,7 +25,6 @@ export const metadata: Metadatas = {
     default: APP_DEFAULT_TITLE,
     template: APP_TITLE_TEMPLATE,
   },
-  "baidu-site-verification": "codeva-Nwhahifnu3",
   description: APP_DESCRIPTION,
   manifest: "manifest.json",
   formatDetection: {
@@ -73,6 +69,7 @@ export default function RootLayout({
       {process.env.mode !== "development" && (
         <GoogleAnalytics gaId="G-4Z3CSGWXGR" />
       )}
+      <meta name="baidu-site-verification" content="codeva-Nwhahifnu3" />
       <body className={content.className}>
         <AntdRegistry>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>

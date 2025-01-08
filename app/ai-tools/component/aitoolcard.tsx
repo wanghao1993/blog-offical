@@ -1,17 +1,18 @@
 import Image from "next/image";
 import { AiTypes } from "@/types/ai";
 
-export function AIToolCard({ title, description, url }: AiTypes.AiTool) {
+export function AIToolCard({ title, description, logo_url }: AiTypes.AiTool) {
   return (
     <div
       title={title}
       className="flex w-full p-6 gap-2 rounded-md border dark:hover:bg-gray-800 light:bg-white dark:bg-gray-900 dark:border-gray-800 hover:shadow-lg transition-all relative light:hover:-translate-y-[2px] cursor-pointer"
     >
-      <div className="relative h-10 w-10 shrink-0 flex items-start gap-4">
+      <div className="relative shrink-0 flex items-start gap-4">
         <Image
-          src={"/favicon.ico"}
+          src={logo_url}
           alt={title}
-          fill
+          width={40}
+          height={40}
           className="rounded-lg object-cover"
         />
       </div>

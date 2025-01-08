@@ -1480,6 +1480,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type AiToolsCategoryCountOutputType
+   */
+
+  export type AiToolsCategoryCountOutputType = {
+    AiTools: number
+  }
+
+  export type AiToolsCategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    AiTools?: boolean | AiToolsCategoryCountOutputTypeCountAiToolsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AiToolsCategoryCountOutputType without action
+   */
+  export type AiToolsCategoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiToolsCategoryCountOutputType
+     */
+    select?: AiToolsCategoryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AiToolsCategoryCountOutputType without action
+   */
+  export type AiToolsCategoryCountOutputTypeCountAiToolsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AiToolsWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -7319,6 +7350,8 @@ export namespace Prisma {
     title?: boolean
     created_at?: boolean
     updated_at?: boolean
+    AiTools?: boolean | AiToolsCategory$AiToolsArgs<ExtArgs>
+    _count?: boolean | AiToolsCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["aiToolsCategory"]>
 
   export type AiToolsCategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7335,10 +7368,17 @@ export namespace Prisma {
     updated_at?: boolean
   }
 
+  export type AiToolsCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    AiTools?: boolean | AiToolsCategory$AiToolsArgs<ExtArgs>
+    _count?: boolean | AiToolsCategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AiToolsCategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $AiToolsCategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "AiToolsCategory"
-    objects: {}
+    objects: {
+      AiTools: Prisma.$AiToolsPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       title: string
@@ -7708,6 +7748,7 @@ export namespace Prisma {
    */
   export interface Prisma__AiToolsCategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    AiTools<T extends AiToolsCategory$AiToolsArgs<ExtArgs> = {}>(args?: Subset<T, AiToolsCategory$AiToolsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AiToolsPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7754,6 +7795,10 @@ export namespace Prisma {
      */
     select?: AiToolsCategorySelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsCategoryInclude<ExtArgs> | null
+    /**
      * Filter, which AiToolsCategory to fetch.
      */
     where: AiToolsCategoryWhereUniqueInput
@@ -7768,6 +7813,10 @@ export namespace Prisma {
      */
     select?: AiToolsCategorySelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsCategoryInclude<ExtArgs> | null
+    /**
      * Filter, which AiToolsCategory to fetch.
      */
     where: AiToolsCategoryWhereUniqueInput
@@ -7781,6 +7830,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the AiToolsCategory
      */
     select?: AiToolsCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsCategoryInclude<ExtArgs> | null
     /**
      * Filter, which AiToolsCategory to fetch.
      */
@@ -7826,6 +7879,10 @@ export namespace Prisma {
      */
     select?: AiToolsCategorySelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsCategoryInclude<ExtArgs> | null
+    /**
      * Filter, which AiToolsCategory to fetch.
      */
     where?: AiToolsCategoryWhereInput
@@ -7870,6 +7927,10 @@ export namespace Prisma {
      */
     select?: AiToolsCategorySelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsCategoryInclude<ExtArgs> | null
+    /**
      * Filter, which AiToolsCategories to fetch.
      */
     where?: AiToolsCategoryWhereInput
@@ -7908,6 +7969,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the AiToolsCategory
      */
     select?: AiToolsCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsCategoryInclude<ExtArgs> | null
     /**
      * The data needed to create a AiToolsCategory.
      */
@@ -7949,6 +8014,10 @@ export namespace Prisma {
      */
     select?: AiToolsCategorySelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsCategoryInclude<ExtArgs> | null
+    /**
      * The data needed to update a AiToolsCategory.
      */
     data: XOR<AiToolsCategoryUpdateInput, AiToolsCategoryUncheckedUpdateInput>
@@ -7981,6 +8050,10 @@ export namespace Prisma {
      */
     select?: AiToolsCategorySelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsCategoryInclude<ExtArgs> | null
+    /**
      * The filter to search for the AiToolsCategory to update in case it exists.
      */
     where: AiToolsCategoryWhereUniqueInput
@@ -8003,6 +8076,10 @@ export namespace Prisma {
      */
     select?: AiToolsCategorySelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsCategoryInclude<ExtArgs> | null
+    /**
      * Filter which AiToolsCategory to delete.
      */
     where: AiToolsCategoryWhereUniqueInput
@@ -8019,6 +8096,26 @@ export namespace Prisma {
   }
 
   /**
+   * AiToolsCategory.AiTools
+   */
+  export type AiToolsCategory$AiToolsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AiTools
+     */
+    select?: AiToolsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsInclude<ExtArgs> | null
+    where?: AiToolsWhereInput
+    orderBy?: AiToolsOrderByWithRelationInput | AiToolsOrderByWithRelationInput[]
+    cursor?: AiToolsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AiToolsScalarFieldEnum | AiToolsScalarFieldEnum[]
+  }
+
+  /**
    * AiToolsCategory without action
    */
   export type AiToolsCategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8026,6 +8123,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the AiToolsCategory
      */
     select?: AiToolsCategorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsCategoryInclude<ExtArgs> | null
   }
 
 
@@ -8057,6 +8158,7 @@ export namespace Prisma {
     description: string | null
     url: string | null
     content: string | null
+    logo_url: string | null
     category_id: number | null
     created_at: Date | null
     updated_at: Date | null
@@ -8068,6 +8170,7 @@ export namespace Prisma {
     description: string | null
     url: string | null
     content: string | null
+    logo_url: string | null
     category_id: number | null
     created_at: Date | null
     updated_at: Date | null
@@ -8079,6 +8182,7 @@ export namespace Prisma {
     description: number
     url: number
     content: number
+    logo_url: number
     category_id: number
     created_at: number
     updated_at: number
@@ -8102,6 +8206,7 @@ export namespace Prisma {
     description?: true
     url?: true
     content?: true
+    logo_url?: true
     category_id?: true
     created_at?: true
     updated_at?: true
@@ -8113,6 +8218,7 @@ export namespace Prisma {
     description?: true
     url?: true
     content?: true
+    logo_url?: true
     category_id?: true
     created_at?: true
     updated_at?: true
@@ -8124,6 +8230,7 @@ export namespace Prisma {
     description?: true
     url?: true
     content?: true
+    logo_url?: true
     category_id?: true
     created_at?: true
     updated_at?: true
@@ -8222,6 +8329,7 @@ export namespace Prisma {
     description: string
     url: string
     content: string
+    logo_url: string
     category_id: number
     created_at: Date
     updated_at: Date
@@ -8252,9 +8360,11 @@ export namespace Prisma {
     description?: boolean
     url?: boolean
     content?: boolean
+    logo_url?: boolean
     category_id?: boolean
     created_at?: boolean
     updated_at?: boolean
+    category?: boolean | AiToolsCategoryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["aiTools"]>
 
   export type AiToolsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -8263,9 +8373,11 @@ export namespace Prisma {
     description?: boolean
     url?: boolean
     content?: boolean
+    logo_url?: boolean
     category_id?: boolean
     created_at?: boolean
     updated_at?: boolean
+    category?: boolean | AiToolsCategoryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["aiTools"]>
 
   export type AiToolsSelectScalar = {
@@ -8274,21 +8386,31 @@ export namespace Prisma {
     description?: boolean
     url?: boolean
     content?: boolean
+    logo_url?: boolean
     category_id?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
+  export type AiToolsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | AiToolsCategoryDefaultArgs<ExtArgs>
+  }
+  export type AiToolsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | AiToolsCategoryDefaultArgs<ExtArgs>
+  }
 
   export type $AiToolsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "AiTools"
-    objects: {}
+    objects: {
+      category: Prisma.$AiToolsCategoryPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       title: string
       description: string
       url: string
       content: string
+      logo_url: string
       category_id: number
       created_at: Date
       updated_at: Date
@@ -8656,6 +8778,7 @@ export namespace Prisma {
    */
   export interface Prisma__AiToolsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    category<T extends AiToolsCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AiToolsCategoryDefaultArgs<ExtArgs>>): Prisma__AiToolsCategoryClient<$Result.GetResult<Prisma.$AiToolsCategoryPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8690,6 +8813,7 @@ export namespace Prisma {
     readonly description: FieldRef<"AiTools", 'String'>
     readonly url: FieldRef<"AiTools", 'String'>
     readonly content: FieldRef<"AiTools", 'String'>
+    readonly logo_url: FieldRef<"AiTools", 'String'>
     readonly category_id: FieldRef<"AiTools", 'Int'>
     readonly created_at: FieldRef<"AiTools", 'DateTime'>
     readonly updated_at: FieldRef<"AiTools", 'DateTime'>
@@ -8706,6 +8830,10 @@ export namespace Prisma {
      */
     select?: AiToolsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsInclude<ExtArgs> | null
+    /**
      * Filter, which AiTools to fetch.
      */
     where: AiToolsWhereUniqueInput
@@ -8720,6 +8848,10 @@ export namespace Prisma {
      */
     select?: AiToolsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsInclude<ExtArgs> | null
+    /**
      * Filter, which AiTools to fetch.
      */
     where: AiToolsWhereUniqueInput
@@ -8733,6 +8865,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the AiTools
      */
     select?: AiToolsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsInclude<ExtArgs> | null
     /**
      * Filter, which AiTools to fetch.
      */
@@ -8778,6 +8914,10 @@ export namespace Prisma {
      */
     select?: AiToolsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsInclude<ExtArgs> | null
+    /**
      * Filter, which AiTools to fetch.
      */
     where?: AiToolsWhereInput
@@ -8822,6 +8962,10 @@ export namespace Prisma {
      */
     select?: AiToolsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsInclude<ExtArgs> | null
+    /**
      * Filter, which AiTools to fetch.
      */
     where?: AiToolsWhereInput
@@ -8861,6 +9005,10 @@ export namespace Prisma {
      */
     select?: AiToolsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsInclude<ExtArgs> | null
+    /**
      * The data needed to create a AiTools.
      */
     data: XOR<AiToolsCreateInput, AiToolsUncheckedCreateInput>
@@ -8890,6 +9038,10 @@ export namespace Prisma {
      */
     data: AiToolsCreateManyInput | AiToolsCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -8900,6 +9052,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the AiTools
      */
     select?: AiToolsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsInclude<ExtArgs> | null
     /**
      * The data needed to update a AiTools.
      */
@@ -8933,6 +9089,10 @@ export namespace Prisma {
      */
     select?: AiToolsSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsInclude<ExtArgs> | null
+    /**
      * The filter to search for the AiTools to update in case it exists.
      */
     where: AiToolsWhereUniqueInput
@@ -8954,6 +9114,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the AiTools
      */
     select?: AiToolsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsInclude<ExtArgs> | null
     /**
      * Filter which AiTools to delete.
      */
@@ -8978,6 +9142,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the AiTools
      */
     select?: AiToolsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AiToolsInclude<ExtArgs> | null
   }
 
 
@@ -9083,6 +9251,7 @@ export namespace Prisma {
     description: 'description',
     url: 'url',
     content: 'content',
+    logo_url: 'logo_url',
     category_id: 'category_id',
     created_at: 'created_at',
     updated_at: 'updated_at'
@@ -9549,6 +9718,7 @@ export namespace Prisma {
     title?: StringFilter<"AiToolsCategory"> | string
     created_at?: DateTimeFilter<"AiToolsCategory"> | Date | string
     updated_at?: DateTimeFilter<"AiToolsCategory"> | Date | string
+    AiTools?: AiToolsListRelationFilter
   }
 
   export type AiToolsCategoryOrderByWithRelationInput = {
@@ -9556,6 +9726,7 @@ export namespace Prisma {
     title?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    AiTools?: AiToolsOrderByRelationAggregateInput
   }
 
   export type AiToolsCategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -9566,6 +9737,7 @@ export namespace Prisma {
     title?: StringFilter<"AiToolsCategory"> | string
     created_at?: DateTimeFilter<"AiToolsCategory"> | Date | string
     updated_at?: DateTimeFilter<"AiToolsCategory"> | Date | string
+    AiTools?: AiToolsListRelationFilter
   }, "id">
 
   export type AiToolsCategoryOrderByWithAggregationInput = {
@@ -9599,9 +9771,11 @@ export namespace Prisma {
     description?: StringFilter<"AiTools"> | string
     url?: StringFilter<"AiTools"> | string
     content?: StringFilter<"AiTools"> | string
+    logo_url?: StringFilter<"AiTools"> | string
     category_id?: IntFilter<"AiTools"> | number
     created_at?: DateTimeFilter<"AiTools"> | Date | string
     updated_at?: DateTimeFilter<"AiTools"> | Date | string
+    category?: XOR<AiToolsCategoryScalarRelationFilter, AiToolsCategoryWhereInput>
   }
 
   export type AiToolsOrderByWithRelationInput = {
@@ -9610,9 +9784,11 @@ export namespace Prisma {
     description?: SortOrder
     url?: SortOrder
     content?: SortOrder
+    logo_url?: SortOrder
     category_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    category?: AiToolsCategoryOrderByWithRelationInput
   }
 
   export type AiToolsWhereUniqueInput = Prisma.AtLeast<{
@@ -9624,9 +9800,11 @@ export namespace Prisma {
     description?: StringFilter<"AiTools"> | string
     url?: StringFilter<"AiTools"> | string
     content?: StringFilter<"AiTools"> | string
+    logo_url?: StringFilter<"AiTools"> | string
     category_id?: IntFilter<"AiTools"> | number
     created_at?: DateTimeFilter<"AiTools"> | Date | string
     updated_at?: DateTimeFilter<"AiTools"> | Date | string
+    category?: XOR<AiToolsCategoryScalarRelationFilter, AiToolsCategoryWhereInput>
   }, "id">
 
   export type AiToolsOrderByWithAggregationInput = {
@@ -9635,6 +9813,7 @@ export namespace Prisma {
     description?: SortOrder
     url?: SortOrder
     content?: SortOrder
+    logo_url?: SortOrder
     category_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -9654,6 +9833,7 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"AiTools"> | string
     url?: StringWithAggregatesFilter<"AiTools"> | string
     content?: StringWithAggregatesFilter<"AiTools"> | string
+    logo_url?: StringWithAggregatesFilter<"AiTools"> | string
     category_id?: IntWithAggregatesFilter<"AiTools"> | number
     created_at?: DateTimeWithAggregatesFilter<"AiTools"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"AiTools"> | Date | string
@@ -10041,6 +10221,7 @@ export namespace Prisma {
     title: string
     created_at?: Date | string
     updated_at?: Date | string
+    AiTools?: AiToolsCreateNestedManyWithoutCategoryInput
   }
 
   export type AiToolsCategoryUncheckedCreateInput = {
@@ -10048,12 +10229,14 @@ export namespace Prisma {
     title: string
     created_at?: Date | string
     updated_at?: Date | string
+    AiTools?: AiToolsUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type AiToolsCategoryUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    AiTools?: AiToolsUpdateManyWithoutCategoryNestedInput
   }
 
   export type AiToolsCategoryUncheckedUpdateInput = {
@@ -10061,6 +10244,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    AiTools?: AiToolsUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type AiToolsCategoryCreateManyInput = {
@@ -10088,9 +10272,10 @@ export namespace Prisma {
     description: string
     url: string
     content: string
-    category_id: number
+    logo_url?: string
     created_at?: Date | string
     updated_at?: Date | string
+    category: AiToolsCategoryCreateNestedOneWithoutAiToolsInput
   }
 
   export type AiToolsUncheckedCreateInput = {
@@ -10099,6 +10284,7 @@ export namespace Prisma {
     description: string
     url: string
     content: string
+    logo_url?: string
     category_id: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -10109,9 +10295,10 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
-    category_id?: IntFieldUpdateOperationsInput | number
+    logo_url?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: AiToolsCategoryUpdateOneRequiredWithoutAiToolsNestedInput
   }
 
   export type AiToolsUncheckedUpdateInput = {
@@ -10120,6 +10307,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    logo_url?: StringFieldUpdateOperationsInput | string
     category_id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10131,6 +10319,7 @@ export namespace Prisma {
     description: string
     url: string
     content: string
+    logo_url?: string
     category_id: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -10141,7 +10330,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
-    category_id?: IntFieldUpdateOperationsInput | number
+    logo_url?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10152,6 +10341,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    logo_url?: StringFieldUpdateOperationsInput | string
     category_id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10561,6 +10751,16 @@ export namespace Prisma {
     expires?: SortOrder
   }
 
+  export type AiToolsListRelationFilter = {
+    every?: AiToolsWhereInput
+    some?: AiToolsWhereInput
+    none?: AiToolsWhereInput
+  }
+
+  export type AiToolsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type AiToolsCategoryCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
@@ -10590,12 +10790,18 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type AiToolsCategoryScalarRelationFilter = {
+    is?: AiToolsCategoryWhereInput
+    isNot?: AiToolsCategoryWhereInput
+  }
+
   export type AiToolsCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
     url?: SortOrder
     content?: SortOrder
+    logo_url?: SortOrder
     category_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -10612,6 +10818,7 @@ export namespace Prisma {
     description?: SortOrder
     url?: SortOrder
     content?: SortOrder
+    logo_url?: SortOrder
     category_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -10623,6 +10830,7 @@ export namespace Prisma {
     description?: SortOrder
     url?: SortOrder
     content?: SortOrder
+    logo_url?: SortOrder
     category_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -10793,6 +11001,62 @@ export namespace Prisma {
     update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
+  }
+
+  export type AiToolsCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<AiToolsCreateWithoutCategoryInput, AiToolsUncheckedCreateWithoutCategoryInput> | AiToolsCreateWithoutCategoryInput[] | AiToolsUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: AiToolsCreateOrConnectWithoutCategoryInput | AiToolsCreateOrConnectWithoutCategoryInput[]
+    createMany?: AiToolsCreateManyCategoryInputEnvelope
+    connect?: AiToolsWhereUniqueInput | AiToolsWhereUniqueInput[]
+  }
+
+  export type AiToolsUncheckedCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<AiToolsCreateWithoutCategoryInput, AiToolsUncheckedCreateWithoutCategoryInput> | AiToolsCreateWithoutCategoryInput[] | AiToolsUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: AiToolsCreateOrConnectWithoutCategoryInput | AiToolsCreateOrConnectWithoutCategoryInput[]
+    createMany?: AiToolsCreateManyCategoryInputEnvelope
+    connect?: AiToolsWhereUniqueInput | AiToolsWhereUniqueInput[]
+  }
+
+  export type AiToolsUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<AiToolsCreateWithoutCategoryInput, AiToolsUncheckedCreateWithoutCategoryInput> | AiToolsCreateWithoutCategoryInput[] | AiToolsUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: AiToolsCreateOrConnectWithoutCategoryInput | AiToolsCreateOrConnectWithoutCategoryInput[]
+    upsert?: AiToolsUpsertWithWhereUniqueWithoutCategoryInput | AiToolsUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: AiToolsCreateManyCategoryInputEnvelope
+    set?: AiToolsWhereUniqueInput | AiToolsWhereUniqueInput[]
+    disconnect?: AiToolsWhereUniqueInput | AiToolsWhereUniqueInput[]
+    delete?: AiToolsWhereUniqueInput | AiToolsWhereUniqueInput[]
+    connect?: AiToolsWhereUniqueInput | AiToolsWhereUniqueInput[]
+    update?: AiToolsUpdateWithWhereUniqueWithoutCategoryInput | AiToolsUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: AiToolsUpdateManyWithWhereWithoutCategoryInput | AiToolsUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: AiToolsScalarWhereInput | AiToolsScalarWhereInput[]
+  }
+
+  export type AiToolsUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<AiToolsCreateWithoutCategoryInput, AiToolsUncheckedCreateWithoutCategoryInput> | AiToolsCreateWithoutCategoryInput[] | AiToolsUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: AiToolsCreateOrConnectWithoutCategoryInput | AiToolsCreateOrConnectWithoutCategoryInput[]
+    upsert?: AiToolsUpsertWithWhereUniqueWithoutCategoryInput | AiToolsUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: AiToolsCreateManyCategoryInputEnvelope
+    set?: AiToolsWhereUniqueInput | AiToolsWhereUniqueInput[]
+    disconnect?: AiToolsWhereUniqueInput | AiToolsWhereUniqueInput[]
+    delete?: AiToolsWhereUniqueInput | AiToolsWhereUniqueInput[]
+    connect?: AiToolsWhereUniqueInput | AiToolsWhereUniqueInput[]
+    update?: AiToolsUpdateWithWhereUniqueWithoutCategoryInput | AiToolsUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: AiToolsUpdateManyWithWhereWithoutCategoryInput | AiToolsUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: AiToolsScalarWhereInput | AiToolsScalarWhereInput[]
+  }
+
+  export type AiToolsCategoryCreateNestedOneWithoutAiToolsInput = {
+    create?: XOR<AiToolsCategoryCreateWithoutAiToolsInput, AiToolsCategoryUncheckedCreateWithoutAiToolsInput>
+    connectOrCreate?: AiToolsCategoryCreateOrConnectWithoutAiToolsInput
+    connect?: AiToolsCategoryWhereUniqueInput
+  }
+
+  export type AiToolsCategoryUpdateOneRequiredWithoutAiToolsNestedInput = {
+    create?: XOR<AiToolsCategoryCreateWithoutAiToolsInput, AiToolsCategoryUncheckedCreateWithoutAiToolsInput>
+    connectOrCreate?: AiToolsCategoryCreateOrConnectWithoutAiToolsInput
+    upsert?: AiToolsCategoryUpsertWithoutAiToolsInput
+    connect?: AiToolsCategoryWhereUniqueInput
+    update?: XOR<XOR<AiToolsCategoryUpdateToOneWithWhereWithoutAiToolsInput, AiToolsCategoryUpdateWithoutAiToolsInput>, AiToolsCategoryUncheckedUpdateWithoutAiToolsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -11215,6 +11479,110 @@ export namespace Prisma {
     expires?: DateTimeFilter<"Session"> | Date | string
   }
 
+  export type AiToolsCreateWithoutCategoryInput = {
+    title: string
+    description: string
+    url: string
+    content: string
+    logo_url?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type AiToolsUncheckedCreateWithoutCategoryInput = {
+    id?: number
+    title: string
+    description: string
+    url: string
+    content: string
+    logo_url?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type AiToolsCreateOrConnectWithoutCategoryInput = {
+    where: AiToolsWhereUniqueInput
+    create: XOR<AiToolsCreateWithoutCategoryInput, AiToolsUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type AiToolsCreateManyCategoryInputEnvelope = {
+    data: AiToolsCreateManyCategoryInput | AiToolsCreateManyCategoryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AiToolsUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: AiToolsWhereUniqueInput
+    update: XOR<AiToolsUpdateWithoutCategoryInput, AiToolsUncheckedUpdateWithoutCategoryInput>
+    create: XOR<AiToolsCreateWithoutCategoryInput, AiToolsUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type AiToolsUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: AiToolsWhereUniqueInput
+    data: XOR<AiToolsUpdateWithoutCategoryInput, AiToolsUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type AiToolsUpdateManyWithWhereWithoutCategoryInput = {
+    where: AiToolsScalarWhereInput
+    data: XOR<AiToolsUpdateManyMutationInput, AiToolsUncheckedUpdateManyWithoutCategoryInput>
+  }
+
+  export type AiToolsScalarWhereInput = {
+    AND?: AiToolsScalarWhereInput | AiToolsScalarWhereInput[]
+    OR?: AiToolsScalarWhereInput[]
+    NOT?: AiToolsScalarWhereInput | AiToolsScalarWhereInput[]
+    id?: IntFilter<"AiTools"> | number
+    title?: StringFilter<"AiTools"> | string
+    description?: StringFilter<"AiTools"> | string
+    url?: StringFilter<"AiTools"> | string
+    content?: StringFilter<"AiTools"> | string
+    logo_url?: StringFilter<"AiTools"> | string
+    category_id?: IntFilter<"AiTools"> | number
+    created_at?: DateTimeFilter<"AiTools"> | Date | string
+    updated_at?: DateTimeFilter<"AiTools"> | Date | string
+  }
+
+  export type AiToolsCategoryCreateWithoutAiToolsInput = {
+    title: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type AiToolsCategoryUncheckedCreateWithoutAiToolsInput = {
+    id?: number
+    title: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type AiToolsCategoryCreateOrConnectWithoutAiToolsInput = {
+    where: AiToolsCategoryWhereUniqueInput
+    create: XOR<AiToolsCategoryCreateWithoutAiToolsInput, AiToolsCategoryUncheckedCreateWithoutAiToolsInput>
+  }
+
+  export type AiToolsCategoryUpsertWithoutAiToolsInput = {
+    update: XOR<AiToolsCategoryUpdateWithoutAiToolsInput, AiToolsCategoryUncheckedUpdateWithoutAiToolsInput>
+    create: XOR<AiToolsCategoryCreateWithoutAiToolsInput, AiToolsCategoryUncheckedCreateWithoutAiToolsInput>
+    where?: AiToolsCategoryWhereInput
+  }
+
+  export type AiToolsCategoryUpdateToOneWithWhereWithoutAiToolsInput = {
+    where?: AiToolsCategoryWhereInput
+    data: XOR<AiToolsCategoryUpdateWithoutAiToolsInput, AiToolsCategoryUncheckedUpdateWithoutAiToolsInput>
+  }
+
+  export type AiToolsCategoryUpdateWithoutAiToolsInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AiToolsCategoryUncheckedUpdateWithoutAiToolsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type AccountCreateManyUserInput = {
     id?: string
     type: string
@@ -11293,6 +11661,49 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AiToolsCreateManyCategoryInput = {
+    id?: number
+    title: string
+    description: string
+    url: string
+    content: string
+    logo_url?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type AiToolsUpdateWithoutCategoryInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    logo_url?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AiToolsUncheckedUpdateWithoutCategoryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    logo_url?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AiToolsUncheckedUpdateManyWithoutCategoryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    logo_url?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

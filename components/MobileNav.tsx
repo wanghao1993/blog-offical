@@ -15,6 +15,10 @@ const headerNavLinks = [
     path: "/blog",
   },
   {
+    title: "AI工具",
+    path: "/ai-tools",
+  },
+  {
     title: "关于我",
     path: "/about",
   },

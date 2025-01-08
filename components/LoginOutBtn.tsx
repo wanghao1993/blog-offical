@@ -2,7 +2,8 @@
 import { useSession, signOut } from "next-auth/react";
 import { Avatar, Dropdown, MenuProps } from "antd";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 const LoginModal = dynamic(
   () => import("@/components/login/page").then((LoginModal) => LoginModal),
   {
@@ -28,6 +29,27 @@ export default function LoginInOut() {
   ];
 
   const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (
+      status === "authenticated" &&
+      session.user.email === "whao53333@gmail.com"
+    ) {
+      items.unshift({
+        label: (
+          <div className="flex items-center">
+            <Link
+              href={"/ai-tools/manage"}
+              className="text-primary-100 hover:text-primary-200"
+            >
+              AI应用管理
+            </Link>
+          </div>
+        ),
+        key: "aiAppManage",
+      });
+    }
+  }, [session]);
 
   return (
     <>

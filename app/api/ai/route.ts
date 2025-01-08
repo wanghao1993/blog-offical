@@ -10,22 +10,18 @@ export async function GET() {
     allCategory.forEach((item) => {
       allCategoryMap[item.id] = item.title;
     });
-    const data = await prisma.aiTools.findMany();
+    const data = await prisma.aiTools.findMany({
+      include: {
+        category: true,
+      },
+    });
     const allData: AiTypes.AiTools = {};
     data.forEach((item) => {
       const title = allCategoryMap[item.category_id];
       if (allData[title]) {
-        allData[title].push({
-          ...item,
-          category: title,
-        });
+        allData[title].push(item);
       } else {
-        allData[title] = [
-          {
-            ...item,
-            category: title,
-          },
-        ];
+        allData[title] = [item];
       }
     });
     return responseHandler(allData);

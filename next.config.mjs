@@ -17,15 +17,11 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "super-super.cn",
+      },
+      {
+        protocol: "https",
         hostname: "**.myqcloud.com",
-      },
-      {
-        protocol: "https",
-        hostname: "**.xitu.io",
-      },
-      {
-        protocol: "https",
-        hostname: "**.byteimg.com",
       },
     ],
   },

@@ -24,7 +24,8 @@ export default async function ToolsHomePage() {
   const allTools = Object.values(data).flat();
   menuData.forEach((item) => {
     item.id =
-      allTools.find((tool) => tool.category === item.title)?.category_id || -1;
+      allTools.find((tool) => tool.category.title === item.title)
+        ?.category_id ?? -1;
   });
   return (
     <div className="max-w-[1920px] mx-auto relative">

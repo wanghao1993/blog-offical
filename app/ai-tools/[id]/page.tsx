@@ -15,10 +15,10 @@ export default async function AiToolsDetail({
     <MainLayout>
       <div className="mx-auto max-w-4xl p-4 flex items-center">
         <Image
-          src={"/favicon.ico"}
+          src={aiToolDetail.logo_url}
           alt={aiToolDetail.title}
-          width={130}
-          height={130}
+          width={180}
+          height={180}
           className="bg-white rounded-lg"
         />
         <div className="ml-4 py-4 flex flex-col justify-between ">

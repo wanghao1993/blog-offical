@@ -30,3 +30,31 @@ export async function GET(
     );
   }
 }
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const id = params.id;
+  if (!id) {
+    return responseHandler(
+      null,
+      BusinessCode.normal,
+      BusinessCode.abnormal,
+      "ID is required"
+    );
+  }
+  try {
+    const detail = await prisma.aiTools.delete({
+      where: { id: Number(id) },
+    });
+    return responseHandler(detail);
+  } catch (error: any) {
+    return responseHandler(
+      null,
+      BusinessCode.normal,
+      BusinessCode.abnormal,
+      error.message || "未知异常"
+    );
+  }
+}

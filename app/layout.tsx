@@ -8,6 +8,7 @@ import Script from "next/script";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import ToTop from "@/components/toTop";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 const APP_NAME = "汪浩的博客";
 const APP_DEFAULT_TITLE = "汪浩（Isaac Wang）的博客";
 const APP_TITLE_TEMPLATE = "汪浩（Isaac Wang）的博客";
@@ -73,16 +74,20 @@ export default function RootLayout({
 
       <body className={content.className}>
         <AntdRegistry>
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            {/* <LenisProvider> */}
-            <div className="sticky top-0 z-10">
-              <DHeader />
-            </div>
-            <main className="min-h-[calc(100vh-150px)] ">{children}</main>
-            <Footer />
-            <ToTop />
-            {/* </LenisProvider> */}
-          </ThemeProvider>
+          <NextThemesProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+          >
+            <ThemeProvider>
+              <div className="sticky top-0 z-10">
+                <DHeader />
+              </div>
+              <main className="min-h-[calc(100vh-150px)] ">{children}</main>
+              <Footer />
+              <ToTop />
+            </ThemeProvider>
+          </NextThemesProvider>
         </AntdRegistry>
       </body>
     </html>

@@ -72,19 +72,22 @@ model VerificationToken {
 }
 
 model AiToolsCategory {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   title      String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  AiTools    AiTools[]
 }
 
 model AiTools {
-  id          Int      @id @default(autoincrement())
+  id          Int             @id @default(autoincrement())
   title       String
   description String
   url         String
   content     String
+  logo_url    String          @default("https://super-super.cn/favicon.ico")
   category_id Int
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
+  created_at  DateTime        @default(now())
+  updated_at  DateTime        @updatedAt
+  category    AiToolsCategory @relation(fields: [category_id], references: [id])
 }

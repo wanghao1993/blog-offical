@@ -1,4 +1,4 @@
-import MainLayout from "@/Layouts/MainLayout";
+"use client";
 import { Tabs, TabsProps } from "antd";
 import AiCateGory from "./component/category";
 import AiToolsList from "./component/list";

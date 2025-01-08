@@ -71,5 +71,11 @@ const nextConfig = {
     ];
   },
 };
+let config;
+if (process.env.env === "production") {
+  config = withContentlayer(withMDX(withPWA(nextConfig)));
+} else {
+  config = withContentlayer(withMDX(nextConfig));
+}
 
-export default withContentlayer(withMDX(withPWA(nextConfig)));
+export default config;

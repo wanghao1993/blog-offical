@@ -1,12 +1,9 @@
-import LenisProvider from "@/components/Providers/LenisProvider";
 import ThemeProvider from "@/components/Providers/ThemeProvider";
-import { ScrollProvider } from "@/components/Providers/ScrollProvider";
 import "./ui/globals.scss";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { content } from "@/lib/font";
 import Footer from "@/components/Footer";
-import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
-import { ProgressProvider } from "@/components/Providers/ProgressProdivder";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";

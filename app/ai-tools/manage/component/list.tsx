@@ -8,7 +8,6 @@ import {
   Spin,
   Table,
   TableColumnProps,
-  TableProps,
   Tooltip,
 } from "antd";
 import { useEffect, useRef, useState } from "react";

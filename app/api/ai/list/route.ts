@@ -3,13 +3,13 @@ import prisma from "@/lib/pg";
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
+  const { nextUrl } = request;
+  const searchParams = nextUrl.searchParams;
+  const page = searchParams.get("page");
+  const limit = searchParams.get("limit");
+  const category_id = searchParams.get("category_id");
+  const title = searchParams.get("title");
   try {
-    const url = new URL(request.url);
-    const searchParams = url.searchParams;
-    const page = searchParams.get("page");
-    const limit = searchParams.get("limit");
-    const category_id = searchParams.get("category_id");
-    const title = searchParams.get("title");
     const pageNumber = page ? parseInt(page, 10) : 1;
     const pageSize = limit ? parseInt(limit, 10) : 10;
     const skip = (pageNumber - 1) * pageSize;

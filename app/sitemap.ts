@@ -29,6 +29,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${siteUrl}blog/category/${cat}`,
     lastModified: new Date().toISOString().split("T")[0],
   }));
-
-  return [...routes, ...blogRoutes, ...tags, ...cats];
+  const numbers = Array.from({ length: 302 }, (_, i) => i + 1);
+  const aiTools = numbers.map((id) => ({
+    url: `${siteUrl}/ai-tools/${id}`,
+    lastModified: new Date().toISOString().split("T")[0],
+  }));
+  return [...routes, ...blogRoutes, ...tags, ...cats, ...aiTools];
 }

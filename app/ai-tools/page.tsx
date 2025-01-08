@@ -3,6 +3,7 @@ import { AiTypes } from "@/types/ai";
 import { Col, Row } from "antd";
 import { Sidebar } from "./component/siderbar";
 import { AIToolCard } from "./component/aitoolcard";
+import Link from "next/link";
 
 async function getAllAiTools() {
   try {
@@ -40,7 +41,13 @@ export default async function ToolsHomePage() {
               <Row gutter={[16, 16]}>
                 {data[category.title].map((tool) => (
                   <Col key={tool.id} sm={24} md={12} lg={8} xl={6}>
-                    <AIToolCard {...tool} />
+                    <Link
+                      href={`/ai-tools/${tool.id}`}
+                      title={tool.title}
+                      className="text-[inherit] hover:text-[#1890ff]"
+                    >
+                      <AIToolCard {...tool} />
+                    </Link>
                   </Col>
                 ))}
               </Row>

@@ -1,7 +1,6 @@
 "use server";
 import { generative } from "./genAi";
 async function getSummary(content: string) {
-  "use server";
   const prompt =
     "请帮我总结以下内容，限制在300个字内，不要使用markdown语法：" + content;
 
@@ -15,12 +14,10 @@ async function getSummary(content: string) {
 }
 
 const AISummay = async ({ content }: { content: string }) => {
-  // const summary =
-  //   process.env.NODE_ENV === "production"
-  //     ? await getSummary(content)
-  //     : "dev环境没有总结";
-
-  const summary = await getSummary(content);
+  const summary =
+    process.env.NODE_ENV === "production"
+      ? await getSummary(content)
+      : "dev环境没有总结";
 
   return (
     <div className="px-3 bg-[#28282c] text-white">

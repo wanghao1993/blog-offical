@@ -5,7 +5,12 @@ import { Sidebar } from "./component/siderbar";
 import { AIToolCard } from "./component/aitoolcard";
 
 async function getAllAiTools() {
-  return await get<AiTypes.AiTools>("ai");
+  try {
+    return await get<AiTypes.AiTools>("ai");
+  } catch (error) {
+    console.error(error);
+    return {};
+  }
 }
 
 export default async function ToolsHomePage() {

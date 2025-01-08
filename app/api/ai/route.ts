@@ -2,7 +2,7 @@ import { BusinessCode, responseHandler } from "@/lib/fetch_utils";
 import prisma from "@/lib/pg";
 import { AiTypes } from "@/types/ai";
 
-export const dynamic = "force-dynamic"; // defaults to auto
+export const dynamic = "force-dynamic";
 export async function GET() {
   try {
     const allCategory = await prisma.aiToolsCategory.findMany();

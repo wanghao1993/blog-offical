@@ -20,7 +20,7 @@ export function responseHandler<T>(
   data: T,
   status = 200,
   code = BusinessCode.normal,
-  message = "success"
+  message = StatusMsg[200]
 ) {
   return NextResponse.json({ message, data, code }, { status });
 }

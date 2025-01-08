@@ -62,7 +62,6 @@
     "sharp": "^0.33.5",
     "tailwindcss": "^3.4.16",
     "tencentcloud-sdk-nodejs": "^4.0.888",
-    "ts-node": "^10.9.2",
     "unist-util-visit": "^5.0.0",
     "vfile": "^6.0.3",
     "zod": "^3.23.8"

@@ -34,3 +34,28 @@ export async function GET() {
     );
   }
 }
+
+// export async function POST() {
+//   try {
+//     const data = await prisma.aiTools.findMany();
+//     const updatePromises = data.map((item) =>
+//       prisma.aiTools.update({
+//         where: { id: item.id },
+//         data: {
+//           logo_url: `https://blog-offical-1302483222.cos.ap-guangzhou.myqcloud.com/images/${encodeURI(
+//             item.title
+//           )}.png`,
+//         }, // Replace "new_logo_url" with the actual URL
+//       })
+//     );
+//     await Promise.all(updatePromises);
+//     return responseHandler({ message: "All logo URLs updated successfully" });
+//   } catch (error: any) {
+//     return responseHandler(
+//       null,
+//       BusinessCode.normal,
+//       BusinessCode.abnormal,
+//       error.message || "未知异常"
+//     );
+//   }
+// }

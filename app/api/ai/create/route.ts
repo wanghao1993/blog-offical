@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 import { z } from "zod";
 const postDetailSchema = z.object({
   category_id: z.number(),
-  title: z.string().max(20, "标题长度不能超过20个字符"),
+  title: z.string().max(50, "标题长度不能超过50个字符"),
   content: z.string(),
   url: z.string().url("不合法的访问地址"),
   logo_url: z.string().url("不合法的logo地址"),

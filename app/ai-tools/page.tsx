@@ -1,4 +1,4 @@
-import { get } from "@/lib/fetch";
+import { get, post } from "@/lib/fetch";
 import { AiTypes } from "@/types/ai";
 import { Col, Row } from "antd";
 import { Sidebar } from "./component/siderbar";
@@ -16,6 +16,7 @@ async function getAllAiTools() {
 
 export default async function ToolsHomePage() {
   const data = await getAllAiTools();
+  // post("ai", {});
   const menuData = Object.keys(data).map((item) => ({
     title: item,
     id: -1,

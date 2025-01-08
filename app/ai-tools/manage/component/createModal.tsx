@@ -67,7 +67,7 @@ const CreateToolModal = forwardRef<ModalHandle, CreateToolModalProps>(
       if (!open) {
         form.resetFields();
       }
-    }, [open]);
+    }, [form, open]);
     return (
       <div>
         <Modal
@@ -151,4 +151,6 @@ const CreateToolModal = forwardRef<ModalHandle, CreateToolModalProps>(
     );
   }
 );
+
+CreateToolModal.displayName = "CreateToolModal";
 export default CreateToolModal;

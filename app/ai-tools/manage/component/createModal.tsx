@@ -14,7 +14,7 @@ interface CreateToolModalProps {
   id?: number;
 }
 
-export const CreateToolModal = forwardRef<ModalHandle, CreateToolModalProps>(
+const CreateToolModal = forwardRef<ModalHandle, CreateToolModalProps>(
   ({ cb, id }, ref) => {
     const [submitting, setSubmitting] = useState(false);
     const [form] = Form.useForm();
@@ -45,7 +45,7 @@ export const CreateToolModal = forwardRef<ModalHandle, CreateToolModalProps>(
     };
     useEffect(() => {
       getCate();
-    }, [id]);
+    }, []);
 
     useEffect(() => {
       if (id) {
@@ -151,3 +151,4 @@ export const CreateToolModal = forwardRef<ModalHandle, CreateToolModalProps>(
     );
   }
 );
+export default CreateToolModal;

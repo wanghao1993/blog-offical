@@ -15,7 +15,7 @@ import { useEffect, useRef, useState } from "react";
 import Filter from "./filter";
 import Image from "next/image";
 import dayjs from "dayjs";
-import { CreateToolModal } from "./createModal";
+import CreateToolModal from "./createModal";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 export default function AiToolsList() {
   const [id, setId] = useState<number | undefined>(undefined);

@@ -198,7 +198,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/isaac/Desktop/blog-offical/prisma/generated/client",
+      "value": "C:\\Users\\98702438\\Desktop\\blog-offical\\prisma\\generated\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -207,12 +207,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "windows",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/isaac/Desktop/blog-offical/prisma/schema.prisma",
+    "sourceFilePath": "C:\\Users\\98702438\\Desktop\\blog-offical\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

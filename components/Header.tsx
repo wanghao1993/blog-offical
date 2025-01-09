@@ -13,7 +13,7 @@ import { NextAuthProvider } from "./Providers/AuthProvider";
 export default function Header({ ...props }) {
   const { theme, setTheme } = useTheme();
   return (
-    <MainLayout>
+    <div className="sticky top-0 z-10 bg-white dark:bg-dark-900 w-[1024px] mx-auto">
       <NextAuthProvider>
         <header
           className="z-10"
@@ -51,6 +51,6 @@ export default function Header({ ...props }) {
           </div>
         </header>
       </NextAuthProvider>
-    </MainLayout>
+    </div>
   );
 }

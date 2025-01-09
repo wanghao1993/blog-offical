@@ -47,7 +47,6 @@ export const metadata: Metadata = {
     description: APP_DESCRIPTION,
   },
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -80,10 +79,12 @@ export default function RootLayout({
             enableSystem
           >
             <ThemeProvider>
-              <div className="sticky top-0 z-10">
+              <div>
                 <DHeader />
               </div>
-              <main className="min-h-[calc(100vh-150px)] ">{children}</main>
+              <main className="mb-auto relative min-h-[calc(100vh-150px)]">
+                {children}
+              </main>
               <Footer />
               <ToTop />
             </ThemeProvider>
